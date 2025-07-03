@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "SaaS.ApiGetway\\SaaS.ApiGetway.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Microservice.AuthService\\Microservice.AuthService.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

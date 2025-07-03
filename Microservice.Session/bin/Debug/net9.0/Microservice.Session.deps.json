@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Microservice.Session/1.0.0": {
+        "runtime": {
+          "Microservice.Session.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microservice.Session/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

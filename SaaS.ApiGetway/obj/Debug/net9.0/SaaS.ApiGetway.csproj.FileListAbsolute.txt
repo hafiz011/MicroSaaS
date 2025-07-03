@@ -26,3 +26,4 @@ D:\GitHub\MicroSaaS\MicroSaaS\SaaS.ApiGetway\obj\Debug\net9.0\refint\SaaS.ApiGet
 D:\GitHub\MicroSaaS\MicroSaaS\SaaS.ApiGetway\obj\Debug\net9.0\SaaS.ApiGetway.pdb
 D:\GitHub\MicroSaaS\MicroSaaS\SaaS.ApiGetway\obj\Debug\net9.0\SaaS.ApiGetway.genruntimeconfig.cache
 D:\GitHub\MicroSaaS\MicroSaaS\SaaS.ApiGetway\obj\Debug\net9.0\ref\SaaS.ApiGetway.dll
+D:\GitHub\MicroSaaS\MicroSaaS\SaaS.ApiGetway\obj\Debug\net9.0\SaaS.ApiGetway.sourcelink.json
