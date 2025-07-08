@@ -1,10 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add YARP Reverse Proxy
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
-// Enable CORS (optional)
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -14,10 +12,6 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
-
-
-
-
 
 var app = builder.Build();
 
