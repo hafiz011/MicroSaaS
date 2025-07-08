@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I3r5DPsXkK0=",
+  "dgSpecHash": "iBl8jSKolEY=",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\MicroSaaS\\MicroSaaS\\Microservice.Session\\Microservice.Session.csproj",
+  "projectFilePath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Microservice.Session.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hafiz\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Hafiz\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

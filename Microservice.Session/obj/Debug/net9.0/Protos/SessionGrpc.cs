@@ -51,10 +51,26 @@ namespace Microservice.Session.Protos {
     static readonly grpc::Marshaller<global::Microservice.Session.Protos.ApiKeyResponse> __Marshaller_ApiKeyResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.Session.Protos.ApiKeyResponse.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse> __Method_ApiKey = new grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(
+    static readonly grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse> __Method_CreateApiKey = new grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
-        "ApiKey",
+        "CreateApiKey",
+        __Marshaller_ApiKeyRequest,
+        __Marshaller_ApiKeyResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse> __Method_GetApiKey = new grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetApiKey",
+        __Marshaller_ApiKeyRequest,
+        __Marshaller_ApiKeyResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse> __Method_GetAllApiKeys = new grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAllApiKeys",
         __Marshaller_ApiKeyRequest,
         __Marshaller_ApiKeyResponse);
 
@@ -69,7 +85,19 @@ namespace Microservice.Session.Protos {
     public abstract partial class SessionBase
     {
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task<global::Microservice.Session.Protos.ApiKeyResponse> ApiKey(global::Microservice.Session.Protos.ApiKeyRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Microservice.Session.Protos.ApiKeyResponse> CreateApiKey(global::Microservice.Session.Protos.ApiKeyRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Microservice.Session.Protos.ApiKeyResponse> GetApiKey(global::Microservice.Session.Protos.ApiKeyRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Microservice.Session.Protos.ApiKeyResponse> GetAllApiKeys(global::Microservice.Session.Protos.ApiKeyRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -82,7 +110,9 @@ namespace Microservice.Session.Protos {
     public static grpc::ServerServiceDefinition BindService(SessionBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_ApiKey, serviceImpl.ApiKey).Build();
+          .AddMethod(__Method_CreateApiKey, serviceImpl.CreateApiKey)
+          .AddMethod(__Method_GetApiKey, serviceImpl.GetApiKey)
+          .AddMethod(__Method_GetAllApiKeys, serviceImpl.GetAllApiKeys).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -92,7 +122,9 @@ namespace Microservice.Session.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, SessionBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_ApiKey, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(serviceImpl.ApiKey));
+      serviceBinder.AddMethod(__Method_CreateApiKey, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(serviceImpl.CreateApiKey));
+      serviceBinder.AddMethod(__Method_GetApiKey, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(serviceImpl.GetApiKey));
+      serviceBinder.AddMethod(__Method_GetAllApiKeys, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(serviceImpl.GetAllApiKeys));
     }
 
   }

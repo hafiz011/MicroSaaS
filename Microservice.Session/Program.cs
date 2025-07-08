@@ -42,14 +42,15 @@ namespace Microservice.Session
             });
 
 
+
+
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-
+            
             app.MapGrpcService<ApiKeyService>();
-            app.MapGet("/", () => "ApiKeyService - gRPC only");
 
 
 

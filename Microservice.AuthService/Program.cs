@@ -1,5 +1,6 @@
 
 using Microservice.AuthService.Database;
+using Microservice.AuthService.Infrastructure.Services;
 using Microservice.AuthService.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -72,7 +73,7 @@ namespace Microservice.AuthService
 
 
 
-
+            builder.Services.AddSingleton<ApiKeyGrpcClient>();
 
 
 

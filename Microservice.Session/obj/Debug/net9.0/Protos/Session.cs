@@ -24,17 +24,27 @@ namespace Microservice.Session.Protos {
     static SessionReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChRQcm90b3Mvc2Vzc2lvbi5wcm90byJCCg1BcGlLZXlSZXF1ZXN0Eg4KBnVz",
-            "ZXJJZBgBIAEoCRIRCglpcEFkZHJlc3MYAiABKAkSDgoGZGV2aWNlGAMgASgJ",
-            "IjIKDkFwaUtleVJlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgSDwoHbWVzc2Fn",
-            "ZRgCIAEoCTI0CgdTZXNzaW9uEikKBkFwaUtleRIOLkFwaUtleVJlcXVlc3Qa",
-            "Dy5BcGlLZXlSZXNwb25zZUIeqgIbTWljcm9zZXJ2aWNlLlNlc3Npb24uUHJv",
-            "dG9zYgZwcm90bzM="));
+            "ChRQcm90b3Mvc2Vzc2lvbi5wcm90bxofZ29vZ2xlL3Byb3RvYnVmL3RpbWVz",
+            "dGFtcC5wcm90byIgCg1BcGlLZXlSZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAki",
+            "kAMKDkFwaUtleVJlc3BvbnNlEhAKCG9yZ19uYW1lGAEgASgJEg4KBmRvbWFp",
+            "bhgCIAEoCRIRCglvcmdfZW1haWwYAyABKAkSEgoKYXBpX3NlY3JldBgEIAEo",
+            "CRIOCgZzY29wZXMYBSADKAkSDAoEcGxhbhgGIAEoCRIzCg9leHBpcmF0aW9u",
+            "X2RhdGUYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhUKDXJl",
+            "cXVlc3RfbGltaXQYCCABKAUSFQoNcmVxdWVzdHNfbWFkZRgJIAEoBRIuCgpy",
+            "ZXNldF9kYXRlGAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIS",
+            "Cgppc19yZXZva2VkGAsgASgIEhEKCWlzX2FjdGl2ZRgMIAEoCBItCglsYXN0",
+            "X3VzZWQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCmNy",
+            "ZWF0ZWRfYXQYDiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wMpoB",
+            "CgdTZXNzaW9uEi8KDENyZWF0ZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaDy5B",
+            "cGlLZXlSZXNwb25zZRIsCglHZXRBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0Gg8u",
+            "QXBpS2V5UmVzcG9uc2USMAoNR2V0QWxsQXBpS2V5cxIOLkFwaUtleVJlcXVl",
+            "c3QaDy5BcGlLZXlSZXNwb25zZUIeqgIbTWljcm9zZXJ2aWNlLlNlc3Npb24u",
+            "UHJvdG9zYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.ApiKeyRequest), global::Microservice.Session.Protos.ApiKeyRequest.Parser, new[]{ "UserId", "IpAddress", "Device" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.ApiKeyResponse), global::Microservice.Session.Protos.ApiKeyResponse.Parser, new[]{ "Success", "Message" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.ApiKeyRequest), global::Microservice.Session.Protos.ApiKeyRequest.Parser, new[]{ "UserId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.ApiKeyResponse), global::Microservice.Session.Protos.ApiKeyResponse.Parser, new[]{ "OrgName", "Domain", "OrgEmail", "ApiSecret", "Scopes", "Plan", "ExpirationDate", "RequestLimit", "RequestsMade", "ResetDate", "IsRevoked", "IsActive", "LastUsed", "CreatedAt" }, null, null, null, null)
           }));
     }
     #endregion
@@ -77,8 +87,6 @@ namespace Microservice.Session.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ApiKeyRequest(ApiKeyRequest other) : this() {
       userId_ = other.userId_;
-      ipAddress_ = other.ipAddress_;
-      device_ = other.device_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -88,7 +96,7 @@ namespace Microservice.Session.Protos {
       return new ApiKeyRequest(this);
     }
 
-    /// <summary>Field number for the "userId" field.</summary>
+    /// <summary>Field number for the "user_id" field.</summary>
     public const int UserIdFieldNumber = 1;
     private string userId_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -97,30 +105,6 @@ namespace Microservice.Session.Protos {
       get { return userId_; }
       set {
         userId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "ipAddress" field.</summary>
-    public const int IpAddressFieldNumber = 2;
-    private string ipAddress_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string IpAddress {
-      get { return ipAddress_; }
-      set {
-        ipAddress_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "device" field.</summary>
-    public const int DeviceFieldNumber = 3;
-    private string device_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Device {
-      get { return device_; }
-      set {
-        device_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -140,8 +124,6 @@ namespace Microservice.Session.Protos {
         return true;
       }
       if (UserId != other.UserId) return false;
-      if (IpAddress != other.IpAddress) return false;
-      if (Device != other.Device) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -150,8 +132,6 @@ namespace Microservice.Session.Protos {
     public override int GetHashCode() {
       int hash = 1;
       if (UserId.Length != 0) hash ^= UserId.GetHashCode();
-      if (IpAddress.Length != 0) hash ^= IpAddress.GetHashCode();
-      if (Device.Length != 0) hash ^= Device.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -174,14 +154,6 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(10);
         output.WriteString(UserId);
       }
-      if (IpAddress.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(IpAddress);
-      }
-      if (Device.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Device);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -196,14 +168,6 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(10);
         output.WriteString(UserId);
       }
-      if (IpAddress.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(IpAddress);
-      }
-      if (Device.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Device);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -216,12 +180,6 @@ namespace Microservice.Session.Protos {
       int size = 0;
       if (UserId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(UserId);
-      }
-      if (IpAddress.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(IpAddress);
-      }
-      if (Device.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Device);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -237,12 +195,6 @@ namespace Microservice.Session.Protos {
       }
       if (other.UserId.Length != 0) {
         UserId = other.UserId;
-      }
-      if (other.IpAddress.Length != 0) {
-        IpAddress = other.IpAddress;
-      }
-      if (other.Device.Length != 0) {
-        Device = other.Device;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -267,14 +219,6 @@ namespace Microservice.Session.Protos {
             UserId = input.ReadString();
             break;
           }
-          case 18: {
-            IpAddress = input.ReadString();
-            break;
-          }
-          case 26: {
-            Device = input.ReadString();
-            break;
-          }
         }
       }
     #endif
@@ -296,14 +240,6 @@ namespace Microservice.Session.Protos {
             break;
           case 10: {
             UserId = input.ReadString();
-            break;
-          }
-          case 18: {
-            IpAddress = input.ReadString();
-            break;
-          }
-          case 26: {
-            Device = input.ReadString();
             break;
           }
         }
@@ -348,8 +284,20 @@ namespace Microservice.Session.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ApiKeyResponse(ApiKeyResponse other) : this() {
-      success_ = other.success_;
-      message_ = other.message_;
+      orgName_ = other.orgName_;
+      domain_ = other.domain_;
+      orgEmail_ = other.orgEmail_;
+      apiSecret_ = other.apiSecret_;
+      scopes_ = other.scopes_.Clone();
+      plan_ = other.plan_;
+      expirationDate_ = other.expirationDate_ != null ? other.expirationDate_.Clone() : null;
+      requestLimit_ = other.requestLimit_;
+      requestsMade_ = other.requestsMade_;
+      resetDate_ = other.resetDate_ != null ? other.resetDate_.Clone() : null;
+      isRevoked_ = other.isRevoked_;
+      isActive_ = other.isActive_;
+      lastUsed_ = other.lastUsed_ != null ? other.lastUsed_.Clone() : null;
+      createdAt_ = other.createdAt_ != null ? other.createdAt_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -359,27 +307,170 @@ namespace Microservice.Session.Protos {
       return new ApiKeyResponse(this);
     }
 
-    /// <summary>Field number for the "success" field.</summary>
-    public const int SuccessFieldNumber = 1;
-    private bool success_;
+    /// <summary>Field number for the "org_name" field.</summary>
+    public const int OrgNameFieldNumber = 1;
+    private string orgName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Success {
-      get { return success_; }
+    public string OrgName {
+      get { return orgName_; }
       set {
-        success_ = value;
+        orgName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
-    /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 2;
-    private string message_ = "";
+    /// <summary>Field number for the "domain" field.</summary>
+    public const int DomainFieldNumber = 2;
+    private string domain_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Message {
-      get { return message_; }
+    public string Domain {
+      get { return domain_; }
       set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        domain_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "org_email" field.</summary>
+    public const int OrgEmailFieldNumber = 3;
+    private string orgEmail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string OrgEmail {
+      get { return orgEmail_; }
+      set {
+        orgEmail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "api_secret" field.</summary>
+    public const int ApiSecretFieldNumber = 4;
+    private string apiSecret_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ApiSecret {
+      get { return apiSecret_; }
+      set {
+        apiSecret_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "scopes" field.</summary>
+    public const int ScopesFieldNumber = 5;
+    private static readonly pb::FieldCodec<string> _repeated_scopes_codec
+        = pb::FieldCodec.ForString(42);
+    private readonly pbc::RepeatedField<string> scopes_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<string> Scopes {
+      get { return scopes_; }
+    }
+
+    /// <summary>Field number for the "plan" field.</summary>
+    public const int PlanFieldNumber = 6;
+    private string plan_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Plan {
+      get { return plan_; }
+      set {
+        plan_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "expiration_date" field.</summary>
+    public const int ExpirationDateFieldNumber = 7;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp expirationDate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp ExpirationDate {
+      get { return expirationDate_; }
+      set {
+        expirationDate_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "request_limit" field.</summary>
+    public const int RequestLimitFieldNumber = 8;
+    private int requestLimit_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int RequestLimit {
+      get { return requestLimit_; }
+      set {
+        requestLimit_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "requests_made" field.</summary>
+    public const int RequestsMadeFieldNumber = 9;
+    private int requestsMade_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int RequestsMade {
+      get { return requestsMade_; }
+      set {
+        requestsMade_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "reset_date" field.</summary>
+    public const int ResetDateFieldNumber = 10;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp resetDate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp ResetDate {
+      get { return resetDate_; }
+      set {
+        resetDate_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_revoked" field.</summary>
+    public const int IsRevokedFieldNumber = 11;
+    private bool isRevoked_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsRevoked {
+      get { return isRevoked_; }
+      set {
+        isRevoked_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_active" field.</summary>
+    public const int IsActiveFieldNumber = 12;
+    private bool isActive_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsActive {
+      get { return isActive_; }
+      set {
+        isActive_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "last_used" field.</summary>
+    public const int LastUsedFieldNumber = 13;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp lastUsed_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp LastUsed {
+      get { return lastUsed_; }
+      set {
+        lastUsed_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "created_at" field.</summary>
+    public const int CreatedAtFieldNumber = 14;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp createdAt_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp CreatedAt {
+      get { return createdAt_; }
+      set {
+        createdAt_ = value;
       }
     }
 
@@ -398,8 +489,20 @@ namespace Microservice.Session.Protos {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Success != other.Success) return false;
-      if (Message != other.Message) return false;
+      if (OrgName != other.OrgName) return false;
+      if (Domain != other.Domain) return false;
+      if (OrgEmail != other.OrgEmail) return false;
+      if (ApiSecret != other.ApiSecret) return false;
+      if(!scopes_.Equals(other.scopes_)) return false;
+      if (Plan != other.Plan) return false;
+      if (!object.Equals(ExpirationDate, other.ExpirationDate)) return false;
+      if (RequestLimit != other.RequestLimit) return false;
+      if (RequestsMade != other.RequestsMade) return false;
+      if (!object.Equals(ResetDate, other.ResetDate)) return false;
+      if (IsRevoked != other.IsRevoked) return false;
+      if (IsActive != other.IsActive) return false;
+      if (!object.Equals(LastUsed, other.LastUsed)) return false;
+      if (!object.Equals(CreatedAt, other.CreatedAt)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -407,8 +510,20 @@ namespace Microservice.Session.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Success != false) hash ^= Success.GetHashCode();
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (OrgName.Length != 0) hash ^= OrgName.GetHashCode();
+      if (Domain.Length != 0) hash ^= Domain.GetHashCode();
+      if (OrgEmail.Length != 0) hash ^= OrgEmail.GetHashCode();
+      if (ApiSecret.Length != 0) hash ^= ApiSecret.GetHashCode();
+      hash ^= scopes_.GetHashCode();
+      if (Plan.Length != 0) hash ^= Plan.GetHashCode();
+      if (expirationDate_ != null) hash ^= ExpirationDate.GetHashCode();
+      if (RequestLimit != 0) hash ^= RequestLimit.GetHashCode();
+      if (RequestsMade != 0) hash ^= RequestsMade.GetHashCode();
+      if (resetDate_ != null) hash ^= ResetDate.GetHashCode();
+      if (IsRevoked != false) hash ^= IsRevoked.GetHashCode();
+      if (IsActive != false) hash ^= IsActive.GetHashCode();
+      if (lastUsed_ != null) hash ^= LastUsed.GetHashCode();
+      if (createdAt_ != null) hash ^= CreatedAt.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -427,13 +542,58 @@ namespace Microservice.Session.Protos {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Success != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Success);
+      if (OrgName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(OrgName);
       }
-      if (Message.Length != 0) {
+      if (Domain.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(Message);
+        output.WriteString(Domain);
+      }
+      if (OrgEmail.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(OrgEmail);
+      }
+      if (ApiSecret.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(ApiSecret);
+      }
+      scopes_.WriteTo(output, _repeated_scopes_codec);
+      if (Plan.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Plan);
+      }
+      if (expirationDate_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(ExpirationDate);
+      }
+      if (RequestLimit != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(RequestLimit);
+      }
+      if (RequestsMade != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(RequestsMade);
+      }
+      if (resetDate_ != null) {
+        output.WriteRawTag(82);
+        output.WriteMessage(ResetDate);
+      }
+      if (IsRevoked != false) {
+        output.WriteRawTag(88);
+        output.WriteBool(IsRevoked);
+      }
+      if (IsActive != false) {
+        output.WriteRawTag(96);
+        output.WriteBool(IsActive);
+      }
+      if (lastUsed_ != null) {
+        output.WriteRawTag(106);
+        output.WriteMessage(LastUsed);
+      }
+      if (createdAt_ != null) {
+        output.WriteRawTag(114);
+        output.WriteMessage(CreatedAt);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -445,13 +605,58 @@ namespace Microservice.Session.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Success != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Success);
+      if (OrgName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(OrgName);
       }
-      if (Message.Length != 0) {
+      if (Domain.Length != 0) {
         output.WriteRawTag(18);
-        output.WriteString(Message);
+        output.WriteString(Domain);
+      }
+      if (OrgEmail.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(OrgEmail);
+      }
+      if (ApiSecret.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(ApiSecret);
+      }
+      scopes_.WriteTo(ref output, _repeated_scopes_codec);
+      if (Plan.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Plan);
+      }
+      if (expirationDate_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(ExpirationDate);
+      }
+      if (RequestLimit != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(RequestLimit);
+      }
+      if (RequestsMade != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(RequestsMade);
+      }
+      if (resetDate_ != null) {
+        output.WriteRawTag(82);
+        output.WriteMessage(ResetDate);
+      }
+      if (IsRevoked != false) {
+        output.WriteRawTag(88);
+        output.WriteBool(IsRevoked);
+      }
+      if (IsActive != false) {
+        output.WriteRawTag(96);
+        output.WriteBool(IsActive);
+      }
+      if (lastUsed_ != null) {
+        output.WriteRawTag(106);
+        output.WriteMessage(LastUsed);
+      }
+      if (createdAt_ != null) {
+        output.WriteRawTag(114);
+        output.WriteMessage(CreatedAt);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -463,11 +668,45 @@ namespace Microservice.Session.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Success != false) {
+      if (OrgName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(OrgName);
+      }
+      if (Domain.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Domain);
+      }
+      if (OrgEmail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(OrgEmail);
+      }
+      if (ApiSecret.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ApiSecret);
+      }
+      size += scopes_.CalculateSize(_repeated_scopes_codec);
+      if (Plan.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Plan);
+      }
+      if (expirationDate_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ExpirationDate);
+      }
+      if (RequestLimit != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RequestLimit);
+      }
+      if (RequestsMade != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RequestsMade);
+      }
+      if (resetDate_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ResetDate);
+      }
+      if (IsRevoked != false) {
         size += 1 + 1;
       }
-      if (Message.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      if (IsActive != false) {
+        size += 1 + 1;
+      }
+      if (lastUsed_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(LastUsed);
+      }
+      if (createdAt_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CreatedAt);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -481,11 +720,57 @@ namespace Microservice.Session.Protos {
       if (other == null) {
         return;
       }
-      if (other.Success != false) {
-        Success = other.Success;
+      if (other.OrgName.Length != 0) {
+        OrgName = other.OrgName;
       }
-      if (other.Message.Length != 0) {
-        Message = other.Message;
+      if (other.Domain.Length != 0) {
+        Domain = other.Domain;
+      }
+      if (other.OrgEmail.Length != 0) {
+        OrgEmail = other.OrgEmail;
+      }
+      if (other.ApiSecret.Length != 0) {
+        ApiSecret = other.ApiSecret;
+      }
+      scopes_.Add(other.scopes_);
+      if (other.Plan.Length != 0) {
+        Plan = other.Plan;
+      }
+      if (other.expirationDate_ != null) {
+        if (expirationDate_ == null) {
+          ExpirationDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        ExpirationDate.MergeFrom(other.ExpirationDate);
+      }
+      if (other.RequestLimit != 0) {
+        RequestLimit = other.RequestLimit;
+      }
+      if (other.RequestsMade != 0) {
+        RequestsMade = other.RequestsMade;
+      }
+      if (other.resetDate_ != null) {
+        if (resetDate_ == null) {
+          ResetDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        ResetDate.MergeFrom(other.ResetDate);
+      }
+      if (other.IsRevoked != false) {
+        IsRevoked = other.IsRevoked;
+      }
+      if (other.IsActive != false) {
+        IsActive = other.IsActive;
+      }
+      if (other.lastUsed_ != null) {
+        if (lastUsed_ == null) {
+          LastUsed = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        LastUsed.MergeFrom(other.LastUsed);
+      }
+      if (other.createdAt_ != null) {
+        if (createdAt_ == null) {
+          CreatedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        CreatedAt.MergeFrom(other.CreatedAt);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -506,12 +791,72 @@ namespace Microservice.Session.Protos {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            Success = input.ReadBool();
+          case 10: {
+            OrgName = input.ReadString();
             break;
           }
           case 18: {
-            Message = input.ReadString();
+            Domain = input.ReadString();
+            break;
+          }
+          case 26: {
+            OrgEmail = input.ReadString();
+            break;
+          }
+          case 34: {
+            ApiSecret = input.ReadString();
+            break;
+          }
+          case 42: {
+            scopes_.AddEntriesFrom(input, _repeated_scopes_codec);
+            break;
+          }
+          case 50: {
+            Plan = input.ReadString();
+            break;
+          }
+          case 58: {
+            if (expirationDate_ == null) {
+              ExpirationDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(ExpirationDate);
+            break;
+          }
+          case 64: {
+            RequestLimit = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            RequestsMade = input.ReadInt32();
+            break;
+          }
+          case 82: {
+            if (resetDate_ == null) {
+              ResetDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(ResetDate);
+            break;
+          }
+          case 88: {
+            IsRevoked = input.ReadBool();
+            break;
+          }
+          case 96: {
+            IsActive = input.ReadBool();
+            break;
+          }
+          case 106: {
+            if (lastUsed_ == null) {
+              LastUsed = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(LastUsed);
+            break;
+          }
+          case 114: {
+            if (createdAt_ == null) {
+              CreatedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(CreatedAt);
             break;
           }
         }
@@ -533,12 +878,72 @@ namespace Microservice.Session.Protos {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            Success = input.ReadBool();
+          case 10: {
+            OrgName = input.ReadString();
             break;
           }
           case 18: {
-            Message = input.ReadString();
+            Domain = input.ReadString();
+            break;
+          }
+          case 26: {
+            OrgEmail = input.ReadString();
+            break;
+          }
+          case 34: {
+            ApiSecret = input.ReadString();
+            break;
+          }
+          case 42: {
+            scopes_.AddEntriesFrom(ref input, _repeated_scopes_codec);
+            break;
+          }
+          case 50: {
+            Plan = input.ReadString();
+            break;
+          }
+          case 58: {
+            if (expirationDate_ == null) {
+              ExpirationDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(ExpirationDate);
+            break;
+          }
+          case 64: {
+            RequestLimit = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            RequestsMade = input.ReadInt32();
+            break;
+          }
+          case 82: {
+            if (resetDate_ == null) {
+              ResetDate = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(ResetDate);
+            break;
+          }
+          case 88: {
+            IsRevoked = input.ReadBool();
+            break;
+          }
+          case 96: {
+            IsActive = input.ReadBool();
+            break;
+          }
+          case 106: {
+            if (lastUsed_ == null) {
+              LastUsed = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(LastUsed);
+            break;
+          }
+          case 114: {
+            if (createdAt_ == null) {
+              CreatedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(CreatedAt);
             break;
           }
         }

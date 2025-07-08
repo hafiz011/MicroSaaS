@@ -25,7 +25,7 @@
   </ItemGroup>
 
     <ItemGroup>
-		<Protobuf Include="Protos/session.proto" GrpcServices="Server" />
+		<Protobuf Include="Protos\ApiKey.proto" GrpcServices="Server" />
 	</ItemGroup>
 
 

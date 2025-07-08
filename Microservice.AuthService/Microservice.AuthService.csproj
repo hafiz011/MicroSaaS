@@ -25,7 +25,11 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Protobuf Include="Protos/session.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\ApiKey.proto" GrpcServices="Client" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\images\profile\" />
 	</ItemGroup>
 
 	

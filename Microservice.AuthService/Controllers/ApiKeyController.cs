@@ -1,167 +1,193 @@
-﻿//using Microservice.AuthService.Models;
-//using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using System.Security.Claims;
+﻿using Grpc.Core;
+using Microservice.AuthService.Infrastructure.Services;
+using Microservice.AuthService.Models;
+using Microservice.AuthService.Protos;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
-//namespace Microservice.AuthService.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class ApiKeyController : ControllerBase
-//    {
+namespace Microservice.AuthService.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ApiKeyController : ControllerBase
+    {
 
+        private readonly UserManager<ApplicationUser> _userManager;
 
+        private readonly ApiKeyGrpcClient _apiKeyGrpcClient;
 
-
-
-
-//        // GET: api/ApiKey
-//        [HttpGet("GetApiInfo")]
-//        public async Task<IActionResult> GetApiKey()
-//        {
-//            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-//            if (string.IsNullOrEmpty(userId))
-//                return Unauthorized(new { Message = "User not authenticated." });
-
-//            var apiKey = await _apiKeyRepository.GetApiByUserIdAsync(userId);
-//            if (apiKey == null)
-//                return NotFound(new { Message = "No API key associated with this user." });
-
-//            return Ok(new
-//            {
-//                apiKey.Domain,
-//                apiKey.Org_Name,
-//                apiKey.Plan,
-//                apiKey.ExpirationDate,
-//                apiKey.RequestLimit,
-//                apiKey.Created_At
-//            });
-//        }
-
-//        public class ApiKeyDto
-//        {
-//            public string Org_Name { get; set; }
-//            public string Domain { get; set; }
-//            public string Org_Email { get; set; }
-//            public string Plan { get; set; }
-//        }
-
-//        // POST: api/ApiKey/Create
-//        [HttpPost("create")]
-//        public async Task<IActionResult> CreateApiKey([FromBody] ApiKeyDto apiKeyDto)
-//        {
-//            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-//            if (string.IsNullOrEmpty(userId))
-//                return Unauthorized(new { Message = "User not authenticated." });
-
-//            var existingKey = await _apiKeyRepository.GetApiByUserIdAsync(userId);
-//            if (existingKey != null)
-//                return BadRequest(new { Message = "An API key already exists for your account." });
-
-//            var (rawKey, hashedKey) = ApiKeyGenerator.GenerateApiKey();
-//            var key = new Tenants
-//            {
-//                UserId = userId,
-//                ApiSecret = hashedKey,
-//                Org_Name = apiKeyDto.Org_Name,
-//                Domain = apiKeyDto.Domain,
-//                Org_Email = apiKeyDto.Org_Email,
-//                Plan = apiKeyDto.Plan,
-//                Created_At = DateTime.UtcNow,
-//                ExpirationDate = DateTime.UtcNow.AddDays(30),
-//                RequestLimit = 500,
-//                IsRevoked = false
-//            };
-
-//            var apiKey = await _apiKeyRepository.CreateApiKeyAsync(key);
-//            return Ok(new
-//            {
-//                Message = "API key created successfully. Please store this key securely.",
-//                ApiKey = rawKey
-//            });
-//        }
-
-//        [HttpPost("regenerate")]
-//        public async Task<IActionResult> RegenerateApiKey()
-//        {
-//            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-//            if (string.IsNullOrEmpty(userId))
-//                return Unauthorized(new { Message = "User not authenticated." });
-
-//            var existingKey = await _apiKeyRepository.GetApiByUserIdAsync(userId);
-//            if (existingKey == null)
-//                return NotFound(new { Message = "No existing API key found to regenerate." });
-
-//            var (rawKey, hashedKey) = ApiKeyGenerator.GenerateApiKey();
-
-//            var newKey = new Tenants
-//            {
-//                UserId = userId,
-//                ApiSecret = hashedKey
-//            };
-
-//            var success = await _apiKeyRepository.RegenerateApiKeyAsync(newKey);
-//            if (!success)
-//                return NotFound(new { Message = "API key already revoked." });
-
-//            return Ok(new
-//            {
-//                Message = "API key regenerated successfully. Please store this key securely.",
-//                RawApiKey = rawKey
-//            });
-//        }
+        public ApiKeyController(UserManager<ApplicationUser> userManager, ApiKeyGrpcClient apiKeyGrpcClient)
+        {
+            _userManager = userManager;
+            _apiKeyGrpcClient = apiKeyGrpcClient;
+        }
 
 
-//        public class Renew
-//        {
-//            public string Plan { get; set; }
-//        }
-//        // POST: api/ApiKey/Renew
-//        [HttpPost("renew")]
-//        public async Task<IActionResult> RenewApiKey([FromBody] Renew renew)
-//        {
-//            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-//            if (string.IsNullOrEmpty(userId))
-//                return Unauthorized(new { Message = "User not authenticated." });
+        // GET: api/ApiKey/GetApiInfo
+        [HttpGet("GetApiInfo")]
+        public async Task<IActionResult> GetApiKey()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized(new { Message = "User not authenticated." });
 
-//            var key = await _apiKeyRepository.GetApiByUserIdAsync(userId);
-//            if (key == null)
-//                return NotFound(new { Message = "API key not found." });
+            try
+            {
+                var apiKey = await _apiKeyGrpcClient.GetApiKeyAsync(userId);
 
-//            // business logic 
-//            var update = new Tenants
-//            {
-//                UserId = key.UserId,
-//                Plan = renew.Plan,
-//                ExpirationDate = DateTime.UtcNow.AddDays(30),
-//                RequestLimit = 500,
-//                IsRevoked = false
-//            };
+                if (apiKey == null)
+                    return NotFound(new { Message = "No API key associated with this user." });
 
+                return Ok(new
+                {
+                    apiKey.Domain,
+                    OrgName = apiKey.OrgName,  // fixed case-sensitive property
+                    apiKey.Plan,
+                    ExpirationDate = apiKey.ExpirationDate.ToDateTime(),
+                    apiKey.RequestLimit,
+                    CreatedAt = apiKey.CreatedAt.ToDateTime()
 
-//            // business logic 
-
-//            var success = await _apiKeyRepository.RenewApiKeyAsync(update);
-//            if (!success)
-//                return NotFound(new { Message = "API key not found or already revoked." });
-
-//            return Ok(new { Message = "API key renewed successfully." });
-//        }
-
-
-//        // POST: api/ApiKey/Revoke
-//        [Authorize(Roles = "Admin")]
-//        [HttpPost("revoke")]
-//        public async Task<IActionResult> RevokeApiKey([FromQuery] string userId)
-//        {
-//            var success = await _apiKeyRepository.RevokeApiKeyAsync(userId);
-//            if (!success)
-//                return NotFound(new { Message = "API key not found." });
-
-//            return Ok(new { Message = "API key revoked successfully." });
-//        }
+                });
+            }
+            catch (RpcException ex) when (ex.StatusCode == Grpc.Core.StatusCode.NotFound)
+            {
+                return NotFound(new { Message = $"No API key found for user {userId}." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching the API key."});
+            }
+        }
 
 
-//    }
-//}
+        public class ApiKeyDto
+        {
+            public string Org_Name { get; set; }
+            public string Domain { get; set; }
+            public string Org_Email { get; set; }
+            public string Plan { get; set; }
+        }
+
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateApiKey([FromBody] ApiKeyDto apiKeyDto)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized(new { Message = "User not authenticated." });
+
+            try
+            {
+                var request = new CreateApiKeyRequest
+                {
+                    UserId = userId,
+                    OrgName = apiKeyDto.Org_Name,
+                    Domain = apiKeyDto.Domain,
+                    OrgEmail = apiKeyDto.Org_Email,
+                    Plan = apiKeyDto.Plan,
+                    ExpirationDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.UtcNow.AddDays(30)),
+                    CreatedAt = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.UtcNow),
+                    RequestLimit = 500
+                };
+
+                var response = await _apiKeyGrpcClient.CreateApiKeyAsync(request);
+                return Ok(new
+                {
+                    Message = "API key created successfully. Please store this key securely.",
+                    ApiKey = response
+                });
+            }
+            catch (RpcException ex) when (ex.StatusCode == Grpc.Core.StatusCode.AlreadyExists)
+            {
+                return BadRequest(new { Message = "An API key already exists for your account." });
+            }
+        }
+
+        [HttpPost("regenerate")]
+        public async Task<IActionResult> RegenerateApiKey()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized(new { Message = "User not authenticated." });
+
+            try
+            {
+                var response = await _apiKeyGrpcClient.RegenerateApiKeyAsync(userId);
+                return Ok(new
+                {
+                    Message = "API key regenerated successfully. Please store this key securely.",
+                    RawApiKey = response
+                });
+            }
+            catch (RpcException ex) when (ex.StatusCode == Grpc.Core.StatusCode.NotFound)
+            {
+                return NotFound(new { Message = "No existing API key found to regenerate." });
+            }
+        }
+
+
+        public class Renew
+        {
+            public string Plan { get; set; }
+        }
+
+        [HttpPost("renew")]
+        public async Task<IActionResult> RenewApiKey([FromBody] Renew renew)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized(new { Message = "User not authenticated." });
+
+            try
+            {
+                var request = new RenewApiKeyRequest
+                {
+                    UserId = userId,
+                    Plan = renew.Plan,
+                    RequestLimit = 500,
+                    ExpirationDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.UtcNow.AddDays(30)),
+                    IsRevoked = false
+                };
+
+                var result = await _apiKeyGrpcClient.RenewApiKeyAsync(request);
+                return Ok(new
+                {
+                    Message = "API key renewed successfully.",
+                    Plan = result.Plan,
+                    ExpirationDate = result.ExpirationDate.ToDateTime(),
+                    RequestLimit = result.RequestLimit
+                });
+            }
+            catch (RpcException ex) when (ex.StatusCode == Grpc.Core.StatusCode.NotFound)
+            {
+                return NotFound(new { Message = "API key not found." });
+            }
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("revoke")]
+        public async Task<IActionResult> RevokeApiKey([FromQuery] string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+                return BadRequest(new { Message = "UserId is required." });
+
+            try
+            {
+                var result = await _apiKeyGrpcClient.RevokeApiKeyAsync(userId);
+                return Ok(new
+                {
+                    Message = "API key revoked successfully.",
+                    IsRevoked = result.IsRevoked
+                });
+            }
+            catch (RpcException ex) when (ex.StatusCode == Grpc.Core.StatusCode.NotFound)
+            {
+                return NotFound(new { Message = "API key not found." });
+            }
+        }
+
+
+    }
+}

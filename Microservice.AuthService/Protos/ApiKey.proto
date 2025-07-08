@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option csharp_namespace = "Microservice.AuthService.Protos";
+
+import "google/protobuf/timestamp.proto";
+
+service ApiKey {
+  rpc GetApiKey(ApiKeyRequest) returns (ApiKeyResponse);
+  rpc CreateApiKey(CreateApiKeyRequest) returns (ApiHashResponse);
+  rpc RegenerateApiKey(ApiKeyRequest) returns (ApiHashResponse);
+  rpc RenewApiKey(RenewApiKeyRequest) returns (ApiKeyResponse);
+  rpc RevokeApiKey(ApiKeyRequest) returns (ApiKeyResponse);
+}
+
+
+message ApiKeyRequest {
+  string user_id = 1;
+}
+
+message ApiKeyResponse {
+  string user_id = 1;
+  string org_name = 2;
+  string domain = 3;
+  string org_email = 4;
+  string plan = 5;
+  google.protobuf.Timestamp expiration_date = 6;
+  google.protobuf.Timestamp created_at = 7;
+  int32 request_limit = 8;
+  google.protobuf.Timestamp reset_date = 9;
+  bool is_revoked = 10;
+  bool is_active = 11;
+}
+
+message CreateApiKeyRequest {
+  string user_id = 1;
+  string org_name = 2;
+  string domain = 3;
+  string org_email = 4;
+  string plan = 5;
+  google.protobuf.Timestamp expiration_date = 6;
+  google.protobuf.Timestamp created_at = 7;
+  int32 request_limit = 8;
+}
+
+message ApiHashResponse {
+  string api_hash = 1;
+}
+
+message RenewApiKeyRequest {
+	string user_id = 1;
+	string plan = 2;
+	int32 request_limit = 3;
+	google.protobuf.Timestamp expiration_date = 4;
+	bool is_revoked = 5;
+}
+
+

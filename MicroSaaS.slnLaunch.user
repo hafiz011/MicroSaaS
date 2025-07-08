@@ -9,6 +9,10 @@
       {
         "Path": "Microservice.AuthService\\Microservice.AuthService.csproj",
         "Action": "Start"
+      },
+      {
+        "Path": "Microservice.Session\\Microservice.Session.csproj",
+        "Action": "Start"
       }
     ]
   }

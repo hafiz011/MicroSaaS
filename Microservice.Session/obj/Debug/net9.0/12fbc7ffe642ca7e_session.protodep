@@ -1,2 +1,0 @@
-obj\Debug\net9.0\Protos/Session.cs \
-obj\Debug\net9.0\Protos/SessionGrpc.cs: Protos/session.proto

@@ -60,7 +60,8 @@ namespace Microservice.Session.Infrastructure.Repositories
                 .Set(a => a.Plan, update.Plan)
                 .Set(a => a.ExpirationDate, update.ExpirationDate)
                 .Set(a => a.RequestLimit, update.RequestLimit)
-                .Set(a => a.IsRevoked, update.IsRevoked);
+                .Set(a => a.IsRevoked, update.IsRevoked)
+                .Set(a => a.ResetDate, update.ResetDate);
 
             var result = await _collection.UpdateOneAsync(filter, updateDef);
 
