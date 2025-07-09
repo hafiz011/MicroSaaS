@@ -1,6 +1,7 @@
-﻿using Microservice.Session.Infrastructure.GeoIPService;
-using Microservice.Session.Entities;
+﻿using Microservice.Session.Entities;
+using Microservice.Session.Infrastructure.GeoIPService;
 using Microservice.Session.Infrastructure.Interfaces;
+using Microservice.Session.Infrastructure.Repositories;
 using Microservice.Session.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -252,7 +253,13 @@ namespace Microservice.Session.Controllers
 
 
 
-
+        //[HttpGet("suspicious/details")]
+        //public async Task<IActionResult> GetSuspiciousWithDetails([FromQuery] DateTime? from, [FromQuery] DateTime? to)
+        //{
+        //    var tenantId = await GetTenantFromApiKey();
+        //    var data = await _suspiciousActivityRepository.GetSuspiciousWithSessionDetailsAsync(tenantId, from, to);
+        //    return Ok(data);
+        //}
 
 
 

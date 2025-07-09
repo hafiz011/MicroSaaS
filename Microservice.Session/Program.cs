@@ -30,6 +30,7 @@ namespace Microservice.Session
             builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
             builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 
+            builder.Services.AddSingleton<ISuspiciousActivityRepository, SuspiciousActivityRepository>();
 
 
             builder.Services.AddGrpc();
