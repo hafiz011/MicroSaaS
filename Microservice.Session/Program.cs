@@ -5,6 +5,7 @@ using Microservice.Session.Infrastructure.MongoDb;
 using Microservice.Session.Infrastructure.Repositories;
 using Microservice.Session.Infrastructure.Services;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using RabbitMQ.Client;
 
 namespace Microservice.Session
 {
@@ -31,6 +32,25 @@ namespace Microservice.Session
             builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 
             builder.Services.AddSingleton<ISuspiciousActivityRepository, SuspiciousActivityRepository>();
+           
+
+
+            builder.Services.AddSingleton<IRabbitMqPublisher, RabbitMqPublisher>();
+
+            builder.Services.AddHostedService<RabbitMqConsumerService>();
+
+            builder.Services.AddSingleton<IModel>(sp =>
+            {
+                var factory = new ConnectionFactory() { HostName = "localhost" };
+                var connection = factory.CreateConnection();
+                return connection.CreateModel();
+            });
+
+
+
+
+
+
 
 
             builder.Services.AddGrpc();

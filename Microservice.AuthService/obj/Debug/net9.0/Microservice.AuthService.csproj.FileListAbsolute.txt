@@ -163,3 +163,4 @@ D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\refin
 D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.pdb
 D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.genruntimeconfig.cache
 D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\ref\Microservice.AuthService.dll
+D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\bin\Debug\net9.0\RabbitMQ.Client.dll

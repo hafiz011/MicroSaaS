@@ -20,18 +20,21 @@ namespace Microservice.Session.Controllers
         private readonly IApiKeyRepository _apiKeyRepository;
         private readonly GeolocationService _geolocationService;
         private readonly ISessionRepository _sessionRepository;
+        private IRabbitMqPublisher _publisher;
         private readonly ILogger<SessionController> _logger;
 
         public SessionController(IActivityRepository activityRepository,
             IApiKeyRepository apiKeyRepository,
             GeolocationService geolocationService,
             ISessionRepository sessionRepository,
+            IRabbitMqPublisher rabbitMqPublisher
             ILogger<SessionController> logger)
         {
             _activityRepository = activityRepository;
             _apiKeyRepository = apiKeyRepository;
             _geolocationService = geolocationService;
             _sessionRepository = sessionRepository;
+            _publisher = rabbitMqPublisher;
             _logger = logger;
         }
 
@@ -155,6 +158,13 @@ namespace Microservice.Session.Controllers
                     };
 
                     var SessionsId = await _sessionRepository.CreateSessionAsync(session);
+
+                    _publisher.PublishSessionRiskCheck(new SessionRiskCheckMessage
+                    {
+                        SessionId = SessionsId.Id,
+                        TenantId = apiKeyInfo.Id
+                    });
+
                     return Ok(new { SessionsId = SessionsId.Id }); //create anonymous user
 
                 } 
