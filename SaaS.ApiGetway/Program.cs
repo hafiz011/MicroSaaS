@@ -15,6 +15,13 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($"Proxying: {context.Request.Method} {context.Request.Path}");
+    await next();
+});
+
 app.UseCors();
 app.MapReverseProxy();
 

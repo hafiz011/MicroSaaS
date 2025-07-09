@@ -36,9 +36,9 @@ namespace Microservice.Session
 
             builder.WebHost.ConfigureKestrel(options =>
             {
-                options.ListenAnyIP(7002, o => o.Protocols = HttpProtocols.Http2);
+                options.ListenAnyIP(5002, o => o.Protocols = HttpProtocols.Http1);   // REST
+                options.ListenAnyIP(7002, o => o.Protocols = HttpProtocols.Http2);   // gRPC   
             });
-
 
 
 
