@@ -70,8 +70,7 @@
               "RelativeToolTip": "Microservice.Session\\Infrastructure\\Services\\SessionTimeOutService .cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T04:39:09.532Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T04:39:09.532Z"
             },
             {
               "$type": "Document",
@@ -83,8 +82,7 @@
               "RelativeToolTip": "Microservice.Session\\Infrastructure\\Services\\ApiKeyGenerator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T04:39:01.212Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T04:39:01.212Z"
             },
             {
               "$type": "Document",
@@ -96,8 +94,7 @@
               "RelativeToolTip": "Microservice.Session\\Infrastructure\\Repositories\\ApiKeyRepository.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAYwBUAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T04:38:20.763Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T04:38:20.763Z"
             },
             {
               "$type": "Document",
@@ -122,8 +119,7 @@
               "RelativeToolTip": "Microservice.Session\\Infrastructure\\Services\\ApiKeyService.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAAwEgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T04:35:53.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T04:35:53.298Z"
             },
             {
               "$type": "Document",
@@ -135,8 +131,7 @@
               "RelativeToolTip": "Microservice.Session\\Program.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAgwAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T04:34:43.988Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T04:34:43.988Z"
             },
             {
               "$type": "Document",
@@ -148,8 +143,7 @@
               "RelativeToolTip": "SaaS.ApiGetway\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T04:34:17.573Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T04:34:17.573Z"
             }
           ]
         }
