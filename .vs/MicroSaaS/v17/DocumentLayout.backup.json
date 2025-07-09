@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "D:\\GitHub\\MicroSaaS\\MicroService\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|d:\\github\\microsaas\\microservice\\saas.apigetway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|solutionrelative:saas.apigetway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|d:\\github\\microsaas\\microservice\\saas.apigetway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|solutionrelative:saas.apigetway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\microservice\\microservice.authservice\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\microservice\\microservice.authservice\\controllers\\apikeycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\controllers\\apikeycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,21 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\Program.cs",
-              "RelativeDocumentMoniker": "SaaS.ApiGetway\\Program.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\Program.cs",
-              "RelativeToolTip": "SaaS.ApiGetway\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T11:56:53.071Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -63,41 +42,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ApiKeyController.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Controllers\\ApiKeyController.cs",
-              "RelativeDocumentMoniker": "Microservice.AuthService\\Controllers\\ApiKeyController.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Controllers\\ApiKeyController.cs",
-              "RelativeToolTip": "Microservice.AuthService\\Controllers\\ApiKeyController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAADwvx4AAAAIAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Program.cs",
+              "RelativeDocumentMoniker": "Microservice.Session\\Program.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Program.cs",
+              "RelativeToolTip": "Microservice.Session\\Program.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T11:56:51.643Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Microservice.AuthService\\Controllers\\AuthController.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Microservice.AuthService\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACwAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T11:52:05.052Z",
+              "WhenOpened": "2025-07-09T04:34:43.988Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\appsettings.json",
-              "RelativeDocumentMoniker": "SaaS.ApiGetway\\appsettings.json",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\appsettings.json",
-              "RelativeToolTip": "SaaS.ApiGetway\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-08T11:50:48.498Z",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\Program.cs",
+              "RelativeDocumentMoniker": "SaaS.ApiGetway\\Program.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\Program.cs",
+              "RelativeToolTip": "SaaS.ApiGetway\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-09T04:34:17.573Z",
               "EditorCaption": ""
             }
           ]

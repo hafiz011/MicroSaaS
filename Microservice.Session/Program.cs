@@ -3,9 +3,7 @@ using Microservice.Session.Infrastructure.GeoIPService;
 using Microservice.Session.Infrastructure.Interfaces;
 using Microservice.Session.Infrastructure.MongoDb;
 using Microservice.Session.Infrastructure.Repositories;
-using Microservice.Session.Infrastructure.Repositories;
 using Microservice.Session.Infrastructure.Services;
-using Microservice.Session.Protos;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace Microservice.Session
