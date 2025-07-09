@@ -39,26 +39,26 @@ namespace Microservice.Session.Controllers
         {
             try
             {
-                if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))
+                if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))  //get api key hash
                 {
-                    return Unauthorized("API Key is missing.");
+                    return Unauthorized("API Key is missing."); 
                 }
-                var isValid = await _apiKeyRepository.TrackUsageAsync(rawKey);
+                var isValid = await _apiKeyRepository.TrackUsageAsync(rawKey);   // track apk key using limit and validation in DB
                 if (!isValid)
                     return Unauthorized("Invalid API Key");
 
-                var apiKeyInfo = await _apiKeyRepository.GetApiByApiKeyIdAsync(rawKey);
+                var apiKeyInfo = await _apiKeyRepository.GetApiByApiKeyIdAsync(rawKey); // check info API key in DB
 
-                Request.Headers.TryGetValue("X-SESSION-ID", out var existingSessionId);
+                Request.Headers.TryGetValue("X-SESSION-ID", out var existingSessionId); // get session id
                 Sessions existingSession = null;
                 if (!string.IsNullOrWhiteSpace(existingSessionId))
                 {
-                    existingSession = await _sessionRepository.GetSessionByIdAsync(existingSessionId);
+                    existingSession = await _sessionRepository.GetSessionByIdAsync(existingSessionId); // get session id if it already exits
                 }
 
                 if (!string.IsNullOrWhiteSpace(dto.User_Id))
                 {
-                    var userinfo = await _sessionRepository.GetUserByIdAsync(dto.User_Id);
+                    var userinfo = await _sessionRepository.GetUserByIdAsync(dto.User_Id);  // get user if it exits in DB
                     var user = new Users
                     {
                         Tenant_Id = apiKeyInfo.Id,
@@ -69,17 +69,17 @@ namespace Microservice.Session.Controllers
                         Created_at = DateTime.UtcNow
                     };
 
-                    if (userinfo == null)
+                    if (userinfo == null) //if user is null than create user
                     {
                         await _sessionRepository.CreateUserAsync(user);
                     }
                     else
                     {
-                        await _sessionRepository.UpdateUserAsync(user);
+                        await _sessionRepository.UpdateUserAsync(user); // if user is exits than update login time
                     }
                 }
 
-                var location = await _geolocationService.GetGeolocationAsync(dto.Ip_Address);
+                var location = await _geolocationService.GetGeolocationAsync(dto.Ip_Address); // get location using ip address
 
                 // If session exists and anonymous, update it to user
                 if (existingSession != null && string.IsNullOrEmpty(existingSession.User_Id) && !string.IsNullOrWhiteSpace(dto.User_Id))
@@ -172,24 +172,24 @@ namespace Microservice.Session.Controllers
         {
             try
             {
-                if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))
+                if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))   //get api key hash
                     return Unauthorized("API Key is missing.");
 
-                if (!Request.Headers.TryGetValue("X-SESSION-ID", out var sessionId) || string.IsNullOrEmpty(sessionId))
+                if (!Request.Headers.TryGetValue("X-SESSION-ID", out var sessionId) || string.IsNullOrEmpty(sessionId))  //get session id
                     return BadRequest("Session ID is missing.");
 
-                var apiKeyInfo = await _apiKeyRepository.GetApiByApiKeyIdAsync(rawKey);
+                var apiKeyInfo = await _apiKeyRepository.GetApiByApiKeyIdAsync(rawKey);  // check info API key in DB
                 if (apiKeyInfo == null)
                     return Unauthorized("Invalid API Key.");
 
-                var session = await _sessionRepository.GetSessionByIdAsync(sessionId);
+                var session = await _sessionRepository.GetSessionByIdAsync(sessionId);  // check session in database
                 if (session == null || session.Tenant_Id != apiKeyInfo.Id)
                     return Unauthorized("Invalid or unauthorized session.");
 
                 if (session.Logout_Time != null)
                     return BadRequest("Session is already ended.");
 
-                await _sessionRepository.EndSessionAsync(sessionId);
+                await _sessionRepository.EndSessionAsync(sessionId);  // end session
 
                 return Ok();
             }
@@ -207,17 +207,18 @@ namespace Microservice.Session.Controllers
         {
             try
             {
+                
                 if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))
                 {
-                    return Unauthorized("API Key is missing.");
+                    return Unauthorized("API Key is missing."); //get api key
                 }
 
                 if (!Request.Headers.TryGetValue("X-SESSION-ID", out var sessionId) || string.IsNullOrEmpty(sessionId))
                 {
-                    return BadRequest("Session ID is missing.");
+                    return BadRequest("Session ID is missing."); //get session id
                 }
 
-                var apiKeyInfo = await _apiKeyRepository.GetApiByApiKeyIdAsync(rawKey);
+                var apiKeyInfo = await _apiKeyRepository.GetApiByApiKeyIdAsync(rawKey); // check info API key in DB
                 if (apiKeyInfo == null)
                 {
                     return Unauthorized("Invalid API Key.");
@@ -233,7 +234,7 @@ namespace Microservice.Session.Controllers
                     Time_Stamp = DateTime.UtcNow
                 };
 
-                await _activityRepository.CreateLogActivityAsync(log);
+                await _activityRepository.CreateLogActivityAsync(log); // insert event log in DB
                 return Ok();
             }
             catch (Exception ex)

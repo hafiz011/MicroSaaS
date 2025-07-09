@@ -3,24 +3,8 @@
   "WorkspaceRootPath": "D:\\GitHub\\MicroSaaS\\MicroService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|d:\\github\\microsaas\\microservice\\saas.apigetway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|solutionrelative:saas.apigetway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|d:\\github\\microsaas\\microservice\\saas.apigetway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|solutionrelative:saas.apigetway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\infrastructure\\repositories\\apikeyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\repositories\\apikeyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,67 +38,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\appsettings.json",
-              "RelativeDocumentMoniker": "SaaS.ApiGetway\\appsettings.json",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\appsettings.json",
-              "RelativeToolTip": "SaaS.ApiGetway\\appsettings.json",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB4AAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-09T05:41:28.907Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Program.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Program.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Program.cs",
-              "RelativeToolTip": "Microservice.Session\\Program.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAIwCcAAABcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T05:32:49.723Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\Program.cs",
-              "RelativeDocumentMoniker": "SaaS.ApiGetway\\Program.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\SaaS.ApiGetway\\Program.cs",
-              "RelativeToolTip": "SaaS.ApiGetway\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T05:30:08.81Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SessionController.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Controllers\\SessionController.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Controllers\\SessionController.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Controllers\\SessionController.cs",
-              "RelativeToolTip": "Microservice.Session\\Controllers\\SessionController.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAA7wCYAAAAIAAAAAAAAAA==",
+              "Title": "ApiKeyRepository.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Infrastructure\\Repositories\\ApiKeyRepository.cs",
+              "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\Repositories\\ApiKeyRepository.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Infrastructure\\Repositories\\ApiKeyRepository.cs",
+              "RelativeToolTip": "Microservice.Session\\Infrastructure\\Repositories\\ApiKeyRepository.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAowBcAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T05:10:40.563Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Microservice.Session\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Microservice.Session\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-09T05:09:45.732Z",
+              "WhenOpened": "2025-07-09T07:27:11.312Z",
               "EditorCaption": ""
             }
           ]

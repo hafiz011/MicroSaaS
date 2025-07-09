@@ -32,7 +32,7 @@ namespace Microservice.Session.Infrastructure.Repositories
             return await _collection.Find(a => a.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<Tenants> GetApiByApiKeyIdAsync(string rawKey)
+        public async Task<Tenants> GetApiByApiKeyIdAsync(string rawKey) // check API hash validation in DB
         {
             var hashedKey = ApiKeyGenerator.HashApiKey(rawKey);
             return await _collection.Find(a => a.ApiSecret == hashedKey).FirstOrDefaultAsync();
