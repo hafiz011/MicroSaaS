@@ -1,7 +1,7 @@
-﻿using Microservice.Session.Entities;
-using Microservice.Session.Models.DashboardDTOs;
+﻿using Microservice.AuthService.Entities;
 
-namespace Microservice.Session.Infrastructure.Interfaces
+
+namespace Microservice.AuthService.Infrastructure.Interfaces
 {
     public interface ISuspiciousActivityRepository
     {

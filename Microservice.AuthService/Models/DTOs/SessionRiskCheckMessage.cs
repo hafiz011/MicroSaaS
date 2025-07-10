@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-
-namespace Microservice.Session.Models.DTOs
+﻿namespace Microservice.AuthService.Models.DTOs
 {
     public class SessionRiskCheckMessage
     {
@@ -12,7 +10,7 @@ namespace Microservice.Session.Models.DTOs
         public DateTime Login_Time { get; set; } = DateTime.UtcNow;
         public DeviceInfo Device { get; set; }
         public Location Geo_Location { get; set; }
-        
+
 
     }
     public class DeviceInfo
@@ -36,9 +34,4 @@ namespace Microservice.Session.Models.DTOs
         public bool is_vpn { get; set; }
     }
 
-
-
-
-
 }
-

@@ -47,3 +47,4 @@ D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\refint\
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\Microservice.Analytics.pdb
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\Microservice.Analytics.genruntimeconfig.cache
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\ref\Microservice.Analytics.dll
+D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

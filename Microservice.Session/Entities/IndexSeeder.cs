@@ -14,15 +14,6 @@ namespace Microservice.Session.Entities
         public async Task SeedIndexesAsync()
         {
             var sessionCollection = _db.GetCollection<Sessions>("Sessions");
-            var suspiciousCollection = _db.GetCollection<SuspiciousActivity>("SuspiciousSessions");
-
-            var suspiciousIndexes = new[]
-            {
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.SessionId)),
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.TenantId)),
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Descending(x => x.DetectedAt)),
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.IsSuspicious))
-            };
 
             var sessionIndexes = new[]
             {
@@ -35,7 +26,6 @@ namespace Microservice.Session.Entities
 
 
             await sessionCollection.Indexes.CreateManyAsync(sessionIndexes);
-            await suspiciousCollection.Indexes.CreateManyAsync(suspiciousIndexes);
         }
     }
 }

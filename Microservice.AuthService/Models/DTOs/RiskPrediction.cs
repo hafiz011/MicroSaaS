@@ -1,4 +1,4 @@
-﻿namespace Microservice.Session.Models.DTOs
+﻿namespace Microservice.AuthService.Models.DTOs
 {
     public class RiskPrediction
     {

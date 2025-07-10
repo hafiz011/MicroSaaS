@@ -2705,6 +2705,7 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.0",
       "MongoDB.Driver.Core >= 2.30.0",
       "Newtonsoft.Json >= 13.0.3",
+      "RabbitMQ.Client >= 6.4.0",
       "Swashbuckle.AspNetCore >= 9.0.1"
     ]
   },
@@ -2791,6 +2792,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "RabbitMQ.Client": {
+            "target": "Package",
+            "version": "[6.4.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

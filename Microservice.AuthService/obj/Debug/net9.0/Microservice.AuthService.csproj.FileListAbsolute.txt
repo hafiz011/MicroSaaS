@@ -89,3 +89,10 @@ D:\GitHub\MicroSaaS\MicroSaaS\Microservice.AuthService\obj\Debug\net9.0\staticwe
 D:\GitHub\MicroSaaS\MicroSaaS\Microservice.AuthService\obj\Debug\net9.0\Microser.3680E9BE.Up2Date
 D:\GitHub\MicroSaaS\MicroSaaS\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.genruntimeconfig.cache
 D:\GitHub\MicroSaaS\MicroSaaS\Microservice.AuthService\obj\Debug\net9.0\ref\Microservice.AuthService.dll
+D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.csproj.AssemblyReference.cache
+D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.AssemblyInfoInputs.cache
+D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.AssemblyInfo.cs
+D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.csproj.CoreCompileInputs.cache
+D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.MvcApplicationPartsAssemblyInfo.cache
+D:\GitHub\MicroSaaS\MicroService\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.sourcelink.json

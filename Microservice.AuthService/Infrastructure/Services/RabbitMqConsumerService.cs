@@ -1,27 +1,21 @@
-﻿using Microservice.Session.Entities;
-using Microservice.Session.Infrastructure.Interfaces;
-using Microservice.Session.Models.DTOs;
-using MongoDB.Driver;
+﻿using Microservice.AuthService.Entities;
+using Microservice.AuthService.Infrastructure.Interfaces;
+using Microservice.AuthService.Models.DTOs;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 
-namespace Microservice.Session.Infrastructure.Services
+namespace Microservice.AuthService.Infrastructure.Services
 {
     public class RabbitMqConsumerService : BackgroundService
     {
         private readonly ISuspiciousActivityRepository _suspiciousRepository;
-        private readonly ISessionRepository _sessionRepository;
         private readonly IModel _channel;
 
-        public RabbitMqConsumerService(
-            ISuspiciousActivityRepository suspiciousRepository,
-            ISessionRepository sessionRepository,
-            IModel channel)
+        public RabbitMqConsumerService(ISuspiciousActivityRepository suspiciousRepository, IModel channel)
         {
             _suspiciousRepository = suspiciousRepository;
-            _sessionRepository = sessionRepository;
             _channel = channel;
         }
 
@@ -40,25 +34,45 @@ namespace Microservice.Session.Infrastructure.Services
 
                     if (message == null || string.IsNullOrWhiteSpace(message.SessionId)) return;
 
-                    var session = await _sessionRepository.GetSessionByIdAsync(message.SessionId);
-                    if (session == null) return;
-
-                    var prediction = PredictRisk(session);
+                    var prediction = PredictRisk(message);
 
                     var suspicious = new SuspiciousActivity
                     {
-                        SessionId = session.Id,
-                        TenantId = session.Tenant_Id,
-                        UserId = session.User_Id,
+                        SessionId = message.SessionId,
+                        TenantId = message.TenantId,
+                        UserId = message.UserId,
+                        IpAddress = message.Ip_Address,
+                        LocalTime = message.Local_Time,
+                        LoginTime = message.Local_Time,
                         RiskScore = prediction.Score,
                         RiskLevel = prediction.Level,
                         RiskFactors = prediction.Factors,
                         DetectedAt = DateTime.UtcNow,
-                        IsSuspicious = prediction.Score > 0.5
+                        IsSuspicious = prediction.Score > 0.5,
+                        Device = new SuspiciousActivity.DeviceInfo
+                        {
+                            Fingerprint = message.Device.Fingerprint,
+                            Browser = message.Device.Browser,
+                            Device_Type = message.Device.Device_Type,
+                            OS = message.Device.OS,
+                            Language = message.Device.Language,
+                            Screen_Resolution = message.Device.Screen_Resolution
+                        },
+                        Geo_Location = new SuspiciousActivity.Location
+                        {
+                            Country = message.Geo_Location.Country,
+                            City = message.Geo_Location.City,
+                            Region = message.Geo_Location.Region,
+                            Postal = message.Geo_Location.Postal,
+                            Latitude_Longitude = message.Geo_Location.Latitude_Longitude,
+                            Isp = message.Geo_Location.Isp,
+                            TimeZone = message.Geo_Location.TimeZone,
+                            is_vpn = message.Geo_Location.is_vpn
+                        }
                     };
 
                     await _suspiciousRepository.InsertAsync(suspicious);
-                    Console.WriteLine($"[✔] Suspicious inserted for session: {session.Id}");
+                    Console.WriteLine($"[✔] Suspicious inserted for session: {message.SessionId}");
                 }
                 catch (Exception ex)
                 {
@@ -71,24 +85,24 @@ namespace Microservice.Session.Infrastructure.Services
             return Task.CompletedTask;
         }
 
-        private RiskPrediction PredictRisk(Sessions session)
+        private RiskPrediction PredictRisk(SessionRiskCheckMessage message)
         {
-            var score = 0.0;
+            double score = 0;
             var reasons = new List<string>();
 
-            if (session.Geo_Location?.is_vpn == true)
+            if (message.Geo_Location?.is_vpn == true)
             {
                 score += 0.6;
                 reasons.Add("VPN");
             }
 
-            if (session.Device?.Device_Type == "Unknown")
+            if (message.Device?.Device_Type == "Unknown")
             {
                 score += 0.3;
                 reasons.Add("Unknown Device");
             }
 
-            var level = score switch
+            string level = score switch
             {
                 >= 0.8 => "High",
                 >= 0.5 => "Medium",
@@ -103,4 +117,5 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
     }
+
 }

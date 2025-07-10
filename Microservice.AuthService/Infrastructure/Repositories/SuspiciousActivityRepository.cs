@@ -1,9 +1,9 @@
-﻿using Microservice.Session.Entities;
-using Microservice.Session.Infrastructure.Interfaces;
-using Microservice.Session.Models.DashboardDTOs;
+﻿using Microservice.AuthService.Entities;
+using Microservice.AuthService.Infrastructure.Interfaces;
+using Microservice.AuthService.Models;
 using MongoDB.Driver;
 
-namespace Microservice.Session.Infrastructure.Repositories
+namespace Microservice.AuthService.Infrastructure.Repositories
 {
     public class SuspiciousActivityRepository : ISuspiciousActivityRepository
     {

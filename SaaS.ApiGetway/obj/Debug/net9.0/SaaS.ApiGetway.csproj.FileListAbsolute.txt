@@ -55,3 +55,4 @@ D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\refint\SaaS.Api
 D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\SaaS.ApiGetway.pdb
 D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\SaaS.ApiGetway.genruntimeconfig.cache
 D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\ref\SaaS.ApiGetway.dll
+D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

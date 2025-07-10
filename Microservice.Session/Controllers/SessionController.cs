@@ -1,14 +1,8 @@
 ﻿using Microservice.Session.Entities;
 using Microservice.Session.Infrastructure.GeoIPService;
 using Microservice.Session.Infrastructure.Interfaces;
-using Microservice.Session.Infrastructure.Repositories;
 using Microservice.Session.Models.DTOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using Org.BouncyCastle.Utilities.Net;
-using System.Net;
-using ZstdSharp.Unsafe;
 
 namespace Microservice.Session.Controllers
 {
@@ -37,6 +31,28 @@ namespace Microservice.Session.Controllers
             _publisher = rabbitMqPublisher;
             _logger = logger;
         }
+
+
+        public class SessionRequestDto
+        {
+            public string User_Id { get; set; }
+            public string Name { get; set; }
+            public string Email { get; set; }
+            public string Ip_Address { get; set; }
+            public DeviceInfoDto Device { get; set; }
+            public DateTime LocalTime { get; set; }
+        }
+
+        public class DeviceInfoDto
+        {
+            public string Fingerprint { get; set; }
+            public string Browser { get; set; }
+            public string Device_Type { get; set; }
+            public string OS { get; set; }
+            public string Language { get; set; }
+            public string Screen_Resolution { get; set; }
+        }
+
 
         [HttpPost("create")]
         public async Task<IActionResult> CreateSession([FromBody] SessionRequestDto dto)
@@ -85,7 +101,7 @@ namespace Microservice.Session.Controllers
 
                 var location = await _geolocationService.GetGeolocationAsync(dto.Ip_Address); // get location using ip address
 
-                // If session exists and anonymous, update it to user
+                // Condition 1: Anonymous → Login → Update session
                 if (existingSession != null && string.IsNullOrEmpty(existingSession.User_Id) && !string.IsNullOrWhiteSpace(dto.User_Id))
                 {
                     var update = new Sessions
@@ -95,7 +111,7 @@ namespace Microservice.Session.Controllers
                         Ip_Address = dto.Ip_Address,
                         Local_Time = dto.LocalTime,
                         isActive = true,
-                        Geo_Location = new Location
+                        Geo_Location = new Entities.Location
                         {
                             Country = location.Country,
                             City = location.City,
@@ -105,7 +121,7 @@ namespace Microservice.Session.Controllers
                             Isp = location.Org,
                             TimeZone = location.TimeZone
                         },
-                        Device = new DeviceInfo
+                        Device = new Entities.DeviceInfo
                         {
                             Browser = dto.Device.Browser,
                             Fingerprint = dto.Device.Fingerprint,
@@ -116,16 +132,45 @@ namespace Microservice.Session.Controllers
                         }
                     };
 
+
+                    _publisher.PublishSessionRiskCheck(new SessionRiskCheckMessage
+                    {
+                        SessionId = existingSession.Id,
+                        TenantId = apiKeyInfo.Id,
+                        UserId = dto.User_Id,
+                        Ip_Address = dto.Ip_Address,
+                        Local_Time = dto.LocalTime,
+                        Geo_Location = new Models.DTOs.Location
+                        {
+                            Country = location.Country,
+                            City = location.City,
+                            Region = location.Region,
+                            Postal = location.Postal,
+                            Latitude_Longitude = location.Loc,
+                            Isp = location.Org,
+                            TimeZone = location.TimeZone
+                        },
+                        Device = new Models.DTOs.DeviceInfo
+                        {
+                            Browser = dto.Device.Browser,
+                            Fingerprint = dto.Device.Fingerprint,
+                            Device_Type = dto.Device.Device_Type,
+                            OS = dto.Device.OS,
+                            Language = dto.Device.Language,
+                            Screen_Resolution = dto.Device.Screen_Resolution
+                        }
+                    });
+
                     await _sessionRepository.UpdateSessionAsync(existingSession.Id, update);
                     return Ok(new { SessionsId = existingSession.Id });
                 }
                 else if (existingSession != null && string.IsNullOrEmpty(existingSession.User_Id) && string.IsNullOrWhiteSpace(dto.User_Id))
                 { 
-                    return Ok(new { SessionsId = existingSession.Id }); //anonymous user
+                    return Ok(new { SessionsId = existingSession.Id }); // Condition 2: Anonymous → Return visit (no change)
                 }
-                else if (existingSession != null && !string.IsNullOrEmpty(existingSession.User_Id) && !string.IsNullOrWhiteSpace(dto.User_Id))
+                else if (existingSession != null && !string.IsNullOrEmpty(existingSession.User_Id) && !string.IsNullOrWhiteSpace(dto.User_Id) && existingSession.User_Id == dto.User_Id)
                 {
-                    return Ok(new { SessionsId = existingSession.Id }); //Pre existing User in Database
+                    return Ok(new { SessionsId = existingSession.Id }); // Condition 3: User already exists → return
                 }
                 else
                 {
@@ -136,7 +181,7 @@ namespace Microservice.Session.Controllers
                         Ip_Address = dto.Ip_Address,
                         Local_Time = dto.LocalTime,
                         isActive = true,
-                        Geo_Location = new Location
+                        Geo_Location = new Entities.Location
                         {
                             Country = location.Country,
                             City = location.City,
@@ -146,7 +191,7 @@ namespace Microservice.Session.Controllers
                             Isp = location.Org,
                             TimeZone = location.TimeZone
                         },
-                        Device = new DeviceInfo
+                        Device = new Entities.DeviceInfo
                         {
                             Browser = dto.Device.Browser,
                             Fingerprint = dto.Device.Fingerprint,
@@ -157,15 +202,40 @@ namespace Microservice.Session.Controllers
                         }
                     };
 
-                    var SessionsId = await _sessionRepository.CreateSessionAsync(session);
+                    var sessionCreated = await _sessionRepository.CreateSessionAsync(session);
 
-                    _publisher.PublishSessionRiskCheck(new SessionRiskCheckMessage
+                    if (!string.IsNullOrWhiteSpace(dto.User_Id))
                     {
-                        SessionId = SessionsId.Id,
-                        TenantId = apiKeyInfo.Id
-                    });
-
-                    return Ok(new { SessionsId = SessionsId.Id }); //create anonymous user
+                        _publisher.PublishSessionRiskCheck(new SessionRiskCheckMessage
+                        {
+                            SessionId = sessionCreated.Id,
+                            TenantId = apiKeyInfo.Id,
+                            UserId = dto.User_Id,
+                            Ip_Address = dto.Ip_Address,
+                            Local_Time = dto.LocalTime,
+                            Geo_Location = new Models.DTOs.Location
+                            {
+                                Country = location.Country,
+                                City = location.City,
+                                Region = location.Region,
+                                Postal = location.Postal,
+                                Latitude_Longitude = location.Loc,
+                                Isp = location.Org,
+                                TimeZone = location.TimeZone
+                            },
+                            Device = new Models.DTOs.DeviceInfo
+                            {
+                                Browser = dto.Device.Browser,
+                                Fingerprint = dto.Device.Fingerprint,
+                                Device_Type = dto.Device.Device_Type,
+                                OS = dto.Device.OS,
+                                Language = dto.Device.Language,
+                                Screen_Resolution = dto.Device.Screen_Resolution
+                            }
+                        });
+                    }
+             
+                    return Ok(new { SessionsId = sessionCreated.Id }); //create anonymous user
 
                 } 
             }
@@ -253,6 +323,23 @@ namespace Microservice.Session.Controllers
                 return StatusCode(500, "An error occurred while logging the activity.");
             }
         }
+
+
+
+        //private SessionRiskCheckMessage BuildRiskMessage(SessionRiskCheckMessage session, string tenantId)
+        //{
+        //    return new SessionRiskCheckMessage
+        //    {
+        //        SessionId = session.SessionId,
+        //        TenantId = tenantId,
+        //        UserId = session.User_Id,
+        //        Ip_Address = session.Ip_Address,
+        //        Local_Time = session.Local_Time,
+        //        Geo_Location = new Location { ... },
+        //        Device = new DeviceInfo { ... }
+        //    };
+        //}
+
 
 
 

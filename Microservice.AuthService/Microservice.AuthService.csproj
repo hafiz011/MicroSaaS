@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.30.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
   </ItemGroup>
 
@@ -30,7 +31,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Infrastructure\Interfaces\" />
-	  <Folder Include="Infrastructure\Repository\" />
+	  <Folder Include="Models\DashboardDTOs\" />
 	  <Folder Include="wwwroot\images\profile\" />
 	</ItemGroup>
 
