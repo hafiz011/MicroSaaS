@@ -1,27 +1,93 @@
 ﻿using Microservice.Session.Infrastructure.Interfaces;
 using Microservice.Session.Models.DTOs;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
 using System.Text;
 
 namespace Microservice.Session.Infrastructure.Services
 {
-    public class RabbitMqPublisher : IRabbitMqPublisher
+    public class RabbitMqPublisher : IRabbitMqPublisher, IDisposable
     {
+        private readonly IConnection _connection;
         private readonly IModel _channel;
+
+        // Queue names
+        private readonly string _sessionRiskCheckQueue = "session-risk-check";
+        private readonly string _userActivityLogQueue = "user-activity-log";
 
         public RabbitMqPublisher()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" }; // or docker/rabbitmq-server
-            var connection = factory.CreateConnection();
-            _channel = connection.CreateModel();
-            _channel.QueueDeclare(queue: "session-risk-check", durable: false, exclusive: false, autoDelete: false);
+            var factory = new ConnectionFactory
+            {
+                HostName = "localhost",
+                // if needed
+                // UserName = "guest",
+                // Password = "guest"
+            };
+
+            _connection = factory.CreateConnection();
+            _channel = _connection.CreateModel();
+
+            // two Queue declare
+            _channel.QueueDeclare(
+                queue: _sessionRiskCheckQueue,
+                durable: true,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null
+            );
+
+            _channel.QueueDeclare(
+                queue: _userActivityLogQueue,
+                durable: true,
+                exclusive: false,
+                autoDelete: false,
+                arguments: null
+            );
         }
 
+        // Session Risk Check message publish method
         public void PublishSessionRiskCheck(SessionRiskCheckMessage message)
         {
-            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
-            _channel.BasicPublish(exchange: "", routingKey: "session-risk-check", basicProperties: null, body: body);
-            Console.WriteLine($"[Publisher] Published message for SessionId: {message.SessionId}");
+            var json = JsonConvert.SerializeObject(message);
+            var body = Encoding.UTF8.GetBytes(json);
+
+            var properties = _channel.CreateBasicProperties();
+            properties.Persistent = true;
+
+            _channel.BasicPublish(
+                exchange: "",
+                routingKey: _sessionRiskCheckQueue,
+                basicProperties: properties,
+                body: body
+            );
+
+            Console.WriteLine($"[Publisher] Published SessionRiskCheck message for SessionId: {message.SessionId}");
+        }
+
+        // User Activity Log message publish method
+        public void PublishUserActivityLog(UserActivityLogMessage message)
+        {
+            var json = JsonConvert.SerializeObject(message);
+            var body = Encoding.UTF8.GetBytes(json);
+
+            var properties = _channel.CreateBasicProperties();
+            properties.Persistent = true;
+
+            _channel.BasicPublish(
+                exchange: "",
+                routingKey: _userActivityLogQueue,
+                basicProperties: properties,
+                body: body
+            );
+
+            Console.WriteLine($"[Publisher] Published UserActivityLog message for session: {message.Session_Id}");
+        }
+
+        public void Dispose()
+        {
+            _channel?.Dispose();
+            _connection?.Dispose();
         }
     }
 }

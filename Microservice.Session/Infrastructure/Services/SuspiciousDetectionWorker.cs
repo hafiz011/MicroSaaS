@@ -2,6 +2,7 @@
 using Microservice.Session.Infrastructure.Interfaces;
 using Microservice.Session.Models.DTOs;
 using MongoDB.Driver;
+using RabbitMQ.Client;
 
 namespace Microservice.Session.Infrastructure.Services
 {

@@ -37,6 +37,7 @@ namespace Microservice.Session
 
             builder.Services.AddSingleton<IRabbitMqPublisher, RabbitMqPublisher>();
 
+
             builder.Services.AddHostedService<RabbitMqConsumerService>();
 
             builder.Services.AddSingleton<IModel>(sp =>

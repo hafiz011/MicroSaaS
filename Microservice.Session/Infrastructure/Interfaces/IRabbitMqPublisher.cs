@@ -5,5 +5,6 @@ namespace Microservice.Session.Infrastructure.Interfaces
     public interface IRabbitMqPublisher
     {
         void PublishSessionRiskCheck(SessionRiskCheckMessage message);
+        void PublishUserActivityLog(UserActivityLogMessage message);
     }
 }

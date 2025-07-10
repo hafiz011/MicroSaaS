@@ -49,7 +49,6 @@ D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\staticwebassets
 D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\staticwebassets.build.json.cache
 D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\staticwebassets.development.json
 D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\SaaS.Api.50AB9588.Up2Date
 D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\SaaS.ApiGetway.dll
 D:\GitHub\MicroSaaS\MicroService\SaaS.ApiGetway\obj\Debug\net9.0\refint\SaaS.ApiGetway.dll

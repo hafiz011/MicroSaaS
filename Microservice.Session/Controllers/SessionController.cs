@@ -27,7 +27,7 @@ namespace Microservice.Session.Controllers
             IApiKeyRepository apiKeyRepository,
             GeolocationService geolocationService,
             ISessionRepository sessionRepository,
-            IRabbitMqPublisher rabbitMqPublisher
+            IRabbitMqPublisher rabbitMqPublisher,
             ILogger<SessionController> logger)
         {
             _activityRepository = activityRepository;
