@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Microservice.AuthService.csproj": {}
+    "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Microservice.AuthService.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Microservice.AuthService.csproj": {
+    "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Microservice.AuthService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Microservice.AuthService.csproj",
+        "projectUniqueName": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Microservice.AuthService.csproj",
         "projectName": "Microservice.AuthService",
-        "projectPath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Microservice.AuthService.csproj",
-        "packagesPath": "C:\\Users\\Hafiz\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\obj\\",
+        "projectPath": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Microservice.AuthService.csproj",
+        "packagesPath": "C:\\Users\\Ghost\\.nuget\\packages\\",
+        "outputPath": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Hafiz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ghost\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Microservice.Session.csproj": {
-                "projectPath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Microservice.Session.csproj"
+              "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.Session\\Microservice.Session.csproj": {
+                "projectPath": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.Session\\Microservice.Session.csproj"
               }
             }
           }
@@ -112,24 +113,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Microservice.Session.csproj": {
+    "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.Session\\Microservice.Session.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Microservice.Session.csproj",
+        "projectUniqueName": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.Session\\Microservice.Session.csproj",
         "projectName": "Microservice.Session",
-        "projectPath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Microservice.Session.csproj",
-        "packagesPath": "C:\\Users\\Hafiz\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\obj\\",
+        "projectPath": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.Session\\Microservice.Session.csproj",
+        "packagesPath": "C:\\Users\\Ghost\\.nuget\\packages\\",
+        "outputPath": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.Session\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Hafiz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ghost\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -138,6 +139,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -220,7 +222,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

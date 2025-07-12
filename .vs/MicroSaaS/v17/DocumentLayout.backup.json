@@ -1,14 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\GitHub\\MicroSaaS\\MicroService\\",
+  "WorkspaceRootPath": "D:\\Github\\SaaSApp\\MicroSaaS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\microservice\\microservice.authservice\\infrastructure\\repositories\\suspiciousactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\infrastructure\\repositories\\suspiciousactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Entities\\OrderStatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Microservice.AuthService\\Entities\\OrderStatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\microservice\\microservice.authservice\\infrastructure\\interfaces\\isuspiciousactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\infrastructure\\interfaces\\isuspiciousactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Microservice.AuthService\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,28 +47,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SuspiciousActivityRepository.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Repositories\\SuspiciousActivityRepository.cs",
-              "RelativeDocumentMoniker": "Microservice.AuthService\\Infrastructure\\Repositories\\SuspiciousActivityRepository.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Repositories\\SuspiciousActivityRepository.cs",
-              "RelativeToolTip": "Microservice.AuthService\\Infrastructure\\Repositories\\SuspiciousActivityRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAmAAAAAAAAAA==",
+              "Title": "OrderStatus.cs",
+              "DocumentMoniker": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Entities\\OrderStatus.cs",
+              "RelativeDocumentMoniker": "Microservice.AuthService\\Entities\\OrderStatus.cs",
+              "ToolTip": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Entities\\OrderStatus.cs",
+              "RelativeToolTip": "Microservice.AuthService\\Entities\\OrderStatus.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAmwA4AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:06:34.554Z",
+              "WhenOpened": "2025-07-12T07:18:54.855Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ISuspiciousActivityRepository.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Interfaces\\ISuspiciousActivityRepository.cs",
-              "RelativeDocumentMoniker": "Microservice.AuthService\\Infrastructure\\Interfaces\\ISuspiciousActivityRepository.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Interfaces\\ISuspiciousActivityRepository.cs",
-              "RelativeToolTip": "Microservice.AuthService\\Infrastructure\\Interfaces\\ISuspiciousActivityRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "RabbitMqConsumerService.cs",
+              "DocumentMoniker": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "RelativeDocumentMoniker": "Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "ToolTip": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "RelativeToolTip": "Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:06:31.993Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-12T07:18:04.558Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Program.cs",
+              "RelativeDocumentMoniker": "Microservice.AuthService\\Program.cs",
+              "ToolTip": "D:\\Github\\SaaSApp\\MicroSaaS\\Microservice.AuthService\\Program.cs",
+              "RelativeToolTip": "Microservice.AuthService\\Program.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAwAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T07:17:50.532Z"
             }
           ]
         }
