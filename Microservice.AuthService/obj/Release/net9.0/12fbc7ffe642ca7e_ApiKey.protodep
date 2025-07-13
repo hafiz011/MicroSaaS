@@ -1,0 +1,3 @@
+obj\Release\net9.0\Protos/ApiKey.cs \
+obj\Release\net9.0\Protos/ApiKeyGrpc.cs: C:/Users/Ghost/.nuget/packages/grpc.tools/2.72.0/build/native/include/google/protobuf/timestamp.proto\
+ Protos/ApiKey.proto
