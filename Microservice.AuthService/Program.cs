@@ -1,5 +1,6 @@
 
 using Microservice.AuthService.Database;
+using Microservice.AuthService.Entities;
 using Microservice.AuthService.Infrastructure.Interfaces;
 using Microservice.AuthService.Infrastructure.Repositories;
 using Microservice.AuthService.Infrastructure.Services;
@@ -8,18 +9,21 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Driver;
 using System.Text;
 
 namespace Microservice.AuthService
 {
     public class Program
     {
-        public static void Main(string[] args)
+       // public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
             builder.Services.AddSingleton<MongoDbContext>();
+
 
             // Add services to the container.
             builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(identityOptions =>
@@ -80,6 +84,9 @@ namespace Microservice.AuthService
             builder.Services.AddSingleton<ISuspiciousActivityRepository, SuspiciousActivityRepository>();
             builder.Services.AddHostedService<RabbitMqConsumerService>();
 
+           // builder.Services.AddSingleton<IndexSeeder>();
+
+
 
 
             builder.Services.AddControllers();
@@ -88,13 +95,22 @@ namespace Microservice.AuthService
 
             var app = builder.Build();
 
+
+            //// Seed indexes
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var seeder = scope.ServiceProvider.GetRequiredService<IndexSeeder>();
+            //    await seeder.SeedIndexesAsync();
+            //}
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseStaticFiles(); // wwwroot automatically served
+
+            app.UseHttpsRedirection();
 
             // If you're serving from a subfolder (e.g., images/profile inside wwwroot)
             app.UseStaticFiles(new StaticFileOptions
@@ -103,14 +119,10 @@ namespace Microservice.AuthService
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
                 RequestPath = ""
             });
-
             app.UseCors("AllowAll");
 
-            app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

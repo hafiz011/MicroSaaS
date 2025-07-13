@@ -60,3 +60,16 @@ D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticweb
 D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
 D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
 D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Session\obj\Debug\net9.0\staticwebassets.build.json

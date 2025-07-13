@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Microservice.AuthService.Models;
+using MongoDB.Driver;
 
 namespace Microservice.AuthService.Entities
 {
@@ -14,6 +15,7 @@ namespace Microservice.AuthService.Entities
         public async Task SeedIndexesAsync()
         {
             var suspiciousCollection = _db.GetCollection<SuspiciousActivity>("SuspiciousSessions");
+            var applicationUserCollection = _db.GetCollection<ApplicationUser>("applicationUsers");
 
             var suspiciousIndexes = new[]
             {
@@ -23,7 +25,16 @@ namespace Microservice.AuthService.Entities
                 new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.IsSuspicious))
             };
 
+            var applicationUserIndexes = new[]
+            {
+                new CreateIndexModel<ApplicationUser>(Builders<ApplicationUser>.IndexKeys.Ascending(x => x.TenantId))
+            };
+
+
+
+
             await suspiciousCollection.Indexes.CreateManyAsync(suspiciousIndexes);
+            await applicationUserCollection.Indexes.CreateManyAsync(applicationUserIndexes);
         }
     }
 }

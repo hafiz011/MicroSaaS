@@ -1,4 +1,5 @@
 ﻿using Microservice.AuthService.Entities;
+using Microservice.AuthService.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -16,7 +17,9 @@ namespace Microservice.AuthService.Database
 
         public IMongoCollection<ActivityLog> ActivityLogDB => _database.GetCollection<ActivityLog>("Activity_Log");
 
+        public IMongoCollection<SuspiciousActivity> SuspiciousSessions => _database.GetCollection<SuspiciousActivity>("SuspiciousSessions");
 
+        public IMongoCollection<ApplicationUser> Users => _database.GetCollection<ApplicationUser>("applicationUsers");
 
     }
 }
