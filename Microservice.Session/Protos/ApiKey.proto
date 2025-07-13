@@ -29,6 +29,7 @@ message ApiKeyResponse {
   google.protobuf.Timestamp reset_date = 9;
   bool is_revoked = 10;
   bool is_active = 11;
+  string TanantId = 12;
 }
 
 message CreateApiKeyRequest {
@@ -44,6 +45,7 @@ message CreateApiKeyRequest {
 
 message ApiHashResponse {
   string api_hash = 1;
+  string TanantId = 2;
 }
 
 message RenewApiKeyRequest {

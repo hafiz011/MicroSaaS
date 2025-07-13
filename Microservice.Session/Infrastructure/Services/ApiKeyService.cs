@@ -37,7 +37,8 @@ namespace Microservice.Session.Infrastructure.Services
                     ? Timestamp.FromDateTime(apiKey.ResetDate.Value.ToUniversalTime())
                     : null, // Handle nullable DateTime
                 IsRevoked = apiKey.IsRevoked,
-                IsActive = apiKey.IsActive
+                IsActive = apiKey.IsActive,
+                TanantId = apiKey.Id
             };
         }
 
@@ -64,11 +65,12 @@ namespace Microservice.Session.Infrastructure.Services
                 IsRevoked = false,
             };
 
-            await _apiKeyRepository.CreateApiKeyAsync(key);
+            var tenant = await _apiKeyRepository.CreateApiKeyAsync(key);
 
             return new ApiHashResponse
             {
-                ApiHash = rawKey
+                ApiHash = rawKey,
+                TanantId = tenant.Id
             };
         }
 

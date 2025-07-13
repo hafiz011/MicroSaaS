@@ -25,6 +25,9 @@ namespace Microservice.AuthService.Models
 
         [BsonElement("RefreshTokenExpiryTime")]
         public DateTime RefreshTokenExpiryTime { get; set; }
+
+        [BsonElement("Tenant_Id")]
+        public string TenantId { get; set; }
     }
 
     public class Address

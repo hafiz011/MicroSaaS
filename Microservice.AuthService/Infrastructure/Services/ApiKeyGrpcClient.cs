@@ -21,10 +21,10 @@ namespace Microservice.AuthService.Infrastructure.Services
             return await _client.GetApiKeyAsync(request);
         }
 
-        public async Task<string> CreateApiKeyAsync(CreateApiKeyRequest request)
+        public async Task<(string ApiHash, string TenantId)> CreateApiKeyAsync(CreateApiKeyRequest request)
         {
             var response = await _client.CreateApiKeyAsync(request);
-            return response.ApiHash;
+            return (response.ApiHash, response.TanantId);
         }
 
         public async Task<string> RegenerateApiKeyAsync(string userId)

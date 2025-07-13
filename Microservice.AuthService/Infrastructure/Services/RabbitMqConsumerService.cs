@@ -48,7 +48,8 @@ namespace Microservice.AuthService.Infrastructure.Services
                         RiskLevel = prediction.Level,
                         RiskFactors = prediction.Factors,
                         DetectedAt = DateTime.UtcNow,
-                        IsSuspicious = prediction.Score > 0.5,
+                        SuspiciousScore = prediction.Score > 0.5,
+                        IsSuspicious = true,
                         Device = new SuspiciousActivity.DeviceInfo
                         {
                             Fingerprint = message.Device.Fingerprint,
@@ -72,16 +73,16 @@ namespace Microservice.AuthService.Infrastructure.Services
                     };
 
                     await _suspiciousRepository.InsertAsync(suspicious);
-                    Console.WriteLine($"[✔] Suspicious inserted for session: {message.SessionId}");
+                    Console.WriteLine($"Suspicious inserted for session: {message.SessionId}");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[!] Error processing message: {ex.Message}");
+                    Console.WriteLine($"Error processing message: {ex.Message}");
                 }
             };
 
             _channel.BasicConsume(queue: "session-risk-check", autoAck: true, consumer: consumer);
-            Console.WriteLine("[*] Listening for suspicious session jobs...");
+            Console.WriteLine("Listening for suspicious session jobs...");
             return Task.CompletedTask;
         }
 

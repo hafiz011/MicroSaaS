@@ -77,6 +77,10 @@ namespace Microservice.AuthService.Controllers
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized(new { Message = "User not authenticated." });
 
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound(new { Message = "User not found." });
+
             try
             {
                 var request = new CreateApiKeyRequest
@@ -92,6 +96,9 @@ namespace Microservice.AuthService.Controllers
                 };
 
                 var response = await _apiKeyGrpcClient.CreateApiKeyAsync(request);
+                user.TenantId = response.TenantId;
+                var update = await _userManager.UpdateAsync(user);
+
                 return Ok(new
                 {
                     Message = "API key created successfully. Please store this key securely.",

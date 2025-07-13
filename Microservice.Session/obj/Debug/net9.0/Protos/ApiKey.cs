@@ -25,38 +25,38 @@ namespace Microservice.Session.Protos {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChNQcm90b3MvQXBpS2V5LnByb3RvGh9nb29nbGUvcHJvdG9idWYvdGltZXN0",
-            "YW1wLnByb3RvIiAKDUFwaUtleVJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCSK3",
+            "YW1wLnByb3RvIiAKDUFwaUtleVJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCSLJ",
             "AgoOQXBpS2V5UmVzcG9uc2USDwoHdXNlcl9pZBgBIAEoCRIQCghvcmdfbmFt",
             "ZRgCIAEoCRIOCgZkb21haW4YAyABKAkSEQoJb3JnX2VtYWlsGAQgASgJEgwK",
             "BHBsYW4YBSABKAkSMwoPZXhwaXJhdGlvbl9kYXRlGAYgASgLMhouZ29vZ2xl",
             "LnByb3RvYnVmLlRpbWVzdGFtcBIuCgpjcmVhdGVkX2F0GAcgASgLMhouZ29v",
             "Z2xlLnByb3RvYnVmLlRpbWVzdGFtcBIVCg1yZXF1ZXN0X2xpbWl0GAggASgF",
             "Ei4KCnJlc2V0X2RhdGUYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0",
-            "YW1wEhIKCmlzX3Jldm9rZWQYCiABKAgSEQoJaXNfYWN0aXZlGAsgASgIIuUB",
-            "ChNDcmVhdGVBcGlLZXlSZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkSEAoIb3Jn",
-            "X25hbWUYAiABKAkSDgoGZG9tYWluGAMgASgJEhEKCW9yZ19lbWFpbBgEIAEo",
-            "CRIMCgRwbGFuGAUgASgJEjMKD2V4cGlyYXRpb25fZGF0ZRgGIAEoCzIaLmdv",
-            "b2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKY3JlYXRlZF9hdBgHIAEoCzIa",
-            "Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFQoNcmVxdWVzdF9saW1pdBgI",
-            "IAEoBSIjCg9BcGlIYXNoUmVzcG9uc2USEAoIYXBpX2hhc2gYASABKAkikwEK",
-            "ElJlbmV3QXBpS2V5UmVxdWVzdBIPCgd1c2VyX2lkGAEgASgJEgwKBHBsYW4Y",
-            "AiABKAkSFQoNcmVxdWVzdF9saW1pdBgDIAEoBRIzCg9leHBpcmF0aW9uX2Rh",
-            "dGUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCmlzX3Jl",
-            "dm9rZWQYBSABKAgyigIKBkFwaUtleRIsCglHZXRBcGlLZXkSDi5BcGlLZXlS",
-            "ZXF1ZXN0Gg8uQXBpS2V5UmVzcG9uc2USNgoMQ3JlYXRlQXBpS2V5EhQuQ3Jl",
-            "YXRlQXBpS2V5UmVxdWVzdBoQLkFwaUhhc2hSZXNwb25zZRI0ChBSZWdlbmVy",
-            "YXRlQXBpS2V5Eg4uQXBpS2V5UmVxdWVzdBoQLkFwaUhhc2hSZXNwb25zZRIz",
-            "CgtSZW5ld0FwaUtleRITLlJlbmV3QXBpS2V5UmVxdWVzdBoPLkFwaUtleVJl",
-            "c3BvbnNlEi8KDFJldm9rZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaDy5BcGlL",
-            "ZXlSZXNwb25zZUIeqgIbTWljcm9zZXJ2aWNlLlNlc3Npb24uUHJvdG9zYgZw",
-            "cm90bzM="));
+            "YW1wEhIKCmlzX3Jldm9rZWQYCiABKAgSEQoJaXNfYWN0aXZlGAsgASgIEhAK",
+            "CFRhbmFudElkGAwgASgJIuUBChNDcmVhdGVBcGlLZXlSZXF1ZXN0Eg8KB3Vz",
+            "ZXJfaWQYASABKAkSEAoIb3JnX25hbWUYAiABKAkSDgoGZG9tYWluGAMgASgJ",
+            "EhEKCW9yZ19lbWFpbBgEIAEoCRIMCgRwbGFuGAUgASgJEjMKD2V4cGlyYXRp",
+            "b25fZGF0ZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoK",
+            "Y3JlYXRlZF9hdBgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAS",
+            "FQoNcmVxdWVzdF9saW1pdBgIIAEoBSI1Cg9BcGlIYXNoUmVzcG9uc2USEAoI",
+            "YXBpX2hhc2gYASABKAkSEAoIVGFuYW50SWQYAiABKAkikwEKElJlbmV3QXBp",
+            "S2V5UmVxdWVzdBIPCgd1c2VyX2lkGAEgASgJEgwKBHBsYW4YAiABKAkSFQoN",
+            "cmVxdWVzdF9saW1pdBgDIAEoBRIzCg9leHBpcmF0aW9uX2RhdGUYBCABKAsy",
+            "Gi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhIKCmlzX3Jldm9rZWQYBSAB",
+            "KAgyigIKBkFwaUtleRIsCglHZXRBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0Gg8u",
+            "QXBpS2V5UmVzcG9uc2USNgoMQ3JlYXRlQXBpS2V5EhQuQ3JlYXRlQXBpS2V5",
+            "UmVxdWVzdBoQLkFwaUhhc2hSZXNwb25zZRI0ChBSZWdlbmVyYXRlQXBpS2V5",
+            "Eg4uQXBpS2V5UmVxdWVzdBoQLkFwaUhhc2hSZXNwb25zZRIzCgtSZW5ld0Fw",
+            "aUtleRITLlJlbmV3QXBpS2V5UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEi8K",
+            "DFJldm9rZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaDy5BcGlLZXlSZXNwb25z",
+            "ZUIeqgIbTWljcm9zZXJ2aWNlLlNlc3Npb24uUHJvdG9zYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.ApiKeyRequest), global::Microservice.Session.Protos.ApiKeyRequest.Parser, new[]{ "UserId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.ApiKeyResponse), global::Microservice.Session.Protos.ApiKeyResponse.Parser, new[]{ "UserId", "OrgName", "Domain", "OrgEmail", "Plan", "ExpirationDate", "CreatedAt", "RequestLimit", "ResetDate", "IsRevoked", "IsActive" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.ApiKeyResponse), global::Microservice.Session.Protos.ApiKeyResponse.Parser, new[]{ "UserId", "OrgName", "Domain", "OrgEmail", "Plan", "ExpirationDate", "CreatedAt", "RequestLimit", "ResetDate", "IsRevoked", "IsActive", "TanantId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.CreateApiKeyRequest), global::Microservice.Session.Protos.CreateApiKeyRequest.Parser, new[]{ "UserId", "OrgName", "Domain", "OrgEmail", "Plan", "ExpirationDate", "CreatedAt", "RequestLimit" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.ApiHashResponse), global::Microservice.Session.Protos.ApiHashResponse.Parser, new[]{ "ApiHash" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.ApiHashResponse), global::Microservice.Session.Protos.ApiHashResponse.Parser, new[]{ "ApiHash", "TanantId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.RenewApiKeyRequest), global::Microservice.Session.Protos.RenewApiKeyRequest.Parser, new[]{ "UserId", "Plan", "RequestLimit", "ExpirationDate", "IsRevoked" }, null, null, null, null)
           }));
     }
@@ -308,6 +308,7 @@ namespace Microservice.Session.Protos {
       resetDate_ = other.resetDate_ != null ? other.resetDate_.Clone() : null;
       isRevoked_ = other.isRevoked_;
       isActive_ = other.isActive_;
+      tanantId_ = other.tanantId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -449,6 +450,18 @@ namespace Microservice.Session.Protos {
       }
     }
 
+    /// <summary>Field number for the "TanantId" field.</summary>
+    public const int TanantIdFieldNumber = 12;
+    private string tanantId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string TanantId {
+      get { return tanantId_; }
+      set {
+        tanantId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -475,6 +488,7 @@ namespace Microservice.Session.Protos {
       if (!object.Equals(ResetDate, other.ResetDate)) return false;
       if (IsRevoked != other.IsRevoked) return false;
       if (IsActive != other.IsActive) return false;
+      if (TanantId != other.TanantId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -493,6 +507,7 @@ namespace Microservice.Session.Protos {
       if (resetDate_ != null) hash ^= ResetDate.GetHashCode();
       if (IsRevoked != false) hash ^= IsRevoked.GetHashCode();
       if (IsActive != false) hash ^= IsActive.GetHashCode();
+      if (TanantId.Length != 0) hash ^= TanantId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -555,6 +570,10 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(88);
         output.WriteBool(IsActive);
       }
+      if (TanantId.Length != 0) {
+        output.WriteRawTag(98);
+        output.WriteString(TanantId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -609,6 +628,10 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(88);
         output.WriteBool(IsActive);
       }
+      if (TanantId.Length != 0) {
+        output.WriteRawTag(98);
+        output.WriteString(TanantId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -651,6 +674,9 @@ namespace Microservice.Session.Protos {
       }
       if (IsActive != false) {
         size += 1 + 1;
+      }
+      if (TanantId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TanantId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -705,6 +731,9 @@ namespace Microservice.Session.Protos {
       }
       if (other.IsActive != false) {
         IsActive = other.IsActive;
+      }
+      if (other.TanantId.Length != 0) {
+        TanantId = other.TanantId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -778,6 +807,10 @@ namespace Microservice.Session.Protos {
             IsActive = input.ReadBool();
             break;
           }
+          case 98: {
+            TanantId = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -848,6 +881,10 @@ namespace Microservice.Session.Protos {
           }
           case 88: {
             IsActive = input.ReadBool();
+            break;
+          }
+          case 98: {
+            TanantId = input.ReadString();
             break;
           }
         }
@@ -1368,6 +1405,7 @@ namespace Microservice.Session.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public ApiHashResponse(ApiHashResponse other) : this() {
       apiHash_ = other.apiHash_;
+      tanantId_ = other.tanantId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1389,6 +1427,18 @@ namespace Microservice.Session.Protos {
       }
     }
 
+    /// <summary>Field number for the "TanantId" field.</summary>
+    public const int TanantIdFieldNumber = 2;
+    private string tanantId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string TanantId {
+      get { return tanantId_; }
+      set {
+        tanantId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1405,6 +1455,7 @@ namespace Microservice.Session.Protos {
         return true;
       }
       if (ApiHash != other.ApiHash) return false;
+      if (TanantId != other.TanantId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1413,6 +1464,7 @@ namespace Microservice.Session.Protos {
     public override int GetHashCode() {
       int hash = 1;
       if (ApiHash.Length != 0) hash ^= ApiHash.GetHashCode();
+      if (TanantId.Length != 0) hash ^= TanantId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1435,6 +1487,10 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(10);
         output.WriteString(ApiHash);
       }
+      if (TanantId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TanantId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1449,6 +1505,10 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(10);
         output.WriteString(ApiHash);
       }
+      if (TanantId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TanantId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1461,6 +1521,9 @@ namespace Microservice.Session.Protos {
       int size = 0;
       if (ApiHash.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(ApiHash);
+      }
+      if (TanantId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TanantId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1476,6 +1539,9 @@ namespace Microservice.Session.Protos {
       }
       if (other.ApiHash.Length != 0) {
         ApiHash = other.ApiHash;
+      }
+      if (other.TanantId.Length != 0) {
+        TanantId = other.TanantId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1500,6 +1566,10 @@ namespace Microservice.Session.Protos {
             ApiHash = input.ReadString();
             break;
           }
+          case 18: {
+            TanantId = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -1521,6 +1591,10 @@ namespace Microservice.Session.Protos {
             break;
           case 10: {
             ApiHash = input.ReadString();
+            break;
+          }
+          case 18: {
+            TanantId = input.ReadString();
             break;
           }
         }

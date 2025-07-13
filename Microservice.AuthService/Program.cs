@@ -1,5 +1,7 @@
 
 using Microservice.AuthService.Database;
+using Microservice.AuthService.Infrastructure.Interfaces;
+using Microservice.AuthService.Infrastructure.Repositories;
 using Microservice.AuthService.Infrastructure.Services;
 using Microservice.AuthService.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -75,6 +77,8 @@ namespace Microservice.AuthService
 
             builder.Services.AddSingleton<ApiKeyGrpcClient>();
 
+            builder.Services.AddSingleton<ISuspiciousActivityRepository, SuspiciousActivityRepository>();
+            builder.Services.AddHostedService<RabbitMqConsumerService>();
 
 
 

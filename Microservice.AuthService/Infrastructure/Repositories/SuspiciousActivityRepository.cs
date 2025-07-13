@@ -1,6 +1,6 @@
 ﻿using Microservice.AuthService.Entities;
 using Microservice.AuthService.Infrastructure.Interfaces;
-using Microservice.AuthService.Models;
+using Microservice.Session.Entities;
 using MongoDB.Driver;
 
 namespace Microservice.AuthService.Infrastructure.Repositories
@@ -8,12 +8,12 @@ namespace Microservice.AuthService.Infrastructure.Repositories
     public class SuspiciousActivityRepository : ISuspiciousActivityRepository
     {
         private readonly IMongoCollection<SuspiciousActivity> _suspiciousCollection;
-        private readonly IMongoCollection<Sessions> _sessionCollection;
+
 
         public SuspiciousActivityRepository(IMongoDatabase db)
         {
             _suspiciousCollection = db.GetCollection<SuspiciousActivity>("SuspiciousActivity");
-            _sessionCollection = db.GetCollection<Sessions>("Sessions");
+
         }
 
         public async Task InsertAsync(SuspiciousActivity activity)
@@ -38,19 +38,51 @@ namespace Microservice.AuthService.Infrastructure.Repositories
             return await _suspiciousCollection.Find(filterBuilder.And(filters)).ToListAsync();
         }
 
-        public async Task<List<SuspiciousWithSessionDto>> GetSuspiciousWithSessionDetailsAsync(string tenantId, DateTime? from = null, DateTime? to = null)
+        public async Task UpdateSuspiciousStatusAsync(string tenantId, string sessionId)
         {
-            var suspiciousList = await GetByTenantAsync(tenantId, from, to);
-            var sessionIds = suspiciousList.Select(x => x.SessionId).ToList();
+            var filterBuilder = Builders<SuspiciousActivity>.Filter;
+            var updateBuilder = Builders<SuspiciousActivity>.Update;
 
-            var sessions = await _sessionCollection.Find(x => sessionIds.Contains(x.Id)).ToListAsync();
+            var filter = filterBuilder.And(
+                filterBuilder.Eq(x => x.TenantId, tenantId),
+                filterBuilder.Eq(x => x.SessionId, sessionId),
+                filterBuilder.Eq(x => x.IsSuspicious, true)
+            );
 
-            return suspiciousList.Select(s => new SuspiciousWithSessionDto
-            {
-                Suspicious = s,
-                SessionDetails = sessions.FirstOrDefault(sess => sess.Id == s.SessionId)
-            }).ToList();
+            var update = updateBuilder
+                .Set(x => x.IsSuspicious, false)
+                .Set(x => x.RiskLevel, "cleared")
+                .Set(x => x.UpdatedAt, DateTime.UtcNow);
+
+            await _suspiciousCollection.UpdateManyAsync(filter, update);
         }
+
+        public async Task<SuspiciousActivity> GetBySessionIdAsync(string tenantId, string sessionId)
+        {
+            var filterBuilder = Builders<SuspiciousActivity>.Filter;
+            var filter = filterBuilder.And(
+                filterBuilder.Eq(x => x.TenantId, tenantId),
+                filterBuilder.Eq(x => x.SessionId, sessionId),
+                filterBuilder.Eq(x => x.IsSuspicious, true)
+            );
+
+            return await _suspiciousCollection.Find(filter).FirstOrDefaultAsync();
+        }
+
+
+        //public async Task<List<SuspiciousWithSessionDto>> GetSuspiciousWithSessionDetailsAsync(string tenantId, DateTime? from = null, DateTime? to = null)
+        //{
+        //    var suspiciousList = await GetByTenantAsync(tenantId, from, to);
+        //    var sessionIds = suspiciousList.Select(x => x.SessionId).ToList();
+
+        //    var sessions = await _sessionCollection.Find(x => sessionIds.Contains(x.Id)).ToListAsync();
+
+        //    return suspiciousList.Select(s => new SuspiciousWithSessionDto
+        //    {
+        //        Suspicious = s,
+        //        SessionDetails = sessions.FirstOrDefault(sess => sess.Id == s.SessionId)
+        //    }).ToList();
+        //}
 
     }
 }

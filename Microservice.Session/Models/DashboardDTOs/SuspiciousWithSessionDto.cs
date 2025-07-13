@@ -4,7 +4,7 @@ namespace Microservice.Session.Models.DashboardDTOs
 {
     public class SuspiciousWithSessionDto
     {
-        public SuspiciousActivity Suspicious { get; set; }
+        //public SuspiciousActivity Suspicious { get; set; }
         public Sessions SessionDetails { get; set; }
     }
 }

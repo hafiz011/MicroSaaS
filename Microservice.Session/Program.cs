@@ -30,15 +30,12 @@ namespace Microservice.Session
             builder.Services.AddScoped<IApiKeyRepository, ApiKeyRepository>();
             builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
             builder.Services.AddScoped<ISessionRepository, SessionRepository>();
-
-            builder.Services.AddSingleton<ISuspiciousActivityRepository, SuspiciousActivityRepository>();
            
 
 
             builder.Services.AddSingleton<IRabbitMqPublisher, RabbitMqPublisher>();
 
 
-            builder.Services.AddHostedService<RabbitMqConsumerService>();
 
             builder.Services.AddSingleton<IModel>(sp =>
             {
