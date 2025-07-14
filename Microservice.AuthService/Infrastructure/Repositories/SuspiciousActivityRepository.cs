@@ -1,6 +1,6 @@
-﻿using Microservice.AuthService.Entities;
+﻿using Microservice.AuthService.Database;
+using Microservice.AuthService.Entities;
 using Microservice.AuthService.Infrastructure.Interfaces;
-using Microservice.Session.Entities;
 using MongoDB.Driver;
 
 namespace Microservice.AuthService.Infrastructure.Repositories
@@ -10,10 +10,9 @@ namespace Microservice.AuthService.Infrastructure.Repositories
         private readonly IMongoCollection<SuspiciousActivity> _suspiciousCollection;
 
 
-        public SuspiciousActivityRepository(IMongoDatabase db)
+        public SuspiciousActivityRepository(MongoDbContext context)
         {
-            _suspiciousCollection = db.GetCollection<SuspiciousActivity>("SuspiciousActivity");
-
+            _suspiciousCollection = context.SuspiciousSessions;
         }
 
         public async Task InsertAsync(SuspiciousActivity activity)

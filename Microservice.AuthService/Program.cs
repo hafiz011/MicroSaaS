@@ -1,4 +1,4 @@
-
+﻿
 using Microservice.AuthService.Database;
 using Microservice.AuthService.Entities;
 using Microservice.AuthService.Infrastructure.Interfaces;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
-using MongoDB.Driver;
+using RabbitMQ.Client;
 using System.Text;
 
 namespace Microservice.AuthService
@@ -17,13 +17,12 @@ namespace Microservice.AuthService
     public class Program
     {
        // public static void Main(string[] args)
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
             builder.Services.AddSingleton<MongoDbContext>();
-
 
             // Add services to the container.
             builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(identityOptions =>
@@ -76,6 +75,31 @@ namespace Microservice.AuthService
                 });
             });
 
+            // RabbitMQ connection factory
+            builder.Services.AddSingleton<IConnectionFactory>(sp =>
+            {
+                return new ConnectionFactory()
+                {
+                    HostName = builder.Configuration["RabbitMq:HostName"], // e.g., "localhost"
+                    UserName = builder.Configuration["RabbitMq:UserName"],
+                    Password = builder.Configuration["RabbitMq:Password"],
+                    DispatchConsumersAsync = true // recommended for async consumer
+                };
+            });
+
+            // RabbitMQ connection
+            builder.Services.AddSingleton<IConnection>(sp =>
+            {
+                var factory = sp.GetRequiredService<IConnectionFactory>();
+                return factory.CreateConnection();
+            });
+
+            // RabbitMQ channel (IModel)
+            builder.Services.AddSingleton<IModel>(sp =>
+            {
+                var connection = sp.GetRequiredService<IConnection>();
+                return connection.CreateModel();
+            });
 
 
 
@@ -84,10 +108,10 @@ namespace Microservice.AuthService
             builder.Services.AddSingleton<ISuspiciousActivityRepository, SuspiciousActivityRepository>();
             builder.Services.AddHostedService<RabbitMqConsumerService>();
 
-           // builder.Services.AddSingleton<IndexSeeder>();
-
-
-
+           
+            
+            
+            // builder.Services.AddSingleton<IndexSeeder>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

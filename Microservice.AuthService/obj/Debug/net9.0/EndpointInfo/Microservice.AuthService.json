@@ -804,6 +804,80 @@
           }
         }
       }
+    },
+    "/api/Suspicious/get-all": {
+      "get": {
+        "tags": [
+          "Suspicious"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Suspicious/details/{sessionId}": {
+      "get": {
+        "tags": [
+          "Suspicious"
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Suspicious/{suspiciousId}": {
+      "put": {
+        "tags": [
+          "Suspicious"
+        ],
+        "parameters": [
+          {
+            "name": "suspiciousId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

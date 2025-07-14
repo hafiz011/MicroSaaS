@@ -45,7 +45,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Microservice.Session.Models.DTOs.SessionRequestDto",
+        "Type": "Microservice.Session.Controllers.SessionController\u002BSessionRequestDto",
         "IsRequired": true
       }
     ],

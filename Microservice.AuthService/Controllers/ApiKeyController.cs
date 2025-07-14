@@ -102,7 +102,7 @@ namespace Microservice.AuthService.Controllers
                 return Ok(new
                 {
                     Message = "API key created successfully. Please store this key securely.",
-                    ApiKey = response
+                    ApiKey = response.ApiHash
                 });
             }
             catch (RpcException ex) when (ex.StatusCode == Grpc.Core.StatusCode.AlreadyExists)

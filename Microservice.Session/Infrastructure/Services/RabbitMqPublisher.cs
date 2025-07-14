@@ -12,7 +12,7 @@ namespace Microservice.Session.Infrastructure.Services
         private readonly IModel _channel;
 
         // Queue names
-        private readonly string _sessionRiskCheckQueue = "session-risk-check";
+        private readonly string _sessionRiskCheckQueue = "session-risk-check-v2";
         private readonly string _userActivityLogQueue = "user-activity-log";
 
         public RabbitMqPublisher()
@@ -21,8 +21,8 @@ namespace Microservice.Session.Infrastructure.Services
             {
                 HostName = "localhost",
                 // if needed
-                // UserName = "guest",
-                // Password = "guest"
+                 UserName = "guest",
+                 Password = "guest"
             };
 
             _connection = factory.CreateConnection();

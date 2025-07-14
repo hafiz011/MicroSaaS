@@ -412,7 +412,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Microservice.Session.Models.DTOs.SessionRequestDto",
+        "Type": "Microservice.Session.Controllers.SessionController\u002BSessionRequestDto",
         "IsRequired": true
       }
     ],
@@ -511,6 +511,59 @@
       {
         "Name": "SuspiciousOnly",
         "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Microservice.AuthService.Controllers.SuspiciousController",
+    "Method": "Update",
+    "RelativePath": "api/Suspicious/{suspiciousId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "suspiciousId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Microservice.AuthService.Controllers.SuspiciousController",
+    "Method": "GetDetails",
+    "RelativePath": "api/Suspicious/details/{sessionId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sessionId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Microservice.AuthService.Controllers.SuspiciousController",
+    "Method": "GetAll",
+    "RelativePath": "api/Suspicious/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "from",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "to",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }
     ],

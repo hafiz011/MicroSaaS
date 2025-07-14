@@ -21,8 +21,9 @@ namespace Microservice.AuthService.Infrastructure.Services
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _channel.QueueDeclare(queue: "session-risk-check", durable: false, exclusive: false, autoDelete: false);
-            var consumer = new EventingBasicConsumer(_channel);
+            _channel.QueueDeclare(queue: "session-risk-check-v2", durable: true, exclusive: false, autoDelete: false);
+            
+            var consumer = new AsyncEventingBasicConsumer(_channel);
 
             consumer.Received += async (model, ea) =>
             {
@@ -81,7 +82,7 @@ namespace Microservice.AuthService.Infrastructure.Services
                 }
             };
 
-            _channel.BasicConsume(queue: "session-risk-check", autoAck: true, consumer: consumer);
+            _channel.BasicConsume(queue: "session-risk-check-v2", autoAck: true, consumer: consumer);
             Console.WriteLine("Listening for suspicious session jobs...");
             return Task.CompletedTask;
         }
