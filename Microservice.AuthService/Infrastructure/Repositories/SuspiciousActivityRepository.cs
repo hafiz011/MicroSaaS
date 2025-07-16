@@ -15,12 +15,14 @@ namespace Microservice.AuthService.Infrastructure.Repositories
             _suspiciousCollection = context.SuspiciousSessions;
         }
 
+        // insart suspicious
         public async Task InsertAsync(SuspiciousActivity activity)
         {
             await _suspiciousCollection.InsertOneAsync(activity);
         }
 
-        public async Task<List<SuspiciousActivity>> GetByTenantAsync(string tenantId, DateTime? from = null, DateTime? to = null)
+        // alert suspicious
+        public async Task<List<SuspiciousActivity>> GetByTenantAsync(string tenantId, DateTime? from, DateTime? to, string device, string country)
         {
             var filterBuilder = Builders<SuspiciousActivity>.Filter;
             var filters = new List<FilterDefinition<SuspiciousActivity>>
@@ -33,10 +35,16 @@ namespace Microservice.AuthService.Infrastructure.Repositories
                 filters.Add(filterBuilder.Gte(x => x.DetectedAt, from.Value));
             if (to.HasValue)
                 filters.Add(filterBuilder.Lte(x => x.DetectedAt, to.Value));
+            if (!string.IsNullOrEmpty(device))
+                filters.Add(filterBuilder.Eq(x => x.Device.Device_Type, device));
+            if (!string.IsNullOrEmpty(country))
+                filters.Add(filterBuilder.Eq(x => x.Geo_Location.Country, country));
 
             return await _suspiciousCollection.Find(filterBuilder.And(filters)).ToListAsync();
         }
 
+
+        // update suspicious to make safe
         public async Task UpdateSuspiciousStatusAsync(string tenantId, string sessionId)
         {
             var filterBuilder = Builders<SuspiciousActivity>.Filter;

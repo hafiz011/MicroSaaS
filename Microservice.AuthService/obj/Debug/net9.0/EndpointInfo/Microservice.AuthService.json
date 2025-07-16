@@ -805,14 +805,28 @@
         }
       }
     },
-    "/api/Suspicious/get-all": {
+    "/api/Suspicious/alert": {
       "get": {
         "tags": [
           "Suspicious"
         ],
         "parameters": [
           {
-            "name": "from",
+            "name": "Country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Device",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "From",
             "in": "query",
             "schema": {
               "type": "string",
@@ -820,11 +834,18 @@
             }
           },
           {
-            "name": "to",
+            "name": "To",
             "in": "query",
             "schema": {
               "type": "string",
               "format": "date-time"
+            }
+          },
+          {
+            "name": "Range",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],

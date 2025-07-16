@@ -42,9 +42,9 @@ D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\staticw
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\staticwebassets.build.json.cache
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\staticwebassets.development.json
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\Microservice.Analytics.dll
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\refint\Microservice.Analytics.dll
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\Microservice.Analytics.pdb
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\Microservice.Analytics.genruntimeconfig.cache
 D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\ref\Microservice.Analytics.dll
-D:\GitHub\MicroSaaS\MicroService\Microservice.Analytics\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

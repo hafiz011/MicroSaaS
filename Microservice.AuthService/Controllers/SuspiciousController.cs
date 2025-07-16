@@ -25,9 +25,18 @@ namespace Microservice.AuthService.Controllers
         }
 
 
-        // Get Suspicious
-        [HttpGet("get-all")]
-        public async Task<IActionResult> GetAll(DateTime? from = null, DateTime? to = null)
+        public class Alert
+        {
+            public string Country { get; set; }
+            public string Device { get; set; }
+            public DateTime? From { get; set; }     // Optional override
+            public DateTime? To { get; set; }       // Optional override
+            public string Range { get; set; }       // "24h", "7d", "30d"
+        }
+
+
+        [HttpGet("alert")]
+        public async Task<IActionResult> GetAll([FromQuery] Alert alert)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
@@ -37,7 +46,27 @@ namespace Microservice.AuthService.Controllers
             if (user.TenantId == null)
                 return NotFound(new { Message = "No API key associated with this user." });
 
-            var suspicious = await _suspiciousRepository.GetByTenantAsync(user.TenantId, from, to);
+            // Handle time range shortcuts
+            if (!alert.From.HasValue && !string.IsNullOrWhiteSpace(alert.Range))
+            {
+                var now = DateTime.UtcNow;
+
+                alert.To = now;
+                alert.From = alert.Range switch
+                {
+                    "24h" => now.AddHours(-24),
+                    "7d" => now.AddDays(-7),
+                    "30d" => now.AddDays(-30),
+                    _ => (DateTime?)null
+                };
+            }
+
+            var suspicious = await _suspiciousRepository.GetByTenantAsync(
+                user.TenantId,
+                alert.From,
+                alert.To,
+                alert.Device,
+                alert.Country);
 
             var dtoList = suspicious.Select(x => new SuspiciousActivityDto
             {
@@ -45,10 +74,13 @@ namespace Microservice.AuthService.Controllers
                 RiskScore = x.RiskScore,
                 RiskLevel = x.RiskLevel,
                 DetectedAt = x.DetectedAt,
-                RiskFactors = x.RiskFactors
+                RiskFactors = x.RiskFactors,
+                
             }).ToList();
+
             return Ok(dtoList);
         }
+
 
         // session id details
         [HttpGet("details/{sessionId}")]

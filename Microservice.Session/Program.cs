@@ -20,8 +20,6 @@ namespace Microservice.Session
 
 
 
-
-
             // Add services to the container.
             builder.Services.AddScoped<EmailService>();
             builder.Services.AddHostedService<SessionTimeOutService>();
@@ -31,23 +29,7 @@ namespace Microservice.Session
             builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
             builder.Services.AddScoped<ISessionRepository, SessionRepository>();
            
-
-
             builder.Services.AddSingleton<IRabbitMqPublisher, RabbitMqPublisher>();
-
-
-
-            builder.Services.AddSingleton<IModel>(sp =>
-            {
-                var factory = new ConnectionFactory() { HostName = "localhost" };
-                var connection = factory.CreateConnection();
-                return connection.CreateModel();
-            });
-
-
-
-
-
 
 
 
@@ -59,6 +41,12 @@ namespace Microservice.Session
                 options.ListenAnyIP(7002, o => o.Protocols = HttpProtocols.Http2);   // gRPC   
             });
 
+            builder.Services.AddSingleton<IModel>(sp =>
+            {
+                var factory = new ConnectionFactory() { HostName = "localhost" };
+                var connection = factory.CreateConnection();
+                return connection.CreateModel();
+            });
 
 
             builder.Services.AddControllers();
