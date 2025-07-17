@@ -16,12 +16,12 @@ namespace Microservice.AuthService.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
 
-        private readonly ApiKeyGrpcClient _apiKeyGrpcClient;
+        private readonly GrpcServiceClient _grpcServiceClient;
 
-        public ApiKeyController(UserManager<ApplicationUser> userManager, ApiKeyGrpcClient apiKeyGrpcClient)
+        public ApiKeyController(UserManager<ApplicationUser> userManager, GrpcServiceClient grpcServiceClient)
         {
             _userManager = userManager;
-            _apiKeyGrpcClient = apiKeyGrpcClient;
+            _grpcServiceClient = grpcServiceClient;
         }
 
 
@@ -35,7 +35,7 @@ namespace Microservice.AuthService.Controllers
 
             try
             {
-                var apiKey = await _apiKeyGrpcClient.GetApiKeyAsync(userId);
+                var apiKey = await _grpcServiceClient.GetApiKeyAsync(userId);
 
                 if (apiKey == null)
                     return NotFound(new { Message = "No API key associated with this user." });
@@ -95,7 +95,7 @@ namespace Microservice.AuthService.Controllers
                     RequestLimit = 500
                 };
 
-                var response = await _apiKeyGrpcClient.CreateApiKeyAsync(request);
+                var response = await _grpcServiceClient.CreateApiKeyAsync(request);
                 user.TenantId = response.TenantId;
                 var update = await _userManager.UpdateAsync(user);
 
@@ -120,7 +120,7 @@ namespace Microservice.AuthService.Controllers
 
             try
             {
-                var response = await _apiKeyGrpcClient.RegenerateApiKeyAsync(userId);
+                var response = await _grpcServiceClient.RegenerateApiKeyAsync(userId);
                 return Ok(new
                 {
                     Message = "API key regenerated successfully. Please store this key securely.",
@@ -157,7 +157,7 @@ namespace Microservice.AuthService.Controllers
                     IsRevoked = false
                 };
 
-                var result = await _apiKeyGrpcClient.RenewApiKeyAsync(request);
+                var result = await _grpcServiceClient.RenewApiKeyAsync(request);
                 return Ok(new
                 {
                     Message = "API key renewed successfully.",
@@ -182,7 +182,7 @@ namespace Microservice.AuthService.Controllers
 
             try
             {
-                var result = await _apiKeyGrpcClient.RevokeApiKeyAsync(userId);
+                var result = await _grpcServiceClient.RevokeApiKeyAsync(userId);
                 return Ok(new
                 {
                     Message = "API key revoked successfully.",

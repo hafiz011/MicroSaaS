@@ -4,17 +4,18 @@ using Microservice.AuthService.Protos;
 
 namespace Microservice.AuthService.Infrastructure.Services
 {
-    public class ApiKeyGrpcClient
+    public class GrpcServiceClient
     {
         private readonly ApiKey.ApiKeyClient _client;
 
-        public ApiKeyGrpcClient(IConfiguration config)
+        public GrpcServiceClient(IConfiguration config)
         {
             var grpcServerUrl = config["Grpc:ApiKeyServiceUrl"];
             var channel = GrpcChannel.ForAddress(grpcServerUrl);
             _client = new ApiKey.ApiKeyClient(channel);
         }
 
+        // api key grpc serivice
         public async Task<ApiKeyResponse> GetApiKeyAsync(string userId)
         {
             var request = new ApiKeyRequest { UserId = userId };
@@ -35,7 +36,6 @@ namespace Microservice.AuthService.Infrastructure.Services
 
         public async Task<ApiKeyResponse> RenewApiKeyAsync(RenewApiKeyRequest request)
         {
-
             return await _client.RenewApiKeyAsync(request);
         }
 
@@ -43,5 +43,14 @@ namespace Microservice.AuthService.Infrastructure.Services
         {
             return await _client.RevokeApiKeyAsync(new ApiKeyRequest { UserId = userId });
         }
+
+        // user info grpc service
+        public async Task<UserInfoResponse> GetUserInfo(string userId, string tenantId)
+        {
+            var response = await _client.GetUserInfoAsync(new UserInfoRequest { UserId = userId, TenantId = tenantId });
+            return response;
+        }
+
+
     }
 }

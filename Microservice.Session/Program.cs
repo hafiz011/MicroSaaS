@@ -55,7 +55,7 @@ namespace Microservice.Session
             var app = builder.Build();
 
             
-            app.MapGrpcService<ApiKeyService>();
+            app.MapGrpcService<GrpcServer>();
 
 
 

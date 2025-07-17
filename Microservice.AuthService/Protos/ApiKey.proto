@@ -5,14 +5,19 @@ option csharp_namespace = "Microservice.AuthService.Protos";
 import "google/protobuf/timestamp.proto";
 
 service ApiKey {
+
+// api key
   rpc GetApiKey(ApiKeyRequest) returns (ApiKeyResponse);
   rpc CreateApiKey(CreateApiKeyRequest) returns (ApiHashResponse);
   rpc RegenerateApiKey(ApiKeyRequest) returns (ApiHashResponse);
   rpc RenewApiKey(RenewApiKeyRequest) returns (ApiKeyResponse);
   rpc RevokeApiKey(ApiKeyRequest) returns (ApiKeyResponse);
+
+  // user info
+  rpc GetUserInfo(UserInfoRequest) returns (UserInfoResponse);
 }
 
-
+// api key
 message ApiKeyRequest {
   string user_id = 1;
 }
@@ -56,4 +61,14 @@ message RenewApiKeyRequest {
 	bool is_revoked = 5;
 }
 
+// user info
+message UserInfoRequest{
+	string user_id = 1;
+	string TenantId = 2;
+}
 
+message UserInfoResponse{
+	string user_name = 1;
+	string user_email = 2;
+	string lastlogin = 3;
+}

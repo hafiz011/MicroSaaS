@@ -1,4 +1,5 @@
-﻿using Microservice.AuthService.Infrastructure.Interfaces;
+﻿using Microservice.AuthService.Entities;
+using Microservice.AuthService.Infrastructure.Interfaces;
 using Microservice.AuthService.Infrastructure.Services;
 using Microservice.AuthService.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -15,13 +16,16 @@ namespace Microservice.AuthService.Controllers
     {
         private readonly ISuspiciousActivityRepository _suspiciousRepository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly GrpcServiceClient _grpcServiceClient;
 
         public SuspiciousController(ISuspiciousActivityRepository uspiciousRepository,
             UserManager<ApplicationUser> userManager,
-            ApiKeyGrpcClient apiKeyGrpcClient)
+            GrpcServiceClient apiKeyGrpcClient,
+            GrpcServiceClient grpcServiceClient)
         {
             _suspiciousRepository = uspiciousRepository;
             _userManager = userManager;
+            _grpcServiceClient = grpcServiceClient;
         }
 
 
@@ -101,14 +105,33 @@ namespace Microservice.AuthService.Controllers
             if (suspicious == null)
                 return NotFound(new { Message = "Suspicious session not found." });
 
+            var userinfo = await _grpcServiceClient.GetUserInfo(suspicious.UserId, suspicious.TenantId);
+
             // Optional: map to DTO
             var dto = new SuspiciousActivityDto
             {
                 SessionId = suspicious.SessionId,
+                UserName = userinfo.UserName,
+                UserEmail = userinfo.UserEmail,
+                IpAddress = suspicious.IpAddress,
+                LoginTime = suspicious.LoginTime.ToString(),
                 RiskScore = suspicious.RiskScore,
                 RiskLevel = suspicious.RiskLevel,
                 DetectedAt = suspicious.DetectedAt,
-                RiskFactors = suspicious.RiskFactors
+                RiskFactors = suspicious.RiskFactors,
+                Browser = suspicious.Device.Browser,
+                DeiceType = suspicious.Device.Device_Type,
+                OS = suspicious.Device.OS,
+                Language = suspicious.Device.Language,
+                ScreenResolution = suspicious.Device.Screen_Resolution,
+                Country = suspicious.Geo_Location.Country,
+                City = suspicious.Geo_Location.City,
+                Region = suspicious.Geo_Location.Region,
+                Postal = suspicious.Geo_Location.Postal,
+                LatitudeLongitude= suspicious.Geo_Location.Latitude_Longitude,
+                TimeZone = suspicious.Geo_Location.TimeZone,
+                Isp = suspicious.Geo_Location.Isp,
+                is_vpn = suspicious.Geo_Location.is_vpn,
             };
 
             return Ok(dto);
@@ -138,10 +161,31 @@ namespace Microservice.AuthService.Controllers
         public class SuspiciousActivityDto
         {
             public string SessionId { get; set; }
+            public string UserName { get; set; }
+            public string UserEmail { get; set; }
+            public string IpAddress { get; set; }
+            public string LoginTime { get; set; }
             public double RiskScore { get; set; }
             public string RiskLevel { get; set; }
             public DateTime DetectedAt { get; set; }
             public List<string> RiskFactors { get; set; }
+
+            // device info
+            public string Browser { get; set; }
+            public string DeiceType { get; set; }
+            public string OS { get; set; }
+            public string Language { get; set; }
+            public string ScreenResolution { get; set; }
+
+            // location info
+            public string Country { get; set; }
+            public string City { get; set; }
+            public string Region { get; set; }
+            public string Postal { get; set; }
+            public string LatitudeLongitude { get; set; }
+            public string TimeZone { get; set; }
+            public string Isp { get; set; }
+            public bool is_vpn { get; set; }
         }
 
     }

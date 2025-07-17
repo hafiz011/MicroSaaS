@@ -103,7 +103,7 @@ namespace Microservice.AuthService
 
 
 
-            builder.Services.AddSingleton<ApiKeyGrpcClient>();
+            builder.Services.AddSingleton<GrpcServiceClient>();
 
             builder.Services.AddSingleton<ISuspiciousActivityRepository, SuspiciousActivityRepository>();
             builder.Services.AddHostedService<RabbitMqConsumerService>();

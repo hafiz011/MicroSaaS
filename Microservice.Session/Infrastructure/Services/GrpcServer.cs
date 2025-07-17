@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 namespace Microservice.Session.Infrastructure.Services
 {
-    public class ApiKeyService : ApiKey.ApiKeyBase
+    public class GrpcServer : ApiKey.ApiKeyBase
     {
         private readonly IApiKeyRepository _apiKeyRepository;
+        private readonly IUserInfoRepository _userinfoRepository;
 
-        public ApiKeyService(IApiKeyRepository apiKeyRepository)
+        public GrpcServer(IApiKeyRepository apiKeyRepository)
         {
             _apiKeyRepository = apiKeyRepository;
         }
@@ -159,5 +160,21 @@ namespace Microservice.Session.Infrastructure.Services
                 IsActive = apiKey.IsActive
             };
         }
+
+        public override async Task<UserInfoResponse> GetUserInfo(UserInfoRequest request, ServerCallContext context)
+        {
+            var getinfo = await _userinfoRepository.getUserById(request.UserId, request.TenantId);
+            if (getinfo != null)
+                throw new RpcException(new Status(StatusCode.NotFound, $"User not found {request.UserId}"));
+
+            return new UserInfoResponse
+            {
+                UserName = getinfo.Name,
+                UserEmail = getinfo.Email,
+                Lastlogin = getinfo.Last_login.ToString()
+            };
+        }
+
+
     }
 }
