@@ -19,6 +19,7 @@ namespace Microservice.AuthService.Entities
 
             var suspiciousIndexes = new[]
             {
+                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.Id)),
                 new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.SessionId)),
                 new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.TenantId)),
                 new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Descending(x => x.DetectedAt)),
@@ -29,6 +30,7 @@ namespace Microservice.AuthService.Entities
 
             var applicationUserIndexes = new[]
             {
+                new CreateIndexModel<ApplicationUser>(Builders<ApplicationUser>.IndexKeys.Ascending(x => x.Id)),
                 new CreateIndexModel<ApplicationUser>(Builders<ApplicationUser>.IndexKeys.Ascending(x => x.TenantId))
             };
 

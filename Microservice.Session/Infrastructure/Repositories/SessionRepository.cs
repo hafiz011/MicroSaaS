@@ -9,11 +9,9 @@ namespace Microservice.Session.Infrastructure.Repositories
     public class SessionRepository : ISessionRepository
     {
         private readonly IMongoCollection<Sessions> _collection;
-        private readonly IMongoCollection<Users> _user;
         public SessionRepository(MongoDbContext context) 
         {
             _collection = context.SessionsDB;
-            _user = context.UserDB;
         }
 
         public async Task<Sessions> CreateSessionAsync(Sessions sessions)
@@ -22,36 +20,12 @@ namespace Microservice.Session.Infrastructure.Repositories
             return sessions;
         }
 
-        public async Task CreateUserAsync(Users user)
-        {
-            await _user.InsertOneAsync(user);
-        }
-
         public async Task EndSessionAsync(string sessionId)
         {
             var update = Builders<Sessions>.Update
                 .Set(a => a.Logout_Time, DateTime.UtcNow)
                 .Set(i => i.isActive, false);
             await _collection.UpdateOneAsync(s => s.Id == sessionId, update);
-        }
-
-        public async Task<Users> GetUserByIdAsync(string User_Id)
-        {
-            if (string.IsNullOrWhiteSpace(User_Id))
-            {
-                return null;
-            }
-            return await _user.Find(a => a.User_Id == User_Id).FirstOrDefaultAsync();
-        }
-        public async Task UpdateUserAsync(Users user)
-        {
-            var filter = Builders<Users>.Filter.Eq(u => u.User_Id, user.User_Id);
-            var update = Builders<Users>.Update
-                .Set(u => u.Last_login, DateTime.UtcNow)
-                .Set(u => u.Name, user.Name)
-                .Set(u => u.Email, user.Email);
-
-            await _user.UpdateOneAsync(filter, update);
         }
 
         public async Task<Sessions> GetSessionByIdAsync(string existingSessionId)

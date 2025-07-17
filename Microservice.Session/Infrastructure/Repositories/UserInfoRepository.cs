@@ -13,6 +13,31 @@ namespace Microservice.Session.Infrastructure.Repositories
             _collection = context.UserDB;
         }
 
+        public async Task CreateUserAsync(Users user)
+        {
+            await _collection.InsertOneAsync(user);
+        }
+
+        public async Task<Users> GetUserByIdAsync(string User_Id)
+        {
+            if (string.IsNullOrWhiteSpace(User_Id))
+            {
+                return null;
+            }
+            return await _collection.Find(a => a.User_Id == User_Id).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateUserAsync(Users user)
+        {
+            var filter = Builders<Users>.Filter.Eq(u => u.User_Id, user.User_Id);
+            var update = Builders<Users>.Update
+                .Set(u => u.Last_login, DateTime.UtcNow)
+                .Set(u => u.Name, user.Name)
+                .Set(u => u.Email, user.Email);
+
+            await _collection.UpdateOneAsync(filter, update);
+        }
+
         // get user info
         public async Task<Users> getUserById(string userId, string tenantId)
         {

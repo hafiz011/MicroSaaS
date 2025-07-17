@@ -28,6 +28,7 @@ namespace Microservice.Session
             builder.Services.AddScoped<IApiKeyRepository, ApiKeyRepository>();
             builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
             builder.Services.AddScoped<ISessionRepository, SessionRepository>();
+            builder.Services.AddScoped<IUserInfoRepository, UserInfoRepository>();
            
             builder.Services.AddSingleton<IRabbitMqPublisher, RabbitMqPublisher>();
 

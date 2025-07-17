@@ -14,6 +14,7 @@ namespace Microservice.Session.Controllers
         private readonly IApiKeyRepository _apiKeyRepository;
         private readonly GeolocationService _geolocationService;
         private readonly ISessionRepository _sessionRepository;
+        private readonly IUserInfoRepository _userInfoRepository;
         private IRabbitMqPublisher _publisher;
         private readonly ILogger<SessionController> _logger;
 
@@ -21,6 +22,7 @@ namespace Microservice.Session.Controllers
             IApiKeyRepository apiKeyRepository,
             GeolocationService geolocationService,
             ISessionRepository sessionRepository,
+            IUserInfoRepository userInfoRepository,
             IRabbitMqPublisher rabbitMqPublisher,
             ILogger<SessionController> logger)
         {
@@ -28,6 +30,7 @@ namespace Microservice.Session.Controllers
             _apiKeyRepository = apiKeyRepository;
             _geolocationService = geolocationService;
             _sessionRepository = sessionRepository;
+            _userInfoRepository = userInfoRepository;
             _publisher = rabbitMqPublisher;
             _logger = logger;
         }
@@ -78,7 +81,7 @@ namespace Microservice.Session.Controllers
 
                 if (!string.IsNullOrWhiteSpace(dto.User_Id))
                 {
-                    var userinfo = await _sessionRepository.GetUserByIdAsync(dto.User_Id);  // get user if it exits in DB
+                    var userinfo = await _userInfoRepository.GetUserByIdAsync(dto.User_Id);  // get user if it exits in DB
                     var user = new Users
                     {
                         Tenant_Id = apiKeyInfo.Id,
@@ -91,11 +94,11 @@ namespace Microservice.Session.Controllers
 
                     if (userinfo == null) //if user is null than create user
                     {
-                        await _sessionRepository.CreateUserAsync(user);
+                        await _userInfoRepository.CreateUserAsync(user);
                     }
                     else
                     {
-                        await _sessionRepository.UpdateUserAsync(user); // if user is exits than update login time
+                        await _userInfoRepository.UpdateUserAsync(user); // if user is exits than update login time
                     }
                 }
 
