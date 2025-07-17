@@ -1,44 +1,43 @@
-﻿using Microservice.AuthService.Models;
+﻿using Microservice.AuthService.Database;
+using Microservice.AuthService.Models;
 using MongoDB.Driver;
 
 namespace Microservice.AuthService.Entities
 {
     public class IndexSeeder
     {
-        private readonly IMongoDatabase _db;
+        private readonly MongoDbContext _context;
 
-        public IndexSeeder(IMongoDatabase database)
+        public IndexSeeder(MongoDbContext context)
         {
-            _db = database;
+            _context = context;
         }
 
         public async Task SeedIndexesAsync()
         {
-            var suspiciousCollection = _db.GetCollection<SuspiciousActivity>("SuspiciousSessions");
-            var applicationUserCollection = _db.GetCollection<ApplicationUser>("applicationUsers");
+            var suspiciousCollection = _context.SuspiciousSessions;
+            var userCollection = _context.Users;
 
             var suspiciousIndexes = new[]
             {
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.Id)),
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.SessionId)),
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.TenantId)),
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Descending(x => x.DetectedAt)),
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.IsSuspicious)),
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.Device.Device_Type)),
-                new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.Geo_Location.Country))
+            new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.SessionId)),
+            new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.TenantId)),
+            new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Descending(x => x.DetectedAt)),
+            new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.IsSuspicious)),
+            new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.Device.Device_Type)),
+            new CreateIndexModel<SuspiciousActivity>(Builders<SuspiciousActivity>.IndexKeys.Ascending(x => x.Geo_Location.Country))
             };
 
-            var applicationUserIndexes = new[]
+            var userIndexes = new[]
             {
-                new CreateIndexModel<ApplicationUser>(Builders<ApplicationUser>.IndexKeys.Ascending(x => x.Id)),
-                new CreateIndexModel<ApplicationUser>(Builders<ApplicationUser>.IndexKeys.Ascending(x => x.TenantId))
+            new CreateIndexModel<ApplicationUser>(Builders<ApplicationUser>.IndexKeys.Ascending(x => x.TenantId))
             };
-
-
-
 
             await suspiciousCollection.Indexes.CreateManyAsync(suspiciousIndexes);
-            await applicationUserCollection.Indexes.CreateManyAsync(applicationUserIndexes);
+            await userCollection.Indexes.CreateManyAsync(userIndexes);
+
+            Console.WriteLine("MongoDB indexes created.");
         }
     }
+
 }

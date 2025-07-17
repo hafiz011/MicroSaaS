@@ -1,23 +1,25 @@
-﻿using MongoDB.Driver;
+﻿using Microservice.Session.Infrastructure.MongoDb;
+using MongoDB.Driver;
 
 namespace Microservice.Session.Entities
 {
     public class IndexSeeder
     {
-        private readonly IMongoDatabase _db;
+        private readonly MongoDbContext _context;
 
-        public IndexSeeder(IMongoDatabase database)
+        public IndexSeeder(MongoDbContext context)
         {
-            _db = database;
+            _context = context;
         }
 
         public async Task SeedIndexesAsync()
         {
-            var sessionCollection = _db.GetCollection<Sessions>("Sessions");
+            var sessionCollection = _context.SessionsDB;
+            var UserCollection = _context.UserDB;
+            var ApiKeyCollection = _context.ApiKey;
 
             var sessionIndexes = new[]
             {
-                new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Ascending(x => x.Id)),
                 new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Ascending(x => x.Tenant_Id)),
                 new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Ascending(x => x.User_Id)),
                 new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Descending(x => x.Device.Fingerprint)),
@@ -28,6 +30,7 @@ namespace Microservice.Session.Entities
 
 
             await sessionCollection.Indexes.CreateManyAsync(sessionIndexes);
+            Console.WriteLine("MongoDB indexes created.");
         }
     }
 }

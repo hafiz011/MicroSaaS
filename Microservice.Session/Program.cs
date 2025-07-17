@@ -1,3 +1,4 @@
+using Microservice.Session.Entities;
 using Microservice.Session.Infrastructure.AlertNotifier;
 using Microservice.Session.Infrastructure.GeoIPService;
 using Microservice.Session.Infrastructure.Interfaces;
@@ -11,7 +12,7 @@ namespace Microservice.Session
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -50,12 +51,27 @@ namespace Microservice.Session
             });
 
 
+
+            // Seed indexes
+            builder.Services.AddTransient<IndexSeeder>();
+
+
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            
+
+            // Seed indexes at startup
+            using (var scope = app.Services.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetRequiredService<IndexSeeder>();
+                await seeder.SeedIndexesAsync();
+            }
+
+
+
+
             app.MapGrpcService<GrpcServer>();
 
 

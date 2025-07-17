@@ -17,7 +17,7 @@ namespace Microservice.AuthService
     public class Program
     {
        // public static void Main(string[] args)
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -108,10 +108,12 @@ namespace Microservice.AuthService
             builder.Services.AddSingleton<ISuspiciousActivityRepository, SuspiciousActivityRepository>();
             builder.Services.AddHostedService<RabbitMqConsumerService>();
 
-           
-            
-            
-            // builder.Services.AddSingleton<IndexSeeder>();
+
+
+
+            // Seed indexes
+            builder.Services.AddTransient<IndexSeeder>();
+
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -120,12 +122,14 @@ namespace Microservice.AuthService
             var app = builder.Build();
 
 
-            //// Seed indexes
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    var seeder = scope.ServiceProvider.GetRequiredService<IndexSeeder>();
-            //    await seeder.SeedIndexesAsync();
-            //}
+
+            // Seed indexes at startup
+            using (var scope = app.Services.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetRequiredService<IndexSeeder>();
+                await seeder.SeedIndexesAsync();
+            }
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
