@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aa34fde6-3dab-4814-9445-2331f31155bd")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Microservice.AuthService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63a9b007b90b67a85b5931f4114d0a437fa21b02")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14a859595a3300fcdee7a702141324a73091bdfd")]
 [assembly: System.Reflection.AssemblyProductAttribute("Microservice.AuthService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microservice.AuthService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

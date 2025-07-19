@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Analytics\\Microservice.Analytics.csproj": {}
+    "D:\\Github\\SaaSApp\\MicroService\\Microservice.Analytics\\Microservice.Analytics.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Analytics\\Microservice.Analytics.csproj": {
+    "D:\\Github\\SaaSApp\\MicroService\\Microservice.Analytics\\Microservice.Analytics.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Analytics\\Microservice.Analytics.csproj",
+        "projectUniqueName": "D:\\Github\\SaaSApp\\MicroService\\Microservice.Analytics\\Microservice.Analytics.csproj",
         "projectName": "Microservice.Analytics",
-        "projectPath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Analytics\\Microservice.Analytics.csproj",
-        "packagesPath": "C:\\Users\\Hafiz\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Analytics\\obj\\",
+        "projectPath": "D:\\Github\\SaaSApp\\MicroService\\Microservice.Analytics\\Microservice.Analytics.csproj",
+        "packagesPath": "C:\\Users\\Ghost\\.nuget\\packages\\",
+        "outputPath": "D:\\Github\\SaaSApp\\MicroService\\Microservice.Analytics\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Hafiz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ghost\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -49,6 +50,12 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.22.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -68,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
