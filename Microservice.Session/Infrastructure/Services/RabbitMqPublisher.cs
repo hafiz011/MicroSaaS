@@ -19,10 +19,10 @@ namespace Microservice.Session.Infrastructure.Services
         {
             var factory = new ConnectionFactory
             {
-                HostName = "localhost",
+                HostName = "rabbitmq",
                 // if needed
-                 UserName = "guest",
-                 Password = "guest"
+                 UserName = "Admin",
+                 Password = "Admin"
             };
 
             _connection = factory.CreateConnection();

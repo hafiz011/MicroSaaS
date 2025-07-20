@@ -45,7 +45,7 @@ namespace Microservice.Session
 
             builder.Services.AddSingleton<IModel>(sp =>
             {
-                var factory = new ConnectionFactory() { HostName = "localhost" };
+                var factory = new ConnectionFactory() { HostName = "rabbitmq" };
                 var connection = factory.CreateConnection();
                 return connection.CreateModel();
             });

@@ -2,6 +2,18 @@
 # You can remove the version line as it's deprecated
 
 services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: Admin
+      RABBITMQ_DEFAULT_PASS: Admin
+    networks:
+      - saasnet
+
   api-gateway:
     build:
       context: ./SaaS.ApiGetway
@@ -21,6 +33,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5001:8080"
+    environment:
+    - RabbitMq__HostName=rabbitmq
+    - RabbitMq__UserName=Admin
+    - RabbitMq__Password=Admin
     networks:
       - saasnet
 
@@ -29,7 +45,8 @@ services:
       context: ./Microservice.Session
       dockerfile: Dockerfile
     ports:
-      - "5002:8080"
+      - "5002:5002"
+      - "7002:7002"  # gRPC
     networks:
       - saasnet
 
@@ -39,17 +56,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5003:8080"
-    networks:
-      - saasnet
-
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - api-gateway
     networks:
       - saasnet
 

@@ -13,6 +13,10 @@
       {
         "Path": "Microservice.Session\\Microservice.Session.csproj",
         "Action": "Start"
+      },
+      {
+        "Path": "Microservice.Analytics\\Microservice.Analytics.csproj",
+        "Action": "Start"
       }
     ]
   }

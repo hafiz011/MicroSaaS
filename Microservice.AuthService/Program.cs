@@ -141,12 +141,26 @@ namespace Microservice.AuthService
             app.UseHttpsRedirection();
 
             // If you're serving from a subfolder (e.g., images/profile inside wwwroot)
-            app.UseStaticFiles(new StaticFileOptions
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+            //    RequestPath = ""
+            //});
+
+            var wwwrootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            if (Directory.Exists(wwwrootPath))
             {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
-                RequestPath = ""
-            });
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(wwwrootPath),
+                    RequestPath = ""
+                });
+            }
+
+
+
+
             app.UseCors("AllowAll");
 
             app.UseAuthentication();
