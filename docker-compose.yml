@@ -1,0 +1,58 @@
+# docker-compose.yml
+# You can remove the version line as it's deprecated
+
+services:
+  api-gateway:
+    build:
+      context: ./SaaS.ApiGetway
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - auth-service
+      - session-service
+      - analytics-service
+    networks:
+      - saasnet
+
+  auth-service:
+    build:
+      context: ./Microservice.AuthService
+      dockerfile: Dockerfile
+    ports:
+      - "5001:8080"
+    networks:
+      - saasnet
+
+  session-service:
+    build:
+      context: ./Microservice.Session
+      dockerfile: Dockerfile
+    ports:
+      - "5002:8080"
+    networks:
+      - saasnet
+
+  analytics-service:
+    build:
+      context: ./Microservice.Analytics
+      dockerfile: Dockerfile
+    ports:
+      - "5003:8080"
+    networks:
+      - saasnet
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-gateway
+    networks:
+      - saasnet
+
+networks:
+  saasnet:
+    driver: bridge
