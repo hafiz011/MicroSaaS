@@ -1,6 +1,7 @@
 ﻿using Microservice.Session.Models.DTOs;
 using Microservice.Session.Entities;
 using Microsoft.Extensions.Primitives;
+using Google.Protobuf.WellKnownTypes;
 
 namespace Microservice.Session.Infrastructure.Interfaces
 {
@@ -15,5 +16,6 @@ namespace Microservice.Session.Infrastructure.Interfaces
         Task<List<Sessions>> GetRecentSessionsForUserAsync(string Tenant_Id, string userId, int v);
         Task<IEnumerable<Sessions>> GetRecentUndetectedSessionsAsync();
         Task UpdateSuspiciousSessionAsync(string id, Sessions sessions);
+        Task<Sessions> ActiveSessionList(string tenantId, DateTime? from, DateTime? to, string device, string country);
     }
 }

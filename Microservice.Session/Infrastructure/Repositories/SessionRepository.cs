@@ -3,6 +3,7 @@ using Microservice.Session.Entities;
 using Microservice.Session.Infrastructure.Interfaces;
 using Microsoft.Extensions.Primitives;
 using MongoDB.Driver;
+using Google.Protobuf.WellKnownTypes;
 
 namespace Microservice.Session.Infrastructure.Repositories
 {
@@ -81,9 +82,26 @@ namespace Microservice.Session.Infrastructure.Repositories
             await _collection.UpdateOneAsync(filter, update);
         }
 
+        // active session list
+        public async Task<List<Sessions>> ActiveSessionList(string tenantId, DateTime? from, DateTime? to, string device, string country)
+        {
+            var filterBuilder = Builders<Sessions>.Filter;
+            var filters = new List<FilterDefinition<Sessions>>
+            {
+                filterBuilder.Eq(x => x.Tenant_Id, tenantId),
+                filterBuilder.Eq(x => x.isActive, true)
+            };
 
+            if (from.HasValue)
+                filters.Add(filterBuilder.Gte(x => x.Local_Time, from.Value));
+            if (to.HasValue)
+                filters.Add(filterBuilder.Lte(x => x.Local_Time, to.Value));
+            if (!string.IsNullOrEmpty(device))
+                filters.Add(filterBuilder.Eq(x => x.Device.Device_Type, device));
+            if (!string.IsNullOrEmpty(country))
+                filters.Add(filterBuilder.Eq(x => x.Geo_Location.Country, country));
 
-
-
+            return await _collection.Find(filterBuilder.And(filters)).ToListAsync();
+        }
     }
 }

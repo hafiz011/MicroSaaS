@@ -32,7 +32,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\DashboardDTOs\" />
 	  <Folder Include="wwwroot\images\profile\" />
 	</ItemGroup>
 

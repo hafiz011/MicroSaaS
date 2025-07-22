@@ -51,6 +51,16 @@ namespace Microservice.AuthService.Infrastructure.Services
             return response;
         }
 
-
+        public async Task<SessionListResponse> GetSessionList(string tenantId, DateTime? from, DateTime? to, string device, string country)
+        {
+            var response = await _client.GetSessionListAsync(new SessionListRequest { 
+                TenantId = tenantId, 
+                From = from,
+                To = to,
+                Device = device,
+                Country = country
+            });
+            return response;
+        }
     }
 }

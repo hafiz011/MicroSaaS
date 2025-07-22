@@ -11,10 +11,14 @@ namespace Microservice.Session.Infrastructure.Services
     {
         private readonly IApiKeyRepository _apiKeyRepository;
         private readonly IUserInfoRepository _userinfoRepository;
+        private readonly ISessionRepository _sessionRepository;
 
-        public GrpcServer(IApiKeyRepository apiKeyRepository)
+        public GrpcServer(IApiKeyRepository apiKeyRepository, IUserInfoRepository userInfoRepository, ISessionRepository sessionRepository)
         {
             _apiKeyRepository = apiKeyRepository;
+            _userinfoRepository = userInfoRepository;
+            _sessionRepository = sessionRepository;
+
         }
 
         public override async Task<ApiKeyResponse> GetApiKey(ApiKeyRequest request, ServerCallContext context)
@@ -161,6 +165,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
+        // user info
         public override async Task<UserInfoResponse> GetUserInfo(UserInfoRequest request, ServerCallContext context)
         {
             var getinfo = await _userinfoRepository.getUserById(request.UserId, request.TenantId);
@@ -173,6 +178,27 @@ namespace Microservice.Session.Infrastructure.Services
                 UserEmail = getinfo.Email,
                 Lastlogin = getinfo.Last_login.ToString()
             };
+        }
+
+        // active session list
+        private override async Task<SessionListResponse> GetSessionList(SessionListRequest request, SerializationContext context)
+        {
+            var session = await _sessionRepository.ActiveSessionList(
+                request.TenantId,
+                request.From,
+                request.To,
+                request.Device,
+                request.Country
+                );
+
+            if (session != null)
+                throw new RpcException(new Status(StatusCode.NotFound, $"Session not found {request.TenantId}"));
+
+            return new SessionListResponse
+            {
+                UserName = session
+            };
+
         }
 
 

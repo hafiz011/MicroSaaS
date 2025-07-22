@@ -2,6 +2,7 @@
 using Microservice.AuthService.Infrastructure.Interfaces;
 using Microservice.AuthService.Infrastructure.Services;
 using Microservice.AuthService.Models;
+using Microservice.AuthService.Models.DashboardDTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -29,18 +30,11 @@ namespace Microservice.AuthService.Controllers
         }
 
 
-        public class Alert
-        {
-            public string Country { get; set; }
-            public string Device { get; set; }
-            public DateTime? From { get; set; }     // Optional override
-            public DateTime? To { get; set; }       // Optional override
-            public string Range { get; set; }       // "24h", "7d", "30d"
-        }
+
 
 
         [HttpGet("alert")]
-        public async Task<IActionResult> GetAll([FromQuery] Alert alert)
+        public async Task<IActionResult> GetAll([FromQuery] Query alert)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
@@ -72,6 +66,9 @@ namespace Microservice.AuthService.Controllers
                 alert.Device,
                 alert.Country);
 
+            // Total count of suspicious activities
+            var totalCount = suspicious.Count;
+
             var dtoList = suspicious.Select(x => new SuspiciousActivityDto
             {
                 SessionId = x.SessionId,
@@ -79,10 +76,15 @@ namespace Microservice.AuthService.Controllers
                 RiskLevel = x.RiskLevel,
                 DetectedAt = x.DetectedAt,
                 RiskFactors = x.RiskFactors,
-                
+                Count = 1
             }).ToList();
 
-            return Ok(dtoList);
+            //   return Ok(dtoList, totalCount);
+            return Ok(new
+            {
+                TotalSuspicious = totalCount,
+                SuspiciousActivities = dtoList
+            });
         }
 
 
@@ -160,6 +162,7 @@ namespace Microservice.AuthService.Controllers
 
         public class SuspiciousActivityDto
         {
+            public int Count { get; set; }
             public string SessionId { get; set; }
             public string UserName { get; set; }
             public string UserEmail { get; set; }

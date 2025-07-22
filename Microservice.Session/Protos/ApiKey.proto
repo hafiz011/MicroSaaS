@@ -14,6 +14,9 @@ service ApiKey {
 
   // user info
   rpc GetUserInfo(UserInfoRequest) returns (UserInfoResponse);
+
+    // Session section
+  rpc GetSessionList(SessionListRequest) returns (SessionListResponse);
 }
 
 // api key
@@ -72,3 +75,25 @@ message UserInfoResponse{
 	string lastlogin = 3;
 }
 
+// Session section
+message SessionListRequest{
+	string TenantId =1;
+	google.protobuf.Timestamp from = 2;
+	google.protobuf.Timestamp to = 3;
+	string device = 4;
+	string country =5;
+}
+
+message SessionListResponse{
+	string user_name =1;
+	string email = 2;
+	string ip_address = 3;
+	string city = 4;
+	string country = 5;
+	string Region = 6;
+	string status = 7;
+	string device_Os = 8;
+	google.protobuf.Timestamp login_Time = 9;
+	string lac = 10;
+	string sessionid = 11;
+}
