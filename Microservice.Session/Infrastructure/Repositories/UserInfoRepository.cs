@@ -44,5 +44,16 @@ namespace Microservice.Session.Infrastructure.Repositories
             var filter = Builders<Users>.Filter.Where(a => a.User_Id == userId && a.Tenant_Id == tenantId);
             return await _collection.Find(filter).FirstOrDefaultAsync();
         }
+
+        // active users list
+        public async Task<List<Users>> GetUserBySessionIdListAsync(string tenantId, List<string> userIds)
+        {
+            var filterBuilder = Builders<Users>.Filter;
+            var filter = filterBuilder.Eq(u => u.Tenant_Id, tenantId) &
+                         filterBuilder.In(u => u.User_Id, userIds);
+            return await _collection.Find(filter).ToListAsync();
+        }
+
+
     }
 }

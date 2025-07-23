@@ -59,7 +59,9 @@ namespace Microservice.AuthService.Controllers
             if (suspicious == null)
                 return NotFound();
 
-            return Ok();
+
+
+            return Ok(suspicious);
         }
 
     }

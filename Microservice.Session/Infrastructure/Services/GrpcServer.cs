@@ -4,6 +4,8 @@ using Microservice.Session.Entities;
 using Microservice.Session.Infrastructure.Interfaces;
 using Microservice.Session.Protos;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.AspNetCore.Http;
+using ProtoSession = Microservice.Session.Protos.Session;
 
 namespace Microservice.Session.Infrastructure.Services
 {
@@ -180,26 +182,50 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-        // active session list
-        private override async Task<SessionListResponse> GetSessionList(SessionListRequest request, SerializationContext context)
+        // active session and user list
+        public override async Task<SessionListResponse> GetSessionList(SessionListRequest request, ServerCallContext context)
         {
-            var session = await _sessionRepository.ActiveSessionList(
+            var sessions = await _sessionRepository.ActiveSessionList(
                 request.TenantId,
-                request.From,
-                request.To,
+                request.From?.ToDateTime(),
+                request.To?.ToDateTime(),
                 request.Device,
                 request.Country
-                );
+            );
 
-            if (session != null)
-                throw new RpcException(new Status(StatusCode.NotFound, $"Session not found {request.TenantId}"));
+            if (sessions == null || !sessions.Any())
+                throw new RpcException(new Status(StatusCode.NotFound, $"No active sessions found for TenantId {request.TenantId}"));
 
-            return new SessionListResponse
+            var userIds = sessions.Select(s => s.User_Id).Distinct().ToList();
+            var users = await _userinfoRepository.GetUserBySessionIdListAsync(request.TenantId, userIds);
+
+            var response = new SessionListResponse();
+
+            foreach (var session in sessions)
             {
-                UserName = session
-            };
+                var user = users.FirstOrDefault(u => u.User_Id == session.User_Id);
 
+                response.Sessions.Add(new ProtoSession
+                {
+                    UserName = user?.Name ?? "",
+                    Email = user?.Email ?? "",
+                    UserId = session.User_Id ?? "",
+                    IpAddress = session.Ip_Address ?? "",
+                    City = session.Geo_Location?.City ?? "",
+                    Country = session.Geo_Location?.Country ?? "",
+                    Region = session.Geo_Location?.Region ?? "",
+                    Status = session.isActive ? "Active" : "Inactive",
+                    DeviceOs = session.Device?.OS ?? "",
+                    DeviceType = session.Device?.Device_Type ?? "",
+                    LoginTime = Timestamp.FromDateTime(session.Login_Time.ToUniversalTime()),
+                    Lac = session.Geo_Location?.Latitude_Longitude ?? "",
+                    Sessionid = session.Id.ToString()
+                });
+            }
+
+            return response;
         }
+
 
 
     }

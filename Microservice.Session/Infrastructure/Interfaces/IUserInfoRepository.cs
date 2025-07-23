@@ -9,5 +9,6 @@ namespace Microservice.Session.Infrastructure.Interfaces
         Task UpdateUserAsync(Users user);
         Task<Users> GetUserByIdAsync(string User_Id);
         Task<Users> getUserById(string userId, string tenantId);
+        Task<List<Users>> GetUserBySessionIdListAsync(string tenant_Id, List<string> user_Ids);
     }
 }

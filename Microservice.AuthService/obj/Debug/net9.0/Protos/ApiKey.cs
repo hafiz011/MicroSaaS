@@ -49,22 +49,23 @@ namespace Microservice.AuthService.Protos {
             "mQEKElNlc3Npb25MaXN0UmVxdWVzdBIQCghUZW5hbnRJZBgBIAEoCRIoCgRm",
             "cm9tGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBImCgJ0bxgD",
             "IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGZGV2aWNlGAQg",
-            "ASgJEg8KB2NvdW50cnkYBSABKAki7QEKE1Nlc3Npb25MaXN0UmVzcG9uc2US",
-            "EQoJdXNlcl9uYW1lGAEgASgJEg0KBWVtYWlsGAIgASgJEhIKCmlwX2FkZHJl",
-            "c3MYAyABKAkSDAoEY2l0eRgEIAEoCRIPCgdjb3VudHJ5GAUgASgJEg4KBlJl",
-            "Z2lvbhgGIAEoCRIOCgZzdGF0dXMYByABKAkSEQoJZGV2aWNlX09zGAggASgJ",
-            "Ei4KCmxvZ2luX1RpbWUYCSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0",
-            "YW1wEgsKA2xhYxgKIAEoCRIRCglzZXNzaW9uaWQYCyABKAky+wIKBkFwaUtl",
-            "eRIsCglHZXRBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0Gg8uQXBpS2V5UmVzcG9u",
-            "c2USNgoMQ3JlYXRlQXBpS2V5EhQuQ3JlYXRlQXBpS2V5UmVxdWVzdBoQLkFw",
-            "aUhhc2hSZXNwb25zZRI0ChBSZWdlbmVyYXRlQXBpS2V5Eg4uQXBpS2V5UmVx",
-            "dWVzdBoQLkFwaUhhc2hSZXNwb25zZRIzCgtSZW5ld0FwaUtleRITLlJlbmV3",
-            "QXBpS2V5UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEi8KDFJldm9rZUFwaUtl",
-            "eRIOLkFwaUtleVJlcXVlc3QaDy5BcGlLZXlSZXNwb25zZRIyCgtHZXRVc2Vy",
-            "SW5mbxIQLlVzZXJJbmZvUmVxdWVzdBoRLlVzZXJJbmZvUmVzcG9uc2USOwoO",
-            "R2V0U2Vzc2lvbkxpc3QSEy5TZXNzaW9uTGlzdFJlcXVlc3QaFC5TZXNzaW9u",
-            "TGlzdFJlc3BvbnNlQiKqAh9NaWNyb3NlcnZpY2UuQXV0aFNlcnZpY2UuUHJv",
-            "dG9zYgZwcm90bzM="));
+            "ASgJEg8KB2NvdW50cnkYBSABKAkigQIKB1Nlc3Npb24SEAoIVXNlck5hbWUY",
+            "ASABKAkSDgoGVXNlcklkGAIgASgJEg0KBUVtYWlsGAMgASgJEhEKCUlwQWRk",
+            "cmVzcxgEIAEoCRIMCgRDaXR5GAUgASgJEg8KB0NvdW50cnkYBiABKAkSDgoG",
+            "UmVnaW9uGAcgASgJEg4KBlN0YXR1cxgIIAEoCRIQCghEZXZpY2VPcxgJIAEo",
+            "CRISCgpEZXZpY2VUeXBlGAogASgJEi0KCUxvZ2luVGltZRgLIAEoCzIaLmdv",
+            "b2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASCwoDTGFjGAwgASgJEhEKCVNlc3Np",
+            "b25pZBgNIAEoCSIxChNTZXNzaW9uTGlzdFJlc3BvbnNlEhoKCHNlc3Npb25z",
+            "GAEgAygLMgguU2Vzc2lvbjL7AgoGQXBpS2V5EiwKCUdldEFwaUtleRIOLkFw",
+            "aUtleVJlcXVlc3QaDy5BcGlLZXlSZXNwb25zZRI2CgxDcmVhdGVBcGlLZXkS",
+            "FC5DcmVhdGVBcGlLZXlSZXF1ZXN0GhAuQXBpSGFzaFJlc3BvbnNlEjQKEFJl",
+            "Z2VuZXJhdGVBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0GhAuQXBpSGFzaFJlc3Bv",
+            "bnNlEjMKC1JlbmV3QXBpS2V5EhMuUmVuZXdBcGlLZXlSZXF1ZXN0Gg8uQXBp",
+            "S2V5UmVzcG9uc2USLwoMUmV2b2tlQXBpS2V5Eg4uQXBpS2V5UmVxdWVzdBoP",
+            "LkFwaUtleVJlc3BvbnNlEjIKC0dldFVzZXJJbmZvEhAuVXNlckluZm9SZXF1",
+            "ZXN0GhEuVXNlckluZm9SZXNwb25zZRI7Cg5HZXRTZXNzaW9uTGlzdBITLlNl",
+            "c3Npb25MaXN0UmVxdWVzdBoULlNlc3Npb25MaXN0UmVzcG9uc2VCIqoCH01p",
+            "Y3Jvc2VydmljZS5BdXRoU2VydmljZS5Qcm90b3NiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -76,7 +77,8 @@ namespace Microservice.AuthService.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.UserInfoRequest), global::Microservice.AuthService.Protos.UserInfoRequest.Parser, new[]{ "UserId", "TenantId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.UserInfoResponse), global::Microservice.AuthService.Protos.UserInfoResponse.Parser, new[]{ "UserName", "UserEmail", "Lastlogin" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionListRequest), global::Microservice.AuthService.Protos.SessionListRequest.Parser, new[]{ "TenantId", "From", "To", "Device", "Country" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionListResponse), global::Microservice.AuthService.Protos.SessionListResponse.Parser, new[]{ "UserName", "Email", "IpAddress", "City", "Country", "Region", "Status", "DeviceOs", "LoginTime", "Lac", "Sessionid" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.Session), global::Microservice.AuthService.Protos.Session.Parser, new[]{ "UserName", "UserId", "Email", "IpAddress", "City", "Country", "Region", "Status", "DeviceOs", "DeviceType", "LoginTime", "Lac", "Sessionid" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionListResponse), global::Microservice.AuthService.Protos.SessionListResponse.Parser, new[]{ "Sessions" }, null, null, null, null)
           }));
     }
     #endregion
@@ -2859,16 +2861,16 @@ namespace Microservice.AuthService.Protos {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class SessionListResponse : pb::IMessage<SessionListResponse>
+  public sealed partial class Session : pb::IMessage<Session>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SessionListResponse> _parser = new pb::MessageParser<SessionListResponse>(() => new SessionListResponse());
+    private static readonly pb::MessageParser<Session> _parser = new pb::MessageParser<Session>(() => new Session());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SessionListResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<Session> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2884,7 +2886,7 @@ namespace Microservice.AuthService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SessionListResponse() {
+    public Session() {
       OnConstruction();
     }
 
@@ -2892,8 +2894,9 @@ namespace Microservice.AuthService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SessionListResponse(SessionListResponse other) : this() {
+    public Session(Session other) : this() {
       userName_ = other.userName_;
+      userId_ = other.userId_;
       email_ = other.email_;
       ipAddress_ = other.ipAddress_;
       city_ = other.city_;
@@ -2901,6 +2904,7 @@ namespace Microservice.AuthService.Protos {
       region_ = other.region_;
       status_ = other.status_;
       deviceOs_ = other.deviceOs_;
+      deviceType_ = other.deviceType_;
       loginTime_ = other.loginTime_ != null ? other.loginTime_.Clone() : null;
       lac_ = other.lac_;
       sessionid_ = other.sessionid_;
@@ -2909,11 +2913,11 @@ namespace Microservice.AuthService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SessionListResponse Clone() {
-      return new SessionListResponse(this);
+    public Session Clone() {
+      return new Session(this);
     }
 
-    /// <summary>Field number for the "user_name" field.</summary>
+    /// <summary>Field number for the "UserName" field.</summary>
     public const int UserNameFieldNumber = 1;
     private string userName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2925,8 +2929,20 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
-    /// <summary>Field number for the "email" field.</summary>
-    public const int EmailFieldNumber = 2;
+    /// <summary>Field number for the "UserId" field.</summary>
+    public const int UserIdFieldNumber = 2;
+    private string userId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string UserId {
+      get { return userId_; }
+      set {
+        userId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Email" field.</summary>
+    public const int EmailFieldNumber = 3;
     private string email_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2937,8 +2953,8 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
-    /// <summary>Field number for the "ip_address" field.</summary>
-    public const int IpAddressFieldNumber = 3;
+    /// <summary>Field number for the "IpAddress" field.</summary>
+    public const int IpAddressFieldNumber = 4;
     private string ipAddress_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2949,8 +2965,8 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
-    /// <summary>Field number for the "city" field.</summary>
-    public const int CityFieldNumber = 4;
+    /// <summary>Field number for the "City" field.</summary>
+    public const int CityFieldNumber = 5;
     private string city_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2961,8 +2977,8 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
-    /// <summary>Field number for the "country" field.</summary>
-    public const int CountryFieldNumber = 5;
+    /// <summary>Field number for the "Country" field.</summary>
+    public const int CountryFieldNumber = 6;
     private string country_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2974,7 +2990,7 @@ namespace Microservice.AuthService.Protos {
     }
 
     /// <summary>Field number for the "Region" field.</summary>
-    public const int RegionFieldNumber = 6;
+    public const int RegionFieldNumber = 7;
     private string region_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2985,8 +3001,8 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 7;
+    /// <summary>Field number for the "Status" field.</summary>
+    public const int StatusFieldNumber = 8;
     private string status_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2997,8 +3013,8 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
-    /// <summary>Field number for the "device_Os" field.</summary>
-    public const int DeviceOsFieldNumber = 8;
+    /// <summary>Field number for the "DeviceOs" field.</summary>
+    public const int DeviceOsFieldNumber = 9;
     private string deviceOs_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3009,8 +3025,20 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
-    /// <summary>Field number for the "login_Time" field.</summary>
-    public const int LoginTimeFieldNumber = 9;
+    /// <summary>Field number for the "DeviceType" field.</summary>
+    public const int DeviceTypeFieldNumber = 10;
+    private string deviceType_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string DeviceType {
+      get { return deviceType_; }
+      set {
+        deviceType_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "LoginTime" field.</summary>
+    public const int LoginTimeFieldNumber = 11;
     private global::Google.Protobuf.WellKnownTypes.Timestamp loginTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3021,8 +3049,8 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
-    /// <summary>Field number for the "lac" field.</summary>
-    public const int LacFieldNumber = 10;
+    /// <summary>Field number for the "Lac" field.</summary>
+    public const int LacFieldNumber = 12;
     private string lac_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3033,8 +3061,8 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
-    /// <summary>Field number for the "sessionid" field.</summary>
-    public const int SessionidFieldNumber = 11;
+    /// <summary>Field number for the "Sessionid" field.</summary>
+    public const int SessionidFieldNumber = 13;
     private string sessionid_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3048,12 +3076,12 @@ namespace Microservice.AuthService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SessionListResponse);
+      return Equals(other as Session);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SessionListResponse other) {
+    public bool Equals(Session other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -3061,6 +3089,7 @@ namespace Microservice.AuthService.Protos {
         return true;
       }
       if (UserName != other.UserName) return false;
+      if (UserId != other.UserId) return false;
       if (Email != other.Email) return false;
       if (IpAddress != other.IpAddress) return false;
       if (City != other.City) return false;
@@ -3068,6 +3097,7 @@ namespace Microservice.AuthService.Protos {
       if (Region != other.Region) return false;
       if (Status != other.Status) return false;
       if (DeviceOs != other.DeviceOs) return false;
+      if (DeviceType != other.DeviceType) return false;
       if (!object.Equals(LoginTime, other.LoginTime)) return false;
       if (Lac != other.Lac) return false;
       if (Sessionid != other.Sessionid) return false;
@@ -3079,6 +3109,7 @@ namespace Microservice.AuthService.Protos {
     public override int GetHashCode() {
       int hash = 1;
       if (UserName.Length != 0) hash ^= UserName.GetHashCode();
+      if (UserId.Length != 0) hash ^= UserId.GetHashCode();
       if (Email.Length != 0) hash ^= Email.GetHashCode();
       if (IpAddress.Length != 0) hash ^= IpAddress.GetHashCode();
       if (City.Length != 0) hash ^= City.GetHashCode();
@@ -3086,6 +3117,7 @@ namespace Microservice.AuthService.Protos {
       if (Region.Length != 0) hash ^= Region.GetHashCode();
       if (Status.Length != 0) hash ^= Status.GetHashCode();
       if (DeviceOs.Length != 0) hash ^= DeviceOs.GetHashCode();
+      if (DeviceType.Length != 0) hash ^= DeviceType.GetHashCode();
       if (loginTime_ != null) hash ^= LoginTime.GetHashCode();
       if (Lac.Length != 0) hash ^= Lac.GetHashCode();
       if (Sessionid.Length != 0) hash ^= Sessionid.GetHashCode();
@@ -3111,44 +3143,52 @@ namespace Microservice.AuthService.Protos {
         output.WriteRawTag(10);
         output.WriteString(UserName);
       }
-      if (Email.Length != 0) {
+      if (UserId.Length != 0) {
         output.WriteRawTag(18);
+        output.WriteString(UserId);
+      }
+      if (Email.Length != 0) {
+        output.WriteRawTag(26);
         output.WriteString(Email);
       }
       if (IpAddress.Length != 0) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(34);
         output.WriteString(IpAddress);
       }
       if (City.Length != 0) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(42);
         output.WriteString(City);
       }
       if (Country.Length != 0) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(50);
         output.WriteString(Country);
       }
       if (Region.Length != 0) {
-        output.WriteRawTag(50);
+        output.WriteRawTag(58);
         output.WriteString(Region);
       }
       if (Status.Length != 0) {
-        output.WriteRawTag(58);
+        output.WriteRawTag(66);
         output.WriteString(Status);
       }
       if (DeviceOs.Length != 0) {
-        output.WriteRawTag(66);
+        output.WriteRawTag(74);
         output.WriteString(DeviceOs);
       }
+      if (DeviceType.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteString(DeviceType);
+      }
       if (loginTime_ != null) {
-        output.WriteRawTag(74);
+        output.WriteRawTag(90);
         output.WriteMessage(LoginTime);
       }
       if (Lac.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(98);
         output.WriteString(Lac);
       }
       if (Sessionid.Length != 0) {
-        output.WriteRawTag(90);
+        output.WriteRawTag(106);
         output.WriteString(Sessionid);
       }
       if (_unknownFields != null) {
@@ -3165,44 +3205,52 @@ namespace Microservice.AuthService.Protos {
         output.WriteRawTag(10);
         output.WriteString(UserName);
       }
-      if (Email.Length != 0) {
+      if (UserId.Length != 0) {
         output.WriteRawTag(18);
+        output.WriteString(UserId);
+      }
+      if (Email.Length != 0) {
+        output.WriteRawTag(26);
         output.WriteString(Email);
       }
       if (IpAddress.Length != 0) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(34);
         output.WriteString(IpAddress);
       }
       if (City.Length != 0) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(42);
         output.WriteString(City);
       }
       if (Country.Length != 0) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(50);
         output.WriteString(Country);
       }
       if (Region.Length != 0) {
-        output.WriteRawTag(50);
+        output.WriteRawTag(58);
         output.WriteString(Region);
       }
       if (Status.Length != 0) {
-        output.WriteRawTag(58);
+        output.WriteRawTag(66);
         output.WriteString(Status);
       }
       if (DeviceOs.Length != 0) {
-        output.WriteRawTag(66);
+        output.WriteRawTag(74);
         output.WriteString(DeviceOs);
       }
+      if (DeviceType.Length != 0) {
+        output.WriteRawTag(82);
+        output.WriteString(DeviceType);
+      }
       if (loginTime_ != null) {
-        output.WriteRawTag(74);
+        output.WriteRawTag(90);
         output.WriteMessage(LoginTime);
       }
       if (Lac.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(98);
         output.WriteString(Lac);
       }
       if (Sessionid.Length != 0) {
-        output.WriteRawTag(90);
+        output.WriteRawTag(106);
         output.WriteString(Sessionid);
       }
       if (_unknownFields != null) {
@@ -3217,6 +3265,9 @@ namespace Microservice.AuthService.Protos {
       int size = 0;
       if (UserName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(UserName);
+      }
+      if (UserId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserId);
       }
       if (Email.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Email);
@@ -3239,6 +3290,9 @@ namespace Microservice.AuthService.Protos {
       if (DeviceOs.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(DeviceOs);
       }
+      if (DeviceType.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(DeviceType);
+      }
       if (loginTime_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(LoginTime);
       }
@@ -3256,12 +3310,15 @@ namespace Microservice.AuthService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SessionListResponse other) {
+    public void MergeFrom(Session other) {
       if (other == null) {
         return;
       }
       if (other.UserName.Length != 0) {
         UserName = other.UserName;
+      }
+      if (other.UserId.Length != 0) {
+        UserId = other.UserId;
       }
       if (other.Email.Length != 0) {
         Email = other.Email;
@@ -3283,6 +3340,9 @@ namespace Microservice.AuthService.Protos {
       }
       if (other.DeviceOs.Length != 0) {
         DeviceOs = other.DeviceOs;
+      }
+      if (other.DeviceType.Length != 0) {
+        DeviceType = other.DeviceType;
       }
       if (other.loginTime_ != null) {
         if (loginTime_ == null) {
@@ -3320,45 +3380,53 @@ namespace Microservice.AuthService.Protos {
             break;
           }
           case 18: {
-            Email = input.ReadString();
+            UserId = input.ReadString();
             break;
           }
           case 26: {
-            IpAddress = input.ReadString();
+            Email = input.ReadString();
             break;
           }
           case 34: {
-            City = input.ReadString();
+            IpAddress = input.ReadString();
             break;
           }
           case 42: {
-            Country = input.ReadString();
+            City = input.ReadString();
             break;
           }
           case 50: {
-            Region = input.ReadString();
+            Country = input.ReadString();
             break;
           }
           case 58: {
-            Status = input.ReadString();
+            Region = input.ReadString();
             break;
           }
           case 66: {
-            DeviceOs = input.ReadString();
+            Status = input.ReadString();
             break;
           }
           case 74: {
+            DeviceOs = input.ReadString();
+            break;
+          }
+          case 82: {
+            DeviceType = input.ReadString();
+            break;
+          }
+          case 90: {
             if (loginTime_ == null) {
               LoginTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(LoginTime);
             break;
           }
-          case 82: {
+          case 98: {
             Lac = input.ReadString();
             break;
           }
-          case 90: {
+          case 106: {
             Sessionid = input.ReadString();
             break;
           }
@@ -3386,46 +3454,241 @@ namespace Microservice.AuthService.Protos {
             break;
           }
           case 18: {
-            Email = input.ReadString();
+            UserId = input.ReadString();
             break;
           }
           case 26: {
-            IpAddress = input.ReadString();
+            Email = input.ReadString();
             break;
           }
           case 34: {
-            City = input.ReadString();
+            IpAddress = input.ReadString();
             break;
           }
           case 42: {
-            Country = input.ReadString();
+            City = input.ReadString();
             break;
           }
           case 50: {
-            Region = input.ReadString();
+            Country = input.ReadString();
             break;
           }
           case 58: {
-            Status = input.ReadString();
+            Region = input.ReadString();
             break;
           }
           case 66: {
-            DeviceOs = input.ReadString();
+            Status = input.ReadString();
             break;
           }
           case 74: {
+            DeviceOs = input.ReadString();
+            break;
+          }
+          case 82: {
+            DeviceType = input.ReadString();
+            break;
+          }
+          case 90: {
             if (loginTime_ == null) {
               LoginTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(LoginTime);
             break;
           }
-          case 82: {
+          case 98: {
             Lac = input.ReadString();
             break;
           }
-          case 90: {
+          case 106: {
             Sessionid = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class SessionListResponse : pb::IMessage<SessionListResponse>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SessionListResponse> _parser = new pb::MessageParser<SessionListResponse>(() => new SessionListResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SessionListResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Microservice.AuthService.Protos.ApiKeyReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SessionListResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SessionListResponse(SessionListResponse other) : this() {
+      sessions_ = other.sessions_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SessionListResponse Clone() {
+      return new SessionListResponse(this);
+    }
+
+    /// <summary>Field number for the "sessions" field.</summary>
+    public const int SessionsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Microservice.AuthService.Protos.Session> _repeated_sessions_codec
+        = pb::FieldCodec.ForMessage(10, global::Microservice.AuthService.Protos.Session.Parser);
+    private readonly pbc::RepeatedField<global::Microservice.AuthService.Protos.Session> sessions_ = new pbc::RepeatedField<global::Microservice.AuthService.Protos.Session>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Microservice.AuthService.Protos.Session> Sessions {
+      get { return sessions_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SessionListResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SessionListResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!sessions_.Equals(other.sessions_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= sessions_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      sessions_.WriteTo(output, _repeated_sessions_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      sessions_.WriteTo(ref output, _repeated_sessions_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      size += sessions_.CalculateSize(_repeated_sessions_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SessionListResponse other) {
+      if (other == null) {
+        return;
+      }
+      sessions_.Add(other.sessions_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            sessions_.AddEntriesFrom(input, _repeated_sessions_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            sessions_.AddEntriesFrom(ref input, _repeated_sessions_codec);
             break;
           }
         }
