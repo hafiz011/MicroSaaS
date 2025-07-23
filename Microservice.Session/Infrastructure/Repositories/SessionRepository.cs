@@ -15,12 +15,14 @@ namespace Microservice.Session.Infrastructure.Repositories
             _collection = context.SessionsDB;
         }
 
+        // create session
         public async Task<Sessions> CreateSessionAsync(Sessions sessions)
         {
             await _collection.InsertOneAsync(sessions);
             return sessions;
         }
 
+        // end session
         public async Task EndSessionAsync(string sessionId)
         {
             var update = Builders<Sessions>.Update
@@ -29,11 +31,13 @@ namespace Microservice.Session.Infrastructure.Repositories
             await _collection.UpdateOneAsync(s => s.Id == sessionId, update);
         }
 
+        // get session by id
         public async Task<Sessions> GetSessionByIdAsync(string existingSessionId)
         {
             return await _collection.Find(a => a.Id == existingSessionId).FirstOrDefaultAsync();
         }
 
+        // update session
         public async Task UpdateSessionAsync(string id, Sessions update)
         {
             var filter = Builders<Sessions>.Filter.Eq(u => u.Id, id);
@@ -47,39 +51,6 @@ namespace Microservice.Session.Infrastructure.Repositories
                 .Set(s => s.Device, update.Device);
 
             await _collection.UpdateOneAsync(filter, updateDef);
-        }
-
-        public async Task<IEnumerable<Sessions>> GetRecentUndetectedSessionsAsync()
-        {
-            var filter = Builders<Sessions>.Filter.Eq(s => s.IsAnalyzed, false);
-            return await _collection.Find(filter).ToListAsync();
-        }
-
-        public async Task<List<Sessions>> GetRecentSessionsForUserAsync(string tenantId, string userId, int limit)
-        {
-            var filter = Builders<Sessions>.Filter.And(
-                Builders<Sessions>.Filter.Eq(s => s.Tenant_Id, tenantId),
-                Builders<Sessions>.Filter.Eq(s => s.User_Id, userId),
-                Builders<Sessions>.Filter.Eq(s => s.isSuspicious, false)
-            );
-
-            return await _collection.Find(filter)
-                .SortByDescending(s => s.Login_Time)
-                .Limit(limit)
-                .ToListAsync();
-        }
-
-        public async Task UpdateSuspiciousSessionAsync(string id, Sessions session)
-        {
-            var filter = Builders<Sessions>.Filter.Eq(s => s.Id, id);
-
-            var update = Builders<Sessions>.Update
-                .Set(s => s.IsAnalyzed, session.IsAnalyzed)
-                .Set(s => s.isSuspicious, session.isSuspicious)
-                .Set(s => s.Suspicious_Flags, session.Suspicious_Flags)
-                .Set(s => s.SuspiciousDetectedAt, session.SuspiciousDetectedAt);
-
-            await _collection.UpdateOneAsync(filter, update);
         }
 
         // active session list
@@ -103,5 +74,55 @@ namespace Microservice.Session.Infrastructure.Repositories
 
             return await _collection.Find(filterBuilder.And(filters)).ToListAsync();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ////dddd
+        //public async Task<IEnumerable<Sessions>> GetRecentUndetectedSessionsAsync()
+        //{
+        //    var filter = Builders<Sessions>.Filter.Eq(s => s.IsAnalyzed, false);
+        //    return await _collection.Find(filter).ToListAsync();
+        //}
+
+        //// dddd
+        //public async Task<List<Sessions>> GetRecentSessionsForUserAsync(string tenantId, string userId, int limit)
+        //{
+        //    var filter = Builders<Sessions>.Filter.And(
+        //        Builders<Sessions>.Filter.Eq(s => s.Tenant_Id, tenantId),
+        //        Builders<Sessions>.Filter.Eq(s => s.User_Id, userId),
+        //        Builders<Sessions>.Filter.Eq(s => s.isSuspicious, false)
+        //    );
+
+        //    return await _collection.Find(filter)
+        //        .SortByDescending(s => s.Login_Time)
+        //        .Limit(limit)
+        //        .ToListAsync();
+        //}
+
+        //// dddd
+        //public async Task UpdateSuspiciousSessionAsync(string id, Sessions session)
+        //{
+        //    var filter = Builders<Sessions>.Filter.Eq(s => s.Id, id);
+
+        //    var update = Builders<Sessions>.Update
+        //        .Set(s => s.IsAnalyzed, session.IsAnalyzed)
+        //        .Set(s => s.isSuspicious, session.isSuspicious)
+        //        .Set(s => s.Suspicious_Flags, session.Suspicious_Flags)
+        //        .Set(s => s.SuspiciousDetectedAt, session.SuspiciousDetectedAt);
+
+        //    await _collection.UpdateOneAsync(filter, update);
+        //}
     }
 }

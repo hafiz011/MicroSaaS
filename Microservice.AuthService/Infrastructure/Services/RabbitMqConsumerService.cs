@@ -22,7 +22,7 @@ namespace Microservice.AuthService.Infrastructure.Services
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _channel.QueueDeclare(queue: "session-risk-check-v2", durable: true, exclusive: false, autoDelete: false);
-            
+
             var consumer = new AsyncEventingBasicConsumer(_channel);
 
             consumer.Received += async (model, ea) =>
@@ -89,35 +89,160 @@ namespace Microservice.AuthService.Infrastructure.Services
 
         private RiskPrediction PredictRisk(SessionRiskCheckMessage message)
         {
-            double score = 0;
-            var reasons = new List<string>();
 
-            if (message.Geo_Location?.is_vpn == true)
+            foreach (var session in message)
             {
-                score += 0.6;
-                reasons.Add("VPN");
+                var recentSessions = await _sessionCollection
+                    .Find(s => s.UserId == session.UserId && s.Id != session.Id)
+                    .SortByDescending(s => s.LoginTime)
+                    .Limit(5)
+                    .ToListAsync();
+
+                if (recentSessions.Count == 0) continue;
+
+                var flags = new List<string>();
+                double riskScore = 0;
+
+                // Build behavioral profile
+                var baselineIPs = recentSessions.Select(s => s.Ip_Address).Distinct().ToList();
+                var baselineCountries = recentSessions.Select(s => s.Geo_Location?.Country).Distinct().ToList();
+                var baselineDevices = recentSessions.Select(s => s.Device?.Fingerprint).Distinct().ToList();
+                var baselineHours = recentSessions.Select(s => s.Local_Time.Hour).ToList();
+
+                // Check #1: IP mismatch
+                if (!baselineIPs.Contains(session.Ip_Address))
+                {
+                    flags.Add("IP address mismatch");
+                    riskScore += 0.2;
+                }
+
+                // Check #2: Location mismatch
+                if (!baselineCountries.Contains(session.Geo_Location?.Country))
+                {
+                    flags.Add("Country mismatch");
+                    riskScore += 0.2;
+                }
+
+                // Check #3: Device mismatch
+                if (!baselineDevices.Contains(session.Device?.Fingerprint))
+                {
+                    flags.Add("Device fingerprint mismatch");
+                    riskScore += 0.2;
+                }
+
+                // Check #4: Login time anomaly
+                var avgLoginHour = baselineHours.Average();
+                var currentHour = session.Local_Time.Hour;
+                if (Math.Abs(currentHour - avgLoginHour) >= 6)
+                {
+                    flags.Add("Unusual login hour");
+                    riskScore += 0.15;
+                }
+
+                // Check #5: VPN / ASN anomaly
+                var isVpn = session.Geo_Location?.IsVpn ?? false;
+                if (isVpn)
+                {
+                    flags.Add("VPN or Proxy detected");
+                    riskScore += 0.15;
+                }
+
+                // Check #6: Impossible travel (velocity)
+                var lastSession = recentSessions.FirstOrDefault();
+                if (lastSession != null)
+                {
+                    var hoursDiff = (session.LoginTime - lastSession.LogoutTime)?.TotalHours ?? 0;
+
+                    var kmDistance = GeoUtils.GetDistanceInKm(
+                        session.Geo_Location?.Latitude ?? 0,
+                        session.Geo_Location?.Longitude ?? 0,
+                        lastSession.Geo_Location?.Latitude ?? 0,
+                        lastSession.Geo_Location?.Longitude ?? 0
+                    );
+
+                    var requiredSpeed = kmDistance / (hoursDiff == 0 ? 0.1 : hoursDiff);
+                    if (requiredSpeed > 1000) // e.g., > 1000 km/h = impossible
+                    {
+                        flags.Add("Impossible travel detected");
+                        riskScore += 0.3;
+                    }
+                }
+
+                // Decision
+                var riskLevel = riskScore switch
+                {
+                    >= 0.6 => "High",
+                    >= 0.4 => "Medium",
+                    _ => "Low"
+                };
+
+                var isSuspicious = riskScore >= 0.4;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                double score = 0;
+                var reasons = new List<string>();
+
+                if (message.Geo_Location?.is_vpn == true)
+                {
+                    score += 0.6;
+                    reasons.Add("VPN");
+                }
+
+                if (message.Device?.Device_Type == "Unknown")
+                {
+                    score += 0.3;
+                    reasons.Add("Unknown Device");
+                }
+
+                string level = score switch
+                {
+                    >= 0.8 => "High",
+                    >= 0.5 => "Medium",
+                    _ => "Low"
+                };
+
+                return new RiskPrediction
+                {
+                    Score = Math.Min(score, 1.0),
+                    Level = level,
+                    Factors = reasons
+                };
             }
-
-            if (message.Device?.Device_Type == "Unknown")
-            {
-                score += 0.3;
-                reasons.Add("Unknown Device");
-            }
-
-            string level = score switch
-            {
-                >= 0.8 => "High",
-                >= 0.5 => "Medium",
-                _ => "Low"
-            };
-
-            return new RiskPrediction
-            {
-                Score = Math.Min(score, 1.0),
-                Level = level,
-                Factors = reasons
-            };
         }
+
+
+        
+
+
+
+        private string BuildEmailBody(Session session, List<string> flags)
+        {
+            return $"""
+        A suspicious login was detected for your account.
+
+        Location: {session.Geo_Location?.City}, {session.Geo_Location?.Country}
+        IP Address: {session.Ip_Address}
+        Time: {session.Local_Time}
+        Device: {session.Device?.Browser} on {session.Device?.OS}
+        Flags:
+        {string.Join("\n", flags.Select(f => $"- {f}"))}
+        """;
+        }
+    
+
     }
 
 }

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Infrastructure\AlertNotifier\" />
   </ItemGroup>
 
   <ItemGroup>

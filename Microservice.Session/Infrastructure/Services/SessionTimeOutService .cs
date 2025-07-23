@@ -28,7 +28,7 @@ namespace Microservice.Session.Infrastructure.Services
                     _logger.LogInformation("Running session cleanup...");
 
                     const int batchSize = 100;
-                    const int idleMinutes = 30;
+                    const int idleMinutes = 20;
                     ObjectId? lastId = null;
 
                     while (!stoppingToken.IsCancellationRequested)
@@ -63,7 +63,7 @@ namespace Microservice.Session.Infrastructure.Services
                             if (idleTime.TotalMinutes < idleMinutes) continue;
 
                             var update = Builders<Sessions>.Update
-                                .Set(s => s.Logout_Time, lastActivity.Time_Stamp.AddMinutes(idleMinutes))
+                                .Set(s => s.Logout_Time, lastActivity.Time_Stamp.AddMinutes(3))
                                 .Set(s => s.isActive, false);
 
                             await _sessionsCollection.UpdateOneAsync(

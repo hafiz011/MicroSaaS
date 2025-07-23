@@ -24,6 +24,7 @@ namespace Microservice.AuthService.Controllers
             _grpcServiceClient = grpcServiceClient;
         }
 
+        // active user list
         [HttpGet("ActiveUsers")]
         public async Task<IActionResult> ActiveUsers([FromQuery] Query query)
         {

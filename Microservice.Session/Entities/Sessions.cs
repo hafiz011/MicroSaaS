@@ -17,10 +17,6 @@ namespace Microservice.Session.Entities
         public DateTime Login_Time { get; set; } = DateTime.UtcNow;
         public DateTime? Logout_Time { get; set; }
         public bool isActive { get; set; }
-        public bool IsAnalyzed { get; set; }
-        public bool isSuspicious { get; set; }
-        public string Suspicious_Flags { get; set; }
-        public DateTime? SuspiciousDetectedAt { get; set; }
     }
     public class DeviceInfo
     {
