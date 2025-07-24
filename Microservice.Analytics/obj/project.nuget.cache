@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "E+2UPeXT4hg=",
+  "dgSpecHash": "c+BvkwQ0Rm4=",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Analytics\\Microservice.Analytics.csproj",
+  "projectFilePath": "D:\\Github\\SaaSApp\\SassApp\\Microservice.Analytics\\Microservice.Analytics.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Hafiz\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.22.1\\microsoft.visualstudio.azure.containers.tools.targets.1.22.1.nupkg.sha512"
+    "C:\\Users\\Ghost\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.22.1\\microsoft.visualstudio.azure.containers.tools.targets.1.22.1.nupkg.sha512"
   ],
   "logs": []
 }

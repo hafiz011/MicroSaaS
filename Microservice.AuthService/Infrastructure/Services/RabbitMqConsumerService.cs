@@ -18,7 +18,7 @@ namespace Microservice.AuthService.Infrastructure.Services
         private readonly ISuspiciousActivityRepository _suspiciousRepository;
         private readonly IModel _channel;
         private readonly GrpcServiceClient _grpcServiceClient;
-        //private readonly EmailService _emailService;
+        private readonly EmailService _emailService;
         private readonly IMongoCollection<ApplicationUser> _users;
 
 
@@ -26,13 +26,13 @@ namespace Microservice.AuthService.Infrastructure.Services
         public RabbitMqConsumerService(ISuspiciousActivityRepository suspiciousRepository,
             IModel channel,
             GrpcServiceClient grpcServiceClient,
-          //  EmailService emailService,
+            EmailService emailService,
             MongoDbContext context)
         {
             _suspiciousRepository = suspiciousRepository;
             _channel = channel;
             _grpcServiceClient = grpcServiceClient;
-          //  _emailService = emailService;
+            _emailService = emailService;
             _users = context.Users;
         }
 
@@ -94,10 +94,10 @@ namespace Microservice.AuthService.Infrastructure.Services
                     var user = await _users.Find(u => u.TenantId == message.TenantId).FirstOrDefaultAsync();
 
                     var emailBody = BuildEmailBody(suspicious);
-                    //bool emailSent = await _emailService.SendEmailAsync(user.Email, "A suspicious login detected", emailBody);
+                    bool emailSent = await _emailService.SendEmailAsync(user.Email, "A suspicious login detected", emailBody);
 
-                    //if (!emailSent)
-                    //    Console.WriteLine($"Failed to send suspicious notification email: {user.Email}");
+                    if (!emailSent)
+                        Console.WriteLine($"Failed to send suspicious notification email: {user.Email}");
                 }
                 catch (Exception ex)
                 {
