@@ -16,8 +16,12 @@ service ApiKey {
   // user info
   rpc GetUserInfo(UserInfoRequest) returns (UserInfoResponse);
 
-  // Session section
+  // active session
   rpc GetSessionList(SessionListRequest) returns (SessionListResponse);
+
+  // session ckeck for suspicious detection
+  rpc SessionListCheck(SessionCheckRequest) returns (SessionCheckResponce);
+
 }
 
 // api key
@@ -76,7 +80,7 @@ message UserInfoResponse{
 	string lastlogin = 3;
 }
 
-// Session section
+// active Session
 message SessionListRequest {
   string TenantId = 1;
   google.protobuf.Timestamp from = 2;
@@ -103,4 +107,27 @@ message Session {
 
 message SessionListResponse {
   repeated Session sessions = 1;
+}
+
+// session check for suspicious detection
+message SessionCheck {
+	string IpAddress = 1;
+	string Country = 2;
+	string Fingerprint = 3;
+	google.protobuf.Timestamp LocalTime = 4;
+	bool isVPN = 5;
+	string lat_lon = 6;
+	google.protobuf.Timestamp LoginTime = 7;
+	google.protobuf.Timestamp LogoutTime = 8;
+}
+
+message SessionCheckRequest {
+	string TenantId = 1;
+	string user_id = 2;
+	string SessionId = 3;
+	int32 v = 4;
+}
+
+message SessionCheckResponce {
+	repeated SessionCheck sessionlist = 1;
 }

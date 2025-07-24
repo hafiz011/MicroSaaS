@@ -17,5 +17,6 @@ namespace Microservice.Session.Infrastructure.Interfaces
         //Task<IEnumerable<Sessions>> GetRecentUndetectedSessionsAsync();
         //Task UpdateSuspiciousSessionAsync(string id, Sessions sessions);
         Task<List<Sessions>> ActiveSessionList(string tenantId, DateTime? from, DateTime? to, string device, string country);
+        Task<List<Sessions>> GetSessionCheckListAsync(string tenantId, string userId, string SessionId, int v);
     }
 }

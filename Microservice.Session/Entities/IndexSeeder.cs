@@ -15,28 +15,58 @@ namespace Microservice.Session.Entities
 
         public async Task SeedIndexesAsync()
         {
-            var sessionCollection = _context.SessionsDB;
-            var UserCollection = _context.UserDB;
-            var ApiKeyCollection = _context.ApiKey;
+            await SeedSessionIndexesAsync();
+            await SeedUserIndexesAsync();
+            await SeedApiKeyIndexesAsync();
+        }
 
-            var sessionIndexes = new[]
+        private async Task SeedSessionIndexesAsync()
+        {
+            var collection = _context.SessionsDB;
+            var indexes = new List<CreateIndexModel<Sessions>>
             {
-                new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Ascending(x => x.Tenant_Id)),
-                new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Ascending(x => x.User_Id)),
-                new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Descending(x => x.Device.Fingerprint)),
-                new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Ascending(x => x.Device.Device_Type)),
-                new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Ascending(x => x.Geo_Location.Country)),
-                new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Descending(x => x.Local_Time)),
-                new CreateIndexModel<Sessions>(Builders<Sessions>.IndexKeys.Ascending(x => x.isActive))
+                new(
+                    Builders<Sessions>.IndexKeys
+                        .Ascending(x => x.Tenant_Id)
+                        .Ascending(x => x.isActive)
+                        .Descending(x => x.Local_Time)
+                        .Ascending(x => x.Device.Device_Type)
+                        .Ascending(x => x.Geo_Location.Country),
+                    new CreateIndexOptions { Name = "idx_active_session_filter" }
+                ),
+
+                new(
+                    Builders<Sessions>.IndexKeys
+                        .Ascending(x => x.Tenant_Id)
+                        .Ascending(x => x.User_Id)
+                        .Descending(x => x.Login_Time),
+                    new CreateIndexOptions { Name = "idx_suspicious_check" }
+                )
             };
 
-            var userIndexs = new[] 
+            await collection.Indexes.CreateManyAsync(indexes);
+            Console.WriteLine("MongoDB Session indexes created.");
+        }
+
+        private async Task SeedUserIndexesAsync()
+        {
+            var collection = _context.UserDB;
+
+            var indexes = new[]
             {
                 new CreateIndexModel<Users>(Builders<Users>.IndexKeys.Ascending(x => x.Tenant_Id)),
                 new CreateIndexModel<Users>(Builders<Users>.IndexKeys.Ascending(x => x.User_Id))
             };
 
-            var apikeyIndexes = new[]
+            await collection.Indexes.CreateManyAsync(indexes);
+            Console.WriteLine("MongoDB User indexes created.");
+        }
+
+        private async Task SeedApiKeyIndexesAsync()
+        {
+            var collection = _context.ApiKey;
+
+            var indexes = new[]
             {
                 new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.UserId)),
                 new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.ApiSecret)),
@@ -44,19 +74,11 @@ namespace Microservice.Session.Entities
                 new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.ExpirationDate)),
                 new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.RequestLimit)),
                 new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.Created_At)),
-                new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.IsRevoked)),
                 new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.IsRevoked))
             };
 
-
-
-            await sessionCollection.Indexes.CreateManyAsync(sessionIndexes);
-            Console.WriteLine("MongoDB session indexes created.");
-            await UserCollection.Indexes.CreateManyAsync(userIndexs);
-            Console.WriteLine("MongoDB user index created");
-            await ApiKeyCollection.Indexes.CreateManyAsync(apikeyIndexes);
-            Console.WriteLine("MongoDB client api index created");
-
+            await collection.Indexes.CreateManyAsync(indexes);
+            Console.WriteLine("MongoDB API Key indexes created.");
         }
     }
 }

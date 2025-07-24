@@ -70,6 +70,22 @@ namespace Microservice.AuthService.Infrastructure.Services
             return await _client.GetSessionListAsync(request);
         }
 
+        // session check for suspicious detection
+        public async Task<List<SessionCheck>> SessionListCheck(string tenantId, string userId, string sessionId, int v)
+        {
+            var request = new SessionCheckRequest
+            {
+                TenantId = tenantId,
+                UserId = userId,
+                SessionId = sessionId,
+                V = v
+            };
+
+            var response = await _client.SessionListCheckAsync(request);
+            return response.Sessionlist.ToList();
+        }
+
+
 
     }
 }

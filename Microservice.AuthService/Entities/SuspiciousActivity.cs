@@ -36,9 +36,6 @@ namespace Microservice.AuthService.Entities
         [BsonElement("Risk_Factors")]
         public List<string> RiskFactors { get; set; }
 
-        [BsonElement("Suspicious_Score")]
-        public bool SuspiciousScore { get; set; }
-
         [BsonElement("Is_Suspicious")]
         public bool IsSuspicious { get; set; }
 

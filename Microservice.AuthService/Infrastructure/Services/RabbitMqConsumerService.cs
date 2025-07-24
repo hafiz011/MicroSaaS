@@ -1,10 +1,15 @@
-﻿using Microservice.AuthService.Entities;
+﻿using Microservice.AuthService.Database;
+using Microservice.AuthService.Entities;
 using Microservice.AuthService.Infrastructure.Interfaces;
+using Microservice.AuthService.Models;
 using Microservice.AuthService.Models.DTOs;
+using Microsoft.AspNetCore.Identity;
+using MongoDB.Driver;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Microservice.AuthService.Infrastructure.Services
 {
@@ -12,11 +17,23 @@ namespace Microservice.AuthService.Infrastructure.Services
     {
         private readonly ISuspiciousActivityRepository _suspiciousRepository;
         private readonly IModel _channel;
+        private readonly GrpcServiceClient _grpcServiceClient;
+        //private readonly EmailService _emailService;
+        private readonly IMongoCollection<ApplicationUser> _users;
 
-        public RabbitMqConsumerService(ISuspiciousActivityRepository suspiciousRepository, IModel channel)
+
+
+        public RabbitMqConsumerService(ISuspiciousActivityRepository suspiciousRepository,
+            IModel channel,
+            GrpcServiceClient grpcServiceClient,
+          //  EmailService emailService,
+            MongoDbContext context)
         {
             _suspiciousRepository = suspiciousRepository;
             _channel = channel;
+            _grpcServiceClient = grpcServiceClient;
+          //  _emailService = emailService;
+            _users = context.Users;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -35,7 +52,7 @@ namespace Microservice.AuthService.Infrastructure.Services
 
                     if (message == null || string.IsNullOrWhiteSpace(message.SessionId)) return;
 
-                    var prediction = PredictRisk(message);
+                    var prediction = await PredictRisk(message);
 
                     var suspicious = new SuspiciousActivity
                     {
@@ -49,7 +66,6 @@ namespace Microservice.AuthService.Infrastructure.Services
                         RiskLevel = prediction.Level,
                         RiskFactors = prediction.Factors,
                         DetectedAt = DateTime.UtcNow,
-                        SuspiciousScore = prediction.Score > 0.5,
                         IsSuspicious = true,
                         Device = new SuspiciousActivity.DeviceInfo
                         {
@@ -74,7 +90,14 @@ namespace Microservice.AuthService.Infrastructure.Services
                     };
 
                     await _suspiciousRepository.InsertAsync(suspicious);
-                    Console.WriteLine($"Suspicious inserted for session: {message.SessionId}");
+
+                    var user = await _users.Find(u => u.TenantId == message.TenantId).FirstOrDefaultAsync();
+
+                    var emailBody = BuildEmailBody(suspicious);
+                    //bool emailSent = await _emailService.SendEmailAsync(user.Email, "A suspicious login detected", emailBody);
+
+                    //if (!emailSent)
+                    //    Console.WriteLine($"Failed to send suspicious notification email: {user.Email}");
                 }
                 catch (Exception ex)
                 {
@@ -87,162 +110,102 @@ namespace Microservice.AuthService.Infrastructure.Services
             return Task.CompletedTask;
         }
 
-        private RiskPrediction PredictRisk(SessionRiskCheckMessage message)
+        private async Task<RiskPrediction> PredictRisk(SessionRiskCheckMessage message)
         {
+            var response = await _grpcServiceClient.SessionListCheck(message.TenantId, message.UserId, message.SessionId, 10);
+            var flags = new List<string>();
+            double riskScore = 0;
 
-            foreach (var session in message)
+            // Build behavioral profile
+            var baselineIPs = response.Select(s => s.IpAddress).Distinct().ToList();
+            var baselineCountries = response.Select(s => s.Country).Distinct().ToList();
+            var baselineDevices = response.Select(s => s.Fingerprint).Distinct().ToList();
+            var baselineHours = response.Select(s => s.LocalTime.ToDateTime().Hour).ToList();
+
+            // Check #1: Location mismatch
+            if (!baselineCountries.Contains(message.Geo_Location.Country))
             {
-                var recentSessions = await _sessionCollection
-                    .Find(s => s.UserId == session.UserId && s.Id != session.Id)
-                    .SortByDescending(s => s.LoginTime)
-                    .Limit(5)
-                    .ToListAsync();
-
-                if (recentSessions.Count == 0) continue;
-
-                var flags = new List<string>();
-                double riskScore = 0;
-
-                // Build behavioral profile
-                var baselineIPs = recentSessions.Select(s => s.Ip_Address).Distinct().ToList();
-                var baselineCountries = recentSessions.Select(s => s.Geo_Location?.Country).Distinct().ToList();
-                var baselineDevices = recentSessions.Select(s => s.Device?.Fingerprint).Distinct().ToList();
-                var baselineHours = recentSessions.Select(s => s.Local_Time.Hour).ToList();
-
-                // Check #1: IP mismatch
-                if (!baselineIPs.Contains(session.Ip_Address))
-                {
-                    flags.Add("IP address mismatch");
-                    riskScore += 0.2;
-                }
-
-                // Check #2: Location mismatch
-                if (!baselineCountries.Contains(session.Geo_Location?.Country))
-                {
-                    flags.Add("Country mismatch");
-                    riskScore += 0.2;
-                }
-
-                // Check #3: Device mismatch
-                if (!baselineDevices.Contains(session.Device?.Fingerprint))
-                {
-                    flags.Add("Device fingerprint mismatch");
-                    riskScore += 0.2;
-                }
-
-                // Check #4: Login time anomaly
-                var avgLoginHour = baselineHours.Average();
-                var currentHour = session.Local_Time.Hour;
-                if (Math.Abs(currentHour - avgLoginHour) >= 6)
-                {
-                    flags.Add("Unusual login hour");
-                    riskScore += 0.15;
-                }
-
-                // Check #5: VPN / ASN anomaly
-                var isVpn = session.Geo_Location?.IsVpn ?? false;
-                if (isVpn)
-                {
-                    flags.Add("VPN or Proxy detected");
-                    riskScore += 0.15;
-                }
-
-                // Check #6: Impossible travel (velocity)
-                var lastSession = recentSessions.FirstOrDefault();
-                if (lastSession != null)
-                {
-                    var hoursDiff = (session.LoginTime - lastSession.LogoutTime)?.TotalHours ?? 0;
-
-                    var kmDistance = GeoUtils.GetDistanceInKm(
-                        session.Geo_Location?.Latitude ?? 0,
-                        session.Geo_Location?.Longitude ?? 0,
-                        lastSession.Geo_Location?.Latitude ?? 0,
-                        lastSession.Geo_Location?.Longitude ?? 0
-                    );
-
-                    var requiredSpeed = kmDistance / (hoursDiff == 0 ? 0.1 : hoursDiff);
-                    if (requiredSpeed > 1000) // e.g., > 1000 km/h = impossible
-                    {
-                        flags.Add("Impossible travel detected");
-                        riskScore += 0.3;
-                    }
-                }
-
-                // Decision
-                var riskLevel = riskScore switch
-                {
-                    >= 0.6 => "High",
-                    >= 0.4 => "Medium",
-                    _ => "Low"
-                };
-
-                var isSuspicious = riskScore >= 0.4;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                double score = 0;
-                var reasons = new List<string>();
-
-                if (message.Geo_Location?.is_vpn == true)
-                {
-                    score += 0.6;
-                    reasons.Add("VPN");
-                }
-
-                if (message.Device?.Device_Type == "Unknown")
-                {
-                    score += 0.3;
-                    reasons.Add("Unknown Device");
-                }
-
-                string level = score switch
-                {
-                    >= 0.8 => "High",
-                    >= 0.5 => "Medium",
-                    _ => "Low"
-                };
-
-                return new RiskPrediction
-                {
-                    Score = Math.Min(score, 1.0),
-                    Level = level,
-                    Factors = reasons
-                };
+                flags.Add("Country mismatch");
+                riskScore += 0.2;
             }
+
+            // Check #2: Device mismatch
+            if (!baselineDevices.Contains(message.Device.Fingerprint))
+            {
+                flags.Add("Device fingerprint mismatch");
+                riskScore += 0.3;
+            }
+
+            // Check #3: Login time anomaly
+            var avgLoginHour = baselineHours.Average();
+            var currentHour = message.Local_Time.Hour;
+            if (Math.Abs(currentHour - avgLoginHour) >= 6)
+            {
+                flags.Add("Unusual login hour");
+                riskScore += 0.1;
+            }
+
+            // Check #4: VPN / ASN anomaly
+            if (message.Geo_Location.is_vpn)
+            {
+                flags.Add("VPN or Proxy detected");
+                riskScore += 0.1;
+            }
+
+            // Check #5: Impossible travel
+            var lastSession = response.OrderByDescending(s => s.LoginTime).FirstOrDefault();
+            if (lastSession != null)
+            {
+                var logoutTime = lastSession.LogoutTime.ToDateTime();
+                var hoursDiff = (message.Login_Time - logoutTime).TotalHours;
+
+                var latLonParts = message.Geo_Location.Latitude_Longitude?.Split(',');
+                var curLat = double.TryParse(latLonParts?[0], out var lat1) ? lat1 : 0;
+                var curLon = double.TryParse(latLonParts?[1], out var lon1) ? lon1 : 0;
+
+                var database_latLonParts = lastSession.LatLon?.Split(",");
+                var prevLat = double.TryParse(database_latLonParts?[0], out var lat) ? lat : 0;
+                var prevLon = double.TryParse(database_latLonParts?[1], out var lon) ? lon : 0;
+
+                var kmDistance = GeoUtils.GetDistanceInKm(curLat, curLon, prevLat, prevLon);
+                var requiredSpeed = kmDistance / (hoursDiff == 0 ? 0.1 : hoursDiff);
+
+                if (requiredSpeed > 1000)
+                {
+                    flags.Add("Impossible travel detected");
+                    riskScore += 0.3;
+                }
+            }
+
+            // Decision
+            var riskLevel = riskScore switch
+            {
+                >= 0.5 => "High",
+                >= 0.3 => "Medium",
+                _ => "Low"
+            };
+            var isSuspicious = riskScore >= 0.4;
+            return new RiskPrediction
+            {
+                Score = Math.Min(riskScore, 1.0),
+                Level = riskLevel,
+                Factors = flags
+            };
         }
 
-
-        
-
-
-
-        private string BuildEmailBody(Session session, List<string> flags)
+        private string BuildEmailBody(SuspiciousActivity session)
         {
             return $"""
-        A suspicious login was detected for your account.
+            A suspicious login was detected for your account.
 
-        Location: {session.Geo_Location?.City}, {session.Geo_Location?.Country}
-        IP Address: {session.Ip_Address}
-        Time: {session.Local_Time}
-        Device: {session.Device?.Browser} on {session.Device?.OS}
-        Flags:
-        {string.Join("\n", flags.Select(f => $"- {f}"))}
-        """;
+            Location: {session.Geo_Location?.City}, {session.Geo_Location?.Country}
+            IP Address: {session.IpAddress}
+            Time: {session.LocalTime}
+            Device: {session.Device?.Browser} on {session.Device?.OS}
+            Flags:
+            {string.Join("\n", session.RiskFactors.Select(f => $"- {f}"))}
+            """;
         }
-    
-
     }
 
 }

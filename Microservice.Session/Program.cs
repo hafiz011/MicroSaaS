@@ -1,5 +1,4 @@
 using Microservice.Session.Entities;
-using Microservice.Session.Infrastructure.AlertNotifier;
 using Microservice.Session.Infrastructure.GeoIPService;
 using Microservice.Session.Infrastructure.Interfaces;
 using Microservice.Session.Infrastructure.MongoDb;
@@ -22,9 +21,7 @@ namespace Microservice.Session
 
 
             // Add services to the container.
-            builder.Services.AddScoped<EmailService>();
             builder.Services.AddHostedService<SessionTimeOutService>();
-            builder.Services.AddHostedService<SuspiciousSessionDetection>();
             builder.Services.AddHttpClient<GeolocationService>();
             builder.Services.AddScoped<IApiKeyRepository, ApiKeyRepository>();
             builder.Services.AddScoped<IActivityRepository, ActivityRepository>();

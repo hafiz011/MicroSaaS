@@ -222,10 +222,47 @@ namespace Microservice.Session.Infrastructure.Services
                     Sessionid = session.Id.ToString()
                 });
             }
-
             return response;
         }
 
+        // session check for suspicious detection
+        public override async Task<SessionCheckResponce> SessionListCheck(SessionCheckRequest request, ServerCallContext context)
+        {
+            var sessions = await _sessionRepository.GetSessionCheckListAsync(
+                request.TenantId,
+                request.UserId,
+                request.SessionId,
+                request.V
+            );
+
+            if (sessions == null || sessions.Count == 0)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, $"No sessions found for TenantId {request.TenantId} and UserId {request.UserId}"));
+            }
+
+            var response = new SessionCheckResponce();
+
+            foreach (var session in sessions)
+            {
+                var check = new SessionCheck
+                {
+                    IpAddress = session.Ip_Address ?? "",
+                    Country = session.Geo_Location?.Country ?? "",
+                    Fingerprint = session.Device?.Fingerprint ?? "",
+                    IsVPN = session?.isVPN ?? false,
+                    LatLon = session.Geo_Location?.Latitude_Longitude ?? "",
+                    LocalTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(session.Local_Time.ToUniversalTime()),
+                    LoginTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(session.Login_Time.ToUniversalTime()),
+                    LogoutTime = session.Logout_Time.HasValue
+                        ? Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(session.Logout_Time.Value.ToUniversalTime())
+                        : null
+                };
+
+                response.Sessionlist.Add(check);
+            }
+
+            return response;
+        }
 
 
     }

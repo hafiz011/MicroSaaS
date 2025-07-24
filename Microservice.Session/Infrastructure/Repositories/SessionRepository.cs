@@ -63,66 +63,41 @@ namespace Microservice.Session.Infrastructure.Repositories
                 filterBuilder.Eq(x => x.isActive, true)
             };
 
+            if (!string.IsNullOrEmpty(device))
+                filters.Add(filterBuilder.Eq(x => x.Device.Device_Type, device));
+
+            if (!string.IsNullOrEmpty(country))
+                filters.Add(filterBuilder.Eq(x => x.Geo_Location.Country, country));
+
             if (from.HasValue)
                 filters.Add(filterBuilder.Gte(x => x.Local_Time, from.Value));
             if (to.HasValue)
                 filters.Add(filterBuilder.Lte(x => x.Local_Time, to.Value));
-            if (!string.IsNullOrEmpty(device))
-                filters.Add(filterBuilder.Eq(x => x.Device.Device_Type, device));
-            if (!string.IsNullOrEmpty(country))
-                filters.Add(filterBuilder.Eq(x => x.Geo_Location.Country, country));
 
-            return await _collection.Find(filterBuilder.And(filters)).ToListAsync();
+            var sort = Builders<Sessions>.Sort.Descending(x => x.Local_Time);
+
+            return await _collection.Find(filterBuilder.And(filters)).Sort(sort).ToListAsync();
+        }
+
+
+        // session check for suspicious detection
+        public async Task<List<Sessions>> GetSessionCheckListAsync(string tenantId, string userId, string sessionId, int limit)
+        {
+            var filterBuilder = Builders<Sessions>.Filter;
+            var filters = new List<FilterDefinition<Sessions>>
+            {
+                filterBuilder.Eq(x => x.Tenant_Id, tenantId),
+                filterBuilder.Eq(x => x.User_Id, userId),
+                filterBuilder.Ne(x => x.Id, sessionId) // exclude current session
+            };
+
+            var sort = Builders<Sessions>.Sort.Descending(x => x.Login_Time);
+
+            return await _collection.Find(filterBuilder.And(filters)).Sort(sort).Limit(limit).ToListAsync();
         }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        ////dddd
-        //public async Task<IEnumerable<Sessions>> GetRecentUndetectedSessionsAsync()
-        //{
-        //    var filter = Builders<Sessions>.Filter.Eq(s => s.IsAnalyzed, false);
-        //    return await _collection.Find(filter).ToListAsync();
-        //}
-
-        //// dddd
-        //public async Task<List<Sessions>> GetRecentSessionsForUserAsync(string tenantId, string userId, int limit)
-        //{
-        //    var filter = Builders<Sessions>.Filter.And(
-        //        Builders<Sessions>.Filter.Eq(s => s.Tenant_Id, tenantId),
-        //        Builders<Sessions>.Filter.Eq(s => s.User_Id, userId),
-        //        Builders<Sessions>.Filter.Eq(s => s.isSuspicious, false)
-        //    );
-
-        //    return await _collection.Find(filter)
-        //        .SortByDescending(s => s.Login_Time)
-        //        .Limit(limit)
-        //        .ToListAsync();
-        //}
-
-        //// dddd
-        //public async Task UpdateSuspiciousSessionAsync(string id, Sessions session)
-        //{
-        //    var filter = Builders<Sessions>.Filter.Eq(s => s.Id, id);
-
-        //    var update = Builders<Sessions>.Update
-        //        .Set(s => s.IsAnalyzed, session.IsAnalyzed)
-        //        .Set(s => s.isSuspicious, session.isSuspicious)
-        //        .Set(s => s.Suspicious_Flags, session.Suspicious_Flags)
-        //        .Set(s => s.SuspiciousDetectedAt, session.SuspiciousDetectedAt);
-
-        //    await _collection.UpdateOneAsync(filter, update);
-        //}
     }
 }

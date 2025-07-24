@@ -63,6 +63,10 @@ namespace Microservice.Session.Protos {
     static readonly grpc::Marshaller<global::Microservice.Session.Protos.SessionListRequest> __Marshaller_SessionListRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.Session.Protos.SessionListRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Microservice.Session.Protos.SessionListResponse> __Marshaller_SessionListResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.Session.Protos.SessionListResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Microservice.Session.Protos.SessionCheckRequest> __Marshaller_SessionCheckRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.Session.Protos.SessionCheckRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Microservice.Session.Protos.SessionCheckResponce> __Marshaller_SessionCheckResponce = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.Session.Protos.SessionCheckResponce.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse> __Method_GetApiKey = new grpc::Method<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(
@@ -119,6 +123,14 @@ namespace Microservice.Session.Protos {
         "GetSessionList",
         __Marshaller_SessionListRequest,
         __Marshaller_SessionListResponse);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Microservice.Session.Protos.SessionCheckRequest, global::Microservice.Session.Protos.SessionCheckResponce> __Method_SessionListCheck = new grpc::Method<global::Microservice.Session.Protos.SessionCheckRequest, global::Microservice.Session.Protos.SessionCheckResponce>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SessionListCheck",
+        __Marshaller_SessionCheckRequest,
+        __Marshaller_SessionCheckResponce);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -179,13 +191,25 @@ namespace Microservice.Session.Protos {
       }
 
       /// <summary>
-      /// Session section
+      /// active session
       /// </summary>
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Microservice.Session.Protos.SessionListResponse> GetSessionList(global::Microservice.Session.Protos.SessionListRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// session ckeck for suspicious detection
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Microservice.Session.Protos.SessionCheckResponce> SessionListCheck(global::Microservice.Session.Protos.SessionCheckRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -204,7 +228,8 @@ namespace Microservice.Session.Protos {
           .AddMethod(__Method_RenewApiKey, serviceImpl.RenewApiKey)
           .AddMethod(__Method_RevokeApiKey, serviceImpl.RevokeApiKey)
           .AddMethod(__Method_GetUserInfo, serviceImpl.GetUserInfo)
-          .AddMethod(__Method_GetSessionList, serviceImpl.GetSessionList).Build();
+          .AddMethod(__Method_GetSessionList, serviceImpl.GetSessionList)
+          .AddMethod(__Method_SessionListCheck, serviceImpl.SessionListCheck).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -221,6 +246,7 @@ namespace Microservice.Session.Protos {
       serviceBinder.AddMethod(__Method_RevokeApiKey, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.ApiKeyRequest, global::Microservice.Session.Protos.ApiKeyResponse>(serviceImpl.RevokeApiKey));
       serviceBinder.AddMethod(__Method_GetUserInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.UserInfoRequest, global::Microservice.Session.Protos.UserInfoResponse>(serviceImpl.GetUserInfo));
       serviceBinder.AddMethod(__Method_GetSessionList, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.SessionListRequest, global::Microservice.Session.Protos.SessionListResponse>(serviceImpl.GetSessionList));
+      serviceBinder.AddMethod(__Method_SessionListCheck, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.SessionCheckRequest, global::Microservice.Session.Protos.SessionCheckResponce>(serviceImpl.SessionListCheck));
     }
 
   }
