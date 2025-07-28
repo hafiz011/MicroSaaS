@@ -17,7 +17,7 @@ public class EmailService
             var emailSettings = _configuration.GetSection("EmailSettings");
 
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("IoT", emailSettings["Email"]));
+            message.From.Add(new MailboxAddress("Tech Ciph", emailSettings["Email"]));
             message.To.Add(new MailboxAddress("", toEmail));
             message.Subject = subject;
 

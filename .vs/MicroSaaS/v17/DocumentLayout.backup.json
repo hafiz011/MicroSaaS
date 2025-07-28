@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\microservice\\microservice.authservice\\infrastructure\\services\\rabbitmqconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\infrastructure\\services\\rabbitmqconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\microservice\\microservice.authservice\\infrastructure\\repositories\\suspiciousactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\infrastructure\\repositories\\suspiciousactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,27 +38,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SuspiciousActivityRepository.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Repositories\\SuspiciousActivityRepository.cs",
-              "RelativeDocumentMoniker": "Microservice.AuthService\\Infrastructure\\Repositories\\SuspiciousActivityRepository.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Repositories\\SuspiciousActivityRepository.cs",
-              "RelativeToolTip": "Microservice.AuthService\\Infrastructure\\Repositories\\SuspiciousActivityRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-24T11:56:21.099Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "RabbitMqConsumerService.cs",
               "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
               "RelativeDocumentMoniker": "Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
               "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
               "RelativeToolTip": "Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAowGoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-24T08:47:02.634Z",
+              "WhenOpened": "2025-07-28T04:45:04.486Z",
               "EditorCaption": ""
             }
           ]
