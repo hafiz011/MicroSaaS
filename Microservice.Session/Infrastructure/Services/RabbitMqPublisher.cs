@@ -19,7 +19,8 @@ namespace Microservice.Session.Infrastructure.Services
         {
             var factory = new ConnectionFactory
             {
-                HostName = "rabbitmq",
+               // HostName = "localhost",
+                 HostName = "rabbitmq",
                 // if needed
                  UserName = "Admin",
                  Password = "Admin"

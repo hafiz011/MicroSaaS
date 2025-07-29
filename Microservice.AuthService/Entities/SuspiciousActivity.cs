@@ -18,6 +18,9 @@ namespace Microservice.AuthService.Entities
         [BsonElement("User_Id")]
         public string UserId { get; set; }
 
+        [BsonElement("User_Email")]
+        public string Email { get; set; }
+
         [BsonElement("IP_Address")]
         public string IpAddress { get; set; }
 

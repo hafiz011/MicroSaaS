@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Microservice.Session")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d3ec5347d2a3a3b323b197e424be40e2be245af")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07c64bb1b226f6ee626bbef57a8c127d37d6ea20")]
 [assembly: System.Reflection.AssemblyProductAttribute("Microservice.Session")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microservice.Session")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

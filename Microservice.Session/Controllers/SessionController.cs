@@ -141,8 +141,10 @@ namespace Microservice.Session.Controllers
                         SessionId = existingSession.Id,
                         TenantId = apiKeyInfo.Id,
                         UserId = dto.User_Id,
+                        Email = dto.Email,
                         Ip_Address = dto.Ip_Address,
                         Local_Time = dto.LocalTime,
+                        Cliend_Domaim = apiKeyInfo.Domain,
                         Geo_Location = new Models.DTOs.Location
                         {
                             Country = location.Country,
@@ -214,8 +216,10 @@ namespace Microservice.Session.Controllers
                             SessionId = sessionCreated.Id,
                             TenantId = apiKeyInfo.Id,
                             UserId = dto.User_Id,
+                            Email = dto.Email,
                             Ip_Address = dto.Ip_Address,
                             Local_Time = dto.LocalTime,
+                            Cliend_Domaim = apiKeyInfo.Domain,
                             Geo_Location = new Models.DTOs.Location
                             {
                                 Country = location.Country,

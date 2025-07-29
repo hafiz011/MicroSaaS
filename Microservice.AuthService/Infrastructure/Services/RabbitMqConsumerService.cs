@@ -18,22 +18,20 @@ namespace Microservice.AuthService.Infrastructure.Services
         private readonly ISuspiciousActivityRepository _suspiciousRepository;
         private readonly IModel _channel;
         private readonly GrpcServiceClient _grpcServiceClient;
-        private readonly EmailService _emailService;
-        private readonly IMongoCollection<ApplicationUser> _users;
+        private readonly IServiceScopeFactory _scopeFactory;
+
 
 
 
         public RabbitMqConsumerService(ISuspiciousActivityRepository suspiciousRepository,
             IModel channel,
             GrpcServiceClient grpcServiceClient,
-            EmailService emailService,
-            MongoDbContext context)
+            IServiceScopeFactory scopeFactory)
         {
             _suspiciousRepository = suspiciousRepository;
             _channel = channel;
             _grpcServiceClient = grpcServiceClient;
-            _emailService = emailService;
-            _users = context.Users;
+            _scopeFactory = scopeFactory;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -44,6 +42,9 @@ namespace Microservice.AuthService.Infrastructure.Services
 
             consumer.Received += async (model, ea) =>
             {
+                using var scope = _scopeFactory.CreateScope();
+                var emailService = scope.ServiceProvider.GetRequiredService<EmailService>();
+
                 try
                 {
                     var body = ea.Body.ToArray();
@@ -59,6 +60,7 @@ namespace Microservice.AuthService.Infrastructure.Services
                         SessionId = message.SessionId,
                         TenantId = message.TenantId,
                         UserId = message.UserId,
+                        Email = message.Email,
                         IpAddress = message.Ip_Address,
                         LocalTime = message.Local_Time,
                         LoginTime = message.Local_Time,
@@ -89,15 +91,15 @@ namespace Microservice.AuthService.Infrastructure.Services
                         }
                     };
 
-                    await _suspiciousRepository.InsertAsync(suspicious);
+                    if(prediction.Level == "High" || prediction.Level == "Medium")
+                    {
+                        await _suspiciousRepository.InsertAsync(suspicious);
+                        var emailBody = BuildEmailBody(suspicious, message);
+                        bool emailSent = await emailService.SendEmailAsync(message.Email, "A suspicious login detected", emailBody);
+                        if (!emailSent)
+                            Console.WriteLine($"Failed to send suspicious notification email: {message.Email}");
+                    }
 
-                    var user = await _users.Find(u => u.TenantId == message.TenantId).FirstOrDefaultAsync();
-
-                    var emailBody = BuildEmailBody(suspicious);
-                    bool emailSent = await _emailService.SendEmailAsync(user.Email, "A suspicious login detected", emailBody);
-
-                    if (!emailSent)
-                        Console.WriteLine($"Failed to send suspicious notification email: {user.Email}");
                 }
                 catch (Exception ex)
                 {
@@ -106,7 +108,6 @@ namespace Microservice.AuthService.Infrastructure.Services
             };
 
             _channel.BasicConsume(queue: "session-risk-check-v2", autoAck: true, consumer: consumer);
-            Console.WriteLine("Listening for suspicious session jobs...");
             return Task.CompletedTask;
         }
 
@@ -154,9 +155,10 @@ namespace Microservice.AuthService.Infrastructure.Services
 
             // Check #5: Impossible travel
             var lastSession = response.OrderByDescending(s => s.LoginTime).FirstOrDefault();
-            if (lastSession != null)
+            if (lastSession != null && lastSession.LogoutTime != null)
             {
                 var logoutTime = lastSession.LogoutTime.ToDateTime();
+
                 var hoursDiff = (message.Login_Time - logoutTime).TotalHours;
 
                 var latLonParts = message.Geo_Location.Latitude_Longitude?.Split(',');
@@ -193,19 +195,52 @@ namespace Microservice.AuthService.Infrastructure.Services
             };
         }
 
-        private string BuildEmailBody(SuspiciousActivity session)
-        {
-            return $"""
-            A suspicious login was detected for your account.
 
-            Location: {session.Geo_Location?.City}, {session.Geo_Location?.Country}
-            IP Address: {session.IpAddress}
-            Time: {session.LocalTime}
-            Device: {session.Device?.Browser} on {session.Device?.OS}
-            Flags:
-            {string.Join("\n", session.RiskFactors.Select(f => $"- {f}"))}
+        private string BuildEmailBody(SuspiciousActivity session, SessionRiskCheckMessage message)
+        {
+            var flags = string.Join("", session.RiskFactors.Select(f => $"<li>{f}</li>"));
+
+            return $"""
+            <html>
+            <head></head>
+            <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; color: #333;">
+                <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 20px;">
+                    <div style="background-color: #ff4d4f; color: white; padding: 15px; border-radius: 8px 8px 0 0; text-align: center; font-size: 20px; font-weight: bold;">
+                        ⚠ Suspicious Login Detected
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <p>Hello,</p>
+                        <p>We noticed a suspicious login to your account with the following details:</p>
+
+                        <table style="width:100%; margin-top:10px; line-height: 1.6;">
+                            <tr><td><strong>Location:</strong></td><td>{session.Geo_Location?.City}, {session.Geo_Location?.Country}</td></tr>
+                            <tr><td><strong>IP Address:</strong></td><td>{session.IpAddress}</td></tr>
+                            <tr><td><strong>Time:</strong></td><td>{session.LocalTime}</td></tr>
+                            <tr><td><strong>Device:</strong></td><td>{session.Device?.Browser} on {session.Device?.OS}</td></tr>
+                        </table>
+
+                        <p><strong>Risk Factors:</strong></p>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            {flags}
+                        </ul>
+
+                        <p>If this wasn't you, please take immediate action to secure your account.</p>
+                        <p>
+                            <a href="https://{message.Cliend_Domaim}" style="background-color:#ff4d4f; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; display:inline-block; margin-top:10px;">
+                                Review Account Activity
+                            </a>
+                        </p>
+                    </div>
+                    <div style="margin-top: 30px; font-size: 12px; color: #888; text-align: center;">
+                        This is an automated message from Tech Ciph. Do not reply to this email.
+                    </div>
+                </div>
+            </body>
+            </html>
             """;
         }
+
+
     }
 
 }

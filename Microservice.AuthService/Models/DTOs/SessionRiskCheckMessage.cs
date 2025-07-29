@@ -5,13 +5,13 @@
         public string TenantId { get; set; }
         public string SessionId { get; set; }
         public string UserId { get; set; }
+        public string Email { get; set; }
         public string Ip_Address { get; set; }
         public DateTime Local_Time { get; set; }
         public DateTime Login_Time { get; set; } = DateTime.UtcNow;
         public DeviceInfo Device { get; set; }
         public Location Geo_Location { get; set; }
-
-
+        public string Cliend_Domaim { get; set; }
     }
     public class DeviceInfo
     {

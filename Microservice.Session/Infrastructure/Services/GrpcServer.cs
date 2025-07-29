@@ -23,6 +23,7 @@ namespace Microservice.Session.Infrastructure.Services
 
         }
 
+        // api key info
         public override async Task<ApiKeyResponse> GetApiKey(ApiKeyRequest request, ServerCallContext context)
         {
             var apiKey = await _apiKeyRepository.GetApiByUserIdAsync(request.UserId);
@@ -49,7 +50,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-
+        // create api key
         public override async Task<ApiHashResponse> CreateApiKey(CreateApiKeyRequest request, ServerCallContext context)
         {
             var existingKey = await _apiKeyRepository.GetApiByUserIdAsync(request.UserId);
@@ -81,6 +82,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
+        // regenerate api key
         public override async Task<ApiHashResponse> RegenerateApiKey(ApiKeyRequest request, ServerCallContext context)
         {
             var existingKey = await _apiKeyRepository.GetApiByUserIdAsync(request.UserId);
@@ -102,7 +104,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-
+        // renew api key
         public override async Task<ApiKeyResponse> RenewApiKey(RenewApiKeyRequest request, ServerCallContext context)
         {
             var existingKey = await _apiKeyRepository.GetApiByUserIdAsync(request.UserId);
@@ -141,7 +143,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-
+        // revike api key
         public override async Task<ApiKeyResponse> RevokeApiKey(ApiKeyRequest request, ServerCallContext context)
         {
             var success = await _apiKeyRepository.RevokeApiKeyAsync(request.UserId);

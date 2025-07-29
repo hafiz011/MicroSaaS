@@ -22,23 +22,27 @@ namespace Microservice.AuthService.Infrastructure.Services
             return await _client.GetApiKeyAsync(request);
         }
 
+        // create api key
         public async Task<(string ApiHash, string TenantId)> CreateApiKeyAsync(CreateApiKeyRequest request)
         {
             var response = await _client.CreateApiKeyAsync(request);
             return (response.ApiHash, response.TanantId);
         }
 
+        // regenerate api key
         public async Task<string> RegenerateApiKeyAsync(string userId)
         {
             var response = await _client.RegenerateApiKeyAsync(new ApiKeyRequest { UserId = userId });
             return response.ApiHash;
         }
 
+        // renuw api key
         public async Task<ApiKeyResponse> RenewApiKeyAsync(RenewApiKeyRequest request)
         {
             return await _client.RenewApiKeyAsync(request);
         }
 
+        // revocke api key
         public async Task<ApiKeyResponse> RevokeApiKeyAsync(string userId)
         {
             return await _client.RevokeApiKeyAsync(new ApiKeyRequest { UserId = userId });
