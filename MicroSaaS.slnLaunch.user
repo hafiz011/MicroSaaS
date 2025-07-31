@@ -3,11 +3,11 @@
     "Name": "New Profile",
     "Projects": [
       {
-        "Path": "SaaS.ApiGetway\\SaaS.ApiGetway.csproj",
+        "Path": "Microservice.AuthService\\Microservice.AuthService.csproj",
         "Action": "Start"
       },
       {
-        "Path": "Microservice.AuthService\\Microservice.AuthService.csproj",
+        "Path": "SaaS.ApiGetway\\SaaS.ApiGetway.csproj",
         "Action": "Start"
       },
       {

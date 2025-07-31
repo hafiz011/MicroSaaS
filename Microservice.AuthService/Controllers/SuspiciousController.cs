@@ -59,6 +59,13 @@ namespace Microservice.AuthService.Controllers
                 };
             }
 
+            if (!alert.From.HasValue && !alert.To.HasValue && string.IsNullOrWhiteSpace(alert.Range))
+            {
+                alert.To = DateTime.UtcNow;
+                alert.From = alert.To.Value.AddHours(-24);
+            }
+
+
             var suspicious = await _suspiciousRepository.GetByTenantAsync(
                 user.TenantId,
                 alert.From,
@@ -69,14 +76,22 @@ namespace Microservice.AuthService.Controllers
             // Total count of suspicious activities
             var totalCount = suspicious.Count;
 
-            var dtoList = suspicious.Select(x => new SuspiciousActivityDto
+            var dtoList = suspicious.Select(suspicious => new SuspiciousActivityDto
             {
-                SessionId = x.SessionId,
-                RiskScore = x.RiskScore,
-                RiskLevel = x.RiskLevel,
-                DetectedAt = x.DetectedAt,
-                RiskFactors = x.RiskFactors,
-                Count = 1
+                SessionId = suspicious.SessionId,
+                UserName = suspicious.Email,
+                IpAddress = suspicious.IpAddress,
+                LoginTime = suspicious.LoginTime.ToString(),
+                RiskScore = suspicious.RiskScore,
+                RiskLevel = suspicious.RiskLevel,
+                DetectedAt = suspicious.DetectedAt,
+                RiskFactors = suspicious.RiskFactors,
+                Browser = suspicious.Device.Browser,
+                DeiceType = suspicious.Device.Device_Type,
+                OS = suspicious.Device.OS,
+                Language = suspicious.Device.Language,
+                Country = suspicious.Geo_Location.Country,
+                is_vpn = suspicious.Geo_Location.is_vpn,
             }).ToList();
 
             //   return Ok(dtoList, totalCount);
