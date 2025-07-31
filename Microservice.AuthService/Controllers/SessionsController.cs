@@ -13,12 +13,12 @@ namespace Microservice.AuthService.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class SessionController : ControllerBase
+    public class SessionsController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly GrpcServiceClient _grpcServiceClient;
 
-        public SessionController(UserManager<ApplicationUser> userManager, GrpcServiceClient grpcServiceClient)
+        public SessionsController(UserManager<ApplicationUser> userManager, GrpcServiceClient grpcServiceClient)
         {
             _userManager = userManager;
             _grpcServiceClient = grpcServiceClient;
@@ -60,10 +60,27 @@ namespace Microservice.AuthService.Controllers
             if (suspicious == null)
                 return NotFound();
 
-
-
             return Ok(suspicious);
         }
 
+        // active user details
+        //[HttpGet("ActiveUserDetails")]
+        //public async Task<IActionResult> ActiveUserDetails(string sessionId)
+        //{
+        //    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        //    if (string.IsNullOrEmpty(userId))
+        //        return Unauthorized(new { Message = "User not authenticated." });
+
+        //    var user = await _userManager.FindByIdAsync(userId);
+        //    if (user.TenantId == null)
+        //        return NotFound(new { Message = "No API key associated with this user." });
+
+        //    var details = await _grpcServiceClient.GetSessionDetails(user.TenantId, sessionId);
+        //    if (details == null)
+        //        return NotFound();
+
+        //    return Ok(details);
+
+        //}
     }
 }

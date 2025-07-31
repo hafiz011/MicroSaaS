@@ -67,6 +67,10 @@ namespace Microservice.AuthService.Protos {
     static readonly grpc::Marshaller<global::Microservice.AuthService.Protos.SessionCheckRequest> __Marshaller_SessionCheckRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.AuthService.Protos.SessionCheckRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Microservice.AuthService.Protos.SessionCheckResponce> __Marshaller_SessionCheckResponce = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.AuthService.Protos.SessionCheckResponce.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Microservice.AuthService.Protos.SessionDetailsRequest> __Marshaller_SessionDetailsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.AuthService.Protos.SessionDetailsRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Microservice.AuthService.Protos.SessionDetailsResponse> __Marshaller_SessionDetailsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.AuthService.Protos.SessionDetailsResponse.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Microservice.AuthService.Protos.ApiKeyRequest, global::Microservice.AuthService.Protos.ApiKeyResponse> __Method_GetApiKey = new grpc::Method<global::Microservice.AuthService.Protos.ApiKeyRequest, global::Microservice.AuthService.Protos.ApiKeyResponse>(
@@ -131,6 +135,14 @@ namespace Microservice.AuthService.Protos {
         "SessionListCheck",
         __Marshaller_SessionCheckRequest,
         __Marshaller_SessionCheckResponce);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Microservice.AuthService.Protos.SessionDetailsRequest, global::Microservice.AuthService.Protos.SessionDetailsResponse> __Method_GetSessionDetails = new grpc::Method<global::Microservice.AuthService.Protos.SessionDetailsRequest, global::Microservice.AuthService.Protos.SessionDetailsResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetSessionDetails",
+        __Marshaller_SessionDetailsRequest,
+        __Marshaller_SessionDetailsResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -436,6 +448,54 @@ namespace Microservice.AuthService.Protos {
       public virtual grpc::AsyncUnaryCall<global::Microservice.AuthService.Protos.SessionCheckResponce> SessionListCheckAsync(global::Microservice.AuthService.Protos.SessionCheckRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_SessionListCheck, null, options, request);
+      }
+      /// <summary>
+      /// Session details
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Microservice.AuthService.Protos.SessionDetailsResponse GetSessionDetails(global::Microservice.AuthService.Protos.SessionDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetSessionDetails(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Session details
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Microservice.AuthService.Protos.SessionDetailsResponse GetSessionDetails(global::Microservice.AuthService.Protos.SessionDetailsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetSessionDetails, null, options, request);
+      }
+      /// <summary>
+      /// Session details
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Microservice.AuthService.Protos.SessionDetailsResponse> GetSessionDetailsAsync(global::Microservice.AuthService.Protos.SessionDetailsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetSessionDetailsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Session details
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Microservice.AuthService.Protos.SessionDetailsResponse> GetSessionDetailsAsync(global::Microservice.AuthService.Protos.SessionDetailsRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetSessionDetails, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

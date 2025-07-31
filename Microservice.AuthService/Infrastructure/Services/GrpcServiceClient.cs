@@ -89,7 +89,10 @@ namespace Microservice.AuthService.Infrastructure.Services
             return response.Sessionlist.ToList();
         }
 
-
-
+        // get session details
+        //public async Task<SessiionDetails> GetSessionDetails(string tenantId, string sessionId)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

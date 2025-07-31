@@ -22,6 +22,9 @@ service ApiKey {
   // session ckeck for suspicious detection
   rpc SessionListCheck(SessionCheckRequest) returns (SessionCheckResponce);
 
+  // Session details
+  rpc GetSessionDetails(SessionDetailsRequest) returns (SessionDetailsResponse);
+
 }
 
 // api key
@@ -130,4 +133,25 @@ message SessionCheckRequest {
 
 message SessionCheckResponce {
 	repeated SessionCheck sessionlist = 1;
+}
+
+// Session details
+message SessionDetailsRequest {
+	string TenantId = 1;
+	string SessionId = 2;
+}
+
+message SessionDetailsResponse {
+	SessionCheck session = 1;
+	google.protobuf.Timestamp created_at = 2;
+	google.protobuf.Timestamp updated_at = 3;
+	string user_id = 4;
+	string user_name = 5;
+	string user_email = 6;
+	string device_os = 7;
+	string device_type = 8;
+	string ip_address = 9;
+	string city = 10;
+	string country = 11;
+	string region = 12;
 }
