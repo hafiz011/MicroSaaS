@@ -4,6 +4,7 @@ using Microservice.AuthService.Infrastructure.Services;
 using Microservice.AuthService.Models;
 using Microservice.AuthService.Models.DashboardDTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -13,26 +14,82 @@ namespace Microservice.AuthService.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class SuspiciousController : ControllerBase
+    public class DashboardController : ControllerBase
     {
-        private readonly ISuspiciousActivityRepository _suspiciousRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly GrpcServiceClient _grpcServiceClient;
+        private readonly ISuspiciousActivityRepository _suspiciousRepository;
 
-        public SuspiciousController(ISuspiciousActivityRepository uspiciousRepository,
-            UserManager<ApplicationUser> userManager,
-            GrpcServiceClient apiKeyGrpcClient,
-            GrpcServiceClient grpcServiceClient)
+        public DashboardController(UserManager<ApplicationUser> userManager,
+            GrpcServiceClient grpcServiceClient,
+            ISuspiciousActivityRepository suspiciousActivityRepository)
         {
-            _suspiciousRepository = uspiciousRepository;
             _userManager = userManager;
             _grpcServiceClient = grpcServiceClient;
+            _suspiciousRepository = suspiciousActivityRepository;
         }
 
+        // active session/user list
+        [HttpGet("ActiveUsers")]
+        public async Task<IActionResult> ActiveUsers([FromQuery] Query query)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized(new { Message = "User not authenticated." });
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user.TenantId == null)
+                return NotFound(new { Message = "No API key associated with this user." });
+
+            // Handle time range shortcuts
+            if (!query.From.HasValue && !string.IsNullOrWhiteSpace(query.Range))
+            {
+                var now = DateTime.UtcNow;
+                query.To = now;
+                query.From = query.Range switch
+                {
+                    "24h" => now.AddHours(-24),
+                    "7d" => now.AddDays(-7),
+                    "30d" => now.AddDays(-30),
+                    _ => (DateTime?)null
+                };
+            }
+
+            var suspicious = await _grpcServiceClient.GetSessionList(
+                user.TenantId,
+                query.From,
+                query.To,
+                query.Device,
+                query.Country);
+
+            if (suspicious == null)
+                return NotFound();
+
+            return Ok(suspicious);
+        }
+
+        // active user details
+        //[HttpGet("ActiveUserDetails")]
+        //public async Task<IActionResult> ActiveUserDetails(string sessionId)
+        //{
+        //    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        //    if (string.IsNullOrEmpty(userId))
+        //        return Unauthorized(new { Message = "User not authenticated." });
+
+        //    var user = await _userManager.FindByIdAsync(userId);
+        //    if (user.TenantId == null)
+        //        return NotFound(new { Message = "No API key associated with this user." });
+
+        //    var details = await _grpcServiceClient.GetSessionDetails(user.TenantId, sessionId);
+        //    if (details == null)
+        //        return NotFound();
+
+        //    return Ok(details);
+
+        //}
 
 
-
-
+        // suspicious activity list
         [HttpGet("alert")]
         public async Task<IActionResult> GetAll([FromQuery] Query alert)
         {
@@ -103,7 +160,7 @@ namespace Microservice.AuthService.Controllers
         }
 
 
-        // session id details
+        // suspicious session id details
         [HttpGet("details/{sessionId}")]
         public async Task<IActionResult> GetDetails(string sessionId)
         {
@@ -122,14 +179,13 @@ namespace Microservice.AuthService.Controllers
             if (suspicious == null)
                 return NotFound(new { Message = "Suspicious session not found." });
 
-            var userinfo = await _grpcServiceClient.GetUserInfo(suspicious.UserId, suspicious.TenantId);
+          //  var userinfo = await _grpcServiceClient.GetUserInfo(suspicious.UserId, suspicious.TenantId);
 
             // Optional: map to DTO
             var dto = new SuspiciousActivityDto
             {
                 SessionId = suspicious.SessionId,
-                UserName = userinfo.UserName,
-                UserEmail = userinfo.UserEmail,
+                UserEmail = suspicious.Email,
                 IpAddress = suspicious.IpAddress,
                 LoginTime = suspicious.LoginTime.ToString(),
                 RiskScore = suspicious.RiskScore,
@@ -145,7 +201,7 @@ namespace Microservice.AuthService.Controllers
                 City = suspicious.Geo_Location.City,
                 Region = suspicious.Geo_Location.Region,
                 Postal = suspicious.Geo_Location.Postal,
-                LatitudeLongitude= suspicious.Geo_Location.Latitude_Longitude,
+                LatitudeLongitude = suspicious.Geo_Location.Latitude_Longitude,
                 TimeZone = suspicious.Geo_Location.TimeZone,
                 Isp = suspicious.Geo_Location.Isp,
                 is_vpn = suspicious.Geo_Location.is_vpn,
@@ -153,7 +209,6 @@ namespace Microservice.AuthService.Controllers
 
             return Ok(dto);
         }
-
 
         // update suspicious to safe session
         [HttpPut("{suspiciousId}")]
@@ -205,6 +260,11 @@ namespace Microservice.AuthService.Controllers
             public string Isp { get; set; }
             public bool is_vpn { get; set; }
         }
+
+
+
+
+
 
     }
 }

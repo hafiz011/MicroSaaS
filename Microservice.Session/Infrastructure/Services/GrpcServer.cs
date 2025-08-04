@@ -23,7 +23,7 @@ namespace Microservice.Session.Infrastructure.Services
 
         }
 
-        // api key info
+        // api key info. this is used to get api key for a user
         public override async Task<ApiKeyResponse> GetApiKey(ApiKeyRequest request, ServerCallContext context)
         {
             var apiKey = await _apiKeyRepository.GetApiByUserIdAsync(request.UserId);
@@ -50,7 +50,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-        // create api key
+        // create api key. This is used to create an API key for a user
         public override async Task<ApiHashResponse> CreateApiKey(CreateApiKeyRequest request, ServerCallContext context)
         {
             var existingKey = await _apiKeyRepository.GetApiByUserIdAsync(request.UserId);
@@ -82,7 +82,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-        // regenerate api key
+        // regenerate api key. This is used to regenerate an API key for a user
         public override async Task<ApiHashResponse> RegenerateApiKey(ApiKeyRequest request, ServerCallContext context)
         {
             var existingKey = await _apiKeyRepository.GetApiByUserIdAsync(request.UserId);
@@ -104,7 +104,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-        // renew api key
+        // renew api key. this is used to renew an API key for a user
         public override async Task<ApiKeyResponse> RenewApiKey(RenewApiKeyRequest request, ServerCallContext context)
         {
             var existingKey = await _apiKeyRepository.GetApiByUserIdAsync(request.UserId);
@@ -143,7 +143,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-        // revike api key
+        // revike api key. this is used to revoke an API key for a user
         public override async Task<ApiKeyResponse> RevokeApiKey(ApiKeyRequest request, ServerCallContext context)
         {
             var success = await _apiKeyRepository.RevokeApiKeyAsync(request.UserId);
@@ -169,7 +169,8 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-        // user info
+        // curenctly this is not used. This is used to get api keys for a user
+        // user info. This is used to get user information by userId and tenantId
         public override async Task<UserInfoResponse> GetUserInfo(UserInfoRequest request, ServerCallContext context)
         {
             var getinfo = await _userinfoRepository.getUserById(request.UserId, request.TenantId);
@@ -184,7 +185,7 @@ namespace Microservice.Session.Infrastructure.Services
             };
         }
 
-        // active session and user list
+        // active session and user list. This is used to get active users sessions for a tenant
         public override async Task<SessionListResponse> GetSessionList(SessionListRequest request, ServerCallContext context)
         {
             var sessions = await _sessionRepository.ActiveSessionList(

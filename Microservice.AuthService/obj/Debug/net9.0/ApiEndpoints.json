@@ -367,45 +367,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Microservice.AuthService.Controllers.SessionController",
-    "Method": "ActiveUsers",
-    "RelativePath": "api/Session/ActiveUsers",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Country",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Device",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "From",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "To",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Range",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Microservice.AuthService.Controllers.SuspiciousController",
+    "ContainingType": "Microservice.AuthService.Controllers.DashboardController",
     "Method": "Update",
-    "RelativePath": "api/Suspicious/{suspiciousId}",
+    "RelativePath": "api/Dashboard/{suspiciousId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -419,35 +383,35 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Microservice.AuthService.Controllers.SuspiciousController",
-    "Method": "GetAll",
-    "RelativePath": "api/Suspicious/alert",
+    "ContainingType": "Microservice.AuthService.Controllers.DashboardController",
+    "Method": "ActiveUsers",
+    "RelativePath": "api/Dashboard/ActiveUsers",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Country",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Device",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "From",
+        "Name": "from",
         "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
-        "Name": "To",
+        "Name": "to",
         "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
-        "Name": "Range",
+        "Name": "range",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "device",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -455,9 +419,45 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Microservice.AuthService.Controllers.SuspiciousController",
+    "ContainingType": "Microservice.AuthService.Controllers.DashboardController",
+    "Method": "GetAll",
+    "RelativePath": "api/Dashboard/alert",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "from",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "to",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "range",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "country",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "device",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Microservice.AuthService.Controllers.DashboardController",
     "Method": "GetDetails",
-    "RelativePath": "api/Suspicious/details/{sessionId}",
+    "RelativePath": "api/Dashboard/details/{sessionId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

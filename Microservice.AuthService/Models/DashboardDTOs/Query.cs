@@ -1,11 +1,23 @@
-﻿namespace Microservice.AuthService.Models.DashboardDTOs
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace Microservice.AuthService.Models.DashboardDTOs
 {
     public class Query
     {
-        public string? Country { get; set; }     // Optional (nullable)
-        public string? Device { get; set; }      // Optional (nullable)
-        public DateTime? From { get; set; }      // Optional
-        public DateTime? To { get; set; }        // Optional
-        public string? Range { get; set; }       // Optional
+        [FromQuery(Name = "from")]
+        public DateTime? From { get; set; }
+
+        [FromQuery(Name = "to")]
+        public DateTime? To { get; set; }
+
+        [FromQuery(Name = "range")]
+        public string? Range { get; set; }
+
+        [FromQuery(Name = "country")]
+        public string? Country { get; set; }
+
+        [FromQuery(Name = "device")]
+        public string? Device { get; set; }
     }
+
 }

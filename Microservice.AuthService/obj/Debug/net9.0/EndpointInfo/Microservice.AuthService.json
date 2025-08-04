@@ -578,28 +578,14 @@
         }
       }
     },
-    "/api/Session/ActiveUsers": {
+    "/api/Dashboard/ActiveUsers": {
       "get": {
         "tags": [
-          "Session"
+          "Dashboard"
         ],
         "parameters": [
           {
-            "name": "Country",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Device",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "From",
+            "name": "from",
             "in": "query",
             "schema": {
               "type": "string",
@@ -607,7 +593,7 @@
             }
           },
           {
-            "name": "To",
+            "name": "to",
             "in": "query",
             "schema": {
               "type": "string",
@@ -615,7 +601,21 @@
             }
           },
           {
-            "name": "Range",
+            "name": "range",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "device",
             "in": "query",
             "schema": {
               "type": "string"
@@ -629,28 +629,14 @@
         }
       }
     },
-    "/api/Suspicious/alert": {
+    "/api/Dashboard/alert": {
       "get": {
         "tags": [
-          "Suspicious"
+          "Dashboard"
         ],
         "parameters": [
           {
-            "name": "Country",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Device",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "From",
+            "name": "from",
             "in": "query",
             "schema": {
               "type": "string",
@@ -658,7 +644,7 @@
             }
           },
           {
-            "name": "To",
+            "name": "to",
             "in": "query",
             "schema": {
               "type": "string",
@@ -666,7 +652,21 @@
             }
           },
           {
-            "name": "Range",
+            "name": "range",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "device",
             "in": "query",
             "schema": {
               "type": "string"
@@ -680,10 +680,10 @@
         }
       }
     },
-    "/api/Suspicious/details/{sessionId}": {
+    "/api/Dashboard/details/{sessionId}": {
       "get": {
         "tags": [
-          "Suspicious"
+          "Dashboard"
         ],
         "parameters": [
           {
@@ -702,10 +702,10 @@
         }
       }
     },
-    "/api/Suspicious/{suspiciousId}": {
+    "/api/Dashboard/{suspiciousId}": {
       "put": {
         "tags": [
-          "Suspicious"
+          "Dashboard"
         ],
         "parameters": [
           {

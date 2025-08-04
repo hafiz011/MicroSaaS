@@ -15,34 +15,34 @@ namespace Microservice.AuthService.Infrastructure.Services
             _client = new ApiKey.ApiKeyClient(channel);
         }
 
-        // api key grpc serivice
+        // api key grpc serivice. This is used to get api key for a user
         public async Task<ApiKeyResponse> GetApiKeyAsync(string userId)
         {
             var request = new ApiKeyRequest { UserId = userId };
             return await _client.GetApiKeyAsync(request);
         }
 
-        // create api key
+        // create api key. This is used to create api key for a user
         public async Task<(string ApiHash, string TenantId)> CreateApiKeyAsync(CreateApiKeyRequest request)
         {
             var response = await _client.CreateApiKeyAsync(request);
             return (response.ApiHash, response.TanantId);
         }
 
-        // regenerate api key
+        // regenerate api key. This is used to regenerate api key for a user
         public async Task<string> RegenerateApiKeyAsync(string userId)
         {
             var response = await _client.RegenerateApiKeyAsync(new ApiKeyRequest { UserId = userId });
             return response.ApiHash;
         }
 
-        // renuw api key
+        // renuw api key. this is used to renew api key for a user
         public async Task<ApiKeyResponse> RenewApiKeyAsync(RenewApiKeyRequest request)
         {
             return await _client.RenewApiKeyAsync(request);
         }
 
-        // revocke api key
+        // revocke api key. this is used to revoke api key for a user
         public async Task<ApiKeyResponse> RevokeApiKeyAsync(string userId)
         {
             return await _client.RevokeApiKeyAsync(new ApiKeyRequest { UserId = userId });
@@ -55,7 +55,7 @@ namespace Microservice.AuthService.Infrastructure.Services
             return response;
         }
 
-        // active user session list
+        // active user session list. this is used for dashboard controller to show active user sessions
         public async Task<SessionListResponse> GetSessionList(string tenantId, DateTime? from, DateTime? to, string device, string country)
         {
             var request = new SessionListRequest
@@ -74,7 +74,7 @@ namespace Microservice.AuthService.Infrastructure.Services
             return await _client.GetSessionListAsync(request);
         }
 
-        // session check for suspicious detection
+        // session check for suspicious detection. this is used rabbitmq consumer to check session list
         public async Task<List<SessionCheck>> SessionListCheck(string tenantId, string userId, string sessionId, int v)
         {
             var request = new SessionCheckRequest
