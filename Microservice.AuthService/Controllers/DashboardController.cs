@@ -41,20 +41,6 @@ namespace Microservice.AuthService.Controllers
             if (user.TenantId == null)
                 return NotFound(new { Message = "No API key associated with this user." });
 
-            // Handle time range shortcuts
-            if (!query.From.HasValue && !string.IsNullOrWhiteSpace(query.Range))
-            {
-                var now = DateTime.UtcNow;
-                query.To = now;
-                query.From = query.Range switch
-                {
-                    "24h" => now.AddHours(-24),
-                    "7d" => now.AddDays(-7),
-                    "30d" => now.AddDays(-30),
-                    _ => (DateTime?)null
-                };
-            }
-
             var suspicious = await _grpcServiceClient.GetSessionList(
                 user.TenantId,
                 query.From,
@@ -100,28 +86,6 @@ namespace Microservice.AuthService.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             if (user.TenantId == null)
                 return NotFound(new { Message = "No API key associated with this user." });
-
-            // Handle time range shortcuts
-            if (!alert.From.HasValue && !string.IsNullOrWhiteSpace(alert.Range))
-            {
-                var now = DateTime.UtcNow;
-
-                alert.To = now;
-                alert.From = alert.Range switch
-                {
-                    "24h" => now.AddHours(-24),
-                    "7d" => now.AddDays(-7),
-                    "30d" => now.AddDays(-30),
-                    _ => (DateTime?)null
-                };
-            }
-
-            if (!alert.From.HasValue && !alert.To.HasValue && string.IsNullOrWhiteSpace(alert.Range))
-            {
-                alert.To = DateTime.UtcNow;
-                alert.From = alert.To.Value.AddHours(-24);
-            }
-
 
             var suspicious = await _suspiciousRepository.GetByTenantAsync(
                 user.TenantId,

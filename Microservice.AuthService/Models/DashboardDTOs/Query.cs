@@ -10,9 +10,6 @@ namespace Microservice.AuthService.Models.DashboardDTOs
         [FromQuery(Name = "to")]
         public DateTime? To { get; set; }
 
-        [FromQuery(Name = "range")]
-        public string? Range { get; set; }
-
         [FromQuery(Name = "country")]
         public string? Country { get; set; }
 
