@@ -99,13 +99,11 @@ message Session {
 	string IpAddress = 4;
 	string City = 5;
 	string Country = 6;
-	string Region = 7;
-	string Status = 8;
-	string DeviceOs = 9;
-	string DeviceType = 10;
-	google.protobuf.Timestamp LoginTime = 11;
-	string Lac = 12;
-	string Sessionid = 13;
+	string Status = 7;
+	string DeviceType = 8;
+	google.protobuf.Timestamp LoginTime = 9;
+	string Lac = 10;
+	string Sessionid = 11;
 }
 
 message SessionListResponse {

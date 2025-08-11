@@ -49,33 +49,33 @@ namespace Microservice.Session.Protos {
             "mQEKElNlc3Npb25MaXN0UmVxdWVzdBIQCghUZW5hbnRJZBgBIAEoCRIoCgRm",
             "cm9tGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBImCgJ0bxgD",
             "IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGZGV2aWNlGAQg",
-            "ASgJEg8KB2NvdW50cnkYBSABKAkigQIKB1Nlc3Npb24SEAoIVXNlck5hbWUY",
+            "ASgJEg8KB2NvdW50cnkYBSABKAki3wEKB1Nlc3Npb24SEAoIVXNlck5hbWUY",
             "ASABKAkSDgoGVXNlcklkGAIgASgJEg0KBUVtYWlsGAMgASgJEhEKCUlwQWRk",
             "cmVzcxgEIAEoCRIMCgRDaXR5GAUgASgJEg8KB0NvdW50cnkYBiABKAkSDgoG",
-            "UmVnaW9uGAcgASgJEg4KBlN0YXR1cxgIIAEoCRIQCghEZXZpY2VPcxgJIAEo",
-            "CRISCgpEZXZpY2VUeXBlGAogASgJEi0KCUxvZ2luVGltZRgLIAEoCzIaLmdv",
-            "b2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASCwoDTGFjGAwgASgJEhEKCVNlc3Np",
-            "b25pZBgNIAEoCSIxChNTZXNzaW9uTGlzdFJlc3BvbnNlEhoKCHNlc3Npb25z",
-            "GAEgAygLMgguU2Vzc2lvbiL1AQoMU2Vzc2lvbkNoZWNrEhEKCUlwQWRkcmVz",
-            "cxgBIAEoCRIPCgdDb3VudHJ5GAIgASgJEhMKC0ZpbmdlcnByaW50GAMgASgJ",
-            "Ei0KCUxvY2FsVGltZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3Rh",
-            "bXASDQoFaXNWUE4YBSABKAgSDwoHbGF0X2xvbhgGIAEoCRItCglMb2dpblRp",
-            "bWUYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCkxvZ291",
-            "dFRpbWUYCCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIlYKE1Nl",
-            "c3Npb25DaGVja1JlcXVlc3QSEAoIVGVuYW50SWQYASABKAkSDwoHdXNlcl9p",
-            "ZBgCIAEoCRIRCglTZXNzaW9uSWQYAyABKAkSCQoBdhgEIAEoBSI6ChRTZXNz",
-            "aW9uQ2hlY2tSZXNwb25jZRIiCgtzZXNzaW9ubGlzdBgBIAMoCzINLlNlc3Np",
-            "b25DaGVjazK8AwoGQXBpS2V5EiwKCUdldEFwaUtleRIOLkFwaUtleVJlcXVl",
-            "c3QaDy5BcGlLZXlSZXNwb25zZRI2CgxDcmVhdGVBcGlLZXkSFC5DcmVhdGVB",
-            "cGlLZXlSZXF1ZXN0GhAuQXBpSGFzaFJlc3BvbnNlEjQKEFJlZ2VuZXJhdGVB",
-            "cGlLZXkSDi5BcGlLZXlSZXF1ZXN0GhAuQXBpSGFzaFJlc3BvbnNlEjMKC1Jl",
-            "bmV3QXBpS2V5EhMuUmVuZXdBcGlLZXlSZXF1ZXN0Gg8uQXBpS2V5UmVzcG9u",
-            "c2USLwoMUmV2b2tlQXBpS2V5Eg4uQXBpS2V5UmVxdWVzdBoPLkFwaUtleVJl",
-            "c3BvbnNlEjIKC0dldFVzZXJJbmZvEhAuVXNlckluZm9SZXF1ZXN0GhEuVXNl",
-            "ckluZm9SZXNwb25zZRI7Cg5HZXRTZXNzaW9uTGlzdBITLlNlc3Npb25MaXN0",
-            "UmVxdWVzdBoULlNlc3Npb25MaXN0UmVzcG9uc2USPwoQU2Vzc2lvbkxpc3RD",
-            "aGVjaxIULlNlc3Npb25DaGVja1JlcXVlc3QaFS5TZXNzaW9uQ2hlY2tSZXNw",
-            "b25jZUIeqgIbTWljcm9zZXJ2aWNlLlNlc3Npb24uUHJvdG9zYgZwcm90bzM="));
+            "U3RhdHVzGAcgASgJEhIKCkRldmljZVR5cGUYCCABKAkSLQoJTG9naW5UaW1l",
+            "GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBILCgNMYWMYCiAB",
+            "KAkSEQoJU2Vzc2lvbmlkGAsgASgJIjEKE1Nlc3Npb25MaXN0UmVzcG9uc2US",
+            "GgoIc2Vzc2lvbnMYASADKAsyCC5TZXNzaW9uIvUBCgxTZXNzaW9uQ2hlY2sS",
+            "EQoJSXBBZGRyZXNzGAEgASgJEg8KB0NvdW50cnkYAiABKAkSEwoLRmluZ2Vy",
+            "cHJpbnQYAyABKAkSLQoJTG9jYWxUaW1lGAQgASgLMhouZ29vZ2xlLnByb3Rv",
+            "YnVmLlRpbWVzdGFtcBINCgVpc1ZQThgFIAEoCBIPCgdsYXRfbG9uGAYgASgJ",
+            "Ei0KCUxvZ2luVGltZRgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3Rh",
+            "bXASLgoKTG9nb3V0VGltZRgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1l",
+            "c3RhbXAiVgoTU2Vzc2lvbkNoZWNrUmVxdWVzdBIQCghUZW5hbnRJZBgBIAEo",
+            "CRIPCgd1c2VyX2lkGAIgASgJEhEKCVNlc3Npb25JZBgDIAEoCRIJCgF2GAQg",
+            "ASgFIjoKFFNlc3Npb25DaGVja1Jlc3BvbmNlEiIKC3Nlc3Npb25saXN0GAEg",
+            "AygLMg0uU2Vzc2lvbkNoZWNrMrwDCgZBcGlLZXkSLAoJR2V0QXBpS2V5Eg4u",
+            "QXBpS2V5UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEjYKDENyZWF0ZUFwaUtl",
+            "eRIULkNyZWF0ZUFwaUtleVJlcXVlc3QaEC5BcGlIYXNoUmVzcG9uc2USNAoQ",
+            "UmVnZW5lcmF0ZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaEC5BcGlIYXNoUmVz",
+            "cG9uc2USMwoLUmVuZXdBcGlLZXkSEy5SZW5ld0FwaUtleVJlcXVlc3QaDy5B",
+            "cGlLZXlSZXNwb25zZRIvCgxSZXZva2VBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0",
+            "Gg8uQXBpS2V5UmVzcG9uc2USMgoLR2V0VXNlckluZm8SEC5Vc2VySW5mb1Jl",
+            "cXVlc3QaES5Vc2VySW5mb1Jlc3BvbnNlEjsKDkdldFNlc3Npb25MaXN0EhMu",
+            "U2Vzc2lvbkxpc3RSZXF1ZXN0GhQuU2Vzc2lvbkxpc3RSZXNwb25zZRI/ChBT",
+            "ZXNzaW9uTGlzdENoZWNrEhQuU2Vzc2lvbkNoZWNrUmVxdWVzdBoVLlNlc3Np",
+            "b25DaGVja1Jlc3BvbmNlQh6qAhtNaWNyb3NlcnZpY2UuU2Vzc2lvbi5Qcm90",
+            "b3NiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -87,7 +87,7 @@ namespace Microservice.Session.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.UserInfoRequest), global::Microservice.Session.Protos.UserInfoRequest.Parser, new[]{ "UserId", "TenantId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.UserInfoResponse), global::Microservice.Session.Protos.UserInfoResponse.Parser, new[]{ "UserName", "UserEmail", "Lastlogin" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionListRequest), global::Microservice.Session.Protos.SessionListRequest.Parser, new[]{ "TenantId", "From", "To", "Device", "Country" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.Session), global::Microservice.Session.Protos.Session.Parser, new[]{ "UserName", "UserId", "Email", "IpAddress", "City", "Country", "Region", "Status", "DeviceOs", "DeviceType", "LoginTime", "Lac", "Sessionid" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.Session), global::Microservice.Session.Protos.Session.Parser, new[]{ "UserName", "UserId", "Email", "IpAddress", "City", "Country", "Status", "DeviceType", "LoginTime", "Lac", "Sessionid" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionListResponse), global::Microservice.Session.Protos.SessionListResponse.Parser, new[]{ "Sessions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionCheck), global::Microservice.Session.Protos.SessionCheck.Parser, new[]{ "IpAddress", "Country", "Fingerprint", "LocalTime", "IsVPN", "LatLon", "LoginTime", "LogoutTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionCheckRequest), global::Microservice.Session.Protos.SessionCheckRequest.Parser, new[]{ "TenantId", "UserId", "SessionId", "V" }, null, null, null, null),
@@ -2914,9 +2914,7 @@ namespace Microservice.Session.Protos {
       ipAddress_ = other.ipAddress_;
       city_ = other.city_;
       country_ = other.country_;
-      region_ = other.region_;
       status_ = other.status_;
-      deviceOs_ = other.deviceOs_;
       deviceType_ = other.deviceType_;
       loginTime_ = other.loginTime_ != null ? other.loginTime_.Clone() : null;
       lac_ = other.lac_;
@@ -3002,20 +3000,8 @@ namespace Microservice.Session.Protos {
       }
     }
 
-    /// <summary>Field number for the "Region" field.</summary>
-    public const int RegionFieldNumber = 7;
-    private string region_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Region {
-      get { return region_; }
-      set {
-        region_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     /// <summary>Field number for the "Status" field.</summary>
-    public const int StatusFieldNumber = 8;
+    public const int StatusFieldNumber = 7;
     private string status_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3026,20 +3012,8 @@ namespace Microservice.Session.Protos {
       }
     }
 
-    /// <summary>Field number for the "DeviceOs" field.</summary>
-    public const int DeviceOsFieldNumber = 9;
-    private string deviceOs_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string DeviceOs {
-      get { return deviceOs_; }
-      set {
-        deviceOs_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     /// <summary>Field number for the "DeviceType" field.</summary>
-    public const int DeviceTypeFieldNumber = 10;
+    public const int DeviceTypeFieldNumber = 8;
     private string deviceType_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3051,7 +3025,7 @@ namespace Microservice.Session.Protos {
     }
 
     /// <summary>Field number for the "LoginTime" field.</summary>
-    public const int LoginTimeFieldNumber = 11;
+    public const int LoginTimeFieldNumber = 9;
     private global::Google.Protobuf.WellKnownTypes.Timestamp loginTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3063,7 +3037,7 @@ namespace Microservice.Session.Protos {
     }
 
     /// <summary>Field number for the "Lac" field.</summary>
-    public const int LacFieldNumber = 12;
+    public const int LacFieldNumber = 10;
     private string lac_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3075,7 +3049,7 @@ namespace Microservice.Session.Protos {
     }
 
     /// <summary>Field number for the "Sessionid" field.</summary>
-    public const int SessionidFieldNumber = 13;
+    public const int SessionidFieldNumber = 11;
     private string sessionid_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3107,9 +3081,7 @@ namespace Microservice.Session.Protos {
       if (IpAddress != other.IpAddress) return false;
       if (City != other.City) return false;
       if (Country != other.Country) return false;
-      if (Region != other.Region) return false;
       if (Status != other.Status) return false;
-      if (DeviceOs != other.DeviceOs) return false;
       if (DeviceType != other.DeviceType) return false;
       if (!object.Equals(LoginTime, other.LoginTime)) return false;
       if (Lac != other.Lac) return false;
@@ -3127,9 +3099,7 @@ namespace Microservice.Session.Protos {
       if (IpAddress.Length != 0) hash ^= IpAddress.GetHashCode();
       if (City.Length != 0) hash ^= City.GetHashCode();
       if (Country.Length != 0) hash ^= Country.GetHashCode();
-      if (Region.Length != 0) hash ^= Region.GetHashCode();
       if (Status.Length != 0) hash ^= Status.GetHashCode();
-      if (DeviceOs.Length != 0) hash ^= DeviceOs.GetHashCode();
       if (DeviceType.Length != 0) hash ^= DeviceType.GetHashCode();
       if (loginTime_ != null) hash ^= LoginTime.GetHashCode();
       if (Lac.Length != 0) hash ^= Lac.GetHashCode();
@@ -3176,32 +3146,24 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(50);
         output.WriteString(Country);
       }
-      if (Region.Length != 0) {
-        output.WriteRawTag(58);
-        output.WriteString(Region);
-      }
       if (Status.Length != 0) {
-        output.WriteRawTag(66);
+        output.WriteRawTag(58);
         output.WriteString(Status);
       }
-      if (DeviceOs.Length != 0) {
-        output.WriteRawTag(74);
-        output.WriteString(DeviceOs);
-      }
       if (DeviceType.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(66);
         output.WriteString(DeviceType);
       }
       if (loginTime_ != null) {
-        output.WriteRawTag(90);
+        output.WriteRawTag(74);
         output.WriteMessage(LoginTime);
       }
       if (Lac.Length != 0) {
-        output.WriteRawTag(98);
+        output.WriteRawTag(82);
         output.WriteString(Lac);
       }
       if (Sessionid.Length != 0) {
-        output.WriteRawTag(106);
+        output.WriteRawTag(90);
         output.WriteString(Sessionid);
       }
       if (_unknownFields != null) {
@@ -3238,32 +3200,24 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(50);
         output.WriteString(Country);
       }
-      if (Region.Length != 0) {
-        output.WriteRawTag(58);
-        output.WriteString(Region);
-      }
       if (Status.Length != 0) {
-        output.WriteRawTag(66);
+        output.WriteRawTag(58);
         output.WriteString(Status);
       }
-      if (DeviceOs.Length != 0) {
-        output.WriteRawTag(74);
-        output.WriteString(DeviceOs);
-      }
       if (DeviceType.Length != 0) {
-        output.WriteRawTag(82);
+        output.WriteRawTag(66);
         output.WriteString(DeviceType);
       }
       if (loginTime_ != null) {
-        output.WriteRawTag(90);
+        output.WriteRawTag(74);
         output.WriteMessage(LoginTime);
       }
       if (Lac.Length != 0) {
-        output.WriteRawTag(98);
+        output.WriteRawTag(82);
         output.WriteString(Lac);
       }
       if (Sessionid.Length != 0) {
-        output.WriteRawTag(106);
+        output.WriteRawTag(90);
         output.WriteString(Sessionid);
       }
       if (_unknownFields != null) {
@@ -3294,14 +3248,8 @@ namespace Microservice.Session.Protos {
       if (Country.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Country);
       }
-      if (Region.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Region);
-      }
       if (Status.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Status);
-      }
-      if (DeviceOs.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(DeviceOs);
       }
       if (DeviceType.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(DeviceType);
@@ -3345,14 +3293,8 @@ namespace Microservice.Session.Protos {
       if (other.Country.Length != 0) {
         Country = other.Country;
       }
-      if (other.Region.Length != 0) {
-        Region = other.Region;
-      }
       if (other.Status.Length != 0) {
         Status = other.Status;
-      }
-      if (other.DeviceOs.Length != 0) {
-        DeviceOs = other.DeviceOs;
       }
       if (other.DeviceType.Length != 0) {
         DeviceType = other.DeviceType;
@@ -3413,33 +3355,25 @@ namespace Microservice.Session.Protos {
             break;
           }
           case 58: {
-            Region = input.ReadString();
-            break;
-          }
-          case 66: {
             Status = input.ReadString();
             break;
           }
-          case 74: {
-            DeviceOs = input.ReadString();
-            break;
-          }
-          case 82: {
+          case 66: {
             DeviceType = input.ReadString();
             break;
           }
-          case 90: {
+          case 74: {
             if (loginTime_ == null) {
               LoginTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(LoginTime);
             break;
           }
-          case 98: {
+          case 82: {
             Lac = input.ReadString();
             break;
           }
-          case 106: {
+          case 90: {
             Sessionid = input.ReadString();
             break;
           }
@@ -3487,33 +3421,25 @@ namespace Microservice.Session.Protos {
             break;
           }
           case 58: {
-            Region = input.ReadString();
-            break;
-          }
-          case 66: {
             Status = input.ReadString();
             break;
           }
-          case 74: {
-            DeviceOs = input.ReadString();
-            break;
-          }
-          case 82: {
+          case 66: {
             DeviceType = input.ReadString();
             break;
           }
-          case 90: {
+          case 74: {
             if (loginTime_ == null) {
               LoginTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(LoginTime);
             break;
           }
-          case 98: {
+          case 82: {
             Lac = input.ReadString();
             break;
           }
-          case 106: {
+          case 90: {
             Sessionid = input.ReadString();
             break;
           }

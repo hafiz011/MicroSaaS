@@ -100,19 +100,17 @@ namespace Microservice.AuthService.Controllers
             var dtoList = suspicious.Select(suspicious => new SuspiciousActivityDto
             {
                 SessionId = suspicious.SessionId,
-                UserName = suspicious.Email,
+                UserEmail = suspicious.Email,
                 IpAddress = suspicious.IpAddress,
                 LoginTime = suspicious.LoginTime.ToString(),
-                RiskScore = suspicious.RiskScore,
-                RiskLevel = suspicious.RiskLevel,
                 DetectedAt = suspicious.DetectedAt,
+                RiskLevel = suspicious.RiskLevel,
                 RiskFactors = suspicious.RiskFactors,
                 Browser = suspicious.Device.Browser,
-                DeiceType = suspicious.Device.Device_Type,
+                DviceType = suspicious.Device.Device_Type,
                 OS = suspicious.Device.OS,
-                Language = suspicious.Device.Language,
                 Country = suspicious.Geo_Location.Country,
-                is_vpn = suspicious.Geo_Location.is_vpn,
+                Is_Suspicious = suspicious.IsSuspicious,
             }).ToList();
 
             //   return Ok(dtoList, totalCount);
@@ -157,18 +155,10 @@ namespace Microservice.AuthService.Controllers
                 DetectedAt = suspicious.DetectedAt,
                 RiskFactors = suspicious.RiskFactors,
                 Browser = suspicious.Device.Browser,
-                DeiceType = suspicious.Device.Device_Type,
+                DviceType = suspicious.Device.Device_Type,
                 OS = suspicious.Device.OS,
-                Language = suspicious.Device.Language,
-                ScreenResolution = suspicious.Device.Screen_Resolution,
                 Country = suspicious.Geo_Location.Country,
                 City = suspicious.Geo_Location.City,
-                Region = suspicious.Geo_Location.Region,
-                Postal = suspicious.Geo_Location.Postal,
-                LatitudeLongitude = suspicious.Geo_Location.Latitude_Longitude,
-                TimeZone = suspicious.Geo_Location.TimeZone,
-                Isp = suspicious.Geo_Location.Isp,
-                is_vpn = suspicious.Geo_Location.is_vpn,
             };
 
             return Ok(dto);
@@ -198,7 +188,6 @@ namespace Microservice.AuthService.Controllers
         {
             public int Count { get; set; }
             public string SessionId { get; set; }
-            public string UserName { get; set; }
             public string UserEmail { get; set; }
             public string IpAddress { get; set; }
             public string LoginTime { get; set; }
@@ -209,20 +198,12 @@ namespace Microservice.AuthService.Controllers
 
             // device info
             public string Browser { get; set; }
-            public string DeiceType { get; set; }
+            public string DviceType { get; set; }
             public string OS { get; set; }
-            public string Language { get; set; }
-            public string ScreenResolution { get; set; }
-
             // location info
             public string Country { get; set; }
             public string City { get; set; }
-            public string Region { get; set; }
-            public string Postal { get; set; }
-            public string LatitudeLongitude { get; set; }
-            public string TimeZone { get; set; }
-            public string Isp { get; set; }
-            public bool is_vpn { get; set; }
+            public bool Is_Suspicious { get; set; }
         }
 
 
