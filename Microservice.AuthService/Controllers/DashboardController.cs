@@ -107,7 +107,7 @@ namespace Microservice.AuthService.Controllers
                 RiskLevel = suspicious.RiskLevel,
                 RiskFactors = suspicious.RiskFactors,
                 Browser = suspicious.Device.Browser,
-                DviceType = suspicious.Device.Device_Type,
+                DeviceType = suspicious.Device.Device_Type,
                 OS = suspicious.Device.OS,
                 Country = suspicious.Geo_Location.Country,
                 Is_Suspicious = suspicious.IsSuspicious,
@@ -150,15 +150,13 @@ namespace Microservice.AuthService.Controllers
                 UserEmail = suspicious.Email,
                 IpAddress = suspicious.IpAddress,
                 LoginTime = suspicious.LoginTime.ToString(),
-                RiskScore = suspicious.RiskScore,
                 RiskLevel = suspicious.RiskLevel,
                 DetectedAt = suspicious.DetectedAt,
                 RiskFactors = suspicious.RiskFactors,
                 Browser = suspicious.Device.Browser,
-                DviceType = suspicious.Device.Device_Type,
+                DeviceType = suspicious.Device.Device_Type,
                 OS = suspicious.Device.OS,
                 Country = suspicious.Geo_Location.Country,
-                City = suspicious.Geo_Location.City,
             };
 
             return Ok(dto);
@@ -191,18 +189,14 @@ namespace Microservice.AuthService.Controllers
             public string UserEmail { get; set; }
             public string IpAddress { get; set; }
             public string LoginTime { get; set; }
-            public double RiskScore { get; set; }
             public string RiskLevel { get; set; }
             public DateTime DetectedAt { get; set; }
             public List<string> RiskFactors { get; set; }
 
-            // device info
             public string Browser { get; set; }
-            public string DviceType { get; set; }
+            public string DeviceType { get; set; }
             public string OS { get; set; }
-            // location info
             public string Country { get; set; }
-            public string City { get; set; }
             public bool Is_Suspicious { get; set; }
         }
 
