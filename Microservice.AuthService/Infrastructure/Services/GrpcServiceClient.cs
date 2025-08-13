@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using Grpc.Net.Client;
 using Microservice.AuthService.Protos;
 
@@ -71,7 +72,15 @@ namespace Microservice.AuthService.Infrastructure.Services
             if (to.HasValue)
                 request.To = Timestamp.FromDateTime(to.Value.ToUniversalTime());
 
-            return await _client.GetSessionListAsync(request);
+            try
+            {
+                return await _client.GetSessionListAsync(request);
+            }
+            catch (RpcException ex) when (ex.StatusCode == StatusCode.NotFound)
+            {
+                // Return empty list instead of throwing
+                return new SessionListResponse { Sessions = { } };
+            }
         }
 
         // session check for suspicious detection. this is used rabbitmq consumer to check session list

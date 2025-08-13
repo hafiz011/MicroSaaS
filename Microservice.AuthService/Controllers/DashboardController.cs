@@ -1,4 +1,5 @@
-﻿using Microservice.AuthService.Entities;
+﻿using Grpc.Core;
+using Microservice.AuthService.Entities;
 using Microservice.AuthService.Infrastructure.Interfaces;
 using Microservice.AuthService.Infrastructure.Services;
 using Microservice.AuthService.Models;
@@ -41,18 +42,25 @@ namespace Microservice.AuthService.Controllers
             if (user.TenantId == null)
                 return NotFound(new { Message = "No API key associated with this user." });
 
-            var suspicious = await _grpcServiceClient.GetSessionList(
-                user.TenantId,
-                query.From,
-                query.To,
-                query.Device,
-                query.Country);
+            try
+            {
+                var sessions = await _grpcServiceClient.GetSessionList(
+                    user.TenantId,
+                    query.From,
+                    query.To,
+                    query.Device,
+                    query.Country
+                );
 
-            if (suspicious == null)
-                return NotFound();
-
-            return Ok(suspicious);
+                // Always return 200 OK with sessions (could be empty)
+                return Ok(sessions);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching active sessions." });
+            }
         }
+
 
         // active user details
         //[HttpGet("ActiveUserDetails")]
