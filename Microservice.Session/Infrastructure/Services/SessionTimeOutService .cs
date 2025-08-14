@@ -63,7 +63,7 @@ namespace Microservice.Session.Infrastructure.Services
                             if (idleTime.TotalMinutes < idleMinutes) continue;
 
                             var update = Builders<Sessions>.Update
-                                .Set(s => s.Logout_Time, lastActivity.Time_Stamp.AddMinutes(3))
+                                .Set(s => s.Logout_Time, lastActivity.Time_Stamp.AddSeconds(20))
                                 .Set(s => s.isActive, false);
 
                             await _sessionsCollection.UpdateOneAsync(

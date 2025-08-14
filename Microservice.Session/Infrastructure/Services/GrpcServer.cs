@@ -265,6 +265,60 @@ namespace Microservice.Session.Infrastructure.Services
             return response;
         }
 
+        // Session Analytics. This is used to get session analytics for a tenant
+        public override async Task<SessionAnalyticsResponse> GetSessionAnalytics(SessionListRequest request, ServerCallContext context)
+        {
+            var sessions = await _sessionRepository.GetSessionsAnalytics(
+                request.TenantId,
+                request.From?.ToDateTime(),
+                request.To?.ToDateTime(),
+                request.Device,
+                request.Country
+            );
+
+            var response = new SessionAnalyticsResponse();
+
+            // Example: daily sessions aggregation
+            var dailyGroups = sessions
+                .GroupBy(s => s.Local_Time.Date)
+                .Select(g => new DailySession
+                {
+                    Date = g.Key.ToString("dd-MM-yyyy"),
+                    Sessions = g.Count(),
+                    Suspicious = g.Count(s => s.isSuspicious)
+                })
+                .ToList();
+
+            response.DailySessions.AddRange(dailyGroups);
+
+            // Device distribution aggregation
+            var deviceDist = sessions
+                .GroupBy(s => s.Device.Device_Type)
+                .Select(g => new DeviceDistribution
+                {
+                    Name = g.Key,
+                    Value = g.Count()
+                })
+                .ToList();
+
+            response.DeviceDistribution.AddRange(deviceDist);
+
+            // Country distribution aggregation
+            var totalSessions = sessions.Count;
+
+            // Bounce rate only based on session duration (<10 seconds)
+            var bounceCount = sessions.Count(s => s.Logout_Time.HasValue &&
+                                                  (s.Logout_Time.Value - s.Login_Time).TotalSeconds < 30);
+
+            response.SessionMetrics = new SessionMetrics
+            {
+                BounceRate = totalSessions > 0 ? (double)bounceCount / totalSessions * 100 : 0
+            };
+
+            return response;
+
+        }
+
 
     }
 }

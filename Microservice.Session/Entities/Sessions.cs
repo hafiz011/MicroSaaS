@@ -18,6 +18,7 @@ namespace Microservice.Session.Entities
         public DateTime? Logout_Time { get; set; }
         public bool isActive { get; set; }
         public bool isVPN { get; set; }
+        public bool isSuspicious { get; set; }
     }
     public class DeviceInfo
     {

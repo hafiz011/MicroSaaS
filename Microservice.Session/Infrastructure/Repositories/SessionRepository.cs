@@ -96,8 +96,27 @@ namespace Microservice.Session.Infrastructure.Repositories
             return await _collection.Find(filterBuilder.And(filters)).Sort(sort).Limit(limit).ToListAsync();
         }
 
+        // sessions analytics chart
+        public async Task<List<Sessions>> GetSessionsAnalytics(string tenantId, DateTime? from, DateTime? to, string device, string country)
+        {
+            var filterBuilder = Builders<Sessions>.Filter;
+            var filters = new List<FilterDefinition<Sessions>>
+            {
+                filterBuilder.Eq(x => x.Tenant_Id, tenantId),
+            };
 
+            if (!string.IsNullOrEmpty(device))
+                filters.Add(filterBuilder.Eq(x => x.Device.Device_Type, device));
 
+            if (!string.IsNullOrEmpty(country))
+                filters.Add(filterBuilder.Eq(x => x.Geo_Location.Country, country));
 
+            if (from.HasValue)
+                filters.Add(filterBuilder.Gte(x => x.Local_Time, from.Value));
+            if (to.HasValue)
+                filters.Add(filterBuilder.Lte(x => x.Local_Time, to.Value));
+
+            return await _collection.Find(filterBuilder.And(filters)).ToListAsync();
+        }
     }
 }

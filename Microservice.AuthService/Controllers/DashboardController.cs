@@ -210,6 +210,43 @@ namespace Microservice.AuthService.Controllers
 
 
 
+        /// <summary>
+        /// Get session overview analytics data.
+        /// Retrieves daily sessions trend, device distribution, and session metrics.
+        /// Data is fetched from gRPC service or database.
+        /// Returns a <see cref="SessionAnalyticsResponse"/> object containing
+        /// all chart data required for the analytics dashboard.
+        /// </summary>
+
+        [HttpGet("analytics")]
+        public async Task<IActionResult> GetSessionOverview([FromQuery] Query query)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized(new { Message = "User not authenticated." });
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user?.TenantId == null)
+                return NotFound(new { Message = "No API key associated with this user." });
+
+            try
+            {
+                // Fetch session analytics data from gRPC service
+                var response = await _grpcServiceClient.GetSessionAnalytics(
+                    user.TenantId,
+                    query.From,
+                    query.To,
+                    query.Device,
+                    query.Country
+                );
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while fetching analytics data." });
+            }
+        }
 
 
 

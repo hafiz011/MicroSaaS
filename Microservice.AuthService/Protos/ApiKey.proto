@@ -25,8 +25,12 @@ service ApiKey {
   // Session details
   rpc GetSessionDetails(SessionDetailsRequest) returns (SessionDetailsResponse);
 
+  // Session analytics overview
+  rpc GetSessionAnalytics(SessionListRequest) returns (SessionAnalyticsResponse);
+
 }
 
+// ================= NEW Messages for api key =================
 // api key
 message ApiKeyRequest {
   string user_id = 1;
@@ -71,6 +75,7 @@ message RenewApiKeyRequest {
 	bool is_revoked = 5;
 }
 
+// ================= NEW Messages for user information =================
 // user info
 message UserInfoRequest{
 	string user_id = 1;
@@ -83,6 +88,7 @@ message UserInfoResponse{
 	string lastlogin = 3;
 }
 
+// ================= NEW Messages for active Session =================
 // active Session
 message SessionListRequest {
   string TenantId = 1;
@@ -106,6 +112,8 @@ message Session {
 	string Sessionid = 11;
 }
 
+// ================= NEW Messages for suspicious detection =================
+// SessionListResponse
 message SessionListResponse {
   repeated Session sessions = 1;
 }
@@ -152,4 +160,30 @@ message SessionDetailsResponse {
 	string city = 10;
 	string country = 11;
 	string region = 12;
+}
+
+// ================= NEW Messages for Analytics chart =================
+// Top-level analytics response
+message SessionAnalyticsResponse {
+  repeated DailySession daily_sessions = 1;
+  repeated DeviceDistribution device_distribution = 2;
+  SessionMetrics session_metrics = 3;
+}
+
+// Daily session data
+message DailySession {
+  string date = 1; // format: "YYYY-MM-DD"
+  int32 sessions = 2;
+  int32 suspicious = 3;
+}
+
+// Device distribution data
+message DeviceDistribution {
+  string name = 1; // "Mobile", "Desktop", "Tablet", etc."
+  double value = 2; // percentage or count
+}
+
+// Session metrics data
+message SessionMetrics {
+  double bounce_rate = 1; // percentage
 }

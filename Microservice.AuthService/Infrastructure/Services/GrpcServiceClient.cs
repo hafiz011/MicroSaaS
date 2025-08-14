@@ -103,5 +103,50 @@ namespace Microservice.AuthService.Infrastructure.Services
         //{
         //    throw new NotImplementedException();
         //}
+
+
+
+
+
+
+
+
+        // get session analytics. this is used for dashboard controller to show session analytics
+        public async Task<SessionAnalyticsResponse> GetSessionAnalytics(
+            string tenantId, DateTime? from, DateTime? to, string? device, string? country)
+        {
+            var request = new SessionListRequest
+            {
+                TenantId = tenantId,
+                Device = device ?? "",
+                Country = country ?? ""
+            };
+
+            if (from.HasValue)
+                request.From = Timestamp.FromDateTime(from.Value.ToUniversalTime());
+
+            if (to.HasValue)
+                request.To = Timestamp.FromDateTime(to.Value.ToUniversalTime());
+
+            try
+            {
+                return await _client.GetSessionAnalyticsAsync(request);
+            }
+            catch (RpcException ex) when (ex.StatusCode == StatusCode.NotFound)
+            {
+                // Return empty object instead of throwing
+                return new SessionAnalyticsResponse
+                {
+                    DailySessions = { },
+                    DeviceDistribution = { },
+                    SessionMetrics = new SessionMetrics { BounceRate = 0 }
+                };
+            }
+        }
+
+
+
+
+
     }
 }
