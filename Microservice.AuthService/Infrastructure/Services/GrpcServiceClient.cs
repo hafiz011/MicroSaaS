@@ -139,7 +139,15 @@ namespace Microservice.AuthService.Infrastructure.Services
                 {
                     DailySessions = { },
                     DeviceDistribution = { },
-                    SessionMetrics = new SessionMetrics { BounceRate = 0 }
+                    SessionMetrics = new SessionMetrics
+                    {
+                        AvgDuration = 0,
+                        AvgDurationTrend = 0,
+                        BounceRate = 0,
+                        BounceRateTrend = 0,
+                        AvgActions = 0,
+                        AvgActionsTrend = 0
+                    }
                 };
             }
         }

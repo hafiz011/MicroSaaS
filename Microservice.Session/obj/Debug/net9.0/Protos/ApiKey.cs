@@ -70,20 +70,23 @@ namespace Microservice.Session.Protos {
             "bhIoCg9zZXNzaW9uX21ldHJpY3MYAyABKAsyDy5TZXNzaW9uTWV0cmljcyJC",
             "CgxEYWlseVNlc3Npb24SDAoEZGF0ZRgBIAEoCRIQCghzZXNzaW9ucxgCIAEo",
             "BRISCgpzdXNwaWNpb3VzGAMgASgFIjEKEkRldmljZURpc3RyaWJ1dGlvbhIM",
-            "CgRuYW1lGAEgASgJEg0KBXZhbHVlGAIgASgBIiUKDlNlc3Npb25NZXRyaWNz",
-            "EhMKC2JvdW5jZV9yYXRlGAEgASgBMoMECgZBcGlLZXkSLAoJR2V0QXBpS2V5",
-            "Eg4uQXBpS2V5UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEjYKDENyZWF0ZUFw",
-            "aUtleRIULkNyZWF0ZUFwaUtleVJlcXVlc3QaEC5BcGlIYXNoUmVzcG9uc2US",
-            "NAoQUmVnZW5lcmF0ZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaEC5BcGlIYXNo",
-            "UmVzcG9uc2USMwoLUmVuZXdBcGlLZXkSEy5SZW5ld0FwaUtleVJlcXVlc3Qa",
-            "Dy5BcGlLZXlSZXNwb25zZRIvCgxSZXZva2VBcGlLZXkSDi5BcGlLZXlSZXF1",
-            "ZXN0Gg8uQXBpS2V5UmVzcG9uc2USMgoLR2V0VXNlckluZm8SEC5Vc2VySW5m",
-            "b1JlcXVlc3QaES5Vc2VySW5mb1Jlc3BvbnNlEjsKDkdldFNlc3Npb25MaXN0",
-            "EhMuU2Vzc2lvbkxpc3RSZXF1ZXN0GhQuU2Vzc2lvbkxpc3RSZXNwb25zZRI/",
-            "ChBTZXNzaW9uTGlzdENoZWNrEhQuU2Vzc2lvbkNoZWNrUmVxdWVzdBoVLlNl",
-            "c3Npb25DaGVja1Jlc3BvbmNlEkUKE0dldFNlc3Npb25BbmFseXRpY3MSEy5T",
-            "ZXNzaW9uTGlzdFJlcXVlc3QaGS5TZXNzaW9uQW5hbHl0aWNzUmVzcG9uc2VC",
-            "HqoCG01pY3Jvc2VydmljZS5TZXNzaW9uLlByb3Rvc2IGcHJvdG8z"));
+            "CgRuYW1lGAEgASgJEg0KBXZhbHVlGAIgASgBIqIBCg5TZXNzaW9uTWV0cmlj",
+            "cxIUCgxhdmdfZHVyYXRpb24YASABKAESGgoSYXZnX2R1cmF0aW9uX3RyZW5k",
+            "GAIgASgBEhMKC2JvdW5jZV9yYXRlGAMgASgBEhkKEWJvdW5jZV9yYXRlX3Ry",
+            "ZW5kGAQgASgBEhMKC2F2Z19hY3Rpb25zGAUgASgBEhkKEWF2Z19hY3Rpb25z",
+            "X3RyZW5kGAYgASgBMoMECgZBcGlLZXkSLAoJR2V0QXBpS2V5Eg4uQXBpS2V5",
+            "UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEjYKDENyZWF0ZUFwaUtleRIULkNy",
+            "ZWF0ZUFwaUtleVJlcXVlc3QaEC5BcGlIYXNoUmVzcG9uc2USNAoQUmVnZW5l",
+            "cmF0ZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaEC5BcGlIYXNoUmVzcG9uc2US",
+            "MwoLUmVuZXdBcGlLZXkSEy5SZW5ld0FwaUtleVJlcXVlc3QaDy5BcGlLZXlS",
+            "ZXNwb25zZRIvCgxSZXZva2VBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0Gg8uQXBp",
+            "S2V5UmVzcG9uc2USMgoLR2V0VXNlckluZm8SEC5Vc2VySW5mb1JlcXVlc3Qa",
+            "ES5Vc2VySW5mb1Jlc3BvbnNlEjsKDkdldFNlc3Npb25MaXN0EhMuU2Vzc2lv",
+            "bkxpc3RSZXF1ZXN0GhQuU2Vzc2lvbkxpc3RSZXNwb25zZRI/ChBTZXNzaW9u",
+            "TGlzdENoZWNrEhQuU2Vzc2lvbkNoZWNrUmVxdWVzdBoVLlNlc3Npb25DaGVj",
+            "a1Jlc3BvbmNlEkUKE0dldFNlc3Npb25BbmFseXRpY3MSEy5TZXNzaW9uTGlz",
+            "dFJlcXVlc3QaGS5TZXNzaW9uQW5hbHl0aWNzUmVzcG9uc2VCHqoCG01pY3Jv",
+            "c2VydmljZS5TZXNzaW9uLlByb3Rvc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -103,7 +106,7 @@ namespace Microservice.Session.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionAnalyticsResponse), global::Microservice.Session.Protos.SessionAnalyticsResponse.Parser, new[]{ "DailySessions", "DeviceDistribution", "SessionMetrics" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.DailySession), global::Microservice.Session.Protos.DailySession.Parser, new[]{ "Date", "Sessions", "Suspicious" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.DeviceDistribution), global::Microservice.Session.Protos.DeviceDistribution.Parser, new[]{ "Name", "Value" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionMetrics), global::Microservice.Session.Protos.SessionMetrics.Parser, new[]{ "BounceRate" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionMetrics), global::Microservice.Session.Protos.SessionMetrics.Parser, new[]{ "AvgDuration", "AvgDurationTrend", "BounceRate", "BounceRateTrend", "AvgActions", "AvgActionsTrend" }, null, null, null, null)
           }));
     }
     #endregion
@@ -5462,7 +5465,12 @@ namespace Microservice.Session.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SessionMetrics(SessionMetrics other) : this() {
+      avgDuration_ = other.avgDuration_;
+      avgDurationTrend_ = other.avgDurationTrend_;
       bounceRate_ = other.bounceRate_;
+      bounceRateTrend_ = other.bounceRateTrend_;
+      avgActions_ = other.avgActions_;
+      avgActionsTrend_ = other.avgActionsTrend_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5472,11 +5480,41 @@ namespace Microservice.Session.Protos {
       return new SessionMetrics(this);
     }
 
+    /// <summary>Field number for the "avg_duration" field.</summary>
+    public const int AvgDurationFieldNumber = 1;
+    private double avgDuration_;
+    /// <summary>
+    /// seconds
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double AvgDuration {
+      get { return avgDuration_; }
+      set {
+        avgDuration_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "avg_duration_trend" field.</summary>
+    public const int AvgDurationTrendFieldNumber = 2;
+    private double avgDurationTrend_;
+    /// <summary>
+    /// %
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double AvgDurationTrend {
+      get { return avgDurationTrend_; }
+      set {
+        avgDurationTrend_ = value;
+      }
+    }
+
     /// <summary>Field number for the "bounce_rate" field.</summary>
-    public const int BounceRateFieldNumber = 1;
+    public const int BounceRateFieldNumber = 3;
     private double bounceRate_;
     /// <summary>
-    /// percentage
+    /// %
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -5484,6 +5522,51 @@ namespace Microservice.Session.Protos {
       get { return bounceRate_; }
       set {
         bounceRate_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bounce_rate_trend" field.</summary>
+    public const int BounceRateTrendFieldNumber = 4;
+    private double bounceRateTrend_;
+    /// <summary>
+    /// %
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double BounceRateTrend {
+      get { return bounceRateTrend_; }
+      set {
+        bounceRateTrend_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "avg_actions" field.</summary>
+    public const int AvgActionsFieldNumber = 5;
+    private double avgActions_;
+    /// <summary>
+    /// number of actions
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double AvgActions {
+      get { return avgActions_; }
+      set {
+        avgActions_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "avg_actions_trend" field.</summary>
+    public const int AvgActionsTrendFieldNumber = 6;
+    private double avgActionsTrend_;
+    /// <summary>
+    /// %
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public double AvgActionsTrend {
+      get { return avgActionsTrend_; }
+      set {
+        avgActionsTrend_ = value;
       }
     }
 
@@ -5502,7 +5585,12 @@ namespace Microservice.Session.Protos {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(AvgDuration, other.AvgDuration)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(AvgDurationTrend, other.AvgDurationTrend)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(BounceRate, other.BounceRate)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(BounceRateTrend, other.BounceRateTrend)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(AvgActions, other.AvgActions)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(AvgActionsTrend, other.AvgActionsTrend)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5510,7 +5598,12 @@ namespace Microservice.Session.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (AvgDuration != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(AvgDuration);
+      if (AvgDurationTrend != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(AvgDurationTrend);
       if (BounceRate != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(BounceRate);
+      if (BounceRateTrend != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(BounceRateTrend);
+      if (AvgActions != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(AvgActions);
+      if (AvgActionsTrend != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(AvgActionsTrend);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5529,9 +5622,29 @@ namespace Microservice.Session.Protos {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (BounceRate != 0D) {
+      if (AvgDuration != 0D) {
         output.WriteRawTag(9);
+        output.WriteDouble(AvgDuration);
+      }
+      if (AvgDurationTrend != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(AvgDurationTrend);
+      }
+      if (BounceRate != 0D) {
+        output.WriteRawTag(25);
         output.WriteDouble(BounceRate);
+      }
+      if (BounceRateTrend != 0D) {
+        output.WriteRawTag(33);
+        output.WriteDouble(BounceRateTrend);
+      }
+      if (AvgActions != 0D) {
+        output.WriteRawTag(41);
+        output.WriteDouble(AvgActions);
+      }
+      if (AvgActionsTrend != 0D) {
+        output.WriteRawTag(49);
+        output.WriteDouble(AvgActionsTrend);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -5543,9 +5656,29 @@ namespace Microservice.Session.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (BounceRate != 0D) {
+      if (AvgDuration != 0D) {
         output.WriteRawTag(9);
+        output.WriteDouble(AvgDuration);
+      }
+      if (AvgDurationTrend != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(AvgDurationTrend);
+      }
+      if (BounceRate != 0D) {
+        output.WriteRawTag(25);
         output.WriteDouble(BounceRate);
+      }
+      if (BounceRateTrend != 0D) {
+        output.WriteRawTag(33);
+        output.WriteDouble(BounceRateTrend);
+      }
+      if (AvgActions != 0D) {
+        output.WriteRawTag(41);
+        output.WriteDouble(AvgActions);
+      }
+      if (AvgActionsTrend != 0D) {
+        output.WriteRawTag(49);
+        output.WriteDouble(AvgActionsTrend);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -5557,7 +5690,22 @@ namespace Microservice.Session.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (AvgDuration != 0D) {
+        size += 1 + 8;
+      }
+      if (AvgDurationTrend != 0D) {
+        size += 1 + 8;
+      }
       if (BounceRate != 0D) {
+        size += 1 + 8;
+      }
+      if (BounceRateTrend != 0D) {
+        size += 1 + 8;
+      }
+      if (AvgActions != 0D) {
+        size += 1 + 8;
+      }
+      if (AvgActionsTrend != 0D) {
         size += 1 + 8;
       }
       if (_unknownFields != null) {
@@ -5572,8 +5720,23 @@ namespace Microservice.Session.Protos {
       if (other == null) {
         return;
       }
+      if (other.AvgDuration != 0D) {
+        AvgDuration = other.AvgDuration;
+      }
+      if (other.AvgDurationTrend != 0D) {
+        AvgDurationTrend = other.AvgDurationTrend;
+      }
       if (other.BounceRate != 0D) {
         BounceRate = other.BounceRate;
+      }
+      if (other.BounceRateTrend != 0D) {
+        BounceRateTrend = other.BounceRateTrend;
+      }
+      if (other.AvgActions != 0D) {
+        AvgActions = other.AvgActions;
+      }
+      if (other.AvgActionsTrend != 0D) {
+        AvgActionsTrend = other.AvgActionsTrend;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -5595,7 +5758,27 @@ namespace Microservice.Session.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 9: {
+            AvgDuration = input.ReadDouble();
+            break;
+          }
+          case 17: {
+            AvgDurationTrend = input.ReadDouble();
+            break;
+          }
+          case 25: {
             BounceRate = input.ReadDouble();
+            break;
+          }
+          case 33: {
+            BounceRateTrend = input.ReadDouble();
+            break;
+          }
+          case 41: {
+            AvgActions = input.ReadDouble();
+            break;
+          }
+          case 49: {
+            AvgActionsTrend = input.ReadDouble();
             break;
           }
         }
@@ -5618,7 +5801,27 @@ namespace Microservice.Session.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 9: {
+            AvgDuration = input.ReadDouble();
+            break;
+          }
+          case 17: {
+            AvgDurationTrend = input.ReadDouble();
+            break;
+          }
+          case 25: {
             BounceRate = input.ReadDouble();
+            break;
+          }
+          case 33: {
+            BounceRateTrend = input.ReadDouble();
+            break;
+          }
+          case 41: {
+            AvgActions = input.ReadDouble();
+            break;
+          }
+          case 49: {
+            AvgActionsTrend = input.ReadDouble();
             break;
           }
         }

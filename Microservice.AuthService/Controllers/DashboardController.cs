@@ -240,13 +240,37 @@ namespace Microservice.AuthService.Controllers
                     query.Country
                 );
 
-                return Ok(response);
+                // Map gRPC response to API DTO (camelCase for frontend)
+                var result = new
+                {
+                    dailySessions = response.DailySessions.Select(ds => new {
+                        date = ds.Date,
+                        sessions = ds.Sessions,
+                        suspicious = ds.Suspicious
+                    }),
+                    deviceDistribution = response.DeviceDistribution.Select(dd => new {
+                        name = dd.Name,
+                        value = dd.Value
+                    }),
+                    sessionMetrics = new
+                    {
+                        avgDuration = response.SessionMetrics.AvgDuration,
+                        avgDurationTrend = response.SessionMetrics.AvgDurationTrend,
+                        bounceRate = response.SessionMetrics.BounceRate,
+                        bounceRateTrend = response.SessionMetrics.BounceRateTrend,
+                        avgActions = response.SessionMetrics.AvgActions,
+                        avgActionsTrend = response.SessionMetrics.AvgActionsTrend
+                    }
+                };
+
+                return Ok(result);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, new { Message = "An error occurred while fetching analytics data." });
             }
         }
+
 
 
 

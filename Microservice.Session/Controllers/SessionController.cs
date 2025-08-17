@@ -89,11 +89,12 @@ namespace Microservice.Session.Controllers
                         Name = dto.Name,
                         Email = dto.Email,
                         Last_login = dto.LocalTime,
-                        Created_at = DateTime.UtcNow
+                        //Created_at = DateTime.UtcNow
                     };
 
                     if (userinfo == null) //if user is null than create user
                     {
+                        user.Created_at = DateTime.UtcNow;
                         await _userInfoRepository.CreateUserAsync(user);
                     }
                     else
@@ -134,7 +135,6 @@ namespace Microservice.Session.Controllers
                             Screen_Resolution = dto.Device.Screen_Resolution
                         }
                     };
-
 
                     _publisher.PublishSessionRiskCheck(new SessionRiskCheckMessage
                     {

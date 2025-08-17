@@ -5,6 +5,7 @@ using Microservice.Session.Infrastructure.Interfaces;
 using Microservice.Session.Protos;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Http;
+using System.Globalization;
 using ProtoSession = Microservice.Session.Protos.Session;
 
 namespace Microservice.Session.Infrastructure.Services
@@ -277,45 +278,160 @@ namespace Microservice.Session.Infrastructure.Services
             );
 
             var response = new SessionAnalyticsResponse();
+            if (sessions == null || !sessions.Any())
+                return response; // return empty response if no data
 
-            // Example: daily sessions aggregation
+            // ---------------- Daily Sessions ----------------
             var dailyGroups = sessions
-                .GroupBy(s => s.Local_Time.Date)
+                .GroupBy(s => s.Login_Time.Date)
                 .Select(g => new DailySession
                 {
-                    Date = g.Key.ToString("dd-MM-yyyy"),
+                    Date = g.Key.ToString("yyyy-MM-dd"), // ISO format
                     Sessions = g.Count(),
                     Suspicious = g.Count(s => s.isSuspicious)
                 })
+                .OrderByDescending(x => x.Date) // latest date first
                 .ToList();
 
             response.DailySessions.AddRange(dailyGroups);
 
-            // Device distribution aggregation
+
+            // ---------------- Device Distribution ----------------
             var deviceDist = sessions
-                .GroupBy(s => s.Device.Device_Type)
+                .Where(s => s.Device != null && !string.IsNullOrEmpty(s.Device.Device_Type))
+                .GroupBy(s => s.Device.Device_Type.ToLower()) // normalize
                 .Select(g => new DeviceDistribution
                 {
-                    Name = g.Key,
+                    Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(g.Key), // "desktop" => "Desktop"
                     Value = g.Count()
                 })
+                .OrderByDescending(d => d.Value) // most used device first
                 .ToList();
 
             response.DeviceDistribution.AddRange(deviceDist);
 
-            // Country distribution aggregation
+            // ---------------- Country Distribution ----------------
+            //var countryDist = sessions
+            //    .Where(s => s.Geo_Location != null && !string.IsNullOrEmpty(s.Geo_Location.Country))
+            //    .GroupBy(s => s.Geo_Location.Country)
+            //    .Select(g => new CountryDistribution
+            //    {
+            //        Name = g.Key,
+            //        Value = g.Count()
+            //    })
+            //    .ToList();
+
+            //response.CountryDistribution.AddRange(countryDist);
+
+            //var activeUsers = sessions
+            //    .Select(s => s.User_Id && s.isActive)
+            //    .Distinct()
+            //    .Count();
+
+
+            // ---------------- Session Metrics ----------------
             var totalSessions = sessions.Count;
 
-            // Bounce rate only based on session duration (<10 seconds)
+            // Bounce rate (<30 sec session)
             var bounceCount = sessions.Count(s => s.Logout_Time.HasValue &&
                                                   (s.Logout_Time.Value - s.Login_Time).TotalSeconds < 30);
 
-            response.SessionMetrics = new SessionMetrics
+            var bounceRate = totalSessions > 0 ? (double)bounceCount / totalSessions * 100 : 0;
+
+            // Avg session duration (seconds)
+            var avgDuration = sessions
+                .Where(s => s.Logout_Time.HasValue)
+                .Select(s => (s.Logout_Time.Value - s.Login_Time).TotalSeconds)
+                .DefaultIfEmpty(0)
+                .Average();
+
+            // ---------------- Avg Actions ----------------
+            var avgActions = sessions
+                .Select(s => s.ActionCount)   // ensure ActionCount exists in your session model
+                .DefaultIfEmpty(0)
+                .Average();
+
+            // ---------------- Trends Calculation ----------------
+            var from = request.From?.ToDateTime();
+            var to = request.To?.ToDateTime();
+
+            if (from.HasValue && to.HasValue)
             {
-                BounceRate = totalSessions > 0 ? (double)bounceCount / totalSessions * 100 : 0
-            };
+                var duration = to.Value - from.Value;
+
+                var prevTo = from.Value.AddTicks(-1);
+                var prevFrom = prevTo - duration;
+
+                var previousSessions = await _sessionRepository.GetSessionsAnalytics(
+                    request.TenantId,
+                    prevFrom,
+                    prevTo,
+                    request.Device,
+                    request.Country
+                );
+
+                var totalPreviousSessions = previousSessions.Count;
+
+                // previous Avg session duration (seconds)
+                var previousAvgDuration = previousSessions
+                    .Where(s => s.Logout_Time.HasValue)
+                    .Select(s => (s.Logout_Time.Value - s.Login_Time).TotalSeconds)
+                    .DefaultIfEmpty(0)
+                    .Average();
+
+                var avgDurationTrend = previousAvgDuration > 0
+                    ? ((avgDuration - previousAvgDuration) / previousAvgDuration) * 100
+                    : 0;
+
+                // previous Bounce rate (<30 sec session)
+                var previousBounceCount = previousSessions.Count(s => s.Logout_Time.HasValue &&
+                                                          (s.Logout_Time.Value - s.Login_Time).TotalSeconds < 30);
+
+                var previousBounceRate = totalPreviousSessions > 0
+                    ? (double)previousBounceCount / totalPreviousSessions * 100
+                    : 0;
+
+                var bounceRateTrend = previousBounceRate > 0
+                    ? ((bounceRate - previousBounceRate) / previousBounceRate) * 100
+                    : 0;
+
+                // Previous sessions to avgActions
+                var previousAvgActions = previousSessions
+                    .Select(s => s.ActionCount)
+                    .DefaultIfEmpty(0)
+                    .Average();
+
+                // Trend for avgActions
+                var avgActionsTrend = previousAvgActions > 0
+                    ? ((avgActions - previousAvgActions) / previousAvgActions) * 100
+                    : 0;
+
+                response.SessionMetrics = new SessionMetrics
+                {
+                    AvgDuration = avgDuration,
+                    AvgDurationTrend = avgDurationTrend,
+                    BounceRate = bounceRate,
+                    BounceRateTrend = bounceRateTrend,
+                    AvgActions = avgActions,
+                    AvgActionsTrend = avgActionsTrend
+                };
+            }
+            else
+            {
+                response.SessionMetrics = new SessionMetrics
+                {
+                    AvgDuration = avgDuration,
+                    AvgDurationTrend = 0,
+                    BounceRate = bounceRate,
+                    BounceRateTrend = 0,
+                    AvgActions = avgActions,
+                    AvgActionsTrend = 0,
+                };
+            }
 
             return response;
+
+
 
         }
 

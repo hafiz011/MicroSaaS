@@ -185,5 +185,10 @@ message DeviceDistribution {
 
 // Session metrics data
 message SessionMetrics {
-  double bounce_rate = 1; // percentage
+  double avg_duration = 1;          // seconds
+  double avg_duration_trend = 2;    // %
+  double bounce_rate = 3;           // %
+  double bounce_rate_trend = 4;     // %
+  double avg_actions = 5;           // number of actions
+  double avg_actions_trend = 6;     // %
 }

@@ -19,6 +19,7 @@ namespace Microservice.Session.Entities
         public bool isActive { get; set; }
         public bool isVPN { get; set; }
         public bool isSuspicious { get; set; }
+        public int ActionCount { get; set; } = 0;
     }
     public class DeviceInfo
     {

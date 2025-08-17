@@ -70,11 +70,11 @@ namespace Microservice.Session.Infrastructure.Repositories
                 filters.Add(filterBuilder.Eq(x => x.Geo_Location.Country, country));
 
             if (from.HasValue)
-                filters.Add(filterBuilder.Gte(x => x.Local_Time, from.Value));
+                filters.Add(filterBuilder.Gte(x => x.Login_Time, from.Value));
             if (to.HasValue)
-                filters.Add(filterBuilder.Lte(x => x.Local_Time, to.Value));
+                filters.Add(filterBuilder.Lte(x => x.Login_Time, to.Value));
 
-            var sort = Builders<Sessions>.Sort.Descending(x => x.Local_Time);
+            var sort = Builders<Sessions>.Sort.Descending(x => x.Login_Time);
 
             return await _collection.Find(filterBuilder.And(filters)).Sort(sort).ToListAsync();
         }

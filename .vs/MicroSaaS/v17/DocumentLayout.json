@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "D:\\GitHub\\MicroSaaS\\MicroService\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\infrastructure\\services\\grpcserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\services\\grpcserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\infrastructure\\repositories\\sessionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\repositories\\sessionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\microservice\\microservice.authservice\\infrastructure\\services\\grpcserviceclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\infrastructure\\services\\grpcserviceclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\infrastructure\\repositories\\userinforepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\repositories\\userinforepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\microservice\\microservice.authservice\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\protos\\apikey.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\protos\\apikey.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,13 +62,91 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserInfoRepository.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Infrastructure\\Repositories\\UserInfoRepository.cs",
+              "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\Repositories\\UserInfoRepository.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Infrastructure\\Repositories\\UserInfoRepository.cs",
+              "RelativeToolTip": "Microservice.Session\\Infrastructure\\Repositories\\UserInfoRepository.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwCEAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T11:12:45.991Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SessionController.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Controllers\\SessionController.cs",
+              "RelativeDocumentMoniker": "Microservice.Session\\Controllers\\SessionController.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Controllers\\SessionController.cs",
+              "RelativeToolTip": "Microservice.Session\\Controllers\\SessionController.cs",
+              "ViewState": "AgIAAMIAAAAAAAAAAAAAAMgAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T11:09:56.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ApiKey.proto",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Protos\\ApiKey.proto",
+              "RelativeDocumentMoniker": "Microservice.Session\\Protos\\ApiKey.proto",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Protos\\ApiKey.proto",
+              "RelativeToolTip": "Microservice.Session\\Protos\\ApiKey.proto",
+              "ViewState": "AgIAAIoAAAAAAAAAAAAAAJ4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
+              "WhenOpened": "2025-08-17T11:02:23.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SessionRepository.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Infrastructure\\Repositories\\SessionRepository.cs",
+              "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\Repositories\\SessionRepository.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Infrastructure\\Repositories\\SessionRepository.cs",
+              "RelativeToolTip": "Microservice.Session\\Infrastructure\\Repositories\\SessionRepository.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAuwHQAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T08:24:12.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "GrpcServer.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Infrastructure\\Services\\GrpcServer.cs",
+              "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\Services\\GrpcServer.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Infrastructure\\Services\\GrpcServer.cs",
+              "RelativeToolTip": "Microservice.Session\\Infrastructure\\Services\\GrpcServer.cs",
+              "ViewState": "AgIAACYBAAAAAAAAAAAAADQBAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T08:22:52.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GrpcServiceClient.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Services\\GrpcServiceClient.cs",
+              "RelativeDocumentMoniker": "Microservice.AuthService\\Infrastructure\\Services\\GrpcServiceClient.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Services\\GrpcServiceClient.cs",
+              "RelativeToolTip": "Microservice.AuthService\\Infrastructure\\Services\\GrpcServiceClient.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAowI0AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T05:42:50.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "DashboardController.cs",
               "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "Microservice.AuthService\\Controllers\\DashboardController.cs",
               "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Controllers\\DashboardController.cs",
               "RelativeToolTip": "Microservice.AuthService\\Controllers\\DashboardController.cs",
-              "ViewState": "AgIAANEAAAAAAAAAAAAowNwAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAANQAAAAAAAAAAAAgwOgAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-14T10:37:42.318Z",
               "EditorCaption": ""
