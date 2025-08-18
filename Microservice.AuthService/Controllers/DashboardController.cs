@@ -252,6 +252,13 @@ namespace Microservice.AuthService.Controllers
                         name = dd.Name,
                         value = dd.Value
                     }),
+                    deviceMetrics = response.DeviceMetrics.Select(dm => new {
+                        name = dm.Name,
+                        total = dm.Total,
+                        avgDuration = dm.AvgDuration,
+                        avgActions = dm.AvgActions
+                    }),
+
                     sessionMetrics = new
                     {
                         avgDuration = response.SessionMetrics.AvgDuration,

@@ -139,6 +139,7 @@ namespace Microservice.AuthService.Infrastructure.Services
                 {
                     DailySessions = { },
                     DeviceDistribution = { },
+                    DeviceMetrics = { },
                     SessionMetrics = new SessionMetrics
                     {
                         AvgDuration = 0,

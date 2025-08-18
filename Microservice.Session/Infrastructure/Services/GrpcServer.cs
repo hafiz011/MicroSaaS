@@ -310,6 +310,33 @@ namespace Microservice.Session.Infrastructure.Services
 
             response.DeviceDistribution.AddRange(deviceDist);
 
+
+            // ---------------- Device Metrics ----------------
+            var deviceMetrics = sessions
+                .Where(s => s.Device != null && !string.IsNullOrEmpty(s.Device.Device_Type))
+                .GroupBy(s => s.Device.Device_Type.ToLower())
+                .Select(g => new DeviceMetrics
+                {
+                    Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(g.Key), // Mobile/Desktop/Tablet
+                    Total = g.Count(), // total sessions per device type
+                    AvgDuration = g
+                        .Where(s => s.Login_Time != null && s.Logout_Time.HasValue)
+                        .Select(s => (s.Logout_Time.Value - s.Login_Time).TotalSeconds)
+                        .DefaultIfEmpty(0)
+                        .Average(), // average session duration in seconds
+                    AvgActions = g
+                        .Select(s => s.ActionCount)
+                        .DefaultIfEmpty(0)
+                        .Average() // average actions per session
+                })
+                .OrderByDescending(d => d.Total) // sort by most used device
+                .ToList();
+
+
+
+
+
+
             // ---------------- Country Distribution ----------------
             //var countryDist = sessions
             //    .Where(s => s.Geo_Location != null && !string.IsNullOrEmpty(s.Geo_Location.Country))
