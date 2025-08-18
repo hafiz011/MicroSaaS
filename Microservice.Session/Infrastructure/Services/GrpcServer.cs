@@ -333,6 +333,7 @@ namespace Microservice.Session.Infrastructure.Services
                 .ToList();
 
 
+           response.DeviceMetrics.AddRange(deviceMetrics);
 
 
 
