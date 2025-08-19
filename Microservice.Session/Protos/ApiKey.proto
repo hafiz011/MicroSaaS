@@ -141,8 +141,7 @@ message SessionCheckResponce {
 message SessionAnalyticsResponse {
   repeated DailySession daily_sessions = 1;
   repeated DeviceDistribution device_distribution = 2;
-  repeated DeviceMetrics device_metrics = 3;
-  SessionMetrics session_metrics = 4;
+  SessionMetrics session_metrics = 3;
 }
 
 // Daily session data
@@ -154,11 +153,6 @@ message DailySession {
 
 // Device distribution data
 message DeviceDistribution {
-  string name = 1; // "Mobile", "Desktop", "Tablet", etc."
-  double value = 2; // percentage or count
-}
-
-message DeviceMetrics {
   string name = 1; // "Mobile", "Desktop", "Tablet", etc.
   int32 total = 2; // number of sessions
   double AvgDuration = 3; // seconds

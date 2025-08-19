@@ -72,34 +72,32 @@ namespace Microservice.AuthService.Protos {
             "LlRpbWVzdGFtcBIPCgd1c2VyX2lkGAQgASgJEhEKCXVzZXJfbmFtZRgFIAEo",
             "CRISCgp1c2VyX2VtYWlsGAYgASgJEhEKCWRldmljZV9vcxgHIAEoCRITCgtk",
             "ZXZpY2VfdHlwZRgIIAEoCRISCgppcF9hZGRyZXNzGAkgASgJEgwKBGNpdHkY",
-            "CiABKAkSDwoHY291bnRyeRgLIAEoCRIOCgZyZWdpb24YDCABKAkixQEKGFNl",
+            "CiABKAkSDwoHY291bnRyeRgLIAEoCRIOCgZyZWdpb24YDCABKAkinQEKGFNl",
             "c3Npb25BbmFseXRpY3NSZXNwb25zZRIlCg5kYWlseV9zZXNzaW9ucxgBIAMo",
             "CzINLkRhaWx5U2Vzc2lvbhIwChNkZXZpY2VfZGlzdHJpYnV0aW9uGAIgAygL",
-            "MhMuRGV2aWNlRGlzdHJpYnV0aW9uEiYKDmRldmljZV9tZXRyaWNzGAMgAygL",
-            "Mg4uRGV2aWNlTWV0cmljcxIoCg9zZXNzaW9uX21ldHJpY3MYBCABKAsyDy5T",
-            "ZXNzaW9uTWV0cmljcyJCCgxEYWlseVNlc3Npb24SDAoEZGF0ZRgBIAEoCRIQ",
-            "CghzZXNzaW9ucxgCIAEoBRISCgpzdXNwaWNpb3VzGAMgASgFIjEKEkRldmlj",
-            "ZURpc3RyaWJ1dGlvbhIMCgRuYW1lGAEgASgJEg0KBXZhbHVlGAIgASgBIlUK",
-            "DURldmljZU1ldHJpY3MSDAoEbmFtZRgBIAEoCRINCgV0b3RhbBgCIAEoBRIT",
-            "CgtBdmdEdXJhdGlvbhgDIAEoARISCgpBdmdBY3Rpb25zGAQgASgBIqIBCg5T",
-            "ZXNzaW9uTWV0cmljcxIUCgxhdmdfZHVyYXRpb24YASABKAESGgoSYXZnX2R1",
-            "cmF0aW9uX3RyZW5kGAIgASgBEhMKC2JvdW5jZV9yYXRlGAMgASgBEhkKEWJv",
-            "dW5jZV9yYXRlX3RyZW5kGAQgASgBEhMKC2F2Z19hY3Rpb25zGAUgASgBEhkK",
-            "EWF2Z19hY3Rpb25zX3RyZW5kGAYgASgBMskECgZBcGlLZXkSLAoJR2V0QXBp",
-            "S2V5Eg4uQXBpS2V5UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEjYKDENyZWF0",
-            "ZUFwaUtleRIULkNyZWF0ZUFwaUtleVJlcXVlc3QaEC5BcGlIYXNoUmVzcG9u",
-            "c2USNAoQUmVnZW5lcmF0ZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaEC5BcGlI",
-            "YXNoUmVzcG9uc2USMwoLUmVuZXdBcGlLZXkSEy5SZW5ld0FwaUtleVJlcXVl",
-            "c3QaDy5BcGlLZXlSZXNwb25zZRIvCgxSZXZva2VBcGlLZXkSDi5BcGlLZXlS",
-            "ZXF1ZXN0Gg8uQXBpS2V5UmVzcG9uc2USMgoLR2V0VXNlckluZm8SEC5Vc2Vy",
-            "SW5mb1JlcXVlc3QaES5Vc2VySW5mb1Jlc3BvbnNlEjsKDkdldFNlc3Npb25M",
-            "aXN0EhMuU2Vzc2lvbkxpc3RSZXF1ZXN0GhQuU2Vzc2lvbkxpc3RSZXNwb25z",
-            "ZRI/ChBTZXNzaW9uTGlzdENoZWNrEhQuU2Vzc2lvbkNoZWNrUmVxdWVzdBoV",
-            "LlNlc3Npb25DaGVja1Jlc3BvbmNlEkQKEUdldFNlc3Npb25EZXRhaWxzEhYu",
-            "U2Vzc2lvbkRldGFpbHNSZXF1ZXN0GhcuU2Vzc2lvbkRldGFpbHNSZXNwb25z",
-            "ZRJFChNHZXRTZXNzaW9uQW5hbHl0aWNzEhMuU2Vzc2lvbkxpc3RSZXF1ZXN0",
-            "GhkuU2Vzc2lvbkFuYWx5dGljc1Jlc3BvbnNlQiKqAh9NaWNyb3NlcnZpY2Uu",
-            "QXV0aFNlcnZpY2UuUHJvdG9zYgZwcm90bzM="));
+            "MhMuRGV2aWNlRGlzdHJpYnV0aW9uEigKD3Nlc3Npb25fbWV0cmljcxgDIAEo",
+            "CzIPLlNlc3Npb25NZXRyaWNzIkIKDERhaWx5U2Vzc2lvbhIMCgRkYXRlGAEg",
+            "ASgJEhAKCHNlc3Npb25zGAIgASgFEhIKCnN1c3BpY2lvdXMYAyABKAUiWgoS",
+            "RGV2aWNlRGlzdHJpYnV0aW9uEgwKBG5hbWUYASABKAkSDQoFdG90YWwYAiAB",
+            "KAUSEwoLQXZnRHVyYXRpb24YAyABKAESEgoKQXZnQWN0aW9ucxgEIAEoASKi",
+            "AQoOU2Vzc2lvbk1ldHJpY3MSFAoMYXZnX2R1cmF0aW9uGAEgASgBEhoKEmF2",
+            "Z19kdXJhdGlvbl90cmVuZBgCIAEoARITCgtib3VuY2VfcmF0ZRgDIAEoARIZ",
+            "ChFib3VuY2VfcmF0ZV90cmVuZBgEIAEoARITCgthdmdfYWN0aW9ucxgFIAEo",
+            "ARIZChFhdmdfYWN0aW9uc190cmVuZBgGIAEoATLJBAoGQXBpS2V5EiwKCUdl",
+            "dEFwaUtleRIOLkFwaUtleVJlcXVlc3QaDy5BcGlLZXlSZXNwb25zZRI2CgxD",
+            "cmVhdGVBcGlLZXkSFC5DcmVhdGVBcGlLZXlSZXF1ZXN0GhAuQXBpSGFzaFJl",
+            "c3BvbnNlEjQKEFJlZ2VuZXJhdGVBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0GhAu",
+            "QXBpSGFzaFJlc3BvbnNlEjMKC1JlbmV3QXBpS2V5EhMuUmVuZXdBcGlLZXlS",
+            "ZXF1ZXN0Gg8uQXBpS2V5UmVzcG9uc2USLwoMUmV2b2tlQXBpS2V5Eg4uQXBp",
+            "S2V5UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEjIKC0dldFVzZXJJbmZvEhAu",
+            "VXNlckluZm9SZXF1ZXN0GhEuVXNlckluZm9SZXNwb25zZRI7Cg5HZXRTZXNz",
+            "aW9uTGlzdBITLlNlc3Npb25MaXN0UmVxdWVzdBoULlNlc3Npb25MaXN0UmVz",
+            "cG9uc2USPwoQU2Vzc2lvbkxpc3RDaGVjaxIULlNlc3Npb25DaGVja1JlcXVl",
+            "c3QaFS5TZXNzaW9uQ2hlY2tSZXNwb25jZRJEChFHZXRTZXNzaW9uRGV0YWls",
+            "cxIWLlNlc3Npb25EZXRhaWxzUmVxdWVzdBoXLlNlc3Npb25EZXRhaWxzUmVz",
+            "cG9uc2USRQoTR2V0U2Vzc2lvbkFuYWx5dGljcxITLlNlc3Npb25MaXN0UmVx",
+            "dWVzdBoZLlNlc3Npb25BbmFseXRpY3NSZXNwb25zZUIiqgIfTWljcm9zZXJ2",
+            "aWNlLkF1dGhTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -118,10 +116,9 @@ namespace Microservice.AuthService.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionCheckResponce), global::Microservice.AuthService.Protos.SessionCheckResponce.Parser, new[]{ "Sessionlist" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionDetailsRequest), global::Microservice.AuthService.Protos.SessionDetailsRequest.Parser, new[]{ "TenantId", "SessionId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionDetailsResponse), global::Microservice.AuthService.Protos.SessionDetailsResponse.Parser, new[]{ "Session", "CreatedAt", "UpdatedAt", "UserId", "UserName", "UserEmail", "DeviceOs", "DeviceType", "IpAddress", "City", "Country", "Region" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionAnalyticsResponse), global::Microservice.AuthService.Protos.SessionAnalyticsResponse.Parser, new[]{ "DailySessions", "DeviceDistribution", "DeviceMetrics", "SessionMetrics" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionAnalyticsResponse), global::Microservice.AuthService.Protos.SessionAnalyticsResponse.Parser, new[]{ "DailySessions", "DeviceDistribution", "SessionMetrics" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.DailySession), global::Microservice.AuthService.Protos.DailySession.Parser, new[]{ "Date", "Sessions", "Suspicious" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.DeviceDistribution), global::Microservice.AuthService.Protos.DeviceDistribution.Parser, new[]{ "Name", "Value" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.DeviceMetrics), global::Microservice.AuthService.Protos.DeviceMetrics.Parser, new[]{ "Name", "Total", "AvgDuration", "AvgActions" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.DeviceDistribution), global::Microservice.AuthService.Protos.DeviceDistribution.Parser, new[]{ "Name", "Total", "AvgDuration", "AvgActions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionMetrics), global::Microservice.AuthService.Protos.SessionMetrics.Parser, new[]{ "AvgDuration", "AvgDurationTrend", "BounceRate", "BounceRateTrend", "AvgActions", "AvgActionsTrend" }, null, null, null, null)
           }));
     }
@@ -5569,7 +5566,6 @@ namespace Microservice.AuthService.Protos {
     public SessionAnalyticsResponse(SessionAnalyticsResponse other) : this() {
       dailySessions_ = other.dailySessions_.Clone();
       deviceDistribution_ = other.deviceDistribution_.Clone();
-      deviceMetrics_ = other.deviceMetrics_.Clone();
       sessionMetrics_ = other.sessionMetrics_ != null ? other.sessionMetrics_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -5602,19 +5598,8 @@ namespace Microservice.AuthService.Protos {
       get { return deviceDistribution_; }
     }
 
-    /// <summary>Field number for the "device_metrics" field.</summary>
-    public const int DeviceMetricsFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::Microservice.AuthService.Protos.DeviceMetrics> _repeated_deviceMetrics_codec
-        = pb::FieldCodec.ForMessage(26, global::Microservice.AuthService.Protos.DeviceMetrics.Parser);
-    private readonly pbc::RepeatedField<global::Microservice.AuthService.Protos.DeviceMetrics> deviceMetrics_ = new pbc::RepeatedField<global::Microservice.AuthService.Protos.DeviceMetrics>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::Microservice.AuthService.Protos.DeviceMetrics> DeviceMetrics {
-      get { return deviceMetrics_; }
-    }
-
     /// <summary>Field number for the "session_metrics" field.</summary>
-    public const int SessionMetricsFieldNumber = 4;
+    public const int SessionMetricsFieldNumber = 3;
     private global::Microservice.AuthService.Protos.SessionMetrics sessionMetrics_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -5642,7 +5627,6 @@ namespace Microservice.AuthService.Protos {
       }
       if(!dailySessions_.Equals(other.dailySessions_)) return false;
       if(!deviceDistribution_.Equals(other.deviceDistribution_)) return false;
-      if(!deviceMetrics_.Equals(other.deviceMetrics_)) return false;
       if (!object.Equals(SessionMetrics, other.SessionMetrics)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -5653,7 +5637,6 @@ namespace Microservice.AuthService.Protos {
       int hash = 1;
       hash ^= dailySessions_.GetHashCode();
       hash ^= deviceDistribution_.GetHashCode();
-      hash ^= deviceMetrics_.GetHashCode();
       if (sessionMetrics_ != null) hash ^= SessionMetrics.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -5675,9 +5658,8 @@ namespace Microservice.AuthService.Protos {
     #else
       dailySessions_.WriteTo(output, _repeated_dailySessions_codec);
       deviceDistribution_.WriteTo(output, _repeated_deviceDistribution_codec);
-      deviceMetrics_.WriteTo(output, _repeated_deviceMetrics_codec);
       if (sessionMetrics_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(26);
         output.WriteMessage(SessionMetrics);
       }
       if (_unknownFields != null) {
@@ -5692,9 +5674,8 @@ namespace Microservice.AuthService.Protos {
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
       dailySessions_.WriteTo(ref output, _repeated_dailySessions_codec);
       deviceDistribution_.WriteTo(ref output, _repeated_deviceDistribution_codec);
-      deviceMetrics_.WriteTo(ref output, _repeated_deviceMetrics_codec);
       if (sessionMetrics_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(26);
         output.WriteMessage(SessionMetrics);
       }
       if (_unknownFields != null) {
@@ -5709,7 +5690,6 @@ namespace Microservice.AuthService.Protos {
       int size = 0;
       size += dailySessions_.CalculateSize(_repeated_dailySessions_codec);
       size += deviceDistribution_.CalculateSize(_repeated_deviceDistribution_codec);
-      size += deviceMetrics_.CalculateSize(_repeated_deviceMetrics_codec);
       if (sessionMetrics_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SessionMetrics);
       }
@@ -5727,7 +5707,6 @@ namespace Microservice.AuthService.Protos {
       }
       dailySessions_.Add(other.dailySessions_);
       deviceDistribution_.Add(other.deviceDistribution_);
-      deviceMetrics_.Add(other.deviceMetrics_);
       if (other.sessionMetrics_ != null) {
         if (sessionMetrics_ == null) {
           SessionMetrics = new global::Microservice.AuthService.Protos.SessionMetrics();
@@ -5762,10 +5741,6 @@ namespace Microservice.AuthService.Protos {
             break;
           }
           case 26: {
-            deviceMetrics_.AddEntriesFrom(input, _repeated_deviceMetrics_codec);
-            break;
-          }
-          case 34: {
             if (sessionMetrics_ == null) {
               SessionMetrics = new global::Microservice.AuthService.Protos.SessionMetrics();
             }
@@ -5800,10 +5775,6 @@ namespace Microservice.AuthService.Protos {
             break;
           }
           case 26: {
-            deviceMetrics_.AddEntriesFrom(ref input, _repeated_deviceMetrics_codec);
-            break;
-          }
-          case 34: {
             if (sessionMetrics_ == null) {
               SessionMetrics = new global::Microservice.AuthService.Protos.SessionMetrics();
             }
@@ -6134,247 +6105,6 @@ namespace Microservice.AuthService.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public DeviceDistribution(DeviceDistribution other) : this() {
       name_ = other.name_;
-      value_ = other.value_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DeviceDistribution Clone() {
-      return new DeviceDistribution(this);
-    }
-
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 1;
-    private string name_ = "";
-    /// <summary>
-    /// "Mobile", "Desktop", "Tablet", etc."
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Name {
-      get { return name_; }
-      set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "value" field.</summary>
-    public const int ValueFieldNumber = 2;
-    private double value_;
-    /// <summary>
-    /// percentage or count
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public double Value {
-      get { return value_; }
-      set {
-        value_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as DeviceDistribution);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(DeviceDistribution other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Name != other.Name) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Value, other.Value)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (Value != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Value);
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
-      }
-      if (Value != 0D) {
-        output.WriteRawTag(17);
-        output.WriteDouble(Value);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Name.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Name);
-      }
-      if (Value != 0D) {
-        output.WriteRawTag(17);
-        output.WriteDouble(Value);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
-      }
-      if (Value != 0D) {
-        size += 1 + 8;
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(DeviceDistribution other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
-      }
-      if (other.Value != 0D) {
-        Value = other.Value;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            Name = input.ReadString();
-            break;
-          }
-          case 17: {
-            Value = input.ReadDouble();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            Name = input.ReadString();
-            break;
-          }
-          case 17: {
-            Value = input.ReadDouble();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class DeviceMetrics : pb::IMessage<DeviceMetrics>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<DeviceMetrics> _parser = new pb::MessageParser<DeviceMetrics>(() => new DeviceMetrics());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<DeviceMetrics> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Microservice.AuthService.Protos.ApiKeyReflection.Descriptor.MessageTypes[18]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DeviceMetrics() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DeviceMetrics(DeviceMetrics other) : this() {
-      name_ = other.name_;
       total_ = other.total_;
       avgDuration_ = other.avgDuration_;
       avgActions_ = other.avgActions_;
@@ -6383,8 +6113,8 @@ namespace Microservice.AuthService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DeviceMetrics Clone() {
-      return new DeviceMetrics(this);
+    public DeviceDistribution Clone() {
+      return new DeviceDistribution(this);
     }
 
     /// <summary>Field number for the "name" field.</summary>
@@ -6450,12 +6180,12 @@ namespace Microservice.AuthService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as DeviceMetrics);
+      return Equals(other as DeviceDistribution);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(DeviceMetrics other) {
+    public bool Equals(DeviceDistribution other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -6567,7 +6297,7 @@ namespace Microservice.AuthService.Protos {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(DeviceMetrics other) {
+    public void MergeFrom(DeviceDistribution other) {
       if (other == null) {
         return;
       }
@@ -6678,7 +6408,7 @@ namespace Microservice.AuthService.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Microservice.AuthService.Protos.ApiKeyReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Microservice.AuthService.Protos.ApiKeyReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

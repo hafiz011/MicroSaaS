@@ -296,26 +296,11 @@ namespace Microservice.Session.Infrastructure.Services
             response.DailySessions.AddRange(dailyGroups);
 
 
-            // ---------------- Device Distribution ----------------
+            // ---------------- Device distribution ----------------
             var deviceDist = sessions
                 .Where(s => s.Device != null && !string.IsNullOrEmpty(s.Device.Device_Type))
-                .GroupBy(s => s.Device.Device_Type.ToLower()) // normalize
-                .Select(g => new DeviceDistribution
-                {
-                    Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(g.Key), // "desktop" => "Desktop"
-                    Value = g.Count()
-                })
-                .OrderByDescending(d => d.Value) // most used device first
-                .ToList();
-
-            response.DeviceDistribution.AddRange(deviceDist);
-
-
-            // ---------------- Device Metrics ----------------
-            var deviceMetrics = sessions
-                .Where(s => s.Device != null && !string.IsNullOrEmpty(s.Device.Device_Type))
                 .GroupBy(s => s.Device.Device_Type.ToLower())
-                .Select(g => new DeviceMetrics
+                .Select(g => new DeviceDistribution
                 {
                     Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(g.Key), // Mobile/Desktop/Tablet
                     Total = g.Count(), // total sessions per device type
@@ -332,33 +317,32 @@ namespace Microservice.Session.Infrastructure.Services
                 .OrderByDescending(d => d.Total) // sort by most used device
                 .ToList();
 
-
-           response.DeviceMetrics.AddRange(deviceMetrics);
-
+            response.DeviceDistribution.AddRange(deviceDist);
 
 
 
-            // ---------------- Country Distribution ----------------
-            //var countryDist = sessions
-            //    .Where(s => s.Geo_Location != null && !string.IsNullOrEmpty(s.Geo_Location.Country))
-            //    .GroupBy(s => s.Geo_Location.Country)
-            //    .Select(g => new CountryDistribution
-            //    {
-            //        Name = g.Key,
-            //        Value = g.Count()
-            //    })
-            //    .ToList();
 
-            //response.CountryDistribution.AddRange(countryDist);
+             // ---------------- Country Distribution ----------------
+             //var countryDist = sessions
+             //    .Where(s => s.Geo_Location != null && !string.IsNullOrEmpty(s.Geo_Location.Country))
+             //    .GroupBy(s => s.Geo_Location.Country)
+             //    .Select(g => new CountryDistribution
+             //    {
+             //        Name = g.Key,
+             //        Value = g.Count()
+             //    })
+             //    .ToList();
 
-            //var activeUsers = sessions
-            //    .Select(s => s.User_Id && s.isActive)
-            //    .Distinct()
-            //    .Count();
+             //response.CountryDistribution.AddRange(countryDist);
+
+             //var activeUsers = sessions
+             //    .Select(s => s.User_Id && s.isActive)
+             //    .Distinct()
+             //    .Count();
 
 
-            // ---------------- Session Metrics ----------------
-            var totalSessions = sessions.Count;
+             // ---------------- Session Metrics ----------------
+             var totalSessions = sessions.Count;
 
             // Bounce rate (<30 sec session)
             var bounceCount = sessions.Count(s => s.Logout_Time.HasValue &&
@@ -458,9 +442,6 @@ namespace Microservice.Session.Infrastructure.Services
             }
 
             return response;
-
-
-
         }
 
 

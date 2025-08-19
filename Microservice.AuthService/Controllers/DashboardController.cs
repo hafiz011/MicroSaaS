@@ -226,8 +226,10 @@ namespace Microservice.AuthService.Controllers
                 return Unauthorized(new { Message = "User not authenticated." });
 
             var user = await _userManager.FindByIdAsync(userId);
-            if (user?.TenantId == null)
+            if (user.TenantId == null)
                 return NotFound(new { Message = "No API key associated with this user." });
+
+
 
             try
             {
@@ -248,17 +250,12 @@ namespace Microservice.AuthService.Controllers
                         sessions = ds.Sessions,
                         suspicious = ds.Suspicious
                     }),
-                    deviceDistribution = response.DeviceDistribution.Select(dd => new {
-                        name = dd.Name,
-                        value = dd.Value
-                    }),
-                    deviceMetrics = response.DeviceMetrics.Select(dm => new {
+                    deviceDistribution = response.DeviceDistribution.Select(dm => new {
                         name = dm.Name,
                         total = dm.Total,
                         avgDuration = dm.AvgDuration,
                         avgActions = dm.AvgActions
                     }),
-
                     sessionMetrics = new
                     {
                         avgDuration = response.SessionMetrics.AvgDuration,

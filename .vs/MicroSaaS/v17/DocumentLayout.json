@@ -11,8 +11,8 @@
       "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\services\\grpcserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\microservice\\microservice.authservice\\infrastructure\\services\\grpcserviceclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\infrastructure\\services\\grpcserviceclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\protos\\apikey.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\protos\\apikey.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\microservice\\microservice.session\\infrastructure\\repositories\\sessionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,14 +51,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "GrpcServiceClient.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Services\\GrpcServiceClient.cs",
-              "RelativeDocumentMoniker": "Microservice.AuthService\\Infrastructure\\Services\\GrpcServiceClient.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Infrastructure\\Services\\GrpcServiceClient.cs",
-              "RelativeToolTip": "Microservice.AuthService\\Infrastructure\\Services\\GrpcServiceClient.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAkwJsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T11:34:52.402Z",
+              "Title": "ApiKey.proto",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Protos\\ApiKey.proto",
+              "RelativeDocumentMoniker": "Microservice.Session\\Protos\\ApiKey.proto",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Protos\\ApiKey.proto",
+              "RelativeToolTip": "Microservice.Session\\Protos\\ApiKey.proto",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAAJwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
+              "WhenOpened": "2025-08-19T06:09:25.232Z",
               "EditorCaption": ""
             },
             {
@@ -71,8 +71,7 @@
               "RelativeToolTip": "Microservice.Session\\Infrastructure\\Repositories\\SessionRepository.cs",
               "ViewState": "AgIAAFwAAAAAAAAAAAAuwGkAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T07:21:07.305Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-18T07:21:07.305Z"
             },
             {
               "$type": "Document",
@@ -82,7 +81,7 @@
               "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\Services\\GrpcServer.cs",
               "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.Session\\Infrastructure\\Services\\GrpcServer.cs",
               "RelativeToolTip": "Microservice.Session\\Infrastructure\\Services\\GrpcServer.cs",
-              "ViewState": "AgIAAEMBAAAAAAAAAAAowEQBAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAAC4BAAAAAAAAAAAAADoBAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-18T07:16:47.49Z",
               "EditorCaption": ""
@@ -95,7 +94,7 @@
               "RelativeDocumentMoniker": "Microservice.AuthService\\Controllers\\DashboardController.cs",
               "ToolTip": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Controllers\\DashboardController.cs",
               "RelativeToolTip": "Microservice.AuthService\\Controllers\\DashboardController.cs",
-              "ViewState": "AgIAAO4AAAAAAAAAAAAtwAQBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAANcAAAAAAAAAAAAlwOcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-14T10:37:42.318Z",
               "EditorCaption": ""
