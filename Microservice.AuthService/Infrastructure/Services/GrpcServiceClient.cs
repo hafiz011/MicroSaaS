@@ -112,8 +112,7 @@ namespace Microservice.AuthService.Infrastructure.Services
 
 
         // get session analytics. this is used for dashboard controller to show session analytics
-        public async Task<SessionAnalyticsResponse> GetSessionAnalytics(
-            string tenantId, DateTime? from, DateTime? to, string? device, string? country)
+        public async Task<SessionAnalyticsResponse> GetSessionAnalytics(string tenantId, DateTime? from, DateTime? to, string? device, string? country)
         {
             var request = new SessionListRequest
             {

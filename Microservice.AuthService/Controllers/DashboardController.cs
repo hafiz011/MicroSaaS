@@ -229,8 +229,6 @@ namespace Microservice.AuthService.Controllers
             if (user.TenantId == null)
                 return NotFound(new { Message = "No API key associated with this user." });
 
-
-
             try
             {
                 // Fetch session analytics data from gRPC service
@@ -269,7 +267,11 @@ namespace Microservice.AuthService.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (RpcException rpcEx)
+            {
+                return StatusCode(502, new { Message = "Analytics service unavailable." });
+            }
+            catch (Exception ex)
             {
                 return StatusCode(500, new { Message = "An error occurred while fetching analytics data." });
             }

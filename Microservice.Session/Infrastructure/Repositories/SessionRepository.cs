@@ -1,9 +1,11 @@
-﻿using Microservice.Session.Infrastructure.MongoDb;
+﻿using Google.Protobuf.WellKnownTypes;
 using Microservice.Session.Entities;
 using Microservice.Session.Infrastructure.Interfaces;
+using Microservice.Session.Infrastructure.MongoDb;
 using Microsoft.Extensions.Primitives;
+using MongoDB.Bson;
 using MongoDB.Driver;
-using Google.Protobuf.WellKnownTypes;
+using System.Text.RegularExpressions;
 
 namespace Microservice.Session.Infrastructure.Repositories
 {
@@ -63,16 +65,26 @@ namespace Microservice.Session.Infrastructure.Repositories
                 filterBuilder.Eq(x => x.isActive, true)
             };
 
-            if (!string.IsNullOrEmpty(device))
-                filters.Add(filterBuilder.Eq(x => x.Device.Device_Type, device));
-
-            if (!string.IsNullOrEmpty(country))
-                filters.Add(filterBuilder.Eq(x => x.Geo_Location.Country, country));
-
             if (from.HasValue)
                 filters.Add(filterBuilder.Gte(x => x.Login_Time, from.Value));
             if (to.HasValue)
                 filters.Add(filterBuilder.Lte(x => x.Login_Time, to.Value));
+
+            if (!string.IsNullOrEmpty(device))
+            {
+                filters.Add(filterBuilder.Regex(
+                    x => x.Device.Device_Type,
+                    new BsonRegularExpression($"^{Regex.Escape(device)}$", "i")  // case-insensitive
+                ));
+            }
+
+            if (!string.IsNullOrEmpty(country))
+            {
+                filters.Add(filterBuilder.Regex(
+                    x => x.Geo_Location.Country,
+                    new BsonRegularExpression($"^{Regex.Escape(country)}$", "i")  // case-insensitive
+                ));
+            }
 
             var sort = Builders<Sessions>.Sort.Descending(x => x.Login_Time);
 
@@ -105,18 +117,30 @@ namespace Microservice.Session.Infrastructure.Repositories
                 filterBuilder.Eq(x => x.Tenant_Id, tenantId),
             };
 
-            if (!string.IsNullOrEmpty(device))
-                filters.Add(filterBuilder.Eq(x => x.Device.Device_Type, device));
-
-            if (!string.IsNullOrEmpty(country))
-                filters.Add(filterBuilder.Eq(x => x.Geo_Location.Country, country));
-
             if (from.HasValue)
                 filters.Add(filterBuilder.Gte(x => x.Login_Time, from.Value));
             if (to.HasValue)
                 filters.Add(filterBuilder.Lte(x => x.Login_Time, to.Value));
 
-            return await _collection.Find(filterBuilder.And(filters)).ToListAsync();
+            if (!string.IsNullOrEmpty(device))
+            {
+                filters.Add(filterBuilder.Regex(
+                    x => x.Device.Device_Type,
+                    new BsonRegularExpression($"^{Regex.Escape(device)}$", "i")  // case-insensitive
+                ));
+            }
+
+            if (!string.IsNullOrEmpty(country))
+            {
+                filters.Add(filterBuilder.Regex(
+                    x => x.Geo_Location.Country,
+                    new BsonRegularExpression($"^{Regex.Escape(country)}$", "i")  // case-insensitive
+                ));
+            }
+
+            var sort = Builders<Sessions>.Sort.Descending(x => x.Login_Time);
+
+            return await _collection.Find(filterBuilder.And(filters)).Sort(sort).ToListAsync();
         }
     }
 }

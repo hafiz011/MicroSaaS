@@ -1,7 +1,9 @@
 ﻿using Microservice.AuthService.Database;
 using Microservice.AuthService.Entities;
 using Microservice.AuthService.Infrastructure.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Text.RegularExpressions;
 
 namespace Microservice.AuthService.Infrastructure.Repositories
 {
@@ -38,11 +40,20 @@ namespace Microservice.AuthService.Infrastructure.Repositories
                 filters.Add(filterBuilder.Lte(x => x.DetectedAt, to.Value));
 
             if (!string.IsNullOrEmpty(device))
-                filters.Add(filterBuilder.Eq(x => x.Device.Device_Type, device));
+            {
+                filters.Add(filterBuilder.Regex(
+                    x => x.Device.Device_Type,
+                    new BsonRegularExpression($"^{Regex.Escape(device)}$", "i")  // case-insensitive
+                ));
+            }
 
             if (!string.IsNullOrEmpty(country))
-                filters.Add(filterBuilder.Eq(x => x.Geo_Location.Country, country));
-
+            {
+                filters.Add(filterBuilder.Regex(
+                    x => x.Geo_Location.Country,
+                    new BsonRegularExpression($"^{Regex.Escape(country)}$", "i")  // case-insensitive
+                ));
+            }
             return await _suspiciousCollection.Find(filterBuilder.And(filters)).ToListAsync();
         }
 

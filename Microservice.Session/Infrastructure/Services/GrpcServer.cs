@@ -278,8 +278,26 @@ namespace Microservice.Session.Infrastructure.Services
             );
 
             var response = new SessionAnalyticsResponse();
+            //if (sessions == null || !sessions.Any())
+            //    return response; // return empty response if no data
+
             if (sessions == null || !sessions.Any())
-                return response; // return empty response if no data
+            {
+                return new SessionAnalyticsResponse
+                {
+                    DailySessions = { },
+                    DeviceDistribution = { },
+                    SessionMetrics = new SessionMetrics
+                    {
+                        AvgDuration = 0,
+                        AvgDurationTrend = 0,
+                        BounceRate = 0,
+                        BounceRateTrend = 0,
+                        AvgActions = 0,
+                        AvgActionsTrend = 0
+                    }
+                };
+            }
 
             // ---------------- Daily Sessions ----------------
             var dailyGroups = sessions
@@ -322,27 +340,33 @@ namespace Microservice.Session.Infrastructure.Services
 
 
 
-             // ---------------- Country Distribution ----------------
-             //var countryDist = sessions
-             //    .Where(s => s.Geo_Location != null && !string.IsNullOrEmpty(s.Geo_Location.Country))
-             //    .GroupBy(s => s.Geo_Location.Country)
-             //    .Select(g => new CountryDistribution
-             //    {
-             //        Name = g.Key,
-             //        Value = g.Count()
-             //    })
-             //    .ToList();
+            // ---------------- Country Distribution ----------------
+            //var countryDist = sessions
+            // .Where(s => s.Geo_Location != null && !string.IsNullOrEmpty(s.Geo_Location.Country))
+            // .GroupBy(s => s.Geo_Location.Country.ToLower())
+            // .Select(g => new CountryDistribution
+            // {
+            //     Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(g.Key),
+            //     Value = g.Count()
+            // })
+            // .OrderByDescending(c => c.Value)
+            // .ToList();
 
-             //response.CountryDistribution.AddRange(countryDist);
-
-             //var activeUsers = sessions
-             //    .Select(s => s.User_Id && s.isActive)
-             //    .Distinct()
-             //    .Count();
+            //response.CountryDistribution.AddRange(countryDist);
 
 
-             // ---------------- Session Metrics ----------------
-             var totalSessions = sessions.Count;
+            //response.CountryDistribution.AddRange(countryDist);
+
+            //var activeUsers = sessions
+            //   .Where(s => s.isActive)
+            //   .Select(s => s.User_Id)
+            //   .Distinct()
+            //   .Count();
+
+
+
+            // ---------------- Session Metrics ----------------
+            var totalSessions = sessions.Count;
 
             // Bounce rate (<30 sec session)
             var bounceCount = sessions.Count(s => s.Logout_Time.HasValue &&
@@ -382,7 +406,8 @@ namespace Microservice.Session.Infrastructure.Services
                     request.Country
                 );
 
-                var totalPreviousSessions = previousSessions.Count;
+                //var totalPreviousSessions = previousSessions.Count;
+                var totalPreviousSessions = previousSessions?.Count ?? 0;
 
                 // previous Avg session duration (seconds)
                 var previousAvgDuration = previousSessions
