@@ -49,55 +49,56 @@ namespace Microservice.AuthService.Protos {
             "mQEKElNlc3Npb25MaXN0UmVxdWVzdBIQCghUZW5hbnRJZBgBIAEoCRIoCgRm",
             "cm9tGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBImCgJ0bxgD",
             "IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGZGV2aWNlGAQg",
-            "ASgJEg8KB2NvdW50cnkYBSABKAki3wEKB1Nlc3Npb24SEAoIVXNlck5hbWUY",
+            "ASgJEg8KB2NvdW50cnkYBSABKAki7wEKB1Nlc3Npb24SEAoIVXNlck5hbWUY",
             "ASABKAkSDgoGVXNlcklkGAIgASgJEg0KBUVtYWlsGAMgASgJEhEKCUlwQWRk",
             "cmVzcxgEIAEoCRIMCgRDaXR5GAUgASgJEg8KB0NvdW50cnkYBiABKAkSDgoG",
             "U3RhdHVzGAcgASgJEhIKCkRldmljZVR5cGUYCCABKAkSLQoJTG9naW5UaW1l",
             "GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBILCgNMYWMYCiAB",
-            "KAkSEQoJU2Vzc2lvbmlkGAsgASgJIjEKE1Nlc3Npb25MaXN0UmVzcG9uc2US",
-            "GgoIc2Vzc2lvbnMYASADKAsyCC5TZXNzaW9uIvUBCgxTZXNzaW9uQ2hlY2sS",
-            "EQoJSXBBZGRyZXNzGAEgASgJEg8KB0NvdW50cnkYAiABKAkSEwoLRmluZ2Vy",
-            "cHJpbnQYAyABKAkSLQoJTG9jYWxUaW1lGAQgASgLMhouZ29vZ2xlLnByb3Rv",
-            "YnVmLlRpbWVzdGFtcBINCgVpc1ZQThgFIAEoCBIPCgdsYXRfbG9uGAYgASgJ",
-            "Ei0KCUxvZ2luVGltZRgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3Rh",
-            "bXASLgoKTG9nb3V0VGltZRgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1l",
-            "c3RhbXAiVgoTU2Vzc2lvbkNoZWNrUmVxdWVzdBIQCghUZW5hbnRJZBgBIAEo",
-            "CRIPCgd1c2VyX2lkGAIgASgJEhEKCVNlc3Npb25JZBgDIAEoCRIJCgF2GAQg",
-            "ASgFIjoKFFNlc3Npb25DaGVja1Jlc3BvbmNlEiIKC3Nlc3Npb25saXN0GAEg",
-            "AygLMg0uU2Vzc2lvbkNoZWNrIjwKFVNlc3Npb25EZXRhaWxzUmVxdWVzdBIQ",
-            "CghUZW5hbnRJZBgBIAEoCRIRCglTZXNzaW9uSWQYAiABKAkiuwIKFlNlc3Np",
-            "b25EZXRhaWxzUmVzcG9uc2USHgoHc2Vzc2lvbhgBIAEoCzINLlNlc3Npb25D",
-            "aGVjaxIuCgpjcmVhdGVkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRp",
-            "bWVzdGFtcBIuCgp1cGRhdGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVm",
-            "LlRpbWVzdGFtcBIPCgd1c2VyX2lkGAQgASgJEhEKCXVzZXJfbmFtZRgFIAEo",
-            "CRISCgp1c2VyX2VtYWlsGAYgASgJEhEKCWRldmljZV9vcxgHIAEoCRITCgtk",
-            "ZXZpY2VfdHlwZRgIIAEoCRISCgppcF9hZGRyZXNzGAkgASgJEgwKBGNpdHkY",
-            "CiABKAkSDwoHY291bnRyeRgLIAEoCRIOCgZyZWdpb24YDCABKAkinQEKGFNl",
-            "c3Npb25BbmFseXRpY3NSZXNwb25zZRIlCg5kYWlseV9zZXNzaW9ucxgBIAMo",
-            "CzINLkRhaWx5U2Vzc2lvbhIwChNkZXZpY2VfZGlzdHJpYnV0aW9uGAIgAygL",
-            "MhMuRGV2aWNlRGlzdHJpYnV0aW9uEigKD3Nlc3Npb25fbWV0cmljcxgDIAEo",
-            "CzIPLlNlc3Npb25NZXRyaWNzIkIKDERhaWx5U2Vzc2lvbhIMCgRkYXRlGAEg",
-            "ASgJEhAKCHNlc3Npb25zGAIgASgFEhIKCnN1c3BpY2lvdXMYAyABKAUiWgoS",
-            "RGV2aWNlRGlzdHJpYnV0aW9uEgwKBG5hbWUYASABKAkSDQoFdG90YWwYAiAB",
-            "KAUSEwoLQXZnRHVyYXRpb24YAyABKAESEgoKQXZnQWN0aW9ucxgEIAEoASKi",
-            "AQoOU2Vzc2lvbk1ldHJpY3MSFAoMYXZnX2R1cmF0aW9uGAEgASgBEhoKEmF2",
-            "Z19kdXJhdGlvbl90cmVuZBgCIAEoARITCgtib3VuY2VfcmF0ZRgDIAEoARIZ",
-            "ChFib3VuY2VfcmF0ZV90cmVuZBgEIAEoARITCgthdmdfYWN0aW9ucxgFIAEo",
-            "ARIZChFhdmdfYWN0aW9uc190cmVuZBgGIAEoATLJBAoGQXBpS2V5EiwKCUdl",
-            "dEFwaUtleRIOLkFwaUtleVJlcXVlc3QaDy5BcGlLZXlSZXNwb25zZRI2CgxD",
-            "cmVhdGVBcGlLZXkSFC5DcmVhdGVBcGlLZXlSZXF1ZXN0GhAuQXBpSGFzaFJl",
-            "c3BvbnNlEjQKEFJlZ2VuZXJhdGVBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0GhAu",
-            "QXBpSGFzaFJlc3BvbnNlEjMKC1JlbmV3QXBpS2V5EhMuUmVuZXdBcGlLZXlS",
-            "ZXF1ZXN0Gg8uQXBpS2V5UmVzcG9uc2USLwoMUmV2b2tlQXBpS2V5Eg4uQXBp",
-            "S2V5UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEjIKC0dldFVzZXJJbmZvEhAu",
-            "VXNlckluZm9SZXF1ZXN0GhEuVXNlckluZm9SZXNwb25zZRI7Cg5HZXRTZXNz",
-            "aW9uTGlzdBITLlNlc3Npb25MaXN0UmVxdWVzdBoULlNlc3Npb25MaXN0UmVz",
-            "cG9uc2USPwoQU2Vzc2lvbkxpc3RDaGVjaxIULlNlc3Npb25DaGVja1JlcXVl",
-            "c3QaFS5TZXNzaW9uQ2hlY2tSZXNwb25jZRJEChFHZXRTZXNzaW9uRGV0YWls",
-            "cxIWLlNlc3Npb25EZXRhaWxzUmVxdWVzdBoXLlNlc3Npb25EZXRhaWxzUmVz",
-            "cG9uc2USRQoTR2V0U2Vzc2lvbkFuYWx5dGljcxITLlNlc3Npb25MaXN0UmVx",
-            "dWVzdBoZLlNlc3Npb25BbmFseXRpY3NSZXNwb25zZUIiqgIfTWljcm9zZXJ2",
-            "aWNlLkF1dGhTZXJ2aWNlLlByb3Rvc2IGcHJvdG8z"));
+            "KAkSEQoJU2Vzc2lvbmlkGAsgASgJEg4KBkFjdGlvbhgMIAEoBSIxChNTZXNz",
+            "aW9uTGlzdFJlc3BvbnNlEhoKCHNlc3Npb25zGAEgAygLMgguU2Vzc2lvbiL1",
+            "AQoMU2Vzc2lvbkNoZWNrEhEKCUlwQWRkcmVzcxgBIAEoCRIPCgdDb3VudHJ5",
+            "GAIgASgJEhMKC0ZpbmdlcnByaW50GAMgASgJEi0KCUxvY2FsVGltZRgEIAEo",
+            "CzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFaXNWUE4YBSABKAgS",
+            "DwoHbGF0X2xvbhgGIAEoCRItCglMb2dpblRpbWUYByABKAsyGi5nb29nbGUu",
+            "cHJvdG9idWYuVGltZXN0YW1wEi4KCkxvZ291dFRpbWUYCCABKAsyGi5nb29n",
+            "bGUucHJvdG9idWYuVGltZXN0YW1wIlYKE1Nlc3Npb25DaGVja1JlcXVlc3QS",
+            "EAoIVGVuYW50SWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRIRCglTZXNzaW9u",
+            "SWQYAyABKAkSCQoBdhgEIAEoBSI6ChRTZXNzaW9uQ2hlY2tSZXNwb25jZRIi",
+            "CgtzZXNzaW9ubGlzdBgBIAMoCzINLlNlc3Npb25DaGVjayI8ChVTZXNzaW9u",
+            "RGV0YWlsc1JlcXVlc3QSEAoIVGVuYW50SWQYASABKAkSEQoJU2Vzc2lvbklk",
+            "GAIgASgJIrsCChZTZXNzaW9uRGV0YWlsc1Jlc3BvbnNlEh4KB3Nlc3Npb24Y",
+            "ASABKAsyDS5TZXNzaW9uQ2hlY2sSLgoKY3JlYXRlZF9hdBgCIAEoCzIaLmdv",
+            "b2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgDIAEoCzIa",
+            "Lmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDwoHdXNlcl9pZBgEIAEoCRIR",
+            "Cgl1c2VyX25hbWUYBSABKAkSEgoKdXNlcl9lbWFpbBgGIAEoCRIRCglkZXZp",
+            "Y2Vfb3MYByABKAkSEwoLZGV2aWNlX3R5cGUYCCABKAkSEgoKaXBfYWRkcmVz",
+            "cxgJIAEoCRIMCgRjaXR5GAogASgJEg8KB2NvdW50cnkYCyABKAkSDgoGcmVn",
+            "aW9uGAwgASgJIp0BChhTZXNzaW9uQW5hbHl0aWNzUmVzcG9uc2USJQoOZGFp",
+            "bHlfc2Vzc2lvbnMYASADKAsyDS5EYWlseVNlc3Npb24SMAoTZGV2aWNlX2Rp",
+            "c3RyaWJ1dGlvbhgCIAMoCzITLkRldmljZURpc3RyaWJ1dGlvbhIoCg9zZXNz",
+            "aW9uX21ldHJpY3MYAyABKAsyDy5TZXNzaW9uTWV0cmljcyJCCgxEYWlseVNl",
+            "c3Npb24SDAoEZGF0ZRgBIAEoCRIQCghzZXNzaW9ucxgCIAEoBRISCgpzdXNw",
+            "aWNpb3VzGAMgASgFIloKEkRldmljZURpc3RyaWJ1dGlvbhIMCgRuYW1lGAEg",
+            "ASgJEg0KBXRvdGFsGAIgASgFEhMKC0F2Z0R1cmF0aW9uGAMgASgBEhIKCkF2",
+            "Z0FjdGlvbnMYBCABKAEiogEKDlNlc3Npb25NZXRyaWNzEhQKDGF2Z19kdXJh",
+            "dGlvbhgBIAEoARIaChJhdmdfZHVyYXRpb25fdHJlbmQYAiABKAESEwoLYm91",
+            "bmNlX3JhdGUYAyABKAESGQoRYm91bmNlX3JhdGVfdHJlbmQYBCABKAESEwoL",
+            "YXZnX2FjdGlvbnMYBSABKAESGQoRYXZnX2FjdGlvbnNfdHJlbmQYBiABKAEy",
+            "yQQKBkFwaUtleRIsCglHZXRBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0Gg8uQXBp",
+            "S2V5UmVzcG9uc2USNgoMQ3JlYXRlQXBpS2V5EhQuQ3JlYXRlQXBpS2V5UmVx",
+            "dWVzdBoQLkFwaUhhc2hSZXNwb25zZRI0ChBSZWdlbmVyYXRlQXBpS2V5Eg4u",
+            "QXBpS2V5UmVxdWVzdBoQLkFwaUhhc2hSZXNwb25zZRIzCgtSZW5ld0FwaUtl",
+            "eRITLlJlbmV3QXBpS2V5UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEi8KDFJl",
+            "dm9rZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaDy5BcGlLZXlSZXNwb25zZRIy",
+            "CgtHZXRVc2VySW5mbxIQLlVzZXJJbmZvUmVxdWVzdBoRLlVzZXJJbmZvUmVz",
+            "cG9uc2USOwoOR2V0U2Vzc2lvbkxpc3QSEy5TZXNzaW9uTGlzdFJlcXVlc3Qa",
+            "FC5TZXNzaW9uTGlzdFJlc3BvbnNlEj8KEFNlc3Npb25MaXN0Q2hlY2sSFC5T",
+            "ZXNzaW9uQ2hlY2tSZXF1ZXN0GhUuU2Vzc2lvbkNoZWNrUmVzcG9uY2USRAoR",
+            "R2V0U2Vzc2lvbkRldGFpbHMSFi5TZXNzaW9uRGV0YWlsc1JlcXVlc3QaFy5T",
+            "ZXNzaW9uRGV0YWlsc1Jlc3BvbnNlEkUKE0dldFNlc3Npb25BbmFseXRpY3MS",
+            "Ey5TZXNzaW9uTGlzdFJlcXVlc3QaGS5TZXNzaW9uQW5hbHl0aWNzUmVzcG9u",
+            "c2VCIqoCH01pY3Jvc2VydmljZS5BdXRoU2VydmljZS5Qcm90b3NiBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -109,7 +110,7 @@ namespace Microservice.AuthService.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.UserInfoRequest), global::Microservice.AuthService.Protos.UserInfoRequest.Parser, new[]{ "UserId", "TenantId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.UserInfoResponse), global::Microservice.AuthService.Protos.UserInfoResponse.Parser, new[]{ "UserName", "UserEmail", "Lastlogin" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionListRequest), global::Microservice.AuthService.Protos.SessionListRequest.Parser, new[]{ "TenantId", "From", "To", "Device", "Country" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.Session), global::Microservice.AuthService.Protos.Session.Parser, new[]{ "UserName", "UserId", "Email", "IpAddress", "City", "Country", "Status", "DeviceType", "LoginTime", "Lac", "Sessionid" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.Session), global::Microservice.AuthService.Protos.Session.Parser, new[]{ "UserName", "UserId", "Email", "IpAddress", "City", "Country", "Status", "DeviceType", "LoginTime", "Lac", "Sessionid", "Action" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionListResponse), global::Microservice.AuthService.Protos.SessionListResponse.Parser, new[]{ "Sessions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionCheck), global::Microservice.AuthService.Protos.SessionCheck.Parser, new[]{ "IpAddress", "Country", "Fingerprint", "LocalTime", "IsVPN", "LatLon", "LoginTime", "LogoutTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.AuthService.Protos.SessionCheckRequest), global::Microservice.AuthService.Protos.SessionCheckRequest.Parser, new[]{ "TenantId", "UserId", "SessionId", "V" }, null, null, null, null),
@@ -2950,6 +2951,7 @@ namespace Microservice.AuthService.Protos {
       loginTime_ = other.loginTime_ != null ? other.loginTime_.Clone() : null;
       lac_ = other.lac_;
       sessionid_ = other.sessionid_;
+      action_ = other.action_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3091,6 +3093,18 @@ namespace Microservice.AuthService.Protos {
       }
     }
 
+    /// <summary>Field number for the "Action" field.</summary>
+    public const int ActionFieldNumber = 12;
+    private int action_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Action {
+      get { return action_; }
+      set {
+        action_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3117,6 +3131,7 @@ namespace Microservice.AuthService.Protos {
       if (!object.Equals(LoginTime, other.LoginTime)) return false;
       if (Lac != other.Lac) return false;
       if (Sessionid != other.Sessionid) return false;
+      if (Action != other.Action) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3135,6 +3150,7 @@ namespace Microservice.AuthService.Protos {
       if (loginTime_ != null) hash ^= LoginTime.GetHashCode();
       if (Lac.Length != 0) hash ^= Lac.GetHashCode();
       if (Sessionid.Length != 0) hash ^= Sessionid.GetHashCode();
+      if (Action != 0) hash ^= Action.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3197,6 +3213,10 @@ namespace Microservice.AuthService.Protos {
         output.WriteRawTag(90);
         output.WriteString(Sessionid);
       }
+      if (Action != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(Action);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3251,6 +3271,10 @@ namespace Microservice.AuthService.Protos {
         output.WriteRawTag(90);
         output.WriteString(Sessionid);
       }
+      if (Action != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(Action);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3293,6 +3317,9 @@ namespace Microservice.AuthService.Protos {
       }
       if (Sessionid.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Sessionid);
+      }
+      if (Action != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Action);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3341,6 +3368,9 @@ namespace Microservice.AuthService.Protos {
       }
       if (other.Sessionid.Length != 0) {
         Sessionid = other.Sessionid;
+      }
+      if (other.Action != 0) {
+        Action = other.Action;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3408,6 +3438,10 @@ namespace Microservice.AuthService.Protos {
             Sessionid = input.ReadString();
             break;
           }
+          case 96: {
+            Action = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -3472,6 +3506,10 @@ namespace Microservice.AuthService.Protos {
           }
           case 90: {
             Sessionid = input.ReadString();
+            break;
+          }
+          case 96: {
+            Action = input.ReadInt32();
             break;
           }
         }

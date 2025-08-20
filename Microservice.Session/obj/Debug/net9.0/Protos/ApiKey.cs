@@ -49,45 +49,45 @@ namespace Microservice.Session.Protos {
             "mQEKElNlc3Npb25MaXN0UmVxdWVzdBIQCghUZW5hbnRJZBgBIAEoCRIoCgRm",
             "cm9tGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBImCgJ0bxgD",
             "IAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDgoGZGV2aWNlGAQg",
-            "ASgJEg8KB2NvdW50cnkYBSABKAki3wEKB1Nlc3Npb24SEAoIVXNlck5hbWUY",
+            "ASgJEg8KB2NvdW50cnkYBSABKAki7wEKB1Nlc3Npb24SEAoIVXNlck5hbWUY",
             "ASABKAkSDgoGVXNlcklkGAIgASgJEg0KBUVtYWlsGAMgASgJEhEKCUlwQWRk",
             "cmVzcxgEIAEoCRIMCgRDaXR5GAUgASgJEg8KB0NvdW50cnkYBiABKAkSDgoG",
             "U3RhdHVzGAcgASgJEhIKCkRldmljZVR5cGUYCCABKAkSLQoJTG9naW5UaW1l",
             "GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBILCgNMYWMYCiAB",
-            "KAkSEQoJU2Vzc2lvbmlkGAsgASgJIjEKE1Nlc3Npb25MaXN0UmVzcG9uc2US",
-            "GgoIc2Vzc2lvbnMYASADKAsyCC5TZXNzaW9uIvUBCgxTZXNzaW9uQ2hlY2sS",
-            "EQoJSXBBZGRyZXNzGAEgASgJEg8KB0NvdW50cnkYAiABKAkSEwoLRmluZ2Vy",
-            "cHJpbnQYAyABKAkSLQoJTG9jYWxUaW1lGAQgASgLMhouZ29vZ2xlLnByb3Rv",
-            "YnVmLlRpbWVzdGFtcBINCgVpc1ZQThgFIAEoCBIPCgdsYXRfbG9uGAYgASgJ",
-            "Ei0KCUxvZ2luVGltZRgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3Rh",
-            "bXASLgoKTG9nb3V0VGltZRgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1l",
-            "c3RhbXAiVgoTU2Vzc2lvbkNoZWNrUmVxdWVzdBIQCghUZW5hbnRJZBgBIAEo",
-            "CRIPCgd1c2VyX2lkGAIgASgJEhEKCVNlc3Npb25JZBgDIAEoCRIJCgF2GAQg",
-            "ASgFIjoKFFNlc3Npb25DaGVja1Jlc3BvbmNlEiIKC3Nlc3Npb25saXN0GAEg",
-            "AygLMg0uU2Vzc2lvbkNoZWNrIp0BChhTZXNzaW9uQW5hbHl0aWNzUmVzcG9u",
-            "c2USJQoOZGFpbHlfc2Vzc2lvbnMYASADKAsyDS5EYWlseVNlc3Npb24SMAoT",
-            "ZGV2aWNlX2Rpc3RyaWJ1dGlvbhgCIAMoCzITLkRldmljZURpc3RyaWJ1dGlv",
-            "bhIoCg9zZXNzaW9uX21ldHJpY3MYAyABKAsyDy5TZXNzaW9uTWV0cmljcyJC",
-            "CgxEYWlseVNlc3Npb24SDAoEZGF0ZRgBIAEoCRIQCghzZXNzaW9ucxgCIAEo",
-            "BRISCgpzdXNwaWNpb3VzGAMgASgFIloKEkRldmljZURpc3RyaWJ1dGlvbhIM",
-            "CgRuYW1lGAEgASgJEg0KBXRvdGFsGAIgASgFEhMKC0F2Z0R1cmF0aW9uGAMg",
-            "ASgBEhIKCkF2Z0FjdGlvbnMYBCABKAEiogEKDlNlc3Npb25NZXRyaWNzEhQK",
-            "DGF2Z19kdXJhdGlvbhgBIAEoARIaChJhdmdfZHVyYXRpb25fdHJlbmQYAiAB",
-            "KAESEwoLYm91bmNlX3JhdGUYAyABKAESGQoRYm91bmNlX3JhdGVfdHJlbmQY",
-            "BCABKAESEwoLYXZnX2FjdGlvbnMYBSABKAESGQoRYXZnX2FjdGlvbnNfdHJl",
-            "bmQYBiABKAEygwQKBkFwaUtleRIsCglHZXRBcGlLZXkSDi5BcGlLZXlSZXF1",
-            "ZXN0Gg8uQXBpS2V5UmVzcG9uc2USNgoMQ3JlYXRlQXBpS2V5EhQuQ3JlYXRl",
-            "QXBpS2V5UmVxdWVzdBoQLkFwaUhhc2hSZXNwb25zZRI0ChBSZWdlbmVyYXRl",
-            "QXBpS2V5Eg4uQXBpS2V5UmVxdWVzdBoQLkFwaUhhc2hSZXNwb25zZRIzCgtS",
-            "ZW5ld0FwaUtleRITLlJlbmV3QXBpS2V5UmVxdWVzdBoPLkFwaUtleVJlc3Bv",
-            "bnNlEi8KDFJldm9rZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaDy5BcGlLZXlS",
-            "ZXNwb25zZRIyCgtHZXRVc2VySW5mbxIQLlVzZXJJbmZvUmVxdWVzdBoRLlVz",
-            "ZXJJbmZvUmVzcG9uc2USOwoOR2V0U2Vzc2lvbkxpc3QSEy5TZXNzaW9uTGlz",
-            "dFJlcXVlc3QaFC5TZXNzaW9uTGlzdFJlc3BvbnNlEj8KEFNlc3Npb25MaXN0",
-            "Q2hlY2sSFC5TZXNzaW9uQ2hlY2tSZXF1ZXN0GhUuU2Vzc2lvbkNoZWNrUmVz",
-            "cG9uY2USRQoTR2V0U2Vzc2lvbkFuYWx5dGljcxITLlNlc3Npb25MaXN0UmVx",
-            "dWVzdBoZLlNlc3Npb25BbmFseXRpY3NSZXNwb25zZUIeqgIbTWljcm9zZXJ2",
-            "aWNlLlNlc3Npb24uUHJvdG9zYgZwcm90bzM="));
+            "KAkSEQoJU2Vzc2lvbmlkGAsgASgJEg4KBkFjdGlvbhgMIAEoBSIxChNTZXNz",
+            "aW9uTGlzdFJlc3BvbnNlEhoKCHNlc3Npb25zGAEgAygLMgguU2Vzc2lvbiL1",
+            "AQoMU2Vzc2lvbkNoZWNrEhEKCUlwQWRkcmVzcxgBIAEoCRIPCgdDb3VudHJ5",
+            "GAIgASgJEhMKC0ZpbmdlcnByaW50GAMgASgJEi0KCUxvY2FsVGltZRgEIAEo",
+            "CzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASDQoFaXNWUE4YBSABKAgS",
+            "DwoHbGF0X2xvbhgGIAEoCRItCglMb2dpblRpbWUYByABKAsyGi5nb29nbGUu",
+            "cHJvdG9idWYuVGltZXN0YW1wEi4KCkxvZ291dFRpbWUYCCABKAsyGi5nb29n",
+            "bGUucHJvdG9idWYuVGltZXN0YW1wIlYKE1Nlc3Npb25DaGVja1JlcXVlc3QS",
+            "EAoIVGVuYW50SWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRIRCglTZXNzaW9u",
+            "SWQYAyABKAkSCQoBdhgEIAEoBSI6ChRTZXNzaW9uQ2hlY2tSZXNwb25jZRIi",
+            "CgtzZXNzaW9ubGlzdBgBIAMoCzINLlNlc3Npb25DaGVjayKdAQoYU2Vzc2lv",
+            "bkFuYWx5dGljc1Jlc3BvbnNlEiUKDmRhaWx5X3Nlc3Npb25zGAEgAygLMg0u",
+            "RGFpbHlTZXNzaW9uEjAKE2RldmljZV9kaXN0cmlidXRpb24YAiADKAsyEy5E",
+            "ZXZpY2VEaXN0cmlidXRpb24SKAoPc2Vzc2lvbl9tZXRyaWNzGAMgASgLMg8u",
+            "U2Vzc2lvbk1ldHJpY3MiQgoMRGFpbHlTZXNzaW9uEgwKBGRhdGUYASABKAkS",
+            "EAoIc2Vzc2lvbnMYAiABKAUSEgoKc3VzcGljaW91cxgDIAEoBSJaChJEZXZp",
+            "Y2VEaXN0cmlidXRpb24SDAoEbmFtZRgBIAEoCRINCgV0b3RhbBgCIAEoBRIT",
+            "CgtBdmdEdXJhdGlvbhgDIAEoARISCgpBdmdBY3Rpb25zGAQgASgBIqIBCg5T",
+            "ZXNzaW9uTWV0cmljcxIUCgxhdmdfZHVyYXRpb24YASABKAESGgoSYXZnX2R1",
+            "cmF0aW9uX3RyZW5kGAIgASgBEhMKC2JvdW5jZV9yYXRlGAMgASgBEhkKEWJv",
+            "dW5jZV9yYXRlX3RyZW5kGAQgASgBEhMKC2F2Z19hY3Rpb25zGAUgASgBEhkK",
+            "EWF2Z19hY3Rpb25zX3RyZW5kGAYgASgBMoMECgZBcGlLZXkSLAoJR2V0QXBp",
+            "S2V5Eg4uQXBpS2V5UmVxdWVzdBoPLkFwaUtleVJlc3BvbnNlEjYKDENyZWF0",
+            "ZUFwaUtleRIULkNyZWF0ZUFwaUtleVJlcXVlc3QaEC5BcGlIYXNoUmVzcG9u",
+            "c2USNAoQUmVnZW5lcmF0ZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaEC5BcGlI",
+            "YXNoUmVzcG9uc2USMwoLUmVuZXdBcGlLZXkSEy5SZW5ld0FwaUtleVJlcXVl",
+            "c3QaDy5BcGlLZXlSZXNwb25zZRIvCgxSZXZva2VBcGlLZXkSDi5BcGlLZXlS",
+            "ZXF1ZXN0Gg8uQXBpS2V5UmVzcG9uc2USMgoLR2V0VXNlckluZm8SEC5Vc2Vy",
+            "SW5mb1JlcXVlc3QaES5Vc2VySW5mb1Jlc3BvbnNlEjsKDkdldFNlc3Npb25M",
+            "aXN0EhMuU2Vzc2lvbkxpc3RSZXF1ZXN0GhQuU2Vzc2lvbkxpc3RSZXNwb25z",
+            "ZRI/ChBTZXNzaW9uTGlzdENoZWNrEhQuU2Vzc2lvbkNoZWNrUmVxdWVzdBoV",
+            "LlNlc3Npb25DaGVja1Jlc3BvbmNlEkUKE0dldFNlc3Npb25BbmFseXRpY3MS",
+            "Ey5TZXNzaW9uTGlzdFJlcXVlc3QaGS5TZXNzaW9uQW5hbHl0aWNzUmVzcG9u",
+            "c2VCHqoCG01pY3Jvc2VydmljZS5TZXNzaW9uLlByb3Rvc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -99,7 +99,7 @@ namespace Microservice.Session.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.UserInfoRequest), global::Microservice.Session.Protos.UserInfoRequest.Parser, new[]{ "UserId", "TenantId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.UserInfoResponse), global::Microservice.Session.Protos.UserInfoResponse.Parser, new[]{ "UserName", "UserEmail", "Lastlogin" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionListRequest), global::Microservice.Session.Protos.SessionListRequest.Parser, new[]{ "TenantId", "From", "To", "Device", "Country" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.Session), global::Microservice.Session.Protos.Session.Parser, new[]{ "UserName", "UserId", "Email", "IpAddress", "City", "Country", "Status", "DeviceType", "LoginTime", "Lac", "Sessionid" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.Session), global::Microservice.Session.Protos.Session.Parser, new[]{ "UserName", "UserId", "Email", "IpAddress", "City", "Country", "Status", "DeviceType", "LoginTime", "Lac", "Sessionid", "Action" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionListResponse), global::Microservice.Session.Protos.SessionListResponse.Parser, new[]{ "Sessions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionCheck), global::Microservice.Session.Protos.SessionCheck.Parser, new[]{ "IpAddress", "Country", "Fingerprint", "LocalTime", "IsVPN", "LatLon", "LoginTime", "LogoutTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionCheckRequest), global::Microservice.Session.Protos.SessionCheckRequest.Parser, new[]{ "TenantId", "UserId", "SessionId", "V" }, null, null, null, null),
@@ -2938,6 +2938,7 @@ namespace Microservice.Session.Protos {
       loginTime_ = other.loginTime_ != null ? other.loginTime_.Clone() : null;
       lac_ = other.lac_;
       sessionid_ = other.sessionid_;
+      action_ = other.action_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3079,6 +3080,18 @@ namespace Microservice.Session.Protos {
       }
     }
 
+    /// <summary>Field number for the "Action" field.</summary>
+    public const int ActionFieldNumber = 12;
+    private int action_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Action {
+      get { return action_; }
+      set {
+        action_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3105,6 +3118,7 @@ namespace Microservice.Session.Protos {
       if (!object.Equals(LoginTime, other.LoginTime)) return false;
       if (Lac != other.Lac) return false;
       if (Sessionid != other.Sessionid) return false;
+      if (Action != other.Action) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3123,6 +3137,7 @@ namespace Microservice.Session.Protos {
       if (loginTime_ != null) hash ^= LoginTime.GetHashCode();
       if (Lac.Length != 0) hash ^= Lac.GetHashCode();
       if (Sessionid.Length != 0) hash ^= Sessionid.GetHashCode();
+      if (Action != 0) hash ^= Action.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3185,6 +3200,10 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(90);
         output.WriteString(Sessionid);
       }
+      if (Action != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(Action);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3239,6 +3258,10 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(90);
         output.WriteString(Sessionid);
       }
+      if (Action != 0) {
+        output.WriteRawTag(96);
+        output.WriteInt32(Action);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3281,6 +3304,9 @@ namespace Microservice.Session.Protos {
       }
       if (Sessionid.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Sessionid);
+      }
+      if (Action != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Action);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3329,6 +3355,9 @@ namespace Microservice.Session.Protos {
       }
       if (other.Sessionid.Length != 0) {
         Sessionid = other.Sessionid;
+      }
+      if (other.Action != 0) {
+        Action = other.Action;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3396,6 +3425,10 @@ namespace Microservice.Session.Protos {
             Sessionid = input.ReadString();
             break;
           }
+          case 96: {
+            Action = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -3460,6 +3493,10 @@ namespace Microservice.Session.Protos {
           }
           case 90: {
             Sessionid = input.ReadString();
+            break;
+          }
+          case 96: {
+            Action = input.ReadInt32();
             break;
           }
         }

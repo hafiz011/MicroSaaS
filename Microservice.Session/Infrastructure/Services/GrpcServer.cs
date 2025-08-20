@@ -200,7 +200,15 @@ namespace Microservice.Session.Infrastructure.Services
             if (sessions == null || !sessions.Any())
                 throw new RpcException(new Status(StatusCode.NotFound, $"No active sessions found for TenantId {request.TenantId}"));
 
-            var userIds = sessions.Select(s => s.User_Id).Distinct().ToList();
+            //var userIds = sessions.Select(s => s.User_Id).Distinct().ToList();
+
+            var userIds = sessions
+                .Where(s => !string.IsNullOrEmpty(s.User_Id))
+                .Select(s => s.User_Id)
+                .Distinct()
+                .ToList();
+
+
             var users = await _userinfoRepository.GetUserBySessionIdListAsync(request.TenantId, userIds);
 
             var response = new SessionListResponse();
@@ -221,11 +229,13 @@ namespace Microservice.Session.Infrastructure.Services
                     DeviceType = session.Device?.Device_Type ?? "",
                     LoginTime = Timestamp.FromDateTime(session.Login_Time.ToUniversalTime()),
                     Lac = session.Geo_Location?.Latitude_Longitude ?? "",
-                    Sessionid = session.Id.ToString()
+                    Sessionid = session.Id.ToString(),
+                    Action = session.ActionCount
                 });
             }
             return response;
         }
+
 
         // session check for suspicious detection
         public override async Task<SessionCheckResponce> SessionListCheck(SessionCheckRequest request, ServerCallContext context)

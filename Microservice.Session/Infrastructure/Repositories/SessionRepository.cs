@@ -62,7 +62,7 @@ namespace Microservice.Session.Infrastructure.Repositories
             var filters = new List<FilterDefinition<Sessions>>
             {
                 filterBuilder.Eq(x => x.Tenant_Id, tenantId),
-                filterBuilder.Eq(x => x.isActive, true)
+                //filterBuilder.Eq(x => x.isActive, true)
             };
 
             if (from.HasValue)

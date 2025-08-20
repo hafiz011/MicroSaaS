@@ -83,6 +83,7 @@ namespace Microservice.AuthService.Infrastructure.Services
             }
         }
 
+
         // session check for suspicious detection. this is used rabbitmq consumer to check session list
         public async Task<List<SessionCheck>> SessionListCheck(string tenantId, string userId, string sessionId, int v)
         {
@@ -150,10 +151,6 @@ namespace Microservice.AuthService.Infrastructure.Services
                 };
             }
         }
-
-
-
-
 
     }
 }

@@ -23,6 +23,7 @@ service ApiKey {
 
   // Session analytics overview
   rpc GetSessionAnalytics(SessionListRequest) returns (SessionAnalyticsResponse);
+
 }
 
 // ================= NEW Messages for api key =================
@@ -105,7 +106,9 @@ message Session {
 	google.protobuf.Timestamp LoginTime = 9;
 	string Lac = 10;
 	string Sessionid = 11;
+	int32 Action = 12;
 }
+
 
 // ================= NEW Messages for suspicious detection =================
 // SessionListResponse
