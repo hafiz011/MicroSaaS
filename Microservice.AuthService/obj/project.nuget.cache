@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/83jK09YtDk=",
+  "dgSpecHash": "z/guGDtKpNc=",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\MicroSaaS\\MicroService\\Microservice.AuthService\\Microservice.AuthService.csproj",
+  "projectFilePath": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Microservice.AuthService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hafiz\\.nuget\\packages\\aspnetcore.identity.mongodbcore\\6.0.0\\aspnetcore.identity.mongodbcore.6.0.0.nupkg.sha512",
     "C:\\Users\\Hafiz\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",

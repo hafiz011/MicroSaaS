@@ -2,6 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "Microservice.Session.Protos";
 
+
 import "google/protobuf/timestamp.proto";
 
 service ApiKey {
@@ -85,7 +86,6 @@ message UserInfoResponse{
 }
 
 // ================= NEW Messages for active Session =================
-// active session
 message SessionListRequest {
   string TenantId = 1;
   google.protobuf.Timestamp from = 2;
@@ -94,7 +94,8 @@ message SessionListRequest {
   string country = 5;
 }
 
-message Session {
+// active session
+message SessionsData {
 	string UserName =1;
 	string UserId =2;
 	string Email = 3;
@@ -106,16 +107,23 @@ message Session {
 	google.protobuf.Timestamp LoginTime = 9;
 	string Lac = 10;
 	string Sessionid = 11;
-	int32 Action = 12;
 }
 
+message TopUser {
+	string user_id = 1;
+	string user_email = 2;
+	string user_name = 3;
+	int32 session = 4;
+	int32 action = 5;
+}
 
-// ================= NEW Messages for suspicious detection =================
 // SessionListResponse
 message SessionListResponse {
-  repeated Session sessions = 1;
-}
+  repeated SessionsData sessions = 1;
+  repeated TopUser topUser = 2;
+} 
 
+// ================= NEW Messages for suspicious detection =================
 // session check for suspicious detection
 message SessionCheck {
 	string IpAddress = 1;

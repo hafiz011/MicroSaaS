@@ -79,7 +79,7 @@ namespace Microservice.AuthService.Infrastructure.Services
             catch (RpcException ex) when (ex.StatusCode == StatusCode.NotFound)
             {
                 // Return empty list instead of throwing
-                return new SessionListResponse { Sessions = { } };
+                return new SessionListResponse { Sessions = { }, TopUser = { } };
             }
         }
 

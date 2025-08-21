@@ -127,7 +127,8 @@ namespace Microservice.AuthService.Controllers
 
             try
             {
-                var sessions = await _grpcServiceClient.GetSessionList(
+                // Call gRPC service
+                var sessionsResponse = await _grpcServiceClient.GetSessionList(
                     user.TenantId,
                     query.From,
                     query.To,
@@ -135,10 +136,39 @@ namespace Microservice.AuthService.Controllers
                     query.Country
                 );
 
-                // Always return 200 OK with sessions (could be empty)
-                return Ok(sessions);
+                // Return sessions + top users
+                return Ok(new
+                {
+                    Sessions = sessionsResponse.Sessions.Select(s => new
+                    {
+                        s.UserName,
+                        s.UserId,
+                        s.Email,
+                        s.IpAddress,
+                        s.City,
+                        s.Country,
+                        s.Status,
+                        s.DeviceType,
+                        LoginTime = s.LoginTime.ToDateTime(),
+                        s.Lac,
+                        s.Sessionid
+                    }),
+                    TopUsers = sessionsResponse.TopUser.Select(t => new
+                    {
+                        t.UserId,
+                        t.UserName,
+                        t.UserEmail,
+                        t.Session,
+                        t.Action
+                    })
+                });
             }
-            catch (Exception ex)
+            catch (RpcException ex) when (ex.StatusCode == Grpc.Core.StatusCode.NotFound)
+            {
+                // Return empty lists if no sessions found
+                return Ok(new { Sessions = new List<object>(), TopUsers = new List<object>() });
+            }
+            catch (Exception)
             {
                 return StatusCode(500, new { Message = "An error occurred while fetching active sessions." });
             }

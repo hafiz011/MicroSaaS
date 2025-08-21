@@ -9,8 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\AlertNotifier\**" />
+    <Content Remove="Infrastructure\AlertNotifier\**" />
+    <EmbeddedResource Remove="Infrastructure\AlertNotifier\**" />
+    <None Remove="Infrastructure\AlertNotifier\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Infrastructure\AlertNotifier\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +35,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
   </ItemGroup>
 
-    <ItemGroup>
+
+	<ItemGroup>
 		<Protobuf Include="Protos\ApiKey.proto" GrpcServices="Server" />
 	</ItemGroup>
 

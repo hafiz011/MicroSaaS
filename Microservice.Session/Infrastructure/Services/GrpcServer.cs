@@ -6,7 +6,6 @@ using Microservice.Session.Protos;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
-using ProtoSession = Microservice.Session.Protos.Session;
 
 namespace Microservice.Session.Infrastructure.Services
 {
@@ -197,10 +196,10 @@ namespace Microservice.Session.Infrastructure.Services
                 request.Country
             );
 
-            if (sessions == null || !sessions.Any())
-                throw new RpcException(new Status(StatusCode.NotFound, $"No active sessions found for TenantId {request.TenantId}"));
+            var response = new SessionListResponse();
 
-            //var userIds = sessions.Select(s => s.User_Id).Distinct().ToList();
+            if (sessions == null || !sessions.Any())
+                return response; // empty response, never null
 
             var userIds = sessions
                 .Where(s => !string.IsNullOrEmpty(s.User_Id))
@@ -208,31 +207,54 @@ namespace Microservice.Session.Infrastructure.Services
                 .Distinct()
                 .ToList();
 
-
             var users = await _userinfoRepository.GetUserBySessionIdListAsync(request.TenantId, userIds);
 
-            var response = new SessionListResponse();
+            // Active sessions
+            var activeSessions = sessions
+             .Where(s => s.isActive)
+             .Select(s =>
+             {
+                 var user = users.FirstOrDefault(u => u.User_Id == s.User_Id);
+                 return new SessionsData
+                 {
+                     UserName = user?.Name ?? string.Empty,
+                     Email = user?.Email ?? string.Empty,
+                     UserId = s.User_Id ?? string.Empty,
+                     IpAddress = s.Ip_Address ?? string.Empty,
+                     City = s.Geo_Location?.City ?? string.Empty,
+                     Country = s.Geo_Location?.Country ?? string.Empty,
+                     Status = s.isActive ? "Active" : "Inactive",
+                     DeviceType = s.Device?.Device_Type ?? string.Empty,
+                     LoginTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(s.Login_Time.ToUniversalTime()),
+                     Lac = s.Geo_Location?.Latitude_Longitude ?? string.Empty,
+                     Sessionid = s.Id.ToString(),
+                 };
+             }).ToList();
 
-            foreach (var session in sessions)
-            {
-                var user = users.FirstOrDefault(u => u.User_Id == session.User_Id);
+            response.Sessions.AddRange(activeSessions);
 
-                response.Sessions.Add(new ProtoSession
+            // Top users
+            var topUserGroups = sessions
+                .Where(s => !string.IsNullOrEmpty(s.User_Id))
+                .GroupBy(s => s.User_Id)
+                .Select(g =>
                 {
-                    UserName = user?.Name ?? "",
-                    Email = user?.Email ?? "",
-                    UserId = session.User_Id ?? "",
-                    IpAddress = session.Ip_Address ?? "",
-                    City = session.Geo_Location?.City ?? "",
-                    Country = session.Geo_Location?.Country ?? "",
-                    Status = session.isActive ? "Active" : "Inactive",
-                    DeviceType = session.Device?.Device_Type ?? "",
-                    LoginTime = Timestamp.FromDateTime(session.Login_Time.ToUniversalTime()),
-                    Lac = session.Geo_Location?.Latitude_Longitude ?? "",
-                    Sessionid = session.Id.ToString(),
-                    Action = session.ActionCount
-                });
-            }
+                    var user = users.FirstOrDefault(u => u.User_Id == g.Key);
+                    return new TopUser
+                    {
+                        UserId = g.Key,
+                        UserName = user?.Name ?? string.Empty,
+                        UserEmail = user?.Email ?? string.Empty,
+                        Session = g.Count(),
+                        Action = g.Sum(x => x.ActionCount)
+                    };
+                })
+                .OrderByDescending(u => u.Action)
+                .Take(20)
+                .ToList();
+
+            response.TopUser.AddRange(topUserGroups);
+
             return response;
         }
 
