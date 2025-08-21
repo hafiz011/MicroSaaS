@@ -59,12 +59,16 @@ namespace Microservice.Session.Infrastructure.Services
 
                             if (lastActivity == null) continue;
 
+                            var actionCount = await _activityLogsCollection
+                                .CountDocumentsAsync(a => a.Session_Id == session.Id && a.Tenant_Id == session.Tenant_Id);
+
                             var idleTime = DateTime.UtcNow - lastActivity.Time_Stamp;
                             if (idleTime.TotalMinutes < idleMinutes) continue;
 
                             var update = Builders<Sessions>.Update
-                                .Set(s => s.Logout_Time, lastActivity.Time_Stamp.AddSeconds(20))
-                                .Set(s => s.isActive, false);
+                                .Set(s => s.Logout_Time, lastActivity.Time_Stamp.AddSeconds(15))
+                                .Set(s => s.isActive, false)
+                                .Set(s => s.ActionCount, actionCount);
 
                             await _sessionsCollection.UpdateOneAsync(
                                 Builders<Sessions>.Filter.Eq(s => s.Id, session.Id),

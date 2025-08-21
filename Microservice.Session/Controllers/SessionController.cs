@@ -88,7 +88,7 @@ namespace Microservice.Session.Controllers
                         User_Id = dto.User_Id,
                         Name = dto.Name,
                         Email = dto.Email,
-                        Last_login = dto.LocalTime,
+                        Last_login = DateTime.UtcNow
                         //Created_at = DateTime.UtcNow
                     };
 
@@ -104,36 +104,43 @@ namespace Microservice.Session.Controllers
                 }
 
                 var location = await _geolocationService.GetGeolocationAsync(dto.Ip_Address); // get location using ip address
-
-                // Condition 1: Anonymous → Login → Update session
+                
+                // Condition 1: Anonymous session gets associated with a logged-in user
+                // If the session exists AND the session's User_Id is null (anonymous)
+                // AND the request contains a valid User_Id,
+                // then update the session to link it to the logged-in user.
                 if (existingSession != null && string.IsNullOrEmpty(existingSession.User_Id) && !string.IsNullOrWhiteSpace(dto.User_Id))
                 {
                     var update = new Sessions
                     {
-                        Tenant_Id = apiKeyInfo.Id,
-                        User_Id = dto.User_Id,
-                        Ip_Address = dto.Ip_Address,
-                        Local_Time = dto.LocalTime,
                         isActive = true,
-                        Geo_Location = new Entities.Location
-                        {
-                            Country = location.Country,
-                            City = location.City,
-                            Region = location.Region,
-                            Postal = location.Postal,
-                            Latitude_Longitude = location.Loc,
-                            Isp = location.Org,
-                            TimeZone = location.TimeZone
-                        },
-                        Device = new Entities.DeviceInfo
-                        {
-                            Browser = dto.Device.Browser,
-                            Fingerprint = dto.Device.Fingerprint,
-                            Device_Type = dto.Device.Device_Type,
-                            OS = dto.Device.OS,
-                            Language = dto.Device.Language,
-                            Screen_Resolution = dto.Device.Screen_Resolution
-                        }
+                        User_Id = dto?.User_Id,
+
+
+                        //Tenant_Id = apiKeyInfo.Id,
+                        //User_Id = dto.User_Id,
+                        //Ip_Address = dto.Ip_Address,
+                        //Local_Time = dto.LocalTime,
+
+                        //Geo_Location = new Entities.Location
+                        //{
+                        //    Country = location.Country,
+                        //    City = location.City,
+                        //    Region = location.Region,
+                        //    Postal = location.Postal,
+                        //    Latitude_Longitude = location.Loc,
+                        //    Isp = location.Org,
+                        //    TimeZone = location.TimeZone
+                        //},
+                        //Device = new Entities.DeviceInfo
+                        //{
+                        //    Browser = dto.Device.Browser,
+                        //    Fingerprint = dto.Device.Fingerprint,
+                        //    Device_Type = dto.Device.Device_Type,
+                        //    OS = dto.Device.OS,
+                        //    Language = dto.Device.Language,
+                        //    Screen_Resolution = dto.Device.Screen_Resolution
+                        //}
                     };
 
                     _publisher.PublishSessionRiskCheck(new SessionRiskCheckMessage
@@ -169,14 +176,25 @@ namespace Microservice.Session.Controllers
                     await _sessionRepository.UpdateSessionAsync(existingSession.Id, update);
                     return Ok(new { SessionsId = existingSession.Id });
                 }
+
+                // Condition 2: Anonymous session revisited without login
+                // If the session exists AND the session's User_Id is null (anonymous)
+                // AND the request also has no User_Id (still anonymous),
+                // then just return the existing session ID without updating anything.
                 else if (existingSession != null && string.IsNullOrEmpty(existingSession.User_Id) && string.IsNullOrWhiteSpace(dto.User_Id))
                 { 
                     return Ok(new { SessionsId = existingSession.Id }); // Condition 2: Anonymous → Return visit (no change)
                 }
+
+                // Condition 3: Returning user session
+                // If the session exists AND it already has a User_Id
+                // AND the incoming request also has the same User_Id,
+                // then the user is returning, so just return the existing session ID.
                 else if (existingSession != null && !string.IsNullOrEmpty(existingSession.User_Id) && !string.IsNullOrWhiteSpace(dto.User_Id) && existingSession.User_Id == dto.User_Id)
                 {
-                    return Ok(new { SessionsId = existingSession.Id }); // Condition 3: User already exists → return
+                    return Ok(new { SessionsId = existingSession.Id }); // User already exists → return
                 }
+                //create session
                 else
                 {
                     var session = new Sessions
@@ -311,18 +329,27 @@ namespace Microservice.Session.Controllers
                 {
                     return Unauthorized("Invalid API Key.");
                 }
-
-                var log = new ActivityLog
+                var sessiondata = await _sessionRepository.GetSessionByIdAsync(sessionId);
+                if (sessiondata == null)
                 {
-                    Tenant_Id = apiKeyInfo.Id,
-                    Session_Id = sessionId,
-                    Activity_Type = dto.Activity_Type,
-                    Metadata = dto.Metadata,
-                    LocalTime = dto.LocalTime,
-                    Time_Stamp = DateTime.UtcNow
-                };
-
-                await _activityRepository.CreateLogActivityAsync(log); // insert event log in DB
+                    var log = new ActivityLog
+                    {
+                        Tenant_Id = apiKeyInfo.Id,
+                        Session_Id = sessionId,
+                        Activity_Type = dto.Activity_Type,
+                        Metadata = dto.Metadata,
+                        Time_Stamp = DateTime.UtcNow
+                    };
+                    await _activityRepository.CreateLogActivityAsync(log); // insert event log in DB
+                }
+                else
+                {
+                    var update = new Sessions
+                    {
+                        isActive = true,
+                    };
+                    await _sessionRepository.UpdateSessionAsync(sessiondata.Id, update);
+                }
                 return Ok();
             }
             catch (Exception ex)

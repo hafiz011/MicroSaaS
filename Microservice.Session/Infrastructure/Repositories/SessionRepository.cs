@@ -42,18 +42,55 @@ namespace Microservice.Session.Infrastructure.Repositories
         // update session
         public async Task UpdateSessionAsync(string id, Sessions update)
         {
-            var filter = Builders<Sessions>.Filter.Eq(u => u.Id, id);
+            var filter = Builders<Sessions>.Filter.Eq(s => s.Id, id);
+            var updates = new List<UpdateDefinition<Sessions>>();
 
-            var updateDef = Builders<Sessions>.Update
-                .Set(s => s.User_Id, update.User_Id)
-                .Set(s => s.Ip_Address, update.Ip_Address)
-                .Set(s => s.Local_Time, update.Local_Time)
-                .Set(s => s.isActive, update.isActive)
-                .Set(s => s.Geo_Location, update.Geo_Location)
-                .Set(s => s.Device, update.Device);
+            void AddUpdatesForObject(object obj, string prefix = "")
+            {
+                if (obj == null) return;
 
-            await _collection.UpdateOneAsync(filter, updateDef);
+                var props = obj.GetType().GetProperties();
+                foreach (var prop in props)
+                {
+                    var value = prop.GetValue(obj);
+
+                    if (value == null) continue;
+                    if (prop.PropertyType.IsValueType && Activator.CreateInstance(prop.PropertyType).Equals(value)) continue;
+
+                    string fieldName = string.IsNullOrEmpty(prefix) ? prop.Name : $"{prefix}.{prop.Name}";
+                    updates.Add(Builders<Sessions>.Update.Set(fieldName, value));
+                }
+            }
+
+            // Top-level properties
+            AddUpdatesForObject(update);
+
+            // Nested objects
+            AddUpdatesForObject(update.Geo_Location, "Geo_Location");
+            AddUpdatesForObject(update.Device, "Device");
+
+            if (updates.Any())
+            {
+                var combinedUpdate = Builders<Sessions>.Update.Combine(updates);
+                await _collection.UpdateOneAsync(filter, combinedUpdate);
+            }
         }
+
+
+        //public async Task UpdateSessionAsync(string id, Sessions update)
+        //{
+        //    var filter = Builders<Sessions>.Filter.Eq(u => u.Id, id);
+
+        //    var updateDef = Builders<Sessions>.Update
+        //        .Set(s => s.User_Id, update.User_Id)
+        //        .Set(s => s.Ip_Address, update.Ip_Address)
+        //        .Set(s => s.Local_Time, update.Local_Time)
+        //        .Set(s => s.isActive, update.isActive)
+        //        .Set(s => s.Geo_Location, update.Geo_Location)
+        //        .Set(s => s.Device, update.Device);
+
+        //    await _collection.UpdateOneAsync(filter, updateDef);
+        //}
 
         // active session list
         public async Task<List<Sessions>> ActiveSessionList(string tenantId, DateTime? from, DateTime? to, string device, string country)
