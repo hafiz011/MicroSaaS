@@ -82,12 +82,8 @@ namespace Microservice.Session.Infrastructure.Repositories
         //    var filter = Builders<Sessions>.Filter.Eq(u => u.Id, id);
 
         //    var updateDef = Builders<Sessions>.Update
-        //        .Set(s => s.User_Id, update.User_Id)
-        //        .Set(s => s.Ip_Address, update.Ip_Address)
-        //        .Set(s => s.Local_Time, update.Local_Time)
-        //        .Set(s => s.isActive, update.isActive)
-        //        .Set(s => s.Geo_Location, update.Geo_Location)
-        //        .Set(s => s.Device, update.Device);
+        //        .Set(s => s.Logout_Time, update.Logout_Time)
+        //        .Set(s => s.isActive, update.isActive);
 
         //    await _collection.UpdateOneAsync(filter, updateDef);
         //}

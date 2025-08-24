@@ -28,7 +28,7 @@ namespace Microservice.Session.Infrastructure.Services
                     _logger.LogInformation("Running session cleanup...");
 
                     const int batchSize = 100;
-                    const int idleMinutes = 20;
+                    const int idleMinutes = 5;
                     ObjectId? lastId = null;
 
                     while (!stoppingToken.IsCancellationRequested)

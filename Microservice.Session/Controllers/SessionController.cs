@@ -292,8 +292,8 @@ namespace Microservice.Session.Controllers
                 if (session == null || session.Tenant_Id != apiKeyInfo.Id)
                     return Unauthorized("Invalid or unauthorized session.");
 
-                if (session.Logout_Time != null)
-                    return BadRequest("Session is already ended.");
+                //if (session.Logout_Time != null)
+                //    return BadRequest("Session is already ended.");
 
                 await _sessionRepository.EndSessionAsync(sessionId);  // end session
 
@@ -347,8 +347,19 @@ namespace Microservice.Session.Controllers
                     var update = new Sessions
                     {
                         isActive = true,
+                        Logout_Time = null,
                     };
                     await _sessionRepository.UpdateSessionAsync(sessiondata.Id, update);
+                    
+                    var log = new ActivityLog
+                    {
+                        Tenant_Id = apiKeyInfo.Id,
+                        Session_Id = sessionId,
+                        Activity_Type = dto.Activity_Type,
+                        Metadata = dto.Metadata,
+                        Time_Stamp = DateTime.UtcNow
+                    };
+                    await _activityRepository.CreateLogActivityAsync(log); // insert event log in DB
                 }
                 return Ok();
             }
