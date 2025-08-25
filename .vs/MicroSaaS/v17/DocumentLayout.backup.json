@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "D:\\GitHub\\MicroSaaS\\TrackLog\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\entities\\indexseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\entities\\indexseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\tracklog\\microservice.authservice\\infrastructure\\services\\rabbitmqconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\infrastructure\\services\\rabbitmqconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\infrastructure\\repositories\\sessionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\repositories\\sessionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\infrastructure\\services\\sessiontimeoutservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\services\\sessiontimeoutservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\entities\\activitylog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\entities\\activitylog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\infrastructure\\interfaces\\iactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\interfaces\\iactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\tracklog\\microservice.authservice\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,21 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IActivityRepository.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\Interfaces\\IActivityRepository.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\Interfaces\\IActivityRepository.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\Interfaces\\IActivityRepository.cs",
-              "RelativeToolTip": "Microservice.Session\\Infrastructure\\Interfaces\\IActivityRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-24T11:07:01.124Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -71,68 +50,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SessionTimeOutService .cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\Services\\SessionTimeOutService .cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\Services\\SessionTimeOutService .cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\Services\\SessionTimeOutService .cs",
-              "RelativeToolTip": "Microservice.Session\\Infrastructure\\Services\\SessionTimeOutService .cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAowDoAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "IndexSeeder.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Entities\\IndexSeeder.cs",
+              "RelativeDocumentMoniker": "Microservice.Session\\Entities\\IndexSeeder.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Entities\\IndexSeeder.cs",
+              "RelativeToolTip": "Microservice.Session\\Entities\\IndexSeeder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-24T10:52:45.229Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DashboardController.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Controllers\\DashboardController.cs",
-              "RelativeDocumentMoniker": "Microservice.AuthService\\Controllers\\DashboardController.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Controllers\\DashboardController.cs",
-              "RelativeToolTip": "Microservice.AuthService\\Controllers\\DashboardController.cs",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAowJ8AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-24T10:24:53.762Z",
+              "WhenOpened": "2025-08-25T11:54:28.725Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SessionRepository.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\Repositories\\SessionRepository.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\Repositories\\SessionRepository.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\Repositories\\SessionRepository.cs",
-              "RelativeToolTip": "Microservice.Session\\Infrastructure\\Repositories\\SessionRepository.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAArwBMAAAAZAAAAAAAAAA==",
+              "Title": "RabbitMqConsumerService.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "RelativeDocumentMoniker": "Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "RelativeToolTip": "Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAwwPUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T11:37:49.02Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T11:41:02.388Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "SessionController.cs",
               "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Controllers\\SessionController.cs",
               "RelativeDocumentMoniker": "Microservice.Session\\Controllers\\SessionController.cs",
               "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Controllers\\SessionController.cs",
               "RelativeToolTip": "Microservice.Session\\Controllers\\SessionController.cs",
-              "ViewState": "AgIAAFYBAAAAAAAAAAAowGwBAAANAAAAAAAAAA==",
+              "ViewState": "AgIAANMAAAAAAAAAAAAAAN4AAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T10:49:36.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T11:40:57.993Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ActivityLog.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Entities\\ActivityLog.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Entities\\ActivityLog.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Entities\\ActivityLog.cs",
-              "RelativeToolTip": "Microservice.Session\\Entities\\ActivityLog.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAmAAAAAAAAAA==",
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "Microservice.AuthService\\Controllers\\DashboardController.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "Microservice.AuthService\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAMBAAAAAAAAAAAwwBwBAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T10:47:49.362Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T10:26:53.186Z"
             }
           ]
         }

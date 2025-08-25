@@ -29,7 +29,7 @@ namespace Microservice.Session.Entities
                     Builders<Sessions>.IndexKeys
                         .Ascending(x => x.Tenant_Id)
                         .Ascending(x => x.isActive)
-                        .Descending(x => x.Local_Time)
+                        .Descending(x => x.Login_Time)
                         .Ascending(x => x.Device.Device_Type)
                         .Ascending(x => x.Geo_Location.Country),
                     new CreateIndexOptions { Name = "idx_active_session_filter" }

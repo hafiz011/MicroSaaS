@@ -62,8 +62,7 @@ namespace Microservice.AuthService.Infrastructure.Services
                         UserId = message.UserId,
                         Email = message.Email,
                         IpAddress = message.Ip_Address,
-                        LocalTime = message.Local_Time,
-                        LoginTime = message.Local_Time,
+                        LoginTime = message.Login_Time,
                         RiskScore = prediction.Score,
                         RiskLevel = prediction.Level,
                         RiskFactors = prediction.Factors,
@@ -121,7 +120,7 @@ namespace Microservice.AuthService.Infrastructure.Services
             var baselineIPs = response.Select(s => s.IpAddress).Distinct().ToList();
             var baselineCountries = response.Select(s => s.Country).Distinct().ToList();
             var baselineDevices = response.Select(s => s.Fingerprint).Distinct().ToList();
-            var baselineHours = response.Select(s => s.LocalTime.ToDateTime().Hour).ToList();
+            var baselineHours = response.Select(s => s.LoginTime.ToDateTime().Hour).ToList();
 
             // Check #1: Location mismatch
             if (!baselineCountries.Contains(message.Geo_Location.Country))
@@ -139,7 +138,7 @@ namespace Microservice.AuthService.Infrastructure.Services
 
             // Check #3: Login time anomaly
             var avgLoginHour = baselineHours.Average();
-            var currentHour = message.Local_Time.Hour;
+            var currentHour = message.Login_Time.Hour;
             if (Math.Abs(currentHour - avgLoginHour) >= 6)
             {
                 flags.Add("Unusual login hour");

@@ -11,15 +11,25 @@ namespace Microservice.Session.Entities
         public string Tenant_Id { get; set; }
         public string User_Id { get; set; } //user collection id
         public string Ip_Address { get; set; }
-        public DateTime Local_Time { get; set; }
+
+        public DateTime Login_Time { get; set; }
+        public DateTime? Logout_Time { get; set; }
+        public double Session_Duration { get; set; }
+        public int ActionCount { get; set; } = 0;
+
+        // Aggregated product actions
+        public List<string> Unique_Products_Viewed { get; set; } = new();
+        public List<string> Unique_Products_Added { get; set; } = new();
+        public List<string> Unique_Products_Purchased { get; set; } = new();
+        public bool Conversion_Flag { get; set; }
+
+        public double Session_RiskScore { get; set; }  // Suspicious behavior score
+        public bool isSuspicious { get; set; }
+        public string ReferrerUrl { get; set; }
+
         public DeviceInfo Device { get; set; }
         public Location Geo_Location { get; set; }
-        public DateTime Login_Time { get; set; } = DateTime.UtcNow;
-        public DateTime? Logout_Time { get; set; }
         public bool isActive { get; set; }
-        public bool isVPN { get; set; }
-        public bool isSuspicious { get; set; }
-        public int ActionCount { get; set; } = 0;
     }
     public class DeviceInfo
     {
@@ -39,6 +49,6 @@ namespace Microservice.Session.Entities
         public string Latitude_Longitude { get; set; }
         public string Isp { get; set; }
         public string TimeZone { get; set; }
-        public bool is_vpn { get; set; }
+        public bool isVPN { get; set; }
     }
 }

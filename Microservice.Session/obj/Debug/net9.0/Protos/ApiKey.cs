@@ -58,39 +58,38 @@ namespace Microservice.Session.Protos {
             "X2lkGAEgASgJEhIKCnVzZXJfZW1haWwYAiABKAkSEQoJdXNlcl9uYW1lGAMg",
             "ASgJEg8KB3Nlc3Npb24YBCABKAUSDgoGYWN0aW9uGAUgASgFIlEKE1Nlc3Np",
             "b25MaXN0UmVzcG9uc2USHwoIc2Vzc2lvbnMYASADKAsyDS5TZXNzaW9uc0Rh",
-            "dGESGQoHdG9wVXNlchgCIAMoCzIILlRvcFVzZXIi9QEKDFNlc3Npb25DaGVj",
+            "dGESGQoHdG9wVXNlchgCIAMoCzIILlRvcFVzZXIixgEKDFNlc3Npb25DaGVj",
             "axIRCglJcEFkZHJlc3MYASABKAkSDwoHQ291bnRyeRgCIAEoCRITCgtGaW5n",
-            "ZXJwcmludBgDIAEoCRItCglMb2NhbFRpbWUYBCABKAsyGi5nb29nbGUucHJv",
-            "dG9idWYuVGltZXN0YW1wEg0KBWlzVlBOGAUgASgIEg8KB2xhdF9sb24YBiAB",
-            "KAkSLQoJTG9naW5UaW1lGAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVz",
-            "dGFtcBIuCgpMb2dvdXRUaW1lGAggASgLMhouZ29vZ2xlLnByb3RvYnVmLlRp",
-            "bWVzdGFtcCJWChNTZXNzaW9uQ2hlY2tSZXF1ZXN0EhAKCFRlbmFudElkGAEg",
-            "ASgJEg8KB3VzZXJfaWQYAiABKAkSEQoJU2Vzc2lvbklkGAMgASgJEgkKAXYY",
-            "BCABKAUiOgoUU2Vzc2lvbkNoZWNrUmVzcG9uY2USIgoLc2Vzc2lvbmxpc3QY",
-            "ASADKAsyDS5TZXNzaW9uQ2hlY2sinQEKGFNlc3Npb25BbmFseXRpY3NSZXNw",
-            "b25zZRIlCg5kYWlseV9zZXNzaW9ucxgBIAMoCzINLkRhaWx5U2Vzc2lvbhIw",
-            "ChNkZXZpY2VfZGlzdHJpYnV0aW9uGAIgAygLMhMuRGV2aWNlRGlzdHJpYnV0",
-            "aW9uEigKD3Nlc3Npb25fbWV0cmljcxgDIAEoCzIPLlNlc3Npb25NZXRyaWNz",
-            "IkIKDERhaWx5U2Vzc2lvbhIMCgRkYXRlGAEgASgJEhAKCHNlc3Npb25zGAIg",
-            "ASgFEhIKCnN1c3BpY2lvdXMYAyABKAUiWgoSRGV2aWNlRGlzdHJpYnV0aW9u",
-            "EgwKBG5hbWUYASABKAkSDQoFdG90YWwYAiABKAUSEwoLQXZnRHVyYXRpb24Y",
-            "AyABKAESEgoKQXZnQWN0aW9ucxgEIAEoASKiAQoOU2Vzc2lvbk1ldHJpY3MS",
-            "FAoMYXZnX2R1cmF0aW9uGAEgASgBEhoKEmF2Z19kdXJhdGlvbl90cmVuZBgC",
-            "IAEoARITCgtib3VuY2VfcmF0ZRgDIAEoARIZChFib3VuY2VfcmF0ZV90cmVu",
-            "ZBgEIAEoARITCgthdmdfYWN0aW9ucxgFIAEoARIZChFhdmdfYWN0aW9uc190",
-            "cmVuZBgGIAEoATKDBAoGQXBpS2V5EiwKCUdldEFwaUtleRIOLkFwaUtleVJl",
-            "cXVlc3QaDy5BcGlLZXlSZXNwb25zZRI2CgxDcmVhdGVBcGlLZXkSFC5DcmVh",
-            "dGVBcGlLZXlSZXF1ZXN0GhAuQXBpSGFzaFJlc3BvbnNlEjQKEFJlZ2VuZXJh",
-            "dGVBcGlLZXkSDi5BcGlLZXlSZXF1ZXN0GhAuQXBpSGFzaFJlc3BvbnNlEjMK",
-            "C1JlbmV3QXBpS2V5EhMuUmVuZXdBcGlLZXlSZXF1ZXN0Gg8uQXBpS2V5UmVz",
-            "cG9uc2USLwoMUmV2b2tlQXBpS2V5Eg4uQXBpS2V5UmVxdWVzdBoPLkFwaUtl",
-            "eVJlc3BvbnNlEjIKC0dldFVzZXJJbmZvEhAuVXNlckluZm9SZXF1ZXN0GhEu",
-            "VXNlckluZm9SZXNwb25zZRI7Cg5HZXRTZXNzaW9uTGlzdBITLlNlc3Npb25M",
-            "aXN0UmVxdWVzdBoULlNlc3Npb25MaXN0UmVzcG9uc2USPwoQU2Vzc2lvbkxp",
-            "c3RDaGVjaxIULlNlc3Npb25DaGVja1JlcXVlc3QaFS5TZXNzaW9uQ2hlY2tS",
-            "ZXNwb25jZRJFChNHZXRTZXNzaW9uQW5hbHl0aWNzEhMuU2Vzc2lvbkxpc3RS",
-            "ZXF1ZXN0GhkuU2Vzc2lvbkFuYWx5dGljc1Jlc3BvbnNlQh6qAhtNaWNyb3Nl",
-            "cnZpY2UuU2Vzc2lvbi5Qcm90b3NiBnByb3RvMw=="));
+            "ZXJwcmludBgDIAEoCRINCgVpc1ZQThgEIAEoCBIPCgdsYXRfbG9uGAUgASgJ",
+            "Ei0KCUxvZ2luVGltZRgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3Rh",
+            "bXASLgoKTG9nb3V0VGltZRgHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1l",
+            "c3RhbXAiVgoTU2Vzc2lvbkNoZWNrUmVxdWVzdBIQCghUZW5hbnRJZBgBIAEo",
+            "CRIPCgd1c2VyX2lkGAIgASgJEhEKCVNlc3Npb25JZBgDIAEoCRIJCgF2GAQg",
+            "ASgFIjoKFFNlc3Npb25DaGVja1Jlc3BvbmNlEiIKC3Nlc3Npb25saXN0GAEg",
+            "AygLMg0uU2Vzc2lvbkNoZWNrIp0BChhTZXNzaW9uQW5hbHl0aWNzUmVzcG9u",
+            "c2USJQoOZGFpbHlfc2Vzc2lvbnMYASADKAsyDS5EYWlseVNlc3Npb24SMAoT",
+            "ZGV2aWNlX2Rpc3RyaWJ1dGlvbhgCIAMoCzITLkRldmljZURpc3RyaWJ1dGlv",
+            "bhIoCg9zZXNzaW9uX21ldHJpY3MYAyABKAsyDy5TZXNzaW9uTWV0cmljcyJC",
+            "CgxEYWlseVNlc3Npb24SDAoEZGF0ZRgBIAEoCRIQCghzZXNzaW9ucxgCIAEo",
+            "BRISCgpzdXNwaWNpb3VzGAMgASgFIloKEkRldmljZURpc3RyaWJ1dGlvbhIM",
+            "CgRuYW1lGAEgASgJEg0KBXRvdGFsGAIgASgFEhMKC0F2Z0R1cmF0aW9uGAMg",
+            "ASgBEhIKCkF2Z0FjdGlvbnMYBCABKAEiogEKDlNlc3Npb25NZXRyaWNzEhQK",
+            "DGF2Z19kdXJhdGlvbhgBIAEoARIaChJhdmdfZHVyYXRpb25fdHJlbmQYAiAB",
+            "KAESEwoLYm91bmNlX3JhdGUYAyABKAESGQoRYm91bmNlX3JhdGVfdHJlbmQY",
+            "BCABKAESEwoLYXZnX2FjdGlvbnMYBSABKAESGQoRYXZnX2FjdGlvbnNfdHJl",
+            "bmQYBiABKAEygwQKBkFwaUtleRIsCglHZXRBcGlLZXkSDi5BcGlLZXlSZXF1",
+            "ZXN0Gg8uQXBpS2V5UmVzcG9uc2USNgoMQ3JlYXRlQXBpS2V5EhQuQ3JlYXRl",
+            "QXBpS2V5UmVxdWVzdBoQLkFwaUhhc2hSZXNwb25zZRI0ChBSZWdlbmVyYXRl",
+            "QXBpS2V5Eg4uQXBpS2V5UmVxdWVzdBoQLkFwaUhhc2hSZXNwb25zZRIzCgtS",
+            "ZW5ld0FwaUtleRITLlJlbmV3QXBpS2V5UmVxdWVzdBoPLkFwaUtleVJlc3Bv",
+            "bnNlEi8KDFJldm9rZUFwaUtleRIOLkFwaUtleVJlcXVlc3QaDy5BcGlLZXlS",
+            "ZXNwb25zZRIyCgtHZXRVc2VySW5mbxIQLlVzZXJJbmZvUmVxdWVzdBoRLlVz",
+            "ZXJJbmZvUmVzcG9uc2USOwoOR2V0U2Vzc2lvbkxpc3QSEy5TZXNzaW9uTGlz",
+            "dFJlcXVlc3QaFC5TZXNzaW9uTGlzdFJlc3BvbnNlEj8KEFNlc3Npb25MaXN0",
+            "Q2hlY2sSFC5TZXNzaW9uQ2hlY2tSZXF1ZXN0GhUuU2Vzc2lvbkNoZWNrUmVz",
+            "cG9uY2USRQoTR2V0U2Vzc2lvbkFuYWx5dGljcxITLlNlc3Npb25MaXN0UmVx",
+            "dWVzdBoZLlNlc3Npb25BbmFseXRpY3NSZXNwb25zZUIeqgIbTWljcm9zZXJ2",
+            "aWNlLlNlc3Npb24uUHJvdG9zYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -105,7 +104,7 @@ namespace Microservice.Session.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionsData), global::Microservice.Session.Protos.SessionsData.Parser, new[]{ "UserName", "UserId", "Email", "IpAddress", "City", "Country", "Status", "DeviceType", "LoginTime", "Lac", "Sessionid" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.TopUser), global::Microservice.Session.Protos.TopUser.Parser, new[]{ "UserId", "UserEmail", "UserName", "Session", "Action" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionListResponse), global::Microservice.Session.Protos.SessionListResponse.Parser, new[]{ "Sessions", "TopUser" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionCheck), global::Microservice.Session.Protos.SessionCheck.Parser, new[]{ "IpAddress", "Country", "Fingerprint", "LocalTime", "IsVPN", "LatLon", "LoginTime", "LogoutTime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionCheck), global::Microservice.Session.Protos.SessionCheck.Parser, new[]{ "IpAddress", "Country", "Fingerprint", "IsVPN", "LatLon", "LoginTime", "LogoutTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionCheckRequest), global::Microservice.Session.Protos.SessionCheckRequest.Parser, new[]{ "TenantId", "UserId", "SessionId", "V" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionCheckResponce), global::Microservice.Session.Protos.SessionCheckResponce.Parser, new[]{ "Sessionlist" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Microservice.Session.Protos.SessionAnalyticsResponse), global::Microservice.Session.Protos.SessionAnalyticsResponse.Parser, new[]{ "DailySessions", "DeviceDistribution", "SessionMetrics" }, null, null, null, null),
@@ -4079,7 +4078,6 @@ namespace Microservice.Session.Protos {
       ipAddress_ = other.ipAddress_;
       country_ = other.country_;
       fingerprint_ = other.fingerprint_;
-      localTime_ = other.localTime_ != null ? other.localTime_.Clone() : null;
       isVPN_ = other.isVPN_;
       latLon_ = other.latLon_;
       loginTime_ = other.loginTime_ != null ? other.loginTime_.Clone() : null;
@@ -4129,20 +4127,8 @@ namespace Microservice.Session.Protos {
       }
     }
 
-    /// <summary>Field number for the "LocalTime" field.</summary>
-    public const int LocalTimeFieldNumber = 4;
-    private global::Google.Protobuf.WellKnownTypes.Timestamp localTime_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Google.Protobuf.WellKnownTypes.Timestamp LocalTime {
-      get { return localTime_; }
-      set {
-        localTime_ = value;
-      }
-    }
-
     /// <summary>Field number for the "isVPN" field.</summary>
-    public const int IsVPNFieldNumber = 5;
+    public const int IsVPNFieldNumber = 4;
     private bool isVPN_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -4154,7 +4140,7 @@ namespace Microservice.Session.Protos {
     }
 
     /// <summary>Field number for the "lat_lon" field.</summary>
-    public const int LatLonFieldNumber = 6;
+    public const int LatLonFieldNumber = 5;
     private string latLon_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -4166,7 +4152,7 @@ namespace Microservice.Session.Protos {
     }
 
     /// <summary>Field number for the "LoginTime" field.</summary>
-    public const int LoginTimeFieldNumber = 7;
+    public const int LoginTimeFieldNumber = 6;
     private global::Google.Protobuf.WellKnownTypes.Timestamp loginTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -4178,7 +4164,7 @@ namespace Microservice.Session.Protos {
     }
 
     /// <summary>Field number for the "LogoutTime" field.</summary>
-    public const int LogoutTimeFieldNumber = 8;
+    public const int LogoutTimeFieldNumber = 7;
     private global::Google.Protobuf.WellKnownTypes.Timestamp logoutTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -4207,7 +4193,6 @@ namespace Microservice.Session.Protos {
       if (IpAddress != other.IpAddress) return false;
       if (Country != other.Country) return false;
       if (Fingerprint != other.Fingerprint) return false;
-      if (!object.Equals(LocalTime, other.LocalTime)) return false;
       if (IsVPN != other.IsVPN) return false;
       if (LatLon != other.LatLon) return false;
       if (!object.Equals(LoginTime, other.LoginTime)) return false;
@@ -4222,7 +4207,6 @@ namespace Microservice.Session.Protos {
       if (IpAddress.Length != 0) hash ^= IpAddress.GetHashCode();
       if (Country.Length != 0) hash ^= Country.GetHashCode();
       if (Fingerprint.Length != 0) hash ^= Fingerprint.GetHashCode();
-      if (localTime_ != null) hash ^= LocalTime.GetHashCode();
       if (IsVPN != false) hash ^= IsVPN.GetHashCode();
       if (LatLon.Length != 0) hash ^= LatLon.GetHashCode();
       if (loginTime_ != null) hash ^= LoginTime.GetHashCode();
@@ -4257,24 +4241,20 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(26);
         output.WriteString(Fingerprint);
       }
-      if (localTime_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(LocalTime);
-      }
       if (IsVPN != false) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(32);
         output.WriteBool(IsVPN);
       }
       if (LatLon.Length != 0) {
-        output.WriteRawTag(50);
+        output.WriteRawTag(42);
         output.WriteString(LatLon);
       }
       if (loginTime_ != null) {
-        output.WriteRawTag(58);
+        output.WriteRawTag(50);
         output.WriteMessage(LoginTime);
       }
       if (logoutTime_ != null) {
-        output.WriteRawTag(66);
+        output.WriteRawTag(58);
         output.WriteMessage(LogoutTime);
       }
       if (_unknownFields != null) {
@@ -4299,24 +4279,20 @@ namespace Microservice.Session.Protos {
         output.WriteRawTag(26);
         output.WriteString(Fingerprint);
       }
-      if (localTime_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(LocalTime);
-      }
       if (IsVPN != false) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(32);
         output.WriteBool(IsVPN);
       }
       if (LatLon.Length != 0) {
-        output.WriteRawTag(50);
+        output.WriteRawTag(42);
         output.WriteString(LatLon);
       }
       if (loginTime_ != null) {
-        output.WriteRawTag(58);
+        output.WriteRawTag(50);
         output.WriteMessage(LoginTime);
       }
       if (logoutTime_ != null) {
-        output.WriteRawTag(66);
+        output.WriteRawTag(58);
         output.WriteMessage(LogoutTime);
       }
       if (_unknownFields != null) {
@@ -4337,9 +4313,6 @@ namespace Microservice.Session.Protos {
       }
       if (Fingerprint.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Fingerprint);
-      }
-      if (localTime_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(LocalTime);
       }
       if (IsVPN != false) {
         size += 1 + 1;
@@ -4373,12 +4346,6 @@ namespace Microservice.Session.Protos {
       }
       if (other.Fingerprint.Length != 0) {
         Fingerprint = other.Fingerprint;
-      }
-      if (other.localTime_ != null) {
-        if (localTime_ == null) {
-          LocalTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-        }
-        LocalTime.MergeFrom(other.LocalTime);
       }
       if (other.IsVPN != false) {
         IsVPN = other.IsVPN;
@@ -4429,29 +4396,22 @@ namespace Microservice.Session.Protos {
             Fingerprint = input.ReadString();
             break;
           }
-          case 34: {
-            if (localTime_ == null) {
-              LocalTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-            }
-            input.ReadMessage(LocalTime);
-            break;
-          }
-          case 40: {
+          case 32: {
             IsVPN = input.ReadBool();
             break;
           }
-          case 50: {
+          case 42: {
             LatLon = input.ReadString();
             break;
           }
-          case 58: {
+          case 50: {
             if (loginTime_ == null) {
               LoginTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(LoginTime);
             break;
           }
-          case 66: {
+          case 58: {
             if (logoutTime_ == null) {
               LogoutTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
@@ -4489,29 +4449,22 @@ namespace Microservice.Session.Protos {
             Fingerprint = input.ReadString();
             break;
           }
-          case 34: {
-            if (localTime_ == null) {
-              LocalTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
-            }
-            input.ReadMessage(LocalTime);
-            break;
-          }
-          case 40: {
+          case 32: {
             IsVPN = input.ReadBool();
             break;
           }
-          case 50: {
+          case 42: {
             LatLon = input.ReadString();
             break;
           }
-          case 58: {
+          case 50: {
             if (loginTime_ == null) {
               LoginTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(LoginTime);
             break;
           }
-          case 66: {
+          case 58: {
             if (logoutTime_ == null) {
               LogoutTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }

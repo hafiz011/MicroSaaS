@@ -42,8 +42,8 @@ namespace Microservice.Session.Controllers
             public string Name { get; set; }
             public string Email { get; set; }
             public string Ip_Address { get; set; }
+            public string ReferrerUrl { get; set; }
             public DeviceInfoDto Device { get; set; }
-            public DateTime LocalTime { get; set; }
         }
 
         public class DeviceInfoDto
@@ -62,6 +62,9 @@ namespace Microservice.Session.Controllers
         {
             try
             {
+                //string apiKey = Request.Headers["X-API-KEY"].FirstOrDefault() ?? Request.Query["apiKey"];
+                //string sessionId = Request.Headers["X-SESSION-ID"].FirstOrDefault() ?? Request.Query["sessionId"];
+
                 if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))  //get api key hash
                 {
                     return Unauthorized("API Key is missing."); 
@@ -76,12 +79,14 @@ namespace Microservice.Session.Controllers
                 Sessions existingSession = null;
                 if (!string.IsNullOrWhiteSpace(existingSessionId))
                 {
-                    existingSession = await _sessionRepository.GetSessionByIdAsync(existingSessionId); // get session id if it already exits
+                    existingSession = await _sessionRepository.GetSessionByIdAsync(existingSessionId, apiKeyInfo.Id); // get session if it already exits
                 }
 
+                // create user or update user
                 if (!string.IsNullOrWhiteSpace(dto.User_Id))
                 {
-                    var userinfo = await _userInfoRepository.GetUserByIdAsync(dto.User_Id);  // get user if it exits in DB
+                    // dto user id not null
+                    var userinfo = await _userInfoRepository.getUserById(dto.User_Id, apiKeyInfo.Id);  // get user if it exits in DB
                     var user = new Users
                     {
                         Tenant_Id = apiKeyInfo.Id,
@@ -89,7 +94,6 @@ namespace Microservice.Session.Controllers
                         Name = dto.Name,
                         Email = dto.Email,
                         Last_login = DateTime.UtcNow
-                        //Created_at = DateTime.UtcNow
                     };
 
                     if (userinfo == null) //if user is null than create user
@@ -104,45 +108,21 @@ namespace Microservice.Session.Controllers
                 }
 
                 var location = await _geolocationService.GetGeolocationAsync(dto.Ip_Address); // get location using ip address
-                
+
                 // Condition 1: Anonymous session gets associated with a logged-in user
                 // If the session exists AND the session's User_Id is null (anonymous)
                 // AND the request contains a valid User_Id,
                 // then update the session to link it to the logged-in user.
+                // update session for anonymous to loin user
                 if (existingSession != null && string.IsNullOrEmpty(existingSession.User_Id) && !string.IsNullOrWhiteSpace(dto.User_Id))
                 {
                     var update = new Sessions
                     {
                         isActive = true,
-                        User_Id = dto?.User_Id,
-
-
-                        //Tenant_Id = apiKeyInfo.Id,
-                        //User_Id = dto.User_Id,
-                        //Ip_Address = dto.Ip_Address,
-                        //Local_Time = dto.LocalTime,
-
-                        //Geo_Location = new Entities.Location
-                        //{
-                        //    Country = location.Country,
-                        //    City = location.City,
-                        //    Region = location.Region,
-                        //    Postal = location.Postal,
-                        //    Latitude_Longitude = location.Loc,
-                        //    Isp = location.Org,
-                        //    TimeZone = location.TimeZone
-                        //},
-                        //Device = new Entities.DeviceInfo
-                        //{
-                        //    Browser = dto.Device.Browser,
-                        //    Fingerprint = dto.Device.Fingerprint,
-                        //    Device_Type = dto.Device.Device_Type,
-                        //    OS = dto.Device.OS,
-                        //    Language = dto.Device.Language,
-                        //    Screen_Resolution = dto.Device.Screen_Resolution
-                        //}
+                        User_Id = dto.User_Id
                     };
-
+                    await _sessionRepository.UpdateSessionAsync(existingSession.Id, update);
+                    // RabbitMQ 
                     _publisher.PublishSessionRiskCheck(new SessionRiskCheckMessage
                     {
                         SessionId = existingSession.Id,
@@ -150,8 +130,8 @@ namespace Microservice.Session.Controllers
                         UserId = dto.User_Id,
                         Email = dto.Email,
                         Ip_Address = dto.Ip_Address,
-                        Local_Time = dto.LocalTime,
                         Cliend_Domaim = apiKeyInfo.Domain,
+                        Login_Time = DateTime.UtcNow,
                         Geo_Location = new Models.DTOs.Location
                         {
                             Country = location.Country,
@@ -172,8 +152,6 @@ namespace Microservice.Session.Controllers
                             Screen_Resolution = dto.Device.Screen_Resolution
                         }
                     });
-
-                    await _sessionRepository.UpdateSessionAsync(existingSession.Id, update);
                     return Ok(new { SessionsId = existingSession.Id });
                 }
 
@@ -202,8 +180,10 @@ namespace Microservice.Session.Controllers
                         Tenant_Id = apiKeyInfo.Id,
                         User_Id = dto?.User_Id,
                         Ip_Address = dto.Ip_Address,
-                        Local_Time = dto.LocalTime,
                         isActive = true,
+                        Login_Time = DateTime.UtcNow,
+                        ReferrerUrl = dto.ReferrerUrl,
+
                         Geo_Location = new Entities.Location
                         {
                             Country = location.Country,
@@ -236,8 +216,8 @@ namespace Microservice.Session.Controllers
                             UserId = dto.User_Id,
                             Email = dto.Email,
                             Ip_Address = dto.Ip_Address,
-                            Local_Time = dto.LocalTime,
                             Cliend_Domaim = apiKeyInfo.Domain,
+                            Login_Time = DateTime.UtcNow,
                             Geo_Location = new Models.DTOs.Location
                             {
                                 Country = location.Country,
@@ -288,12 +268,9 @@ namespace Microservice.Session.Controllers
                 if (apiKeyInfo == null)
                     return Unauthorized("Invalid API Key.");
 
-                var session = await _sessionRepository.GetSessionByIdAsync(sessionId);  // check session in database
+                var session = await _sessionRepository.GetSessionByIdAsync(sessionId, apiKeyInfo.Id);  // check session in database
                 if (session == null || session.Tenant_Id != apiKeyInfo.Id)
                     return Unauthorized("Invalid or unauthorized session.");
-
-                //if (session.Logout_Time != null)
-                //    return BadRequest("Session is already ended.");
 
                 await _sessionRepository.EndSessionAsync(sessionId);  // end session
 
@@ -306,6 +283,25 @@ namespace Microservice.Session.Controllers
             }
         }
 
+
+
+        public class ActivityLogDto
+        {
+            public string User_Id { get; set; }
+            public string Action_Type { get; set; }     // view_product, add_to_cart, checkout, payment, etc.
+            public string Product_Id { get; set; }
+            public string Category_Id { get; set; }
+            public int Quantity { get; set; }
+            public double Price { get; set; }
+            public string Url { get; set; }
+            public string ReferrerUrl { get; set; }
+            public Dictionary<string, string> Metadata { get; set; }
+            public string Request_Method { get; set; }
+            public int Response_Code { get; set; }
+            public bool Success_Flag { get; set; }
+            public double Response_Time { get; set; }
+            public DateTime Time_Stamp { get; set; }
+        }
 
 
         [HttpPost("log-activity")]
@@ -329,112 +325,58 @@ namespace Microservice.Session.Controllers
                 {
                     return Unauthorized("Invalid API Key.");
                 }
-                var sessiondata = await _sessionRepository.GetSessionByIdAsync(sessionId);
-                if (sessiondata == null)
+                var sessiondata = await _sessionRepository.GetSessionByIdAsync(sessionId, apiKeyInfo.Id);
+
+                if (sessiondata != null)
                 {
+                    if (sessiondata.isActive == false)
+                    {
+                        var update = new Sessions
+                        {
+                            isActive = true,
+                            Logout_Time = null
+                        };
+                        await _sessionRepository.UpdateSessionAsync(sessiondata.Id, update);
+                    }
+
+                    // Activity Log create
                     var log = new ActivityLog
                     {
                         Tenant_Id = apiKeyInfo.Id,
                         Session_Id = sessionId,
-                        Activity_Type = dto.Activity_Type,
+                        User_Id = sessiondata.User_Id,
+                        Action_Type = dto.Action_Type,
+                        Product_Id = dto.Product_Id,
+                        Category_Id = dto.Category_Id,
+                        Quantity = dto.Quantity,
+                        Price = dto.Price,
+                        Url = dto.Url,
+                        ReferrerUrl = dto.ReferrerUrl,
                         Metadata = dto.Metadata,
+                        Request_Method = dto.Request_Method,
+                        Response_Code = dto.Response_Code,
+                        Success_Flag = dto.Success_Flag,
+                        Response_Time = dto.Response_Time,
                         Time_Stamp = DateTime.UtcNow
                     };
-                    await _activityRepository.CreateLogActivityAsync(log); // insert event log in DB
+
+                    await _activityRepository.CreateLogActivityAsync(log);
                 }
                 else
                 {
-                    var update = new Sessions
-                    {
-                        isActive = true,
-                        Logout_Time = null,
-                    };
-                    await _sessionRepository.UpdateSessionAsync(sessiondata.Id, update);
-                    
-                    var log = new ActivityLog
-                    {
-                        Tenant_Id = apiKeyInfo.Id,
-                        Session_Id = sessionId,
-                        Activity_Type = dto.Activity_Type,
-                        Metadata = dto.Metadata,
-                        Time_Stamp = DateTime.UtcNow
-                    };
-                    await _activityRepository.CreateLogActivityAsync(log); // insert event log in DB
+                    return BadRequest("Session ID is miss match."); //get session id
                 }
-                return Ok();
+
+                return Ok("Activity logged successfully.");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while logging the activity.");
+                return StatusCode(500, $"An error occurred while logging the activity: {ex.Message}");
             }
         }
 
 
 
-        //private SessionRiskCheckMessage BuildRiskMessage(SessionRiskCheckMessage session, string tenantId)
-        //{
-        //    return new SessionRiskCheckMessage
-        //    {
-        //        SessionId = session.SessionId,
-        //        TenantId = tenantId,
-        //        UserId = session.User_Id,
-        //        Ip_Address = session.Ip_Address,
-        //        Local_Time = session.Local_Time,
-        //        Geo_Location = new Location { ... },
-        //        Device = new DeviceInfo { ... }
-        //    };
-        //}
-
-
-
-
-
-
-
-
-
-
-
-        //[HttpGet("suspicious/details")]
-        //public async Task<IActionResult> GetSuspiciousWithDetails([FromQuery] DateTime? from, [FromQuery] DateTime? to)
-        //{
-        //    var tenantId = await GetTenantFromApiKey();
-        //    var data = await _suspiciousActivityRepository.GetSuspiciousWithSessionDetailsAsync(tenantId, from, to);
-        //    return Ok(data);
-        //}
-
-
-
-
-
-
-
-        [HttpGet("metrics")]
-        public async Task<IActionResult> GetSessionMetrics([FromQuery] SessionQueryParams query)
-        {
-            return Ok();
-        }
-
-        [HttpGet("suspicious")]
-        public async Task<IActionResult> GetSuspiciousActivities([FromQuery] SessionQueryParams query)
-        {
-            return Ok();
-        }
-
-        [HttpGet("active-users-count")]
-        public async Task<IActionResult> GetActiveUserCount([FromQuery] SessionQueryParams query)
-        {
-            return Ok();
-        }
-
-        public class SessionQueryParams
-        {
-            public DateTime? StartDate { get; set; }
-            public DateTime? EndDate { get; set; }
-            public string Country { get; set; }
-            public string DeviceType { get; set; }
-            public bool? SuspiciousOnly { get; set; }
-        }
 
 
 

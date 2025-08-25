@@ -283,9 +283,8 @@ namespace Microservice.Session.Infrastructure.Services
                     IpAddress = session.Ip_Address ?? "",
                     Country = session.Geo_Location?.Country ?? "",
                     Fingerprint = session.Device?.Fingerprint ?? "",
-                    IsVPN = session?.isVPN ?? false,
+                    IsVPN = session.Geo_Location?.isVPN ?? false,
                     LatLon = session.Geo_Location?.Latitude_Longitude ?? "",
-                    LocalTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(session.Local_Time.ToUniversalTime()),
                     LoginTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(session.Login_Time.ToUniversalTime()),
                     LogoutTime = session.Logout_Time.HasValue
                         ? Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(session.Logout_Time.Value.ToUniversalTime())
@@ -310,8 +309,6 @@ namespace Microservice.Session.Infrastructure.Services
             );
 
             var response = new SessionAnalyticsResponse();
-            //if (sessions == null || !sessions.Any())
-            //    return response; // return empty response if no data
 
             if (sessions == null || !sessions.Any())
             {
@@ -336,11 +333,11 @@ namespace Microservice.Session.Infrastructure.Services
                 .GroupBy(s => s.Login_Time.Date)
                 .Select(g => new DailySession
                 {
-                    Date = g.Key.ToString("yyyy-MM-dd"), // ISO format
+                    Date = g.Key.ToString("dd-MM-yyyy"), // ISO format
                     Sessions = g.Count(),
                     Suspicious = g.Count(s => s.isSuspicious)
                 })
-                .OrderByDescending(x => x.Date) // latest date first
+                //.OrderByDescending(x => x.Date) // latest date first
                 .ToList();
 
             response.DailySessions.AddRange(dailyGroups);
@@ -355,10 +352,10 @@ namespace Microservice.Session.Infrastructure.Services
                     Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(g.Key), // Mobile/Desktop/Tablet
                     Total = g.Count(), // total sessions per device type
                     AvgDuration = g
-                        .Where(s => s.Login_Time != null && s.Logout_Time.HasValue)
-                        .Select(s => (s.Logout_Time.Value - s.Login_Time).TotalSeconds)
+                        .Select(s => s.Session_Duration) // duration save is seconds
                         .DefaultIfEmpty(0)
                         .Average(), // average session duration in seconds
+
                     AvgActions = g
                         .Select(s => s.ActionCount)
                         .DefaultIfEmpty(0)
@@ -398,24 +395,24 @@ namespace Microservice.Session.Infrastructure.Services
 
 
             // ---------------- Session Metrics ----------------
-            var totalSessions = sessions.Count;
 
             // Bounce rate (<30 sec session)
-            var bounceCount = sessions.Count(s => s.Logout_Time.HasValue &&
-                                                  (s.Logout_Time.Value - s.Login_Time).TotalSeconds < 30);
-
+            //var bounceCount = sessions.Count(s => s.Logout_Time.HasValue &&
+            //                                      (s.Logout_Time.Value - s.Login_Time).TotalSeconds < 30);
+            
+            var totalSessions = sessions.Count;
+            var bounceCount = sessions.Count(s => s.Session_Duration < 30);
             var bounceRate = totalSessions > 0 ? (double)bounceCount / totalSessions * 100 : 0;
 
             // Avg session duration (seconds)
             var avgDuration = sessions
-                .Where(s => s.Logout_Time.HasValue)
-                .Select(s => (s.Logout_Time.Value - s.Login_Time).TotalSeconds)
+                .Select(s => s.Session_Duration)
                 .DefaultIfEmpty(0)
                 .Average();
 
             // ---------------- Avg Actions ----------------
             var avgActions = sessions
-                .Select(s => s.ActionCount)   // ensure ActionCount exists in your session model
+                .Select(s => s.ActionCount)
                 .DefaultIfEmpty(0)
                 .Average();
 
@@ -438,31 +435,24 @@ namespace Microservice.Session.Infrastructure.Services
                     request.Country
                 );
 
-                //var totalPreviousSessions = previousSessions.Count;
                 var totalPreviousSessions = previousSessions?.Count ?? 0;
 
                 // previous Avg session duration (seconds)
                 var previousAvgDuration = previousSessions
-                    .Where(s => s.Logout_Time.HasValue)
-                    .Select(s => (s.Logout_Time.Value - s.Login_Time).TotalSeconds)
+                    .Select(s => s.Session_Duration)
                     .DefaultIfEmpty(0)
                     .Average();
 
                 var avgDurationTrend = previousAvgDuration > 0
-                    ? ((avgDuration - previousAvgDuration) / previousAvgDuration) * 100
-                    : 0;
+                    ? ((avgDuration - previousAvgDuration) / previousAvgDuration) * 100 : 0;
 
                 // previous Bounce rate (<30 sec session)
-                var previousBounceCount = previousSessions.Count(s => s.Logout_Time.HasValue &&
-                                                          (s.Logout_Time.Value - s.Login_Time).TotalSeconds < 30);
-
+                var previousBounceCount = previousSessions.Count(s => s.Session_Duration < 30);
                 var previousBounceRate = totalPreviousSessions > 0
-                    ? (double)previousBounceCount / totalPreviousSessions * 100
-                    : 0;
+                    ? (double)previousBounceCount / totalPreviousSessions * 100 : 0;
 
                 var bounceRateTrend = previousBounceRate > 0
-                    ? ((bounceRate - previousBounceRate) / previousBounceRate) * 100
-                    : 0;
+                    ? ((bounceRate - previousBounceRate) / previousBounceRate) * 100 : 0;
 
                 // Previous sessions to avgActions
                 var previousAvgActions = previousSessions
@@ -472,8 +462,7 @@ namespace Microservice.Session.Infrastructure.Services
 
                 // Trend for avgActions
                 var avgActionsTrend = previousAvgActions > 0
-                    ? ((avgActions - previousAvgActions) / previousAvgActions) * 100
-                    : 0;
+                    ? ((avgActions - previousAvgActions) / previousAvgActions) * 100 : 0;
 
                 response.SessionMetrics = new SessionMetrics
                 {

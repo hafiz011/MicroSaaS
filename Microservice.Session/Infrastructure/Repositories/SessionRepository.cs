@@ -33,16 +33,27 @@ namespace Microservice.Session.Infrastructure.Repositories
             await _collection.UpdateOneAsync(s => s.Id == sessionId, update);
         }
 
-        // get session by id
-        public async Task<Sessions> GetSessionByIdAsync(string existingSessionId)
+        // get session by id and tenant id
+        public async Task<Sessions> GetSessionByIdAsync(string existingSessionId, string tenantId)
         {
-            return await _collection.Find(a => a.Id == existingSessionId).FirstOrDefaultAsync();
+            var filterBuilder = Builders<Sessions>.Filter;
+            var filters = new List<FilterDefinition<Sessions>>
+            {
+                filterBuilder.Eq(x => x.Tenant_Id, tenantId),
+                filterBuilder.Eq(x => x.Id, existingSessionId)
+            };
+
+            var filter = filterBuilder.And(filters);
+            var sort = Builders<Sessions>.Sort.Descending(x => x.Login_Time);
+
+            return await _collection.Find(filter).Sort(sort).FirstOrDefaultAsync();
         }
 
+
         // update session
-        public async Task UpdateSessionAsync(string id, Sessions update)
+        public async Task UpdateSessionAsync(string sessionId, Sessions update)
         {
-            var filter = Builders<Sessions>.Filter.Eq(s => s.Id, id);
+            var filter = Builders<Sessions>.Filter.Eq(s => s.Id, sessionId);
             var updates = new List<UpdateDefinition<Sessions>>();
 
             void AddUpdatesForObject(object obj, string prefix = "")
@@ -53,9 +64,6 @@ namespace Microservice.Session.Infrastructure.Repositories
                 foreach (var prop in props)
                 {
                     var value = prop.GetValue(obj);
-
-                    if (value == null) continue;
-                    if (prop.PropertyType.IsValueType && Activator.CreateInstance(prop.PropertyType).Equals(value)) continue;
 
                     string fieldName = string.IsNullOrEmpty(prefix) ? prop.Name : $"{prefix}.{prop.Name}";
                     updates.Add(Builders<Sessions>.Update.Set(fieldName, value));
@@ -75,6 +83,7 @@ namespace Microservice.Session.Infrastructure.Repositories
                 await _collection.UpdateOneAsync(filter, combinedUpdate);
             }
         }
+
 
 
         //public async Task UpdateSessionAsync(string id, Sessions update)

@@ -18,15 +18,6 @@ namespace Microservice.Session.Infrastructure.Repositories
             await _collection.InsertOneAsync(user);
         }
 
-        public async Task<Users> GetUserByIdAsync(string User_Id)
-        {
-            if (string.IsNullOrWhiteSpace(User_Id))
-            {
-                return null;
-            }
-            return await _collection.Find(a => a.User_Id == User_Id).FirstOrDefaultAsync();
-        }
-
         public async Task UpdateUserAsync(Users user)
         {
             var filter = Builders<Users>.Filter.Eq(u => u.User_Id, user.User_Id);

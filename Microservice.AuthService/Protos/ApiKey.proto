@@ -134,11 +134,10 @@ message SessionCheck {
 	string IpAddress = 1;
 	string Country = 2;
 	string Fingerprint = 3;
-	google.protobuf.Timestamp LocalTime = 4;
-	bool isVPN = 5;
-	string lat_lon = 6;
-	google.protobuf.Timestamp LoginTime = 7;
-	google.protobuf.Timestamp LogoutTime = 8;
+	bool isVPN = 4;
+	string lat_lon = 5;
+	google.protobuf.Timestamp LoginTime = 6;
+	google.protobuf.Timestamp LogoutTime = 7;
 }
 
 message SessionCheckRequest {
