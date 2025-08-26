@@ -25,22 +25,32 @@ namespace Microservice.Session.Entities
             var collection = _context.SessionsDB;
             var indexes = new List<CreateIndexModel<Sessions>>
             {
+                // session list filter
                 new(
                     Builders<Sessions>.IndexKeys
                         .Ascending(x => x.Tenant_Id)
-                        .Ascending(x => x.isActive)
                         .Descending(x => x.Login_Time)
                         .Ascending(x => x.Device.Device_Type)
                         .Ascending(x => x.Geo_Location.Country),
-                    new CreateIndexOptions { Name = "idx_active_session_filter" }
+                    new CreateIndexOptions { Name = "idx_session_filter" }
                 ),
 
+                // Suspicious session check (per user recent sessions)
                 new(
                     Builders<Sessions>.IndexKeys
                         .Ascending(x => x.Tenant_Id)
                         .Ascending(x => x.User_Id)
+                        .Ascending(x => x.Id)
                         .Descending(x => x.Login_Time),
                     new CreateIndexOptions { Name = "idx_suspicious_check" }
+                ),
+
+                // Get session by Id + Tenant
+                new(
+                    Builders<Sessions>.IndexKeys
+                        .Ascending(x => x.Tenant_Id)
+                        .Ascending(x => x.Id),
+                    new CreateIndexOptions { Name = "idx_session_by_tenant_and_id", Unique = true }
                 )
             };
 
@@ -52,12 +62,16 @@ namespace Microservice.Session.Entities
         {
             var collection = _context.UserDB;
 
-            var indexes = new[]
+            var indexes = new List<CreateIndexModel<Users>>
             {
-                new CreateIndexModel<Users>(Builders<Users>.IndexKeys.Ascending(x => x.Tenant_Id)),
-                new CreateIndexModel<Users>(Builders<Users>.IndexKeys.Ascending(x => x.User_Id))
+                // get user info
+                new(
+                    Builders<Users>.IndexKeys
+                        .Ascending(x => x.Tenant_Id)
+                        .Ascending(x => x.User_Id),
+                    new CreateIndexOptions { Name = "idx_user_info_filter" }
+                )
             };
-
             await collection.Indexes.CreateManyAsync(indexes);
             Console.WriteLine("MongoDB User indexes created.");
         }
@@ -66,15 +80,19 @@ namespace Microservice.Session.Entities
         {
             var collection = _context.ApiKey;
 
-            var indexes = new[]
+            var indexes = new List<CreateIndexModel<Tenants>>
             {
                 new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.UserId)),
                 new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.ApiSecret)),
-                new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.Plan)),
-                new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.ExpirationDate)),
-                new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.RequestLimit)),
-                new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.Created_At)),
-                new CreateIndexModel<Tenants>(Builders<Tenants>.IndexKeys.Ascending(x => x.IsRevoked))
+
+                // Validate api key
+                new(
+                    Builders<Tenants>.IndexKeys
+                        .Ascending(x => x.ApiSecret)
+                        .Ascending(x => x.ExpirationDate)
+                        .Ascending(x => x.IsRevoked),
+                    new CreateIndexOptions { Name = "idx_validate_apikey" }
+                )
             };
 
             await collection.Indexes.CreateManyAsync(indexes);

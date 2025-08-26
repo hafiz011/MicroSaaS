@@ -9,7 +9,7 @@ namespace Microservice.Session.Infrastructure.Interfaces
         Task<Sessions> CreateSessionAsync(Sessions sessions);
         Task EndSessionAsync(string sessionId);
         Task<Sessions> GetSessionByIdAsync(string existingSessionId, string tenantId);
-        Task UpdateSessionAsync(string sesiionId, Sessions update);
+        Task UpdateSessionAsync(Sessions update);
 
 
         //Task<List<Sessions>> GetRecentSessionsForUserAsync(string Tenant_Id, string userId, int v);

@@ -51,88 +51,58 @@ namespace Microservice.Session.Infrastructure.Repositories
 
 
         // update session
-        public async Task UpdateSessionAsync(string sessionId, Sessions update)
-        {
-            var filter = Builders<Sessions>.Filter.Eq(s => s.Id, sessionId);
-            var updates = new List<UpdateDefinition<Sessions>>();
-
-            void AddUpdatesForObject(object obj, string prefix = "")
-            {
-                if (obj == null) return;
-
-                var props = obj.GetType().GetProperties();
-                foreach (var prop in props)
-                {
-                    var value = prop.GetValue(obj);
-
-                    string fieldName = string.IsNullOrEmpty(prefix) ? prop.Name : $"{prefix}.{prop.Name}";
-                    updates.Add(Builders<Sessions>.Update.Set(fieldName, value));
-                }
-            }
-
-            // Top-level properties
-            AddUpdatesForObject(update);
-
-            // Nested objects
-            AddUpdatesForObject(update.Geo_Location, "Geo_Location");
-            AddUpdatesForObject(update.Device, "Device");
-
-            if (updates.Any())
-            {
-                var combinedUpdate = Builders<Sessions>.Update.Combine(updates);
-                await _collection.UpdateOneAsync(filter, combinedUpdate);
-            }
-        }
-
-
-
-        //public async Task UpdateSessionAsync(string id, Sessions update)
+        //public async Task UpdateSessionAsync(string sessionId, Sessions update)
         //{
-        //    var filter = Builders<Sessions>.Filter.Eq(u => u.Id, id);
+        //    var filter = Builders<Sessions>.Filter.Eq(s => s.Id, sessionId);
+        //    var updates = new List<UpdateDefinition<Sessions>>();
 
-        //    var updateDef = Builders<Sessions>.Update
-        //        .Set(s => s.Logout_Time, update.Logout_Time)
-        //        .Set(s => s.isActive, update.isActive);
+        //    void AddUpdatesForObject(object obj, string prefix = "")
+        //    {
+        //        if (obj == null) return;
 
-        //    await _collection.UpdateOneAsync(filter, updateDef);
+        //        var props = obj.GetType().GetProperties();
+        //        foreach (var prop in props)
+        //        {
+        //            var value = prop.GetValue(obj);
+
+        //            string fieldName = string.IsNullOrEmpty(prefix) ? prop.Name : $"{prefix}.{prop.Name}";
+        //            updates.Add(Builders<Sessions>.Update.Set(fieldName, value));
+        //        }
+        //    }
+
+        //    // Top-level properties
+        //    AddUpdatesForObject(update);
+
+        //    // Nested objects
+        //    AddUpdatesForObject(update.Geo_Location, "Geo_Location");
+        //    AddUpdatesForObject(update.Device, "Device");
+
+        //    if (updates.Any())
+        //    {
+        //        var combinedUpdate = Builders<Sessions>.Update.Combine(updates);
+        //        await _collection.UpdateOneAsync(filter, combinedUpdate);
+        //    }
         //}
 
-        // active session list
-        public async Task<List<Sessions>> ActiveSessionList(string tenantId, DateTime? from, DateTime? to, string device, string country)
+
+
+        public async Task UpdateSessionAsync(Sessions update)
         {
             var filterBuilder = Builders<Sessions>.Filter;
             var filters = new List<FilterDefinition<Sessions>>
             {
-                filterBuilder.Eq(x => x.Tenant_Id, tenantId),
-                //filterBuilder.Eq(x => x.isActive, true)
+                filterBuilder.Eq(x => x.Tenant_Id, update.Tenant_Id),
+                filterBuilder.Eq(x => x.Id, update.Id)
             };
 
-            if (from.HasValue)
-                filters.Add(filterBuilder.Gte(x => x.Login_Time, from.Value));
-            if (to.HasValue)
-                filters.Add(filterBuilder.Lte(x => x.Login_Time, to.Value));
+            var filter = filterBuilder.And(filters);
 
-            if (!string.IsNullOrEmpty(device))
-            {
-                filters.Add(filterBuilder.Regex(
-                    x => x.Device.Device_Type,
-                    new BsonRegularExpression($"^{Regex.Escape(device)}$", "i")  // case-insensitive
-                ));
-            }
+            var updateDef = Builders<Sessions>.Update
+                .Set(s => s.Logout_Time, update.Logout_Time)
+                .Set(s => s.isActive, update.isActive);
 
-            if (!string.IsNullOrEmpty(country))
-            {
-                filters.Add(filterBuilder.Regex(
-                    x => x.Geo_Location.Country,
-                    new BsonRegularExpression($"^{Regex.Escape(country)}$", "i")  // case-insensitive
-                ));
-            }
-
-            var sort = Builders<Sessions>.Sort.Descending(x => x.Login_Time);
-
-            return await _collection.Find(filterBuilder.And(filters)).Sort(sort).ToListAsync();
+            await _collection.UpdateOneAsync(filter, updateDef);
         }
-
 
         // session check for suspicious detection
         public async Task<List<Sessions>> GetSessionCheckListAsync(string tenantId, string userId, string sessionId, int limit)
@@ -150,39 +120,49 @@ namespace Microservice.Session.Infrastructure.Repositories
             return await _collection.Find(filterBuilder.And(filters)).Sort(sort).Limit(limit).ToListAsync();
         }
 
-        // sessions analytics chart
-        public async Task<List<Sessions>> GetSessionsAnalytics(string tenantId, DateTime? from, DateTime? to, string device, string country)
+
+        // helper for active session list & analytics queries
+        private FilterDefinition<Sessions> BuildSessionFilter(string tenantId, DateTime? from, DateTime? to, string device, string country)
         {
             var filterBuilder = Builders<Sessions>.Filter;
             var filters = new List<FilterDefinition<Sessions>>
             {
-                filterBuilder.Eq(x => x.Tenant_Id, tenantId),
+                filterBuilder.Eq(s => s.Tenant_Id, tenantId)
             };
 
-            if (from.HasValue)
-                filters.Add(filterBuilder.Gte(x => x.Login_Time, from.Value));
-            if (to.HasValue)
-                filters.Add(filterBuilder.Lte(x => x.Login_Time, to.Value));
+            if (from.HasValue) filters.Add(filterBuilder.Gte(s => s.Login_Time, from.Value));
+            if (to.HasValue) filters.Add(filterBuilder.Lte(s => s.Login_Time, to.Value));
 
             if (!string.IsNullOrEmpty(device))
-            {
-                filters.Add(filterBuilder.Regex(
-                    x => x.Device.Device_Type,
-                    new BsonRegularExpression($"^{Regex.Escape(device)}$", "i")  // case-insensitive
-                ));
-            }
+                filters.Add(filterBuilder.Regex(s => s.Device.Device_Type,
+                    new BsonRegularExpression($"^{Regex.Escape(device)}$", "i")));
 
             if (!string.IsNullOrEmpty(country))
-            {
-                filters.Add(filterBuilder.Regex(
-                    x => x.Geo_Location.Country,
-                    new BsonRegularExpression($"^{Regex.Escape(country)}$", "i")  // case-insensitive
-                ));
-            }
+                filters.Add(filterBuilder.Regex(s => s.Geo_Location.Country,
+                    new BsonRegularExpression($"^{Regex.Escape(country)}$", "i")));
 
-            var sort = Builders<Sessions>.Sort.Descending(x => x.Login_Time);
-
-            return await _collection.Find(filterBuilder.And(filters)).Sort(sort).ToListAsync();
+            return filterBuilder.And(filters);
         }
+
+        // get active sessions
+        public async Task<List<Sessions>> ActiveSessionList(string tenantId, DateTime? from, DateTime? to, string device, string country)
+        {
+            var filter = BuildSessionFilter(tenantId, from, to, device, country);
+            return await _collection.Find(filter)
+                                    .SortByDescending(s => s.Login_Time)
+                                    .ToListAsync();
+        }
+
+        // sessions analytics chart
+        public async Task<List<Sessions>> GetSessionsAnalytics(string tenantId, DateTime? from, DateTime? to, string device, string country)
+        {
+            var filter = BuildSessionFilter(tenantId, from, to, device, country);
+            return await _collection.Find(filter)
+                                    .SortByDescending(s => s.Login_Time)
+                                    .ToListAsync();
+        }
+
+
+
     }
 }

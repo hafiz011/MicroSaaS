@@ -118,10 +118,12 @@ namespace Microservice.Session.Controllers
                 {
                     var update = new Sessions
                     {
+                        Tenant_Id = existingSession.Tenant_Id,
+                        Id = existingSession.Id,
                         isActive = true,
-                        User_Id = dto.User_Id
+                        Logout_Time = null,
                     };
-                    await _sessionRepository.UpdateSessionAsync(existingSession.Id, update);
+                    await _sessionRepository.UpdateSessionAsync(update);
                     // RabbitMQ 
                     _publisher.PublishSessionRiskCheck(new SessionRiskCheckMessage
                     {
@@ -332,11 +334,13 @@ namespace Microservice.Session.Controllers
                     if (sessiondata.isActive == false)
                     {
                         var update = new Sessions
-                        {
+                        {   
+                            Tenant_Id = sessiondata.Tenant_Id,
+                            Id = sessiondata.Id,
                             isActive = true,
                             Logout_Time = null
                         };
-                        await _sessionRepository.UpdateSessionAsync(sessiondata.Id, update);
+                        await _sessionRepository.UpdateSessionAsync(update);
                     }
 
                     // Activity Log create
