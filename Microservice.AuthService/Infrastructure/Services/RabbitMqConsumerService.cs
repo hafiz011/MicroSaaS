@@ -90,9 +90,10 @@ namespace Microservice.AuthService.Infrastructure.Services
                         }
                     };
 
-                    if(prediction.Level == "High" || prediction.Level == "Medium")
+                    if (prediction.Level == "High" || prediction.Level == "Medium")
                     {
                         await _suspiciousRepository.InsertAsync(suspicious);
+                        await _grpcServiceClient.UpdateSuspiciousSession(suspicious.TenantId, suspicious.SessionId, suspicious.RiskScore, suspicious.IsSuspicious);
                         var emailBody = BuildEmailBody(suspicious, message);
                         bool emailSent = await emailService.SendEmailAsync(message.Email, "A suspicious login detected", emailBody);
                         if (!emailSent)
@@ -214,7 +215,7 @@ namespace Microservice.AuthService.Infrastructure.Services
                         <table style="width:100%; margin-top:10px; line-height: 1.6;">
                             <tr><td><strong>Location:</strong></td><td>{session.Geo_Location?.City}, {session.Geo_Location?.Country}</td></tr>
                             <tr><td><strong>IP Address:</strong></td><td>{session.IpAddress}</td></tr>
-                            <tr><td><strong>Time:</strong></td><td>{session.LocalTime}</td></tr>
+                            <tr><td><strong>Time:</strong></td><td>{session.LoginTime}</td></tr>
                             <tr><td><strong>Device:</strong></td><td>{session.Device?.Browser} on {session.Device?.OS}</td></tr>
                         </table>
 

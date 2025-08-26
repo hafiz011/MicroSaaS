@@ -297,6 +297,31 @@ namespace Microservice.Session.Infrastructure.Services
             return response;
         }
 
+        // suspicious session update
+        public override async Task<UpdateSuspiciousSessionsResponse> UpdateSuspiciousSession(UpdateSuspiciousSessionsRequest request, ServerCallContext context)
+        {
+
+            try
+            {
+                var updated = await _sessionRepository.UpdateSuspicious(request.TenantId, request.SessionId, request.RiskScore, request.IsSuspicious);
+
+                return new UpdateSuspiciousSessionsResponse
+                {
+                    Success = updated
+                };
+            }
+            catch (Exception ex)
+            {
+                // log error
+                return new UpdateSuspiciousSessionsResponse
+                {
+                    Success = false
+                };
+            }
+        }
+
+
+
         // Session Analytics. This is used to get session analytics for a tenant
         public override async Task<SessionAnalyticsResponse> GetSessionAnalytics(SessionListRequest request, ServerCallContext context)
         {

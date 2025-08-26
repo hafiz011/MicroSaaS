@@ -24,9 +24,6 @@ namespace Microservice.AuthService.Entities
         [BsonElement("IP_Address")]
         public string IpAddress { get; set; }
 
-        [BsonElement("Local_Time")]
-        public DateTime LocalTime { get; set; }
-
         [BsonElement("Login_Time")]
         public DateTime LoginTime { get; set; }
 

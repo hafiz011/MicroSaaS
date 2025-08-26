@@ -22,6 +22,9 @@ service ApiKey {
   // session ckeck for suspicious detection
   rpc SessionListCheck(SessionCheckRequest) returns (SessionCheckResponce);
 
+  // suspicious session update
+  rpc UpdateSuspiciousSession (UpdateSuspiciousSessionsRequest) returns (UpdateSuspiciousSessionsResponse);
+
   // Session analytics overview
   rpc GetSessionAnalytics(SessionListRequest) returns (SessionAnalyticsResponse);
 
@@ -144,6 +147,18 @@ message SessionCheckRequest {
 
 message SessionCheckResponce {
 	repeated SessionCheck sessionlist = 1;
+}
+
+// update for suspicious Session
+message UpdateSuspiciousSessionsRequest {
+  string TenantId = 1;
+  string SessionId = 2;
+  double riskScore = 3;
+  bool isSuspicious = 4;
+}
+
+message UpdateSuspiciousSessionsResponse {
+  bool success = 1;
 }
 
 // ================= NEW Messages for Analytics chart =================

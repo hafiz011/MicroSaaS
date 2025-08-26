@@ -99,6 +99,19 @@ namespace Microservice.AuthService.Infrastructure.Services
             return response.Sessionlist.ToList();
         }
 
+        // suspicious session update
+        public async Task UpdateSuspiciousSession(string tenantId, string sessionId, double riskScore, bool isSuspicious)
+        {
+            var request = new UpdateSuspiciousSessionsRequest
+            {
+                TenantId = tenantId,
+                SessionId = sessionId,
+                RiskScore = riskScore,
+                IsSuspicious = isSuspicious
+            };
+            await _client.UpdateSuspiciousSessionAsync(request);
+        }
+
         // get session details
         //public async Task<SessiionDetails> GetSessionDetails(string tenantId, string sessionId)
         //{
@@ -151,6 +164,7 @@ namespace Microservice.AuthService.Infrastructure.Services
                 };
             }
         }
+
 
     }
 }

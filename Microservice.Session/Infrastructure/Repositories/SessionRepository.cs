@@ -121,6 +121,27 @@ namespace Microservice.Session.Infrastructure.Repositories
             return await _collection.Find(filterBuilder.And(filters)).Sort(sort).Limit(limit).ToListAsync();
         }
 
+        // suspicious session update
+        public async Task<bool> UpdateSuspicious(string tenantId, string sessionId, double riskScore, bool isSuspicious)
+        {
+            var filterBuilder = Builders<Sessions>.Filter;
+            var filters = new List<FilterDefinition<Sessions>>
+            {
+                filterBuilder.Eq(x => x.Tenant_Id, tenantId),
+                filterBuilder.Eq(x => x.Id, sessionId)
+            };
+
+            var filter = filterBuilder.And(filters);
+
+            var updateDef = Builders<Sessions>.Update
+                .Set(s => s.Session_RiskScore, riskScore)
+                .Set(s => s.isSuspicious, isSuspicious);
+
+            var result = await _collection.UpdateOneAsync(filter, updateDef);
+
+            return result.ModifiedCount > 0;
+        }
+
 
         // helper for active session list & analytics queries
         private FilterDefinition<Sessions> BuildSessionFilter(string tenantId, DateTime? from, DateTime? to, string device, string country)
@@ -162,8 +183,6 @@ namespace Microservice.Session.Infrastructure.Repositories
                                     .SortByDescending(s => s.Login_Time)
                                     .ToListAsync();
         }
-
-
 
     }
 }

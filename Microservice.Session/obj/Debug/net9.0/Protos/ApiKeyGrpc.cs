@@ -68,6 +68,10 @@ namespace Microservice.Session.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Microservice.Session.Protos.SessionCheckResponce> __Marshaller_SessionCheckResponce = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.Session.Protos.SessionCheckResponce.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Microservice.Session.Protos.UpdateSuspiciousSessionsRequest> __Marshaller_UpdateSuspiciousSessionsRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.Session.Protos.UpdateSuspiciousSessionsRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Microservice.Session.Protos.UpdateSuspiciousSessionsResponse> __Marshaller_UpdateSuspiciousSessionsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.Session.Protos.UpdateSuspiciousSessionsResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Microservice.Session.Protos.SessionAnalyticsResponse> __Marshaller_SessionAnalyticsResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Microservice.Session.Protos.SessionAnalyticsResponse.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -133,6 +137,14 @@ namespace Microservice.Session.Protos {
         "SessionListCheck",
         __Marshaller_SessionCheckRequest,
         __Marshaller_SessionCheckResponce);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Microservice.Session.Protos.UpdateSuspiciousSessionsRequest, global::Microservice.Session.Protos.UpdateSuspiciousSessionsResponse> __Method_UpdateSuspiciousSession = new grpc::Method<global::Microservice.Session.Protos.UpdateSuspiciousSessionsRequest, global::Microservice.Session.Protos.UpdateSuspiciousSessionsResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "UpdateSuspiciousSession",
+        __Marshaller_UpdateSuspiciousSessionsRequest,
+        __Marshaller_UpdateSuspiciousSessionsResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Microservice.Session.Protos.SessionListRequest, global::Microservice.Session.Protos.SessionAnalyticsResponse> __Method_GetSessionAnalytics = new grpc::Method<global::Microservice.Session.Protos.SessionListRequest, global::Microservice.Session.Protos.SessionAnalyticsResponse>(
@@ -225,6 +237,18 @@ namespace Microservice.Session.Protos {
       }
 
       /// <summary>
+      /// suspicious session update
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Microservice.Session.Protos.UpdateSuspiciousSessionsResponse> UpdateSuspiciousSession(global::Microservice.Session.Protos.UpdateSuspiciousSessionsRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
       /// Session analytics overview
       /// </summary>
       /// <param name="request">The request received from the client.</param>
@@ -252,6 +276,7 @@ namespace Microservice.Session.Protos {
           .AddMethod(__Method_GetUserInfo, serviceImpl.GetUserInfo)
           .AddMethod(__Method_GetSessionList, serviceImpl.GetSessionList)
           .AddMethod(__Method_SessionListCheck, serviceImpl.SessionListCheck)
+          .AddMethod(__Method_UpdateSuspiciousSession, serviceImpl.UpdateSuspiciousSession)
           .AddMethod(__Method_GetSessionAnalytics, serviceImpl.GetSessionAnalytics).Build();
     }
 
@@ -270,6 +295,7 @@ namespace Microservice.Session.Protos {
       serviceBinder.AddMethod(__Method_GetUserInfo, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.UserInfoRequest, global::Microservice.Session.Protos.UserInfoResponse>(serviceImpl.GetUserInfo));
       serviceBinder.AddMethod(__Method_GetSessionList, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.SessionListRequest, global::Microservice.Session.Protos.SessionListResponse>(serviceImpl.GetSessionList));
       serviceBinder.AddMethod(__Method_SessionListCheck, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.SessionCheckRequest, global::Microservice.Session.Protos.SessionCheckResponce>(serviceImpl.SessionListCheck));
+      serviceBinder.AddMethod(__Method_UpdateSuspiciousSession, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.UpdateSuspiciousSessionsRequest, global::Microservice.Session.Protos.UpdateSuspiciousSessionsResponse>(serviceImpl.UpdateSuspiciousSession));
       serviceBinder.AddMethod(__Method_GetSessionAnalytics, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Microservice.Session.Protos.SessionListRequest, global::Microservice.Session.Protos.SessionAnalyticsResponse>(serviceImpl.GetSessionAnalytics));
     }
 

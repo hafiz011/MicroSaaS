@@ -18,5 +18,6 @@ namespace Microservice.Session.Infrastructure.Interfaces
         Task<List<Sessions>> ActiveSessionList(string tenantId, DateTime? from, DateTime? to, string device, string country);
         Task<List<Sessions>> GetSessionCheckListAsync(string tenantId, string userId, string SessionId, int v);
         Task<List<Sessions>> GetSessionsAnalytics(string tenantId, DateTime? from, DateTime? to, string device, string country);
+        Task<bool> UpdateSuspicious(string tenantId, string sessionId, double riskScore, bool isSuspicious);
     }
 }
