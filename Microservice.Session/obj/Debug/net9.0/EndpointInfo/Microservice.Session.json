@@ -78,159 +78,6 @@
           }
         }
       }
-    },
-    "/api/Session/metrics": {
-      "get": {
-        "tags": [
-          "Session"
-        ],
-        "parameters": [
-          {
-            "name": "StartDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "EndDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "Country",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "DeviceType",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "SuspiciousOnly",
-            "in": "query",
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Session/suspicious": {
-      "get": {
-        "tags": [
-          "Session"
-        ],
-        "parameters": [
-          {
-            "name": "StartDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "EndDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "Country",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "DeviceType",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "SuspiciousOnly",
-            "in": "query",
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Session/active-users-count": {
-      "get": {
-        "tags": [
-          "Session"
-        ],
-        "parameters": [
-          {
-            "name": "StartDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "EndDate",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "Country",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "DeviceType",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "SuspiciousOnly",
-            "in": "query",
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -238,7 +85,35 @@
       "ActivityLogDto": {
         "type": "object",
         "properties": {
-          "activity_Type": {
+          "user_Id": {
+            "type": "string",
+            "nullable": true
+          },
+          "action_Type": {
+            "type": "string",
+            "nullable": true
+          },
+          "product_Id": {
+            "type": "string",
+            "nullable": true
+          },
+          "category_Id": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "referrerUrl": {
             "type": "string",
             "nullable": true
           },
@@ -249,7 +124,22 @@
             },
             "nullable": true
           },
-          "localTime": {
+          "request_Method": {
+            "type": "string",
+            "nullable": true
+          },
+          "response_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "success_Flag": {
+            "type": "boolean"
+          },
+          "response_Time": {
+            "type": "number",
+            "format": "double"
+          },
+          "time_Stamp": {
             "type": "string",
             "format": "date-time"
           }
@@ -305,12 +195,12 @@
             "type": "string",
             "nullable": true
           },
+          "referrerUrl": {
+            "type": "string",
+            "nullable": true
+          },
           "device": {
             "$ref": "#/components/schemas/DeviceInfoDto"
-          },
-          "localTime": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "additionalProperties": false

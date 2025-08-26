@@ -401,11 +401,6 @@
         "IsRequired": false
       },
       {
-        "Name": "range",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "country",
         "Type": "System.String",
         "IsRequired": false
@@ -437,8 +432,34 @@
         "IsRequired": false
       },
       {
-        "Name": "range",
+        "Name": "country",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "device",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Microservice.AuthService.Controllers.DashboardController",
+    "Method": "GetSessionOverview",
+    "RelativePath": "api/Dashboard/analytics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "from",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "to",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {

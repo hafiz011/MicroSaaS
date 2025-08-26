@@ -120,6 +120,7 @@ namespace Microservice.Session.Controllers
                     {
                         Tenant_Id = existingSession.Tenant_Id,
                         Id = existingSession.Id,
+                        User_Id = dto.User_Id,
                         isActive = true,
                         Logout_Time = null,
                     };
@@ -337,6 +338,7 @@ namespace Microservice.Session.Controllers
                         {   
                             Tenant_Id = sessiondata.Tenant_Id,
                             Id = sessiondata.Id,
+                            User_Id = sessiondata.User_Id,
                             isActive = true,
                             Logout_Time = null
                         };

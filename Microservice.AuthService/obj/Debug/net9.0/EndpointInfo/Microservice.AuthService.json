@@ -601,13 +601,6 @@
             }
           },
           {
-            "name": "range",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "country",
             "in": "query",
             "schema": {
@@ -649,13 +642,6 @@
             "schema": {
               "type": "string",
               "format": "date-time"
-            }
-          },
-          {
-            "name": "range",
-            "in": "query",
-            "schema": {
-              "type": "string"
             }
           },
           {
@@ -712,6 +698,50 @@
             "name": "suspiciousId",
             "in": "path",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Dashboard/analytics": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "device",
+            "in": "query",
             "schema": {
               "type": "string"
             }

@@ -98,6 +98,7 @@ namespace Microservice.Session.Infrastructure.Repositories
             var filter = filterBuilder.And(filters);
 
             var updateDef = Builders<Sessions>.Update
+                .Set(s => s.User_Id, update.User_Id)
                 .Set(s => s.Logout_Time, update.Logout_Time)
                 .Set(s => s.isActive, update.isActive);
 

@@ -1,42 +1,6 @@
 [
   {
     "ContainingType": "Microservice.Session.Controllers.SessionController",
-    "Method": "GetActiveUserCount",
-    "RelativePath": "api/Session/active-users-count",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "StartDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "EndDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Country",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "DeviceType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "SuspiciousOnly",
-        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Microservice.Session.Controllers.SessionController",
     "Method": "CreateSession",
     "RelativePath": "api/Session/create",
     "HttpMethod": "POST",
@@ -71,80 +35,8 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Microservice.Session.Models.DTOs.ActivityLogDto",
+        "Type": "Microservice.Session.Controllers.SessionController\u002BActivityLogDto",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Microservice.Session.Controllers.SessionController",
-    "Method": "GetSessionMetrics",
-    "RelativePath": "api/Session/metrics",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "StartDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "EndDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Country",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "DeviceType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "SuspiciousOnly",
-        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Microservice.Session.Controllers.SessionController",
-    "Method": "GetSuspiciousActivities",
-    "RelativePath": "api/Session/suspicious",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "StartDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "EndDate",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Country",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "DeviceType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "SuspiciousOnly",
-        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
