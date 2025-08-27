@@ -42,11 +42,11 @@ namespace Microservice.AuthService.Controllers
 
                 return Ok(new
                 {
-                    apiKey.Domain,
-                    OrgName = apiKey.OrgName,  // fixed case-sensitive property
-                    apiKey.Plan,
-                    ExpirationDate = apiKey.ExpirationDate.ToDateTime(),
-                    apiKey.RequestLimit,
+                    domain = apiKey.Domain,
+                    Org_Name = apiKey.OrgName, 
+                    plan = apiKey.Plan,
+                    Expiration_Date = apiKey.ExpirationDate.ToDateTime(),
+                    Limit = apiKey.RequestLimit,
                     CreatedAt = apiKey.CreatedAt.ToDateTime()
 
                 });
