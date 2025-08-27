@@ -52,7 +52,7 @@
               "RelativeDocumentMoniker": "Microservice.AuthService\\Controllers\\ApiKeyController.cs",
               "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Controllers\\ApiKeyController.cs",
               "RelativeToolTip": "Microservice.AuthService\\Controllers\\ApiKeyController.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowD4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAAwH8AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-27T08:38:48.678Z",
               "EditorCaption": ""
@@ -79,8 +79,7 @@
               "RelativeToolTip": "Microservice.Session\\Infrastructure\\Services\\GrpcServer.cs",
               "ViewState": "AgIAACcBAAAAAAAAAAAYwDcBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T11:39:44.528Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-26T11:39:44.528Z"
             }
           ]
         }
