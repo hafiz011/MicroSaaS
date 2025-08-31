@@ -359,10 +359,10 @@ namespace Microservice.Session.Infrastructure.Services
                 .Select(g => new DailySession
                 {
                     Date = g.Key.ToString("dd-MM-yyyy"), // ISO format
-                    Sessions = g.Count(),
+                    Sessions = g.Count(s => !s.isSuspicious),
                     Suspicious = g.Count(s => s.isSuspicious)
                 })
-                //.OrderByDescending(x => x.Date) // latest date first
+                .OrderByDescending(x => x.Date) // latest date first
                 .ToList();
 
             response.DailySessions.AddRange(dailyGroups);
