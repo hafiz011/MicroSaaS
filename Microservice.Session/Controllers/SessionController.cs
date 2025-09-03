@@ -48,13 +48,13 @@ namespace Microservice.Session.Controllers
             public string Email { get; set; }
             public string Ip_Address { get; set; }
             public string ReferrerUrl { get; set; }
-            public DeviceInfoDto Device { get; set; }
+            public DeviceDto Device { get; set; }
         }
 
         /// <summary>
         /// Data Transfer Object for device information
         /// </summary>
-        public class DeviceInfoDto
+        public class DeviceDto
         {
             public string Fingerprint { get; set; }
             public string UserAgent { get; set; }
@@ -249,6 +249,7 @@ namespace Microservice.Session.Controllers
                     Language = dto.Device?.Language,
                     Screen_Resolution = dto.Device?.Screen_Resolution
                 }
+
             };
         }
 
