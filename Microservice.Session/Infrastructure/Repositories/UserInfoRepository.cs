@@ -20,9 +20,9 @@ namespace Microservice.Session.Infrastructure.Repositories
 
         public async Task UpdateUserAsync(Users user)
         {
-            var filter = Builders<Users>.Filter.Eq(u => u.User_Id, user.User_Id);
+            var filter = Builders<Users>.Filter.Where(u => u.User_Id == user.User_Id && u.Tenant_Id == user.Tenant_Id);
             var update = Builders<Users>.Update
-                .Set(u => u.Last_login, DateTime.UtcNow)
+                .Set(u => u.Last_login, user.Last_login)
                 .Set(u => u.Name, user.Name)
                 .Set(u => u.Email, user.Email);
 

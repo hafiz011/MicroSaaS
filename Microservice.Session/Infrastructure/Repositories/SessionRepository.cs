@@ -49,60 +49,22 @@ namespace Microservice.Session.Infrastructure.Repositories
             return await _collection.Find(filter).Sort(sort).FirstOrDefaultAsync();
         }
 
-
-        // update session
-        //public async Task UpdateSessionAsync(string sessionId, Sessions update)
-        //{
-        //    var filter = Builders<Sessions>.Filter.Eq(s => s.Id, sessionId);
-        //    var updates = new List<UpdateDefinition<Sessions>>();
-
-        //    void AddUpdatesForObject(object obj, string prefix = "")
-        //    {
-        //        if (obj == null) return;
-
-        //        var props = obj.GetType().GetProperties();
-        //        foreach (var prop in props)
-        //        {
-        //            var value = prop.GetValue(obj);
-
-        //            string fieldName = string.IsNullOrEmpty(prefix) ? prop.Name : $"{prefix}.{prop.Name}";
-        //            updates.Add(Builders<Sessions>.Update.Set(fieldName, value));
-        //        }
-        //    }
-
-        //    // Top-level properties
-        //    AddUpdatesForObject(update);
-
-        //    // Nested objects
-        //    AddUpdatesForObject(update.Geo_Location, "Geo_Location");
-        //    AddUpdatesForObject(update.Device, "Device");
-
-        //    if (updates.Any())
-        //    {
-        //        var combinedUpdate = Builders<Sessions>.Update.Combine(updates);
-        //        await _collection.UpdateOneAsync(filter, combinedUpdate);
-        //    }
-        //}
-
-
-
-        public async Task UpdateSessionAsync(Sessions update)
+        public async Task<Sessions> UpdateSessionAsync(Sessions session)
         {
-            var filterBuilder = Builders<Sessions>.Filter;
-            var filters = new List<FilterDefinition<Sessions>>
-            {
-                filterBuilder.Eq(x => x.Tenant_Id, update.Tenant_Id),
-                filterBuilder.Eq(x => x.Id, update.Id)
-            };
+            var filter = Builders<Sessions>.Filter.Where(a => a.Tenant_Id == session.Tenant_Id && a.Id == session.Id);
 
-            var filter = filterBuilder.And(filters);
+            var update = Builders<Sessions>.Update
+                .Set(s => s.User_Id, session.User_Id)
+                .Set(s => s.isActive, session.isActive)
+                .Set(s => s.Logout_Time, session.Logout_Time);
 
-            var updateDef = Builders<Sessions>.Update
-                .Set(s => s.User_Id, update.User_Id)
-                .Set(s => s.Logout_Time, update.Logout_Time)
-                .Set(s => s.isActive, update.isActive);
-
-            await _collection.UpdateOneAsync(filter, updateDef);
+            return await _collection.FindOneAndUpdateAsync(
+                filter,
+                update,
+                new FindOneAndUpdateOptions<Sessions>
+                {
+                    ReturnDocument = ReturnDocument.After // updated document fached
+                });
         }
 
         // session check for suspicious detection
