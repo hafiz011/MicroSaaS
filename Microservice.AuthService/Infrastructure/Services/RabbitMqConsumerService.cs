@@ -98,6 +98,9 @@ namespace Microservice.AuthService.Infrastructure.Services
                         bool emailSent = await emailService.SendEmailAsync(message.Email, "A suspicious login detected", emailBody);
                         if (!emailSent)
                             Console.WriteLine($"Failed to send suspicious notification email: {message.Email}");
+                        //bool emailSent = await emailService.SendEmailAsync(message.Cliend_Email, "A suspicious login detected", emailBody);
+                        //if (!emailSent)
+                        //    Console.WriteLine($"Failed to send suspicious notification email: {message.Email}");
                     }
 
                 }
@@ -226,7 +229,7 @@ namespace Microservice.AuthService.Infrastructure.Services
 
                         <p>If this wasn't you, please take immediate action to secure your account.</p>
                         <p>
-                            <a href="https://{message.Cliend_Domaim}" style="background-color:#ff4d4f; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; display:inline-block; margin-top:10px;">
+                            <a href="https://{message.Cliend_Domain}" style="background-color:#ff4d4f; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; display:inline-block; margin-top:10px;">
                                 Review Account Activity
                             </a>
                         </p>

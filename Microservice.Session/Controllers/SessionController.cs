@@ -337,13 +337,14 @@ namespace Microservice.Session.Controllers
                 if (sessiondata == null)
                     return BadRequest("Session ID does not match.");
 
-                // --- User info handling ---
+                // --- anonymous to identified user transition ---
                 if (string.IsNullOrWhiteSpace(sessiondata.User_Id) && !string.IsNullOrWhiteSpace(dto.UserId))
                 {
                     var userinfo = await _userInfoRepository.getUserById(dto.UserId, apiKeyInfo.Id);
 
                     if (userinfo == null)
                     {
+                        // create new user info
                         var newUser = new Users
                         {
                             Tenant_Id = apiKeyInfo.Id,
@@ -357,16 +358,20 @@ namespace Microservice.Session.Controllers
                     }
                     else
                     {
+                        // update user info
                         userinfo.Last_login = DateTime.UtcNow;
                         if (!string.IsNullOrWhiteSpace(dto.Name)) userinfo.Name = dto.Name;
                         if (!string.IsNullOrWhiteSpace(dto.Email)) userinfo.Email = dto.Email;
-
                         await _userInfoRepository.UpdateUserAsync(userinfo);
+                       
                     }
 
+                    // update session user id and clear logout time
                     sessiondata.User_Id = dto.UserId;
                     sessiondata.Logout_Time = null;
                     sessiondata = await _sessionRepository.UpdateSessionAsync(sessiondata);
+                    var userdata = await _userInfoRepository.getUserById(dto.UserId, apiKeyInfo.Id);
+                    PublishSessionRiskCheck(sessiondata, userdata, apiKeyInfo);
                 }
 
                 // --- Session activation check ---
@@ -399,13 +404,7 @@ namespace Microservice.Session.Controllers
                 };
 
                 await _activityRepository.CreateLogActivityAsync(log);
-
-                return Ok(new
-                {
-                    Message = "Activity logged successfully",
-                    Session = sessiondata,
-                    Activity = log
-                });
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -415,42 +414,41 @@ namespace Microservice.Session.Controllers
         }
 
 
-
-
-        //// #region Helper Methods
-        //private async Task PublishSessionRiskCheck(string sessionId, Tenants apiKeyInfo, SessionRequestDto dto, GeoLocationDto location)
-        //{
-        //    var message = new SessionRiskCheckMessage
-        //    {
-        //        SessionId = sessionId,
-        //        TenantId = apiKeyInfo.Id,
-        //        UserId = dto.UserId,
-        //        Email = dto.Email,
-        //        Ip_Address = dto.IpAddress,
-        //        Cliend_Domaim = apiKeyInfo.Domain,
-        //        Login_Time = DateTime.UtcNow,
-        //        Geo_Location = new Models.DTOs.Location
-        //        {
-        //            Country = location.Country,
-        //            City = location.City,
-        //            Region = location.Region,
-        //            Postal = location.Postal,
-        //            Latitude_Longitude = location.Loc,
-        //            Isp = location.Org,
-        //            TimeZone = location.TimeZone
-        //        },
-        //        Device = new Models.DTOs.DeviceInfo
-        //        {
-        //            Browser = GetBrowserInfo(dto.Device?.UserAgent),
-        //            Fingerprint = dto.Device?.Fingerprint,
-        //            Device_Type = GetDeviceInfo(dto.Device?.UserAgent),
-        //            OS = GetOSInfo(dto.Device?.UserAgent),
-        //            Language = dto.Device?.Language,
-        //            Screen_Resolution = dto.Device?.Screen_Resolution
-        //        }
-        //    };
-        //    _publisher.PublishSessionRiskCheck(message);
-        //}
+        // rabbitmq publish session risk check
+        private async Task PublishSessionRiskCheck(Sessions sessiondata, Users userdata, Tenants apiKeyInfo)
+        {
+            var message = new SessionRiskCheckMessage
+            {
+                SessionId = sessiondata.Id,
+                TenantId = sessiondata.Tenant_Id,
+                UserId = userdata.User_Id,
+                Email = userdata.Email,
+                Ip_Address = sessiondata.Ip_Address,
+                Cliend_Domain = apiKeyInfo.Domain,
+                Cliend_Email = apiKeyInfo.Org_Email,
+                Login_Time = sessiondata.Login_Time,
+                Geo_Location = new Models.DTOs.Location
+                {
+                    Country = sessiondata.Geo_Location.Country,
+                    City = sessiondata.Geo_Location.City,
+                    Region = sessiondata.Geo_Location.Region,
+                    Postal = sessiondata.Geo_Location.Postal,
+                    Latitude_Longitude = sessiondata.Geo_Location.Latitude_Longitude,
+                    Isp = sessiondata.Geo_Location.Isp,
+                    TimeZone = sessiondata.Geo_Location.TimeZone
+                },
+                Device = new Models.DTOs.DeviceInfo
+                {
+                    Browser = sessiondata.Device.Browser,
+                    Fingerprint = sessiondata.Device.Fingerprint,
+                    Device_Type = sessiondata.Device.Device_Type,
+                    OS = sessiondata.Device.OS,
+                    Language = sessiondata.Device.Language,
+                    Screen_Resolution = sessiondata.Device.Screen_Resolution,
+                }
+            };
+            _publisher.PublishSessionRiskCheck(message);
+        }
 
 
 

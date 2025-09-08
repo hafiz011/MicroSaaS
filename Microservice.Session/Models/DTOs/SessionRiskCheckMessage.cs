@@ -13,7 +13,8 @@ namespace Microservice.Session.Models.DTOs
         public DateTime Login_Time { get; set; } = DateTime.UtcNow;
         public DeviceInfo Device { get; set; }
         public Location Geo_Location { get; set; }
-        public string Cliend_Domaim { get; set; }
+        public string Cliend_Domain { get; set; }
+        public string Cliend_Email { get; set; }
 
     }
     public class DeviceInfo
