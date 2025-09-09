@@ -15,8 +15,8 @@ namespace Microservice.Session.Entities
         public string Action_Type { get; set; }        // view_product, add_to_cart, purchase, login_attempt
         public string Product_Id { get; set; }
         public string Category_Id { get; set; }
-        public int Quantity { get; set; }              // If purchase/add_to_cart
-        public double Price { get; set; }              // Product price
+        public int Quantity { get; set; }
+        public double Price { get; set; }            // Product price
 
         public string Url { get; set; }
         public string ReferrerUrl { get; set; }

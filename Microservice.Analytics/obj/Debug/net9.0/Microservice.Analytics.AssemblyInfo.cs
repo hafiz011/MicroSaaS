@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Microservice.Analytics")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1d52a00ec58924931f0ae4e851ae14e201e431a7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73c13e77510215667e625868d689ad2d438c472b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Microservice.Analytics")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microservice.Analytics")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

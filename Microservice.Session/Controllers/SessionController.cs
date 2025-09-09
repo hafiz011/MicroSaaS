@@ -299,22 +299,21 @@ namespace Microservice.Session.Controllers
 
         public class ActivityLogDto
         {
-            public string UserId { get; set; }
-            public string Name { get; set; }
-            public string Email { get; set; }
-            public string ActionType { get; set; }     // view_product, add_to_cart, checkout, payment, etc.
-            public string ProductId { get; set; }
-            public string CategoryId { get; set; }
-            public int Quantity { get; set; }
-            public double Price { get; set; }
-            public string Url { get; set; }
-            public string ReferrerUrl { get; set; }
-            public Dictionary<string, string> Metadata { get; set; }
-            public string RequestMethod { get; set; }
+            public string? UserId { get; set; }
+            public string? Name { get; set; }
+            public string? Email { get; set; }
+            public string? ActionType { get; set; }
+            public string? ProductId { get; set; }
+            public string? CategoryId { get; set; }
+            public int? Quantity { get; set; }
+            public double? Price { get; set; }
+            public string? Url { get; set; }
+            public string? ReferrerUrl { get; set; }
+            public Dictionary<string, string?> Metadata { get; set; }
+            public string? RequestMethod { get; set; }
             public int ResponseCode { get; set; }
             public bool SuccessFlag { get; set; }
             public double ResponseTime { get; set; }
-            //public DateTime TimeStamp { get; set; }
         }
 
 
@@ -391,8 +390,8 @@ namespace Microservice.Session.Controllers
                     Action_Type = dto.ActionType,
                     Product_Id = dto.ProductId,
                     Category_Id = dto.CategoryId,
-                    Quantity = dto.Quantity,
-                    Price = dto.Price,
+                    Quantity = dto.Quantity ?? 0,
+                    Price = dto.Price ?? 0.0,
                     Url = dto.Url,
                     ReferrerUrl = dto.ReferrerUrl,
                     Metadata = dto.Metadata,
