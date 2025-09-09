@@ -314,7 +314,7 @@ namespace Microservice.Session.Controllers
             public int ResponseCode { get; set; }
             public bool SuccessFlag { get; set; }
             public double ResponseTime { get; set; }
-            public DateTime TimeStamp { get; set; }
+            //public DateTime TimeStamp { get; set; }
         }
 
 
