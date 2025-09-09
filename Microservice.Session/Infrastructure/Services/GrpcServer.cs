@@ -358,7 +358,8 @@ namespace Microservice.Session.Infrastructure.Services
                 .GroupBy(s => s.Login_Time.Date)
                 .Select(g => new DailySession
                 {
-                    Date = g.Key.ToString("dd-MM-yyyy"), // ISO format
+                    //Date = g.Key.ToString("dd-MM-yyyy"), // ISO format
+                    Date = g.Key.ToString("o"), // ISO format
                     Sessions = g.Count(s => !s.isSuspicious),
                     Suspicious = g.Count(s => s.isSuspicious)
                 })
@@ -375,16 +376,19 @@ namespace Microservice.Session.Infrastructure.Services
                 .Select(g => new DeviceDistribution
                 {
                     Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(g.Key), // Mobile/Desktop/Tablet
-                    Total = g.Count(), // total sessions per device type
-                    AvgDuration = g
-                        .Select(s => s.Session_Duration) // duration save is seconds
-                        .DefaultIfEmpty(0)
-                        .Average(), // average session duration in seconds
+                    Total = g.Count(),
+                    AvgDuration = g.Average(s => s.Session_Duration),
+                    AvgActions = g.Average(s => s.ActionCount)
+                    //Total = g.Count(), // total sessions per device type
+                    //AvgDuration = g
+                    //    .Select(s => s.Session_Duration) // duration save is seconds
+                    //    .DefaultIfEmpty(0)
+                    //    .Average(), // average session duration in seconds
 
-                    AvgActions = g
-                        .Select(s => s.ActionCount)
-                        .DefaultIfEmpty(0)
-                        .Average() // average actions per session
+                    //AvgActions = g
+                    //    .Select(s => s.ActionCount)
+                    //    .DefaultIfEmpty(0)
+                    //    .Average() // average actions per session
                 })
                 .OrderByDescending(d => d.Total) // sort by most used device
                 .ToList();
@@ -411,35 +415,26 @@ namespace Microservice.Session.Infrastructure.Services
 
             //response.CountryDistribution.AddRange(countryDist);
 
-            //var activeUsers = sessions
-            //   .Where(s => s.isActive)
-            //   .Select(s => s.User_Id)
-            //   .Distinct()
-            //   .Count();
-
-
 
             // ---------------- Session Metrics ----------------
-
-            // Bounce rate (<30 sec session)
-            //var bounceCount = sessions.Count(s => s.Logout_Time.HasValue &&
-            //                                      (s.Logout_Time.Value - s.Login_Time).TotalSeconds < 30);
             
             var totalSessions = sessions.Count;
             var bounceCount = sessions.Count(s => s.Session_Duration < 30);
             var bounceRate = totalSessions > 0 ? (double)bounceCount / totalSessions * 100 : 0;
+            var avgDuration = sessions.Average(s => s.Session_Duration);
+            var avgActions = sessions.Average(s => s.ActionCount);
 
-            // Avg session duration (seconds)
-            var avgDuration = sessions
-                .Select(s => s.Session_Duration)
-                .DefaultIfEmpty(0)
-                .Average();
+            //// Avg session duration (seconds)
+            //var avgDuration = sessions
+            //    .Select(s => s.Session_Duration)
+            //    .DefaultIfEmpty(0)
+            //    .Average();
 
-            // ---------------- Avg Actions ----------------
-            var avgActions = sessions
-                .Select(s => s.ActionCount)
-                .DefaultIfEmpty(0)
-                .Average();
+            //// ---------------- Avg Actions ----------------
+            //var avgActions = sessions
+            //    .Select(s => s.ActionCount)
+            //    .DefaultIfEmpty(0)
+            //    .Average();
 
             // ---------------- Trends Calculation ----------------
             var from = request.From?.ToDateTime();
@@ -460,43 +455,73 @@ namespace Microservice.Session.Infrastructure.Services
                     request.Country
                 );
 
-                var totalPreviousSessions = previousSessions?.Count ?? 0;
+                //    var totalPreviousSessions = previousSessions?.Count ?? 0;
 
-                // previous Avg session duration (seconds)
-                var previousAvgDuration = previousSessions
-                    .Select(s => s.Session_Duration)
-                    .DefaultIfEmpty(0)
-                    .Average();
+                //    // previous Avg session duration (seconds)
+                //    var previousAvgDuration = previousSessions
+                //        .Select(s => s.Session_Duration)
+                //        .DefaultIfEmpty(0)
+                //        .Average();
 
-                var avgDurationTrend = previousAvgDuration > 0
-                    ? ((avgDuration - previousAvgDuration) / previousAvgDuration) * 100 : 0;
+                //    var avgDurationTrend = previousAvgDuration > 0
+                //        ? ((avgDuration - previousAvgDuration) / previousAvgDuration) * 100 : 0;
 
-                // previous Bounce rate (<30 sec session)
+                //    // previous Bounce rate (<30 sec session)
+                //    var previousBounceCount = previousSessions.Count(s => s.Session_Duration < 30);
+                //    var previousBounceRate = totalPreviousSessions > 0
+                //        ? (double)previousBounceCount / totalPreviousSessions * 100 : 0;
+
+                //    var bounceRateTrend = previousBounceRate > 0
+                //        ? ((bounceRate - previousBounceRate) / previousBounceRate) * 100 : 0;
+
+                //    // Previous sessions to avgActions
+                //    var previousAvgActions = previousSessions
+                //        .Select(s => s.ActionCount)
+                //        .DefaultIfEmpty(0)
+                //        .Average();
+
+                //    // Trend for avgActions
+                //    var avgActionsTrend = previousAvgActions > 0
+                //        ? ((avgActions - previousAvgActions) / previousAvgActions) * 100 : 0;
+
+                //    response.SessionMetrics = new SessionMetrics
+                //    {
+                //        AvgDuration = avgDuration,
+                //        AvgDurationTrend = avgDurationTrend,
+                //        BounceRate = bounceRate,
+                //        BounceRateTrend = bounceRateTrend,
+                //        AvgActions = avgActions,
+                //        AvgActionsTrend = avgActionsTrend
+                //    };
+                //}
+                //else
+                //{
+                //    response.SessionMetrics = new SessionMetrics
+                //    {
+                //        AvgDuration = avgDuration,
+                //        AvgDurationTrend = 0,
+                //        BounceRate = bounceRate,
+                //        BounceRateTrend = 0,
+                //        AvgActions = avgActions,
+                //        AvgActionsTrend = 0,
+                //    };
+                //}
+
+
+                var totalPreviousSessions = previousSessions.Count();
+                var previousAvgDuration = previousSessions.Any() ? previousSessions.Average(s => s.Session_Duration) : 0;
                 var previousBounceCount = previousSessions.Count(s => s.Session_Duration < 30);
-                var previousBounceRate = totalPreviousSessions > 0
-                    ? (double)previousBounceCount / totalPreviousSessions * 100 : 0;
-
-                var bounceRateTrend = previousBounceRate > 0
-                    ? ((bounceRate - previousBounceRate) / previousBounceRate) * 100 : 0;
-
-                // Previous sessions to avgActions
-                var previousAvgActions = previousSessions
-                    .Select(s => s.ActionCount)
-                    .DefaultIfEmpty(0)
-                    .Average();
-
-                // Trend for avgActions
-                var avgActionsTrend = previousAvgActions > 0
-                    ? ((avgActions - previousAvgActions) / previousAvgActions) * 100 : 0;
+                var previousBounceRate = totalPreviousSessions > 0 ? (double)previousBounceCount / totalPreviousSessions * 100 : 0;
+                var previousAvgActions = previousSessions.Any() ? previousSessions.Average(s => s.ActionCount) : 0;
 
                 response.SessionMetrics = new SessionMetrics
                 {
                     AvgDuration = avgDuration,
-                    AvgDurationTrend = avgDurationTrend,
+                    AvgDurationTrend = previousAvgDuration > 0 ? ((avgDuration - previousAvgDuration) / previousAvgDuration) * 100 : 0,
                     BounceRate = bounceRate,
-                    BounceRateTrend = bounceRateTrend,
+                    BounceRateTrend = previousBounceRate > 0 ? ((bounceRate - previousBounceRate) / previousBounceRate) * 100 : 0,
                     AvgActions = avgActions,
-                    AvgActionsTrend = avgActionsTrend
+                    AvgActionsTrend = previousAvgActions > 0 ? ((avgActions - previousAvgActions) / previousAvgActions) * 100 : 0
                 };
             }
             else
@@ -504,11 +529,8 @@ namespace Microservice.Session.Infrastructure.Services
                 response.SessionMetrics = new SessionMetrics
                 {
                     AvgDuration = avgDuration,
-                    AvgDurationTrend = 0,
                     BounceRate = bounceRate,
-                    BounceRateTrend = 0,
-                    AvgActions = avgActions,
-                    AvgActionsTrend = 0,
+                    AvgActions = avgActions
                 };
             }
 
