@@ -192,11 +192,6 @@ message SessionDetailsResponse {
 
 // ================= NEW Messages for Analytics chart =================
 // Top-level analytics response
-message SessionAnalyticsResponse {
-  repeated DailySession daily_sessions = 1;
-  repeated DeviceDistribution device_distribution = 2;
-  SessionMetrics session_metrics = 3;
-}
 
 // Daily session data
 message DailySession {
@@ -221,4 +216,39 @@ message SessionMetrics {
   double bounce_rate_trend = 4;     // %
   double avg_actions = 5;           // number of actions
   double avg_actions_trend = 6;     // %
+  int32  bots = 7;
+  int32 users = 8;
+  double botPercentage = 9;
+  double userPercentage =10;
 }
+
+// session distribution by use Time
+
+message SessionTimeDistribution {
+    string category = 1;
+    int32 count = 2;
+    double percentage = 3;
+}
+// session distribution by country
+message CountryDistribution {
+  string country = 1; // e.g., "United States"
+  int32 count = 2;
+  double percentage = 3; // percentage of total sessions
+}
+
+// session source distribution
+message SourceDistribution {
+  string source = 1; // e.g., "Direct", "Referral", "Organic Search"
+  int32 count = 2;
+  double percentage = 3; // percentage of total sessions
+}
+
+message SessionAnalyticsResponse {
+    repeated DailySession dailySessions = 1;
+    repeated DeviceDistribution deviceDistribution = 2;
+    repeated SessionTimeDistribution sessionTimeDistribution = 3;
+    repeated CountryDistribution countryDistribution = 4;
+    repeated SourceDistribution sourceDistribution = 5;
+    SessionMetrics sessionMetrics = 6;
+}
+

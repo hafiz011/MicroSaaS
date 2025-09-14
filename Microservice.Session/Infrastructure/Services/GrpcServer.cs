@@ -358,8 +358,8 @@ namespace Microservice.Session.Infrastructure.Services
                 .GroupBy(s => s.Login_Time.Date)
                 .Select(g => new DailySession
                 {
-                    //Date = g.Key.ToString("dd-MM-yyyy"), // ISO format
-                    Date = g.Key.ToString("o"), // ISO format
+                    Date = g.Key.ToString("dd-MM-yyyy"), // ISO format
+                    //Date = g.Key.ToString("o"), // ISO format
                     Sessions = g.Count(s => !s.isSuspicious),
                     Suspicious = g.Count(s => s.isSuspicious)
                 })
@@ -379,62 +379,144 @@ namespace Microservice.Session.Infrastructure.Services
                     Total = g.Count(),
                     AvgDuration = g.Average(s => s.Session_Duration),
                     AvgActions = g.Average(s => s.ActionCount)
-                    //Total = g.Count(), // total sessions per device type
-                    //AvgDuration = g
-                    //    .Select(s => s.Session_Duration) // duration save is seconds
-                    //    .DefaultIfEmpty(0)
-                    //    .Average(), // average session duration in seconds
-
-                    //AvgActions = g
-                    //    .Select(s => s.ActionCount)
-                    //    .DefaultIfEmpty(0)
-                    //    .Average() // average actions per session
                 })
                 .OrderByDescending(d => d.Total) // sort by most used device
                 .ToList();
 
             response.DeviceDistribution.AddRange(deviceDist);
 
+            // ----------------Country Distribution----------------
+            var countryDist = sessions
+             .Where(s => s.Geo_Location != null && !string.IsNullOrEmpty(s.Geo_Location.Country))
+             .GroupBy(s => s.Geo_Location.Country.ToLower())
+             .Select(g => new CountryDistribution
+             {
+                 Country = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(g.Key),
+                 Count = g.Count(),
+                 Percentage = (double)g.Count() / sessions.Count * 100
+             })
+             .OrderByDescending(d => d.Count) // sort by most used device
+             .ToList();
 
+            response.CountryDistribution.AddRange(countryDist);
 
+            //------------ source distribution (ReferrerUrl) --------------
+            // source name maping (short domain -> main name)
+            var sourceMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "google", "google" },
+                { "facebook", "facebook" },
+                { "instagram", "instagram" },
+                { "t.co", "twitter" },
+                { "twitter", "twitter" },
+                { "lnkd.in", "linkedin" },
+                { "linkedin", "linkedin" },
+                { "youtube", "youtube" },
+                { "youtu.be", "youtube" },
+                { "pinterest", "pinterest" },
+                { "reddit", "reddit" }
+            };
 
-            // ---------------- Country Distribution ----------------
-            //var countryDist = sessions
-            // .Where(s => s.Geo_Location != null && !string.IsNullOrEmpty(s.Geo_Location.Country))
-            // .GroupBy(s => s.Geo_Location.Country.ToLower())
-            // .Select(g => new CountryDistribution
-            // {
-            //     Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(g.Key),
-            //     Value = g.Count()
-            // })
-            // .OrderByDescending(c => c.Value)
-            // .ToList();
+            var sourceDist = sessions
+                .Select(s =>
+                {
+                    if (string.IsNullOrEmpty(s.ReferrerUrl))
+                    {
+                        return "direct"; // is null or empty = direct
+                    }
 
-            //response.CountryDistribution.AddRange(countryDist);
+                    try
+                    {
+                        var uri = new Uri(s.ReferrerUrl);
+                        var host = uri.Host.ToLower();
 
+                        if (host.StartsWith("www."))
+                            host = host.Substring(4);
 
-            //response.CountryDistribution.AddRange(countryDist);
+                        // host  base part finding (google.com to google)
+                        var parts = host.Split('.');
+                        var baseName = parts.Length > 2 ? parts[parts.Length - 2] : parts[0];
 
+                        // using mapping
+                        if (sourceMap.TryGetValue(host, out var mapped))
+                            return mapped;
+                        if (sourceMap.TryGetValue(baseName, out mapped))
+                            return mapped;
+
+                        return baseName;
+                    }
+                    catch
+                    {
+                        return "direct"; // is invalid = direct
+                    }
+                })
+                .GroupBy(source => source)
+                .Select(g => new SourceDistribution
+                {
+                    Source = g.Key,   // google, facebook, twitter, linkedin, direct etc.
+                    Count = g.Count(),
+                    Percentage = (double)g.Count() / sessions.Count * 100
+                })
+                .OrderByDescending(d => d.Count)
+                .ToList();
+
+            response.SourceDistribution.AddRange(sourceDist);
 
             // ---------------- Session Metrics ----------------
-            
             var totalSessions = sessions.Count;
             var bounceCount = sessions.Count(s => s.Session_Duration < 30);
             var bounceRate = totalSessions > 0 ? (double)bounceCount / totalSessions * 100 : 0;
             var avgDuration = sessions.Average(s => s.Session_Duration);
             var avgActions = sessions.Average(s => s.ActionCount);
+            var bots = bounceCount; // for now, consider all bounces as bots
+            var humans = totalSessions - bots;
+            var botPercentage = totalSessions > 0 ? (double)bots / totalSessions * 100 : 0;
+            var humanPercentage = totalSessions > 0 ? (double)humans / totalSessions * 100 : 0;
 
-            //// Avg session duration (seconds)
-            //var avgDuration = sessions
-            //    .Select(s => s.Session_Duration)
-            //    .DefaultIfEmpty(0)
-            //    .Average();
 
-            //// ---------------- Avg Actions ----------------
-            //var avgActions = sessions
-            //    .Select(s => s.ActionCount)
-            //    .DefaultIfEmpty(0)
-            //    .Average();
+            // -----------  session time distribution --------------
+            // duration buckets (seconds)
+            var ranges = new List<(string Category, double Min, double? Max)>
+            {
+                ("< 1 min", 0, 60),
+                ("1-5 min", 60, 300),
+                ("5-15 min", 300, 900),
+                ("15-30 min", 900, 1800),
+                ("> 30 min", 1800, null)
+            };
+
+            // initialize counts
+            var bucketCounts = ranges.ToDictionary(r => r.Category, r => 0);
+
+            // single pass over sessions
+            foreach (var s in sessions)
+            {
+                foreach (var r in ranges)
+                {
+                    if (s.Session_Duration >= r.Min && (r.Max == null || s.Session_Duration < r.Max))
+                    {
+                        bucketCounts[r.Category]++;
+                        break; // session counted, go to next session
+                    }
+                }
+            }
+
+            // build SessionTimeDistribution list
+            var sessionTimeDist = bucketCounts
+                .Select(kvp => new SessionTimeDistribution
+                {
+                    Category = kvp.Key,
+                    Count = kvp.Value,
+                    Percentage = totalSessions > 0 ? (double)kvp.Value / totalSessions * 100 : 0
+                })
+                .OrderByDescending(d => d.Count)
+                .ToList();
+
+            response.SessionTimeDistribution.AddRange(sessionTimeDist);
+
+
+
+
 
             // ---------------- Trends Calculation ----------------
             var from = request.From?.ToDateTime();
@@ -455,59 +537,6 @@ namespace Microservice.Session.Infrastructure.Services
                     request.Country
                 );
 
-                //    var totalPreviousSessions = previousSessions?.Count ?? 0;
-
-                //    // previous Avg session duration (seconds)
-                //    var previousAvgDuration = previousSessions
-                //        .Select(s => s.Session_Duration)
-                //        .DefaultIfEmpty(0)
-                //        .Average();
-
-                //    var avgDurationTrend = previousAvgDuration > 0
-                //        ? ((avgDuration - previousAvgDuration) / previousAvgDuration) * 100 : 0;
-
-                //    // previous Bounce rate (<30 sec session)
-                //    var previousBounceCount = previousSessions.Count(s => s.Session_Duration < 30);
-                //    var previousBounceRate = totalPreviousSessions > 0
-                //        ? (double)previousBounceCount / totalPreviousSessions * 100 : 0;
-
-                //    var bounceRateTrend = previousBounceRate > 0
-                //        ? ((bounceRate - previousBounceRate) / previousBounceRate) * 100 : 0;
-
-                //    // Previous sessions to avgActions
-                //    var previousAvgActions = previousSessions
-                //        .Select(s => s.ActionCount)
-                //        .DefaultIfEmpty(0)
-                //        .Average();
-
-                //    // Trend for avgActions
-                //    var avgActionsTrend = previousAvgActions > 0
-                //        ? ((avgActions - previousAvgActions) / previousAvgActions) * 100 : 0;
-
-                //    response.SessionMetrics = new SessionMetrics
-                //    {
-                //        AvgDuration = avgDuration,
-                //        AvgDurationTrend = avgDurationTrend,
-                //        BounceRate = bounceRate,
-                //        BounceRateTrend = bounceRateTrend,
-                //        AvgActions = avgActions,
-                //        AvgActionsTrend = avgActionsTrend
-                //    };
-                //}
-                //else
-                //{
-                //    response.SessionMetrics = new SessionMetrics
-                //    {
-                //        AvgDuration = avgDuration,
-                //        AvgDurationTrend = 0,
-                //        BounceRate = bounceRate,
-                //        BounceRateTrend = 0,
-                //        AvgActions = avgActions,
-                //        AvgActionsTrend = 0,
-                //    };
-                //}
-
-
                 var totalPreviousSessions = previousSessions.Count();
                 var previousAvgDuration = previousSessions.Any() ? previousSessions.Average(s => s.Session_Duration) : 0;
                 var previousBounceCount = previousSessions.Count(s => s.Session_Duration < 30);
@@ -521,7 +550,11 @@ namespace Microservice.Session.Infrastructure.Services
                     BounceRate = bounceRate,
                     BounceRateTrend = previousBounceRate > 0 ? ((bounceRate - previousBounceRate) / previousBounceRate) * 100 : 0,
                     AvgActions = avgActions,
-                    AvgActionsTrend = previousAvgActions > 0 ? ((avgActions - previousAvgActions) / previousAvgActions) * 100 : 0
+                    AvgActionsTrend = previousAvgActions > 0 ? ((avgActions - previousAvgActions) / previousAvgActions) * 100 : 0,
+                    Bots = bots,
+                    Users = humans,
+                    BotPercentage = botPercentage,
+                    UserPercentage = humanPercentage
                 };
             }
             else

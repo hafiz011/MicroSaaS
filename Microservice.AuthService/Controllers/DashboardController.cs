@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Metrics;
 using System.Security.Claims;
 
 namespace Microservice.AuthService.Controllers
@@ -284,6 +285,24 @@ namespace Microservice.AuthService.Controllers
                         avgDuration = dm.AvgDuration,
                         avgActions = dm.AvgActions
                     }),
+                    SessionTimeDistribution = new
+                    {
+                        category = response.SessionTimeDistribution.category,
+                        count = response.SessionTimeDistribution.count,
+                        percentage = response.SessionTimeDistribution.percentage
+                    },
+                    countryDistribution = new
+                    {
+                        country = response.CountryDistribution.country,
+                        sessions = response.CountryDistribution.count,
+                        percentage = response.CountryDistribution.percentage
+                    },
+                    trafficSource = new
+                    {
+                        source = response.SourceDistribution.source,
+                        sessions = response.SourceDistribution.count,
+                        percentage = response.SourceDistribution.percentage
+                    },
                     sessionMetrics = new
                     {
                         avgDuration = response.SessionMetrics.AvgDuration,
@@ -291,8 +310,14 @@ namespace Microservice.AuthService.Controllers
                         bounceRate = response.SessionMetrics.BounceRate,
                         bounceRateTrend = response.SessionMetrics.BounceRateTrend,
                         avgActions = response.SessionMetrics.AvgActions,
-                        avgActionsTrend = response.SessionMetrics.AvgActionsTrend
-                    }
+                        avgActionsTrend = response.SessionMetrics.AvgActionsTrend,
+                        bots = response.SessionMetrics.Bots,
+                        users = response.SessionMetrics.Users,
+                        botPercentage = response.SessionMetrics.BotPercentage,
+                        userPercentage = response.SessionMetrics.UserPercentage
+                    },
+                   
+
                 };
 
                 return Ok(result);

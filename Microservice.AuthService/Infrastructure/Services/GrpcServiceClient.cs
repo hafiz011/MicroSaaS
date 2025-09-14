@@ -152,6 +152,9 @@ namespace Microservice.AuthService.Infrastructure.Services
                 {
                     DailySessions = { },
                     DeviceDistribution = { },
+                    SessionTimeDistribution = { },
+                    CountryDistribution = { },
+                    SourceDistribution = { },
                     SessionMetrics = new SessionMetrics
                     {
                         AvgDuration = 0,
@@ -159,7 +162,11 @@ namespace Microservice.AuthService.Infrastructure.Services
                         BounceRate = 0,
                         BounceRateTrend = 0,
                         AvgActions = 0,
-                        AvgActionsTrend = 0
+                        AvgActionsTrend = 0,
+                        Bots = 0,
+                        Users = 0,
+                        BotPercentage = 0,
+                        UserPercentage = 0
                     }
                 };
             }
