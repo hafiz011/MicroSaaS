@@ -478,8 +478,7 @@ namespace Microservice.Session.Infrastructure.Services
             // duration buckets (seconds)
             var ranges = new List<(string Category, double Min, double? Max)>
             {
-                ("< 1 min", 0, 60),
-                ("1-5 min", 60, 300),
+                ("1-5 min", 40, 300),
                 ("5-15 min", 300, 900),
                 ("15-30 min", 900, 1800),
                 ("> 30 min", 1800, null)

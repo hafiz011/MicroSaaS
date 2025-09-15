@@ -59,14 +59,14 @@ services:
     networks:
       - saasnet
 
-  tech-ciph:
-    build:
-      context: /home/hafiz/techciph/CipherNetSecurity
-      dockerfile: Dockerfile
-    ports:
-      - "5051:8080"
-    networks:
-      - saasnet
+  # tech-ciph:
+  #   build:
+  #     context: /home/hafiz/techciph/CipherNetSecurity
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5051:8080"
+  #   networks:
+  #     - saasnet
 
 networks:
   saasnet:
