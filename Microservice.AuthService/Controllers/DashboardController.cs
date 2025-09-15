@@ -285,24 +285,21 @@ namespace Microservice.AuthService.Controllers
                         avgDuration = dm.AvgDuration,
                         avgActions = dm.AvgActions
                     }),
-                    SessionTimeDistribution = new
-                    {
-                        category = response.SessionTimeDistribution.category,
-                        count = response.SessionTimeDistribution.count,
-                        percentage = response.SessionTimeDistribution.percentage
-                    },
-                    countryDistribution = new
-                    {
-                        country = response.CountryDistribution.country,
-                        sessions = response.CountryDistribution.count,
-                        percentage = response.CountryDistribution.percentage
-                    },
-                    trafficSource = new
-                    {
-                        source = response.SourceDistribution.source,
-                        sessions = response.SourceDistribution.count,
-                        percentage = response.SourceDistribution.percentage
-                    },
+                    SessionTimeDistribution = response.SessionTimeDistribution.Select(st => new {
+                        category = st.Category,
+                        count = st.Count,
+                        percentage = st.Percentage
+                    }),
+                    CountryDistribution = response.CountryDistribution.Select(cd => new {
+                        country = cd.Country,
+                        sessions = cd.Count,
+                        percentage = cd.Percentage
+                    }),
+                    TrafficSource = response.SourceDistribution.Select(ts => new {
+                        source = ts.Source,
+                        sessions = ts.Count,
+                        percentage = ts.Percentage
+                    }),
                     sessionMetrics = new
                     {
                         avgDuration = response.SessionMetrics.AvgDuration,
