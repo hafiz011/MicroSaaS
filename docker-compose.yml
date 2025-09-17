@@ -45,7 +45,7 @@ services:
       context: ./Microservice.Session
       dockerfile: Dockerfile
     ports:
-      - "5002:8080"
+      - "5002:5002"  # HTTP
       - "7002:7002"  # gRPC
     networks:
       - saasnet
