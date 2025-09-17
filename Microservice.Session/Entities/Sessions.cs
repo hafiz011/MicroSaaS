@@ -43,10 +43,14 @@ namespace Microservice.Session.Entities
     public class Location
     {
         public string Country { get; set; }
+        public string CountryIsoCode { get; set; }
+        public string Continent { get; set; }
+        public string ContinentCode { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
-        public string Postal { get; set; }
+        public string RegionIsoCode { get; set; }
         public string Latitude_Longitude { get; set; }
+        public int? AccuracyRadius { get; set; }
         public string Isp { get; set; }
         public string TimeZone { get; set; }
         public bool isVPN { get; set; }

@@ -515,8 +515,6 @@ namespace Microservice.Session.Infrastructure.Services
 
 
 
-
-
             // ---------------- Trends Calculation ----------------
             var from = request.From?.ToDateTime();
             var to = request.To?.ToDateTime();

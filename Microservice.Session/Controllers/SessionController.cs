@@ -14,7 +14,8 @@ namespace Microservice.Session.Controllers
     {
         private readonly IActivityRepository _activityRepository;
         private readonly IApiKeyRepository _apiKeyRepository;
-        private readonly GeolocationService _geolocationService;
+        private readonly IGeoLocationService _geoService; // GeoIP2 service
+        private readonly GeolocationService _geolocationService;   // ipinfo.io service fallback
         private readonly ISessionRepository _sessionRepository;
         private readonly IUserInfoRepository _userInfoRepository;
         private IRabbitMqPublisher _publisher;
@@ -90,21 +91,21 @@ namespace Microservice.Session.Controllers
                 }
 
                 //  #region Geolocation
-                var location = await _geolocationService.GetGeolocationAsync(dto.IpAddress);
-                if (location == null)
+                var location = _geoService.GetGeoLocation(dto.IpAddress);
+                if (location == null || string.IsNullOrWhiteSpace(location.Country))
                 {
-                    return BadRequest("Unable to retrieve geolocation data.");
+                    _logger.LogWarning("Geolocation service failed for IP: {IpAddress}", dto.IpAddress);
+                    //var location = await _geolocationService.GetGeolocationAsync(dto.IpAddress);
+
                 }
+                //if (location == null)
+                //{
+                //    return BadRequest("Unable to retrieve geolocation data.");
+                //}
 
                 // Create new session
                 var session = CreateNewSession(apiKeyInfo.Id, dto, location);
                 var sessionCreated = await _sessionRepository.CreateSessionAsync(session);
-
-                //if (!string.IsNullOrWhiteSpace(dto.User_Id))
-                //{
-                //    await PublishSessionRiskCheck(sessionCreated.Id, apiKeyInfo, dto, location);
-                //}
-
                 return Ok(new { SessionsId = sessionCreated.Id });
             }
             catch (Exception ex)
@@ -115,7 +116,7 @@ namespace Microservice.Session.Controllers
         }
 
 
-        private Sessions CreateNewSession(string tenantId, SessionRequestDto dto, GeoLocationDto location)
+        private Sessions CreateNewSession(string tenantId, SessionRequestDto dto, GeoLocationResult location)
         {
             return new Sessions
             {
@@ -127,11 +128,15 @@ namespace Microservice.Session.Controllers
                 Geo_Location = new Entities.Location
                 {
                     Country = location.Country,
+                    CountryIsoCode = location.CountryIsoCode,
+                    Continent = location.Continent,
+                    ContinentCode = location.ContinentCode,
                     City = location.City,
                     Region = location.Region,
-                    Postal = location.Postal,
-                    Latitude_Longitude = location.Loc,
-                    Isp = location.Org,
+                    RegionIsoCode = location.RegionIsoCode,
+                    Latitude_Longitude = location.Latitude.ToString() + "," + location.Longitude.ToString(),
+                    AccuracyRadius = location.AccuracyRadius,
+                    //Isp = location.Org,
                     TimeZone = location.TimeZone
                 },
                 Device = new Entities.DeviceInfo
@@ -431,7 +436,7 @@ namespace Microservice.Session.Controllers
                     Country = sessiondata.Geo_Location.Country,
                     City = sessiondata.Geo_Location.City,
                     Region = sessiondata.Geo_Location.Region,
-                    Postal = sessiondata.Geo_Location.Postal,
+                    Postal = sessiondata.Geo_Location.ContinentCode,
                     Latitude_Longitude = sessiondata.Geo_Location.Latitude_Longitude,
                     Isp = sessiondata.Geo_Location.Isp,
                     TimeZone = sessiondata.Geo_Location.TimeZone

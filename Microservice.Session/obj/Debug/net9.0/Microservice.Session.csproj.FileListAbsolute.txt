@@ -295,3 +295,5 @@ D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\refint\Micros
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.pdb
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.genruntimeconfig.cache
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\ref\Microservice.Session.dll
+D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\MaxMind.Db.dll
+D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\MaxMind.GeoIP2.dll
