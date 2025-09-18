@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "D:\\GitHub\\MicroSaaS\\TrackLog\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\infrastructure\\services\\rabbitmqpublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\services\\rabbitmqpublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\entities\\sessions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\entities\\sessions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\tracklog\\microservice.authservice\\infrastructure\\services\\rabbitmqconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\infrastructure\\services\\rabbitmqconsumerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\infrastructure\\geoipservice\\geolocationservicegeolite2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\infrastructure\\geoipservice\\geolocationservicegeolite2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\tracklog\\microservice.authservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\models\\dtos\\geolocationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\models\\dtos\\geolocationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|d:\\github\\microsaas\\tracklog\\microservice.authservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5ADBF65B-9332-8C33-E46C-C35453E6607C}|Microservice.AuthService\\Microservice.AuthService.csproj|solutionrelative:microservice.authservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,34 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 8,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Program.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Program.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Program.cs",
-              "RelativeToolTip": "Microservice.Session\\Program.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAgwDsAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T09:49:09.388Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Sessions.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Entities\\Sessions.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Entities\\Sessions.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Entities\\Sessions.cs",
-              "RelativeToolTip": "Microservice.Session\\Entities\\Sessions.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAuwDMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T09:21:22.683Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -80,41 +50,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GeoLocationServiceGeoLite2.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\GeoIPService\\GeoLocationServiceGeoLite2.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\GeoIPService\\GeoLocationServiceGeoLite2.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\GeoIPService\\GeoLocationServiceGeoLite2.cs",
-              "RelativeToolTip": "Microservice.Session\\Infrastructure\\GeoIPService\\GeoLocationServiceGeoLite2.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAcAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "RabbitMqConsumerService.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "RelativeDocumentMoniker": "Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "RelativeToolTip": "Microservice.AuthService\\Infrastructure\\Services\\RabbitMqConsumerService.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAQwCQAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T08:51:35.783Z",
+              "WhenOpened": "2025-09-18T06:29:49.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Program.cs",
+              "RelativeDocumentMoniker": "Microservice.AuthService\\Program.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\Program.cs",
+              "RelativeToolTip": "Microservice.AuthService\\Program.cs",
+              "ViewState": "AgIAAKkAAAAAAAAAAAAgwL8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-18T06:07:27.17Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "GeoLocationResult.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Models\\DTOs\\GeoLocationResult.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Models\\DTOs\\GeoLocationResult.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Models\\DTOs\\GeoLocationResult.cs",
-              "RelativeToolTip": "Microservice.Session\\Models\\DTOs\\GeoLocationResult.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA9wBQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T08:49:58.038Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\appsettings.json",
+              "RelativeDocumentMoniker": "Microservice.AuthService\\appsettings.json",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.AuthService\\appsettings.json",
+              "RelativeToolTip": "Microservice.AuthService\\appsettings.json",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABwAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-18T06:00:48.997Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SessionController.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Controllers\\SessionController.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Controllers\\SessionController.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Controllers\\SessionController.cs",
-              "RelativeToolTip": "Microservice.Session\\Controllers\\SessionController.cs",
-              "ViewState": "AgIAALEBAAAAAAAAAAAIwLwBAAARAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "RabbitMqPublisher.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\Services\\RabbitMqPublisher.cs",
+              "RelativeDocumentMoniker": "Microservice.Session\\Infrastructure\\Services\\RabbitMqPublisher.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Infrastructure\\Services\\RabbitMqPublisher.cs",
+              "RelativeToolTip": "Microservice.Session\\Infrastructure\\Services\\RabbitMqPublisher.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T08:48:49.513Z",
+              "WhenOpened": "2025-09-18T06:00:19.185Z",
               "EditorCaption": ""
             }
           ]

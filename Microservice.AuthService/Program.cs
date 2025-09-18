@@ -1,5 +1,4 @@
-﻿
-using Microservice.AuthService.Database;
+﻿using Microservice.AuthService.Database;
 using Microservice.AuthService.Entities;
 using Microservice.AuthService.Infrastructure.Interfaces;
 using Microservice.AuthService.Infrastructure.Repositories;
@@ -16,7 +15,6 @@ namespace Microservice.AuthService
 {
     public class Program
     {
-       // public static void Main(string[] args)
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -87,33 +85,67 @@ namespace Microservice.AuthService
                 };
             });
 
-            // RabbitMQ connection
+            // RabbitMQ connection with retry
             builder.Services.AddSingleton<IConnection>(sp =>
             {
                 var factory = sp.GetRequiredService<IConnectionFactory>();
-                return factory.CreateConnection();
+
+                const int maxRetries = 5;
+                int delaySeconds = 5;
+
+                for (int attempt = 1; attempt <= maxRetries; attempt++)
+                {
+                    try
+                    {
+                        Console.WriteLine($"[RabbitMQ] Attempt {attempt} to connect...");
+                        return factory.CreateConnection();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"[RabbitMQ] Connection attempt {attempt} failed: {ex.Message}");
+
+                        if (attempt == maxRetries)
+                            throw;
+
+                        // wait before retry
+                        Thread.Sleep(TimeSpan.FromSeconds(delaySeconds));
+                        delaySeconds *= 2; // exponential backoff
+                    }
+                }
+
+                throw new Exception("RabbitMQ connection could not be established after retries.");
             });
 
-            // RabbitMQ channel (IModel)
+            // RabbitMQ channel (IModel) with retry
             builder.Services.AddSingleton<IModel>(sp =>
             {
                 var connection = sp.GetRequiredService<IConnection>();
-                return connection.CreateModel();
+
+                int retries = 3;
+                for (int attempt = 1; attempt <= retries; attempt++)
+                {
+                    try
+                    {
+                        return connection.CreateModel();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"[RabbitMQ] Channel creation failed (attempt {attempt}): {ex.Message}");
+                        if (attempt == retries) throw;
+                        Thread.Sleep(2000);
+                    }
+                }
+
+                throw new Exception("RabbitMQ channel could not be created after retries.");
             });
-
-
 
             builder.Services.AddSingleton<GrpcServiceClient>();
 
             builder.Services.AddSingleton<ISuspiciousActivityRepository, SuspiciousActivityRepository>();
             builder.Services.AddHostedService<RabbitMqConsumerService>();
 
-
-
-
             // Seed indexes
             builder.Services.AddTransient<IndexSeeder>();
-
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -121,15 +153,12 @@ namespace Microservice.AuthService
 
             var app = builder.Build();
 
-
-
             // Seed indexes at startup
             using (var scope = app.Services.CreateScope())
             {
                 var seeder = scope.ServiceProvider.GetRequiredService<IndexSeeder>();
                 await seeder.SeedIndexesAsync();
             }
-
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -140,7 +169,6 @@ namespace Microservice.AuthService
 
             app.UseHttpsRedirection();
 
-
             var wwwrootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
             if (Directory.Exists(wwwrootPath) && Path.IsPathRooted(wwwrootPath))
             {
@@ -150,19 +178,6 @@ namespace Microservice.AuthService
                     RequestPath = ""
                 });
             }
-
-            //var wwwrootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            //if (Directory.Exists(wwwrootPath))
-            //{
-            //    app.UseStaticFiles(new StaticFileOptions
-            //    {
-            //        FileProvider = new PhysicalFileProvider(wwwrootPath),
-            //        RequestPath = ""
-            //    });
-            //}
-
-
-
 
             app.UseCors("AllowAll");
 
