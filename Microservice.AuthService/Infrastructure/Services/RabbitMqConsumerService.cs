@@ -36,7 +36,8 @@ namespace Microservice.AuthService.Infrastructure.Services
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _channel.QueueDeclare(queue: "session-risk-check-v3", durable: true, exclusive: false, autoDelete: false);
+            //_channel.QueueDeclare(queue: "session-risk-check-v3", durable: true, exclusive: false, autoDelete: false);
+            _channel.QueueDeclare(queue: "session-risk-check-v2", durable: true, exclusive: false, autoDelete: false);
 
             var consumer = new AsyncEventingBasicConsumer(_channel);
 
