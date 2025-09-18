@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SaaS.ApiGetway")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6f236803789f72e70e6f4b3a51433d900f80d2f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebf5203aadb33d257b67be9cb67e7665e49e7dba")]
 [assembly: System.Reflection.AssemblyProductAttribute("SaaS.ApiGetway")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SaaS.ApiGetway")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
