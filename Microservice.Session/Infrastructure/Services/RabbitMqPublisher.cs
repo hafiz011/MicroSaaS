@@ -21,8 +21,8 @@ namespace Microservice.Session.Infrastructure.Services
             {
                 // HostName = "31.97.203.233",
                  HostName = "rabbitmq",
-                 UserName = "StrongPassword123",
-                 Password = "StrongPassword123"
+                 UserName = "Admin",
+                 Password = "Admin"
             };
 
             _connection = factory.CreateConnection();

@@ -1,5 +1,8 @@
-version: "3.9"
+# docker-compose.yml
+# You can remove the version line as it's deprecated
+
 services:
+
   rabbitmq:
     image: rabbitmq:3-management
     ports:
@@ -7,31 +10,22 @@ services:
       - "15672:15672"
     environment:
       RABBITMQ_DEFAULT_USER: Admin
-      RABBITMQ_DEFAULT_PASS: StrongPassword123
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
+      RABBITMQ_DEFAULT_PASS: Admin
     networks:
       - saasnet
-    healthcheck:
-      test: ["CMD", "rabbitmqctl", "status"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
 
   api-gateway:
     build:
       context: ./SaaS.ApiGetway
       dockerfile: Dockerfile
     ports:
-      - "5000:8080"
+      - "5050:8080"
     depends_on:
       - auth-service
       - session-service
       - analytics-service
     networks:
       - saasnet
-    restart: unless-stopped
 
   auth-service:
     build:
@@ -40,15 +34,11 @@ services:
     ports:
       - "5001:8080"
     environment:
-      - RabbitMq__HostName=rabbitmq
-      - RabbitMq__UserName=Admin
-      - RabbitMq__Password=Admin
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
+    - RabbitMq__HostName=rabbitmq
+    - RabbitMq__UserName=Admin
+    - RabbitMq__Password=Admin
     networks:
       - saasnet
-    restart: unless-stopped
 
   session-service:
     build:
@@ -59,7 +49,6 @@ services:
       - "7002:7002"  # gRPC
     networks:
       - saasnet
-    restart: unless-stopped
 
   analytics-service:
     build:
@@ -69,11 +58,10 @@ services:
       - "5003:8080"
     networks:
       - saasnet
-    restart: unless-stopped
 
   tech-ciph:
     build:
-      context: ./techciph/CipherNetSecurity
+      context: /home/hafiz/techciph/CipherNetSecurity
       dockerfile: Dockerfile
     ports:
       - "5051:8080"
@@ -82,10 +70,6 @@ services:
       - ASPNETCORE_URLS=http://+:8080
     networks:
       - saasnet
-    restart: unless-stopped
-
-volumes:
-  rabbitmq_data:
 
 networks:
   saasnet:
