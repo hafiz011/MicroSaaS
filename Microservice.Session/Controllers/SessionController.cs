@@ -92,16 +92,63 @@ namespace Microservice.Session.Controllers
 
                 //  #region Geolocation
                 var location = _geoService.GetGeoLocation(dto.IpAddress);
+                //if (location == null || string.IsNullOrWhiteSpace(location.Country))
+                //{
+                //    _logger.LogWarning("Geolocation service failed for IP: {IpAddress}", dto.IpAddress);
+                //    var API_location = await _geolocationService.GetGeolocationAsync(dto.IpAddress);
+
+                //}
+
                 if (location == null || string.IsNullOrWhiteSpace(location.Country))
                 {
                     _logger.LogWarning("Geolocation service failed for IP: {IpAddress}", dto.IpAddress);
-                    //var location = await _geolocationService.GetGeolocationAsync(dto.IpAddress);
 
+                    // Async API call to fallback service
+                    var apiLocation = await _geolocationService.GetGeolocationAsync(dto.IpAddress);
+
+                    if (apiLocation != null)
+                    {
+                        double lat = 0, lon = 0;
+
+                        if (!string.IsNullOrWhiteSpace(apiLocation.Loc))
+                        {
+                            var parts = apiLocation.Loc.Split(',');
+                            if (parts.Length == 2)
+                            {
+                                double.TryParse(parts[0], System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out lat);
+                                double.TryParse(parts[1], System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out lon);
+                            }
+                        }
+
+                        location = new GeoLocationResult
+                        {
+                            Ip = apiLocation.Ip,
+                            Country = apiLocation.Country ?? "Unknown",
+                            CountryIsoCode = "",
+                            Continent = "",
+                            ContinentCode = "",
+                            City = apiLocation.City ?? "Unknown",
+                            Region = apiLocation.Region ?? "Unknown",
+                            RegionIsoCode = apiLocation.Postal ?? "",
+                            Latitude = lat,
+                            Longitude = lon,
+                            AccuracyRadius = null, // ipinfo.io does not provide accuracy radius
+                            TimeZone = apiLocation.TimeZone ?? "UTC",
+                        };
+                    }
+                    else
+                    {
+                        // fallback default if API also fails
+                        location = new GeoLocationResult
+                        {
+                            Ip = dto.IpAddress,
+                            Country = "Unknown",
+                            City = "Unknown",
+                            Latitude = 0,
+                            Longitude = 0
+                        };
+                    }
                 }
-                //if (location == null)
-                //{
-                //    return BadRequest("Unable to retrieve geolocation data.");
-                //}
 
                 // Create new session
                 var session = CreateNewSession(apiKeyInfo.Id, dto, location);

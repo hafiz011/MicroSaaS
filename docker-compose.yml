@@ -47,6 +47,8 @@ services:
     ports:
       - "5002:5002"  # HTTP
       - "7002:7002"  # gRPC
+    volumes:
+      - ./Microservice.Session/GeoIP/GeoLite2-City.mmdb:/app/GeoLite2-City.mmdb:ro
     networks:
       - saasnet
 
@@ -64,10 +66,10 @@ services:
       context: /home/hafiz/techciph/CipherNetSecurity
       dockerfile: Dockerfile
     ports:
-      - "5051:8080"
+      - "5051:5051"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:5051
     networks:
       - saasnet
 
