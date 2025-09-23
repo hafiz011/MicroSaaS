@@ -19,7 +19,7 @@ namespace Microservice.Session.Infrastructure.Services
         {
             var factory = new ConnectionFactory
             {
-                // HostName = "31.97.203.233",
+                //HostName = "31.97.203.233",
                  HostName = "rabbitmq",
                  UserName = "Admin",
                  Password = "Admin"

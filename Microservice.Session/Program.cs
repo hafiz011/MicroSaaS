@@ -53,12 +53,20 @@ namespace Microservice.Session
             builder.Services.AddTransient<IndexSeeder>();
 
             // GeoIP service using MaxMind GeoLite2 database
-            builder.Services.AddSingleton<IGeoLocationService>(sp =>
+            builder.Services.AddSingleton<IGeoLocationServiceGeoLite2>(sp =>
                 new GeoLocationServiceGeoLite2(
                     "/app/GeoLite2-City.mmdb",
                     sp.GetRequiredService<ILogger<GeoLocationServiceGeoLite2>>()
                 )
             );
+
+            //builder.Services.AddSingleton<IGeoLocationServiceGeoLite2>(sp =>
+            //    new GeoLocationServiceGeoLite2(
+            //        @"D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\GeoIP\GeoLite2-City.mmdb",
+            //        sp.GetRequiredService<ILogger<GeoLocationServiceGeoLite2>>()
+            //    )
+            //);
+
 
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();

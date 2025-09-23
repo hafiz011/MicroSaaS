@@ -85,29 +85,39 @@
       "ActivityLogDto": {
         "type": "object",
         "properties": {
-          "user_Id": {
+          "userId": {
             "type": "string",
             "nullable": true
           },
-          "action_Type": {
+          "name": {
             "type": "string",
             "nullable": true
           },
-          "product_Id": {
+          "email": {
             "type": "string",
             "nullable": true
           },
-          "category_Id": {
+          "actionType": {
+            "type": "string",
+            "nullable": true
+          },
+          "productId": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryId": {
             "type": "string",
             "nullable": true
           },
           "quantity": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "price": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "url": {
             "type": "string",
@@ -120,58 +130,25 @@
           "metadata": {
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             },
             "nullable": true
           },
-          "request_Method": {
+          "requestMethod": {
             "type": "string",
             "nullable": true
           },
-          "response_Code": {
+          "responseCode": {
             "type": "integer",
             "format": "int32"
           },
-          "success_Flag": {
+          "successFlag": {
             "type": "boolean"
           },
-          "response_Time": {
+          "responseTime": {
             "type": "number",
             "format": "double"
-          },
-          "time_Stamp": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeviceInfoDto": {
-        "type": "object",
-        "properties": {
-          "fingerprint": {
-            "type": "string",
-            "nullable": true
-          },
-          "browser": {
-            "type": "string",
-            "nullable": true
-          },
-          "device_Type": {
-            "type": "string",
-            "nullable": true
-          },
-          "os": {
-            "type": "string",
-            "nullable": true
-          },
-          "language": {
-            "type": "string",
-            "nullable": true
-          },
-          "screen_Resolution": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -179,19 +156,7 @@
       "SessionRequestDto": {
         "type": "object",
         "properties": {
-          "user_Id": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "ip_Address": {
+          "ipAddress": {
             "type": "string",
             "nullable": true
           },
@@ -199,8 +164,21 @@
             "type": "string",
             "nullable": true
           },
-          "device": {
-            "$ref": "#/components/schemas/DeviceInfoDto"
+          "fingerprint": {
+            "type": "string",
+            "nullable": true
+          },
+          "userAgent": {
+            "type": "string",
+            "nullable": true
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
+          },
+          "screenResolution": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

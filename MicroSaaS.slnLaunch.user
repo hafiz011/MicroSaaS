@@ -3,7 +3,7 @@
     "Name": "New Profile",
     "Projects": [
       {
-        "Path": "Microservice.AuthService\\Microservice.AuthService.csproj",
+        "Path": "Microservice.Session\\Microservice.Session.csproj",
         "Action": "Start"
       },
       {
@@ -11,7 +11,7 @@
         "Action": "Start"
       },
       {
-        "Path": "Microservice.Session\\Microservice.Session.csproj",
+        "Path": "Microservice.AuthService\\Microservice.AuthService.csproj",
         "Action": "Start"
       },
       {

@@ -15,7 +15,7 @@ namespace Microservice.Session.Controllers
     {
         private readonly IActivityRepository _activityRepository;
         private readonly IApiKeyRepository _apiKeyRepository;
-        private readonly IGeoLocationService _geoService; // GeoIP2 service
+        private readonly IGeoLocationServiceGeoLite2 _geoServiceGeoLite2; // GeoIP2 service
         private readonly GeolocationService _geolocationService;   // ipinfo.io service fallback
         private readonly ISessionRepository _sessionRepository;
         private readonly IUserInfoRepository _userInfoRepository;
@@ -28,6 +28,7 @@ namespace Microservice.Session.Controllers
             ISessionRepository sessionRepository,
             IUserInfoRepository userInfoRepository,
             IRabbitMqPublisher rabbitMqPublisher,
+            IGeoLocationServiceGeoLite2 geoServiceGeoLite2,
             ILogger<SessionController> logger)
         {
             _activityRepository = activityRepository;
@@ -36,6 +37,7 @@ namespace Microservice.Session.Controllers
             _sessionRepository = sessionRepository;
             _userInfoRepository = userInfoRepository;
             _publisher = rabbitMqPublisher;
+            _geoServiceGeoLite2 = geoServiceGeoLite2;
             _logger = logger;
         }
 
@@ -91,60 +93,39 @@ namespace Microservice.Session.Controllers
                     return Unauthorized("API Key information not found");
                 }
 
-                //  #region Geolocation
-                //var location = _geoService.GetGeoLocation(dto.IpAddress);
-                //if (location == null || string.IsNullOrWhiteSpace(location.Country))
-                //{
-                //    _logger.LogWarning("Geolocation service failed for IP: {IpAddress}", dto.IpAddress);
-                //    var API_location = await _geolocationService.GetGeolocationAsync(dto.IpAddress);
-
-                //}
-
-                var location = _geoService.GetGeoLocation(dto.IpAddress);
-
-                if (location == null || string.IsNullOrWhiteSpace(location.Country))
+                //  call geolocation service to get location data
+                var location = await _geoServiceGeoLite2.GetGeoLocation(dto.IpAddress);
+                // if geolite2 fails, fallback to ipinfo.io service
+                if (string.IsNullOrWhiteSpace(location.City))
                 {
-                    _logger.LogWarning("GeoLite2 failed for IP: {IpAddress}", dto.IpAddress);
-
+                    // Fallback to ipinfo.io service
                     var apiLocation = await _geolocationService.GetGeolocationAsync(dto.IpAddress);
 
-                    if (apiLocation != null)
+                    if (apiLocation != null && !string.IsNullOrWhiteSpace(apiLocation.Loc))
                     {
-                        double lat = 0, lon = 0;
-
-                        if (!string.IsNullOrWhiteSpace(apiLocation.Loc))
+                        var parts = apiLocation.Loc.Split(',');
+                        if (parts.Length == 2 &&
+                            double.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out var lat) &&
+                            double.TryParse(parts[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var lon))
                         {
-                            var parts = apiLocation.Loc.Split(',');
-                            if (parts.Length == 2)
+                            location = new GeoLocationResult
                             {
-                                double.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out lat);
-                                double.TryParse(parts[1], NumberStyles.Any, CultureInfo.InvariantCulture, out lon);
-                            }
+                                Ip = dto.IpAddress,
+                                Country = location.Country ?? apiLocation.Country,
+                                CountryIsoCode = location.CountryIsoCode,
+                                Continent = location.Continent,
+                                ContinentCode = location.ContinentCode,
+                                City = apiLocation.City ?? "Unknown",
+                                Region = apiLocation.Region ?? "Unknown",
+                                RegionIsoCode = apiLocation.Postal ?? "",
+                                Latitude = lat,
+                                Longitude = lon,
+                                AccuracyRadius = location.AccuracyRadius,
+                                Isp = apiLocation.Org,
+                                TimeZone = location.TimeZone
+                            };
                         }
-                        location = new GeoLocationResult
-                        {
-                            Ip = apiLocation.Ip,
-                            Country = apiLocation.Country ?? "Unknown",
-                            City = apiLocation.City ?? "Unknown",
-                            Region = apiLocation.Region ?? "Unknown",
-                            RegionIsoCode = apiLocation.Postal ?? "",
-                            Latitude = lat,
-                            Longitude = lon,
-                            TimeZone = apiLocation.TimeZone ?? "UTC",
-                        };
                     }
-                }
-                if (location == null)
-                {
-                    location = new GeoLocationResult
-                    {
-                        Ip = dto.IpAddress,
-                        Country = "Unknown",
-                        City = "Unknown",
-                        Latitude = 0,
-                        Longitude = 0,
-                        TimeZone = "UTC"
-                    };
                 }
 
                 var session = CreateNewSession(apiKeyInfo.Id, dto, location);
@@ -179,7 +160,7 @@ namespace Microservice.Session.Controllers
                     RegionIsoCode = location.RegionIsoCode,
                     Latitude_Longitude = location.Latitude.ToString() + "," + location.Longitude.ToString(),
                     AccuracyRadius = location.AccuracyRadius,
-                    //Isp = location.Org,
+                    Isp = location.Isp,
                     TimeZone = location.TimeZone
                 },
                 Device = new Entities.DeviceInfo
