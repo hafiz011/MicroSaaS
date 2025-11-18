@@ -4,7 +4,10 @@ using Microservice.Session.Infrastructure.Interfaces;
 using Microservice.Session.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using MongoDB.Bson;
+using System.Diagnostics;
 using System.Globalization;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace Microservice.Session.Controllers
@@ -47,17 +50,16 @@ namespace Microservice.Session.Controllers
         /// </summary>
         public class SessionRequestDto
         {
-            public string IpAddress { get; set; }
+            public string? Ip { get; set; }
             public string ReferrerUrl { get; set; }
-            public string Fingerprint { get; set; }
             public string UserAgent { get; set; }
             public string Language { get; set; }
-            public string ScreenResolution { get; set; }
+            public string Screen { get; set; }
         }
 
 
         /// <summary>
-        /// Creates or updates a user session
+        /// Create session
         /// </summary>
         /// <param name="dto">Session request data</param>
         /// <returns>Action result with session ID</returns>
@@ -66,21 +68,10 @@ namespace Microservice.Session.Controllers
         {
             try
             {
-                //        //string apiKey = Request.Headers["X-API-KEY"].FirstOrDefault() ?? Request.Query["apiKey"];
-                //        //string sessionId = Request.Headers["X-SESSION-ID"].FirstOrDefault() ?? Request.Query["sessionId"];
-
-                //  #region Input Validation
-                if (dto == null)
-                {
-                    return BadRequest("Invalid request data.");
-                }
-
                 if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey)) //get api key hash
                 {
                     return Unauthorized("API Key is missing.");
                 }
-
-                //  #region API Key Validation
                 var isValid = await _apiKeyRepository.TrackUsageAsync(rawKey);
                 if (!isValid)
                 {
@@ -92,14 +83,17 @@ namespace Microservice.Session.Controllers
                 {
                     return Unauthorized("API Key information not found");
                 }
-
+                if(string.IsNullOrWhiteSpace(dto.Ip))
+                {
+                    dto.Ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+                }
                 //  call geolocation service to get location data
-                var location = await _geoServiceGeoLite2.GetGeoLocation(dto.IpAddress);
+                var location = await _geoServiceGeoLite2.GetGeoLocation(dto.Ip);
                 // if geolite2 fails, fallback to ipinfo.io service
                 if (string.IsNullOrWhiteSpace(location.City))
                 {
                     // Fallback to ipinfo.io service
-                    var apiLocation = await _geolocationService.GetGeolocationAsync(dto.IpAddress);
+                    var apiLocation = await _geolocationService.GetGeolocationAsync(dto.Ip);
 
                     if (apiLocation != null && !string.IsNullOrWhiteSpace(apiLocation.Loc))
                     {
@@ -110,7 +104,7 @@ namespace Microservice.Session.Controllers
                         {
                             location = new GeoLocationResult
                             {
-                                Ip = dto.IpAddress,
+                                Ip = dto.Ip,
                                 Country = location.Country ?? apiLocation.Country,
                                 CountryIsoCode = location.CountryIsoCode,
                                 Continent = location.Continent,
@@ -127,14 +121,13 @@ namespace Microservice.Session.Controllers
                         }
                     }
                 }
-
                 var session = CreateNewSession(apiKeyInfo.Id, dto, location);
                 var sessionCreated = await _sessionRepository.CreateSessionAsync(session);
                 return Ok(new { SessionsId = sessionCreated.Id });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error in CreateSession for IP: {IpAddress}", dto?.IpAddress);
+                _logger.LogError(ex, "Error in CreateSession for IP: {IpAddress}", dto?.Ip);
                 return StatusCode(500, "Internal server error.");
             }
         }
@@ -142,10 +135,11 @@ namespace Microservice.Session.Controllers
 
         private Sessions CreateNewSession(string tenantId, SessionRequestDto dto, GeoLocationResult location)
         {
+            var fingerprint = dto.UserAgent+dto.Language + dto.Screen ?? "Unknown";
             return new Sessions
             {
                 Tenant_Id = tenantId,
-                Ip_Address = dto.IpAddress,
+                Ip_Address = dto.Ip,
                 isActive = true,
                 Login_Time = DateTime.UtcNow,
                 ReferrerUrl = dto.ReferrerUrl,
@@ -166,11 +160,11 @@ namespace Microservice.Session.Controllers
                 Device = new Entities.DeviceInfo
                 {
                     Browser = GetBrowserInfo(dto?.UserAgent),
-                    Fingerprint = dto?.Fingerprint,
+                    Fingerprint = fingerprint,
                     Device_Type = GetDeviceInfo(dto?.UserAgent),
                     OS = GetOSInfo(dto?.UserAgent),
                     Language = dto?.Language,
-                    Screen_Resolution = dto?.ScreenResolution
+                    Screen_Resolution = dto?.Screen
                 }
             };
         }
@@ -292,6 +286,56 @@ namespace Microservice.Session.Controllers
 
             return "Desktop";
         }
+
+
+        // Dtos/EventTrackRequest.cs
+        public class EventTrackRequest
+        {
+            public string SessionId { get; set; }
+            public string Event { get; set; }
+            public object Data { get; set; }
+            public string Url { get; set; }
+            public string ReferrerUrl { get; set; }
+            public DateTime Ts { get; set; } = DateTime.UtcNow;
+        }
+
+        [HttpPost("track")]
+        public async Task<IActionResult> Track([FromBody] EventTrackRequest req)
+        {
+            // quick validation
+            if (string.IsNullOrEmpty(req.SessionId) || string.IsNullOrEmpty(req.Event))
+                return BadRequest("sessionId and event required");
+
+            if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))
+                return Unauthorized("API Key is missing.");
+
+            var apiKeyInfo = await _apiKeyRepository.GetApiByApiKeyIdAsync(rawKey);
+            if (apiKeyInfo == null)
+                return Unauthorized("Invalid API Key.");
+
+            //var session = await _sessionRepository.GetSessionByIdAsync(req.SessionId, apiKeyInfo.Id);
+            //if (session == null)
+            //    return BadRequest("Session ID does not match.");
+            //if (session == null) return BadRequest("invalid session");
+
+            var log = new ActivityLog
+            {
+                Tenant_Id = apiKeyInfo.Id,
+                EventName = req.Event,
+                Data = req.Data == null ? new BsonDocument() : BsonDocument.Parse(JsonSerializer.Serialize(req.Data)),
+                Url = req.Url,
+                ReferrerUrl = req.ReferrerUrl,
+                Time_Stamp = req.Ts
+            };
+
+            await _activityRepository.CreateLogActivityAsync(log);
+            return Ok(new { ok = true });
+        }
+
+
+
+
+
 
 
         [HttpPost("end-session")]
@@ -416,19 +460,19 @@ namespace Microservice.Session.Controllers
                     Tenant_Id = apiKeyInfo.Id,
                     Session_Id = sessiondata.Id,
                     User_Id = sessiondata.User_Id,
-                    Action_Type = dto.ActionType,
-                    Product_Id = dto.ProductId,
-                    Category_Id = dto.CategoryId,
-                    Quantity = dto.Quantity ?? 0,
-                    Price = dto.Price ?? 0.0,
+                    //Action_Type = dto.ActionType,
+                    //Product_Id = dto.ProductId,
+                    //Category_Id = dto.CategoryId,
+                    //Quantity = dto.Quantity ?? 0,
+                    //Price = dto.Price ?? 0.0,
                     Url = dto.Url,
                     ReferrerUrl = dto.ReferrerUrl,
-                    Metadata = dto.Metadata,
-                    Request_Method = dto.RequestMethod,
-                    Response_Code = dto.ResponseCode,
-                    Success_Flag = dto.SuccessFlag,
-                    Response_Time = dto.ResponseTime,
-                    Time_Stamp = DateTime.UtcNow
+                    //Metadata = dto.Metadata,
+                    //Request_Method = dto.RequestMethod,
+                    //Response_Code = dto.ResponseCode,
+                    //Success_Flag = dto.SuccessFlag,
+                    //Response_Time = dto.ResponseTime,
+                    //Time_Stamp = DateTime.UtcNow
                 };
 
                 await _activityRepository.CreateLogActivityAsync(log);

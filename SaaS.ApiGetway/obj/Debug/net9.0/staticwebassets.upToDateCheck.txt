@@ -1,0 +1,2 @@
+wwwroot\trackly.js
+D:\GitHub\MicroSaaS\TrackLog\SaaS.ApiGetway\wwwroot\trackly.js
