@@ -56,7 +56,12 @@ namespace Microservice.Session.Controllers
             public string Language { get; set; }
             public string Screen { get; set; }
         }
-
+        // Dtos/SessionStartResponse.cs
+        public class SessionStartResponse
+        {
+            public string SessionId { get; set; }
+            public string Status { get; set; } = "started";
+        }
 
         /// <summary>
         /// Create session
@@ -123,7 +128,18 @@ namespace Microservice.Session.Controllers
                 }
                 var session = CreateNewSession(apiKeyInfo.Id, dto, location);
                 var sessionCreated = await _sessionRepository.CreateSessionAsync(session);
-                return Ok(new { SessionsId = sessionCreated.Id });
+
+                // Set cookie (client-side JS can also set; but setting here is safer)
+                Response.Cookies.Append("trackly_session", sessionCreated.Id, new CookieOptions
+                {
+                    HttpOnly = false, // JS reads it; set true if you want server-only and use other flow
+                    Secure = true,
+                    SameSite = SameSiteMode.Lax,
+                    Expires = DateTimeOffset.UtcNow.AddDays(1)
+                });
+
+                return Ok(new SessionStartResponse { SessionId = sessionCreated.Id });
+
             }
             catch (Exception ex)
             {

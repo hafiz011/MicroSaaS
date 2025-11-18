@@ -22,6 +22,8 @@ app.Use(async (context, next) =>
     await next();
 });
 
+app.UseStaticFiles();
+
 app.UseCors();
 app.MapReverseProxy();
 
