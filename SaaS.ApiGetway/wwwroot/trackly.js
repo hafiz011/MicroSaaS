@@ -22,35 +22,50 @@
         const m = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
         return m ? decodeURIComponent(m[2]) : null;
     }
-
-    // small util to safe parse float
     function toNumber(v) {
         if (v == null) return null;
         const s = String(v).replace(/[^0-9.\-]/g, "");
         const n = parseFloat(s);
         return isNaN(n) ? null : n;
     }
+    function nowMs() { return Date.now(); }
+    function safeJSON(v) {
+        try { return JSON.stringify(v); } catch { return String(v); }
+    }
 
     // -------------------------
-    // Session + event queue
+    // Session + queue + dedupe
     // -------------------------
     let sessionId = getCookie("trackly_session");
     let sessionReady = !!sessionId;
     const eventQueue = [];
+    const lastSeen = new Map(); // key -> timestamp ms
+    const DEDUPE_WINDOW_MS = 2000; // ignore duplicates within 2s (configurable)
+    const ONE_TIME_EVENTS = new Set(); // keys for page-level one-time events
 
-    function flushQueue() {
-        if (!sessionReady) return;
-        while (eventQueue.length) {
-            sendEvent(eventQueue.shift());
-        }
+    function dedupeKey(event, data) {
+        // Build small signature: event + id or name + minimal props
+        const id = data && (data.id || data.productId || data.transaction_id || data.transactionId || data.name || "");
+        return `${event}::${id}`;
+    }
+
+    function shouldSend(event, data) {
+        const key = dedupeKey(event, data);
+        const t = nowMs();
+        const last = lastSeen.get(key) || 0;
+        if (t - last < DEDUPE_WINDOW_MS) return false;
+        lastSeen.set(key, t);
+        return true;
     }
 
     function queueOrSend(payload) {
-        if (!sessionReady) {
-            eventQueue.push(payload);
-        } else {
-            sendEvent(payload);
-        }
+        if (!sessionReady) eventQueue.push(payload);
+        else sendEvent(payload);
+    }
+
+    function flushQueue() {
+        if (!sessionReady) return;
+        while (eventQueue.length) sendEvent(eventQueue.shift());
     }
 
     async function startSession() {
@@ -83,29 +98,26 @@
         }
     }
 
-    function sendEventObj(evt) {
-        queueOrSend(evt);
-    }
-
-    function sendEvent({ event, data }) {
+    function sendEvent(payload) {
         if (!sessionId) {
-            eventQueue.push({ event, data });
+            eventQueue.push(payload);
             return;
         }
+        // dedupe check
+        if (!shouldSend(payload.event, payload.data)) return;
+        // send
         fetch(API_EVENT_TRACK, {
             method: "POST",
             headers: { "Content-Type": "application/json", "X-API-KEY": apiKey },
             body: JSON.stringify({
                 sessionId,
-                event,
-                data,
+                event: payload.event,
+                data: payload.data,
                 url: window.location.href,
                 ReferrerUrl: document.referrer || null,
                 ts: new Date().toISOString()
             })
-        }).catch(e => {
-            console.error("Trackly: sendEvent failed", e);
-        });
+        }).catch(e => console.error("Trackly: sendEvent failed", e));
     }
 
     // -------------------------
@@ -120,7 +132,6 @@
             }
             const meta = document.querySelector('meta[property="product:category"], meta[name="category"]');
             if (meta) return meta.content;
-            // URL path guess
             const parts = location.pathname.split("/").filter(p => p && p.length > 1);
             if (parts.length >= 2) return parts[parts.length - 1];
         } catch (e) { /* ignore */ }
@@ -130,7 +141,6 @@
     // -------------------------
     // Product extraction heuristics
     // -------------------------
-    // Common product container selectors used by templates
     const PRODUCT_SELECTORS = [
         "[data-product-id]",
         ".product-card",
@@ -141,25 +151,23 @@
         ".product-list-item",
         "article[data-id]",
     ];
-
-    // keep track of processed nodes to avoid duplicate listeners
     const processed = new WeakSet();
 
+    function slugify(s) {
+        return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    }
+
     function extractFromContainer(node) {
-        // Return null if not product-like
         if (!node || processed.has(node)) return null;
 
-        // Heuristic: look for price text inside node
         const txt = node.innerText || "";
         const priceRegex = /(?:¥|\$|₹|৳|€)\s?\d{1,3}(?:[.,]\d{2,})?/g;
         const priceMatch = txt.match(priceRegex);
         if (!priceMatch) {
-            // also try patterns like 100.00 or 10000 (with currency missing) near price class names
             const alt = node.querySelector("[class*='price'], .product-price, .price")?.innerText;
             if (!alt) return null;
         }
 
-        // id: try dataset, link href, or generate from name+price
         let id = node.dataset && (node.dataset.productId || node.dataset.id || node.dataset.sku) || null;
         if (!id) {
             const link = node.querySelector("a[href*='product'], a[href*='product-detail'], a[href*='sku'], a[href*='/p/']");
@@ -169,14 +177,12 @@
             }
         }
 
-        // name
         const name =
             (node.querySelector("h1,h2,h3,h4,h5,h6,.product-title,.title")?.innerText ||
                 node.querySelector("img")?.alt ||
                 node.getAttribute("aria-label") ||
                 node.dataset.name) || null;
 
-        // price
         let price = null;
         if (priceMatch && priceMatch.length) price = toNumber(priceMatch[0]);
         else {
@@ -184,11 +190,9 @@
             if (pEl) price = toNumber(pEl.innerText);
         }
 
-        // category (best-effort: container scope fallback to page category)
         let category = node.dataset.category || node.getAttribute("data-category") || null;
         if (!category) category = detectCategoryFromBreadcrumbs();
 
-        // quantity detection
         let quantity = 1;
         const qtyInput = node.querySelector('input[type="number"], input.qty, [name="quantity"], select.qty, select[name="quantity"]');
         if (qtyInput) {
@@ -196,44 +200,28 @@
             if (!isNaN(v) && v > 0) quantity = v;
         }
 
-        // variants detection: size and color
         const variant = { size: null, color: null, attributes: {} };
-
-        // select-based
         const sizeSelect = node.querySelector('select[name*="size"], select[id*="size"], select[data-variant*="size"]');
         if (sizeSelect) variant.size = sizeSelect.value || null;
-
         const colorSelect = node.querySelector('select[name*="color"], select[id*="color"], select[data-variant*="color"]');
         if (colorSelect) variant.color = colorSelect.value || null;
-
-        // button-based (swatches)
         const sizeBtn = Array.from(node.querySelectorAll("button, a")).find(b => {
             const t = (b.innerText || "").trim().toLowerCase();
             return ["s", "m", "l", "xl", "xs", "xxl"].includes(t);
         });
         if (sizeBtn && !variant.size) variant.size = sizeBtn.innerText.trim();
-
-        // color swatch (background-color or aria-label)
         const colorBtn = Array.from(node.querySelectorAll("[data-color], [aria-label]")).find(el => {
             const al = el.getAttribute("aria-label");
             return al && /color/i.test(al);
         });
         if (colorBtn && !variant.color) variant.color = colorBtn.getAttribute("aria-label") || null;
-
-        // fallback: look for attributes like data-variant-*
         for (const k in node.dataset) {
-            if (/variant|option|attr|attribute/i.test(k)) {
-                variant.attributes[k] = node.dataset[k];
-            }
+            if (/variant|option|attr|attribute/i.test(k)) variant.attributes[k] = node.dataset[k];
         }
 
-        // image
         const image = node.querySelector("img")?.src || null;
-
-        // if nothing meaningful found, skip
         if (!name && !price && !id) return null;
 
-        // mark processed to avoid double-binding listeners
         processed.add(node);
 
         return {
@@ -247,72 +235,114 @@
         };
     }
 
-    // small slug helper
-    function slugify(s) {
-        return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    // -------------------------
+    // LIST SCAN (view_item_list)
+    // -------------------------
+    function buildItemListFromNodes(nodes) {
+        const items = [];
+        nodes.forEach(n => {
+            const p = extractFromContainer(n);
+            if (p) items.push(p);
+        });
+        return items;
+    }
+
+    function scanListsAndSend() {
+        // Find product lists on common selectors
+        const listSelectors = [
+            ".products", ".product-list", ".product-grid", ".listing", ".collection", ".woocommerce", ".search-results"
+        ];
+        const lists = new Set();
+        listSelectors.forEach(sel => document.querySelectorAll(sel).forEach(n => lists.add(n)));
+        // fallback: group nodes by parent that contain multiple products
+        if (!lists.size) {
+            const all = Array.from(document.querySelectorAll(PRODUCT_SELECTORS.join(",")));
+            const grouped = new Map();
+            all.forEach(n => {
+                const p = n.parentElement || document.body;
+                const key = p;
+                if (!grouped.has(key)) grouped.set(key, []);
+                grouped.get(key).push(n);
+            });
+            grouped.forEach((arr, parent) => {
+                if (arr.length >= 2) lists.add(parent);
+            });
+        }
+
+        lists.forEach(listEl => {
+            const itemNodes = Array.from(listEl.querySelectorAll(PRODUCT_SELECTORS.join(",")));
+            const items = buildItemListFromNodes(itemNodes);
+            if (items && items.length) {
+                // dedupe using list container path + item ids
+                const key = `view_item_list::${listEl.tagName}::${listEl.className}::${location.pathname}`;
+                if (!ONE_TIME_EVENTS.has(key)) {
+                    ONE_TIME_EVENTS.add(key);
+                    sendEvent({ event: "view_item_list", data: { items, list_name: listEl.className || null } });
+                }
+            }
+        });
     }
 
     // -------------------------
-    // Auto bind product buttons
+    // Bind product interactions
     // -------------------------
     function bindProductInteractions(container, product) {
         if (!product || !container) return;
-        // scan for actionable controls
         const buttons = container.querySelectorAll("button,a,input[type=button],input[type=submit]");
         buttons.forEach(btn => {
-            // normalize text
             const txt = (btn.innerText || btn.value || "").trim().toLowerCase();
             if (!txt) return;
-            // add to cart
-            if (/add to cart|add to basket|add cart|add to bag|bag it|cart add/i.test(txt)) {
+            if (/add to cart|add to basket|add cart|add to bag|bag it|cart add|add-to-cart/i.test(txt)) {
+                btn.addEventListener("click", () => sendEvent({ event: "add_to_cart", data: product }));
+            }
+            if (/buy now|buy|checkout|place order|purchase|complete order|pay now/i.test(txt)) {
                 btn.addEventListener("click", () => {
-                    sendEvent({ event: "add_to_cart", data: product });
+                    // on buy immediately send purchase with generated txn if not present
+                    const txn = { transaction_id: `txn_${nowMs()}`, items: [product], value: product.price, currency: (product.currency || "USD") };
+                    sendEvent({ event: "purchase", data: txn });
                 });
             }
-            // buy / checkout / purchase
-            if (/buy now|buy|checkout|place order|purchase/i.test(txt)) {
-                btn.addEventListener("click", () => {
-                    sendEvent({ event: "purchase", data: product });
-                });
+            if (/checkout|proceed to checkout|go to checkout/i.test(txt)) {
+                btn.addEventListener("click", () => sendEvent({ event: "begin_checkout", data: { items: [product] } }));
             }
         });
     }
 
     // -------------------------
-    // Scan page for products
+    // Scan page for products & bind
     // -------------------------
-    function scanAndTrackProducts() {
-        // try specific selectors first
+    function scanAndBindAll() {
         let nodes = [];
         PRODUCT_SELECTORS.forEach(sel => nodes.push(...Array.from(document.querySelectorAll(sel))));
-        // fallback to scanning common containers
         if (!nodes.length) nodes = Array.from(document.querySelectorAll("article, section, div")).slice(0, 500);
-
         nodes.forEach(node => {
-            const product = extractFromContainer(node);
-            if (product) {
-                // send view_item event
-                sendEvent({ event: "view_item", data: product });
-                bindProductInteractions(node, product);
+            const p = extractFromContainer(node);
+            if (p) {
+                sendEvent({ event: "view_item", data: p });
+                bindProductInteractions(node, p);
             }
         });
+        // view_item_list
+        scanListsAndSend();
     }
 
     // -------------------------
-    // Mutation observer for AJAX
+    // MutationObserver for AJAX loaded products
     // -------------------------
     const mo = new MutationObserver((mutations) => {
         for (const m of mutations) {
             if (m.addedNodes && m.addedNodes.length) {
                 m.addedNodes.forEach(n => {
                     if (!(n instanceof HTMLElement)) return;
-                    // if this node looks like a product container
+                    // try to extract product from newly added node or its children
                     const p = extractFromContainer(n) || Array.from(n.querySelectorAll("div,article,section")).map(extractFromContainer).find(x => x);
                     if (p) {
                         sendEvent({ event: "view_item", data: p });
-                        // bind interactions for inner node
                         const container = (n.matches && n.matches("[data-product-id], .product-card, .product, .product-item")) ? n : n.querySelector(".product-card, .product, .product-item") || n;
                         bindProductInteractions(container, p);
+                    } else {
+                        // also re-scan lists in case a list updated
+                        scanListsAndSend();
                     }
                 });
             }
@@ -321,13 +351,17 @@
     mo.observe(document.body, { childList: true, subtree: true });
 
     // -------------------------
-    // Basic auto events (links, buttons, forms, scroll)
+    // Basic auto events (links, buttons, forms)
     // -------------------------
     function enableAutoEvents() {
-        // page_view
-        sendEvent({ event: "page_view", data: { title: document.title } });
+        // page_view (one time)
+        const pvKey = `page_view::${location.pathname}`;
+        if (!ONE_TIME_EVENTS.has(pvKey)) {
+            ONE_TIME_EVENTS.add(pvKey);
+            sendEvent({ event: "page_view", data: { title: document.title } });
+        }
 
-        // links
+        // link/button clicks (generic)
         document.addEventListener("click", (e) => {
             const a = e.target.closest("a");
             if (a) sendEvent({ event: "link_click", data: { text: a.innerText, href: a.href } });
@@ -341,194 +375,61 @@
             sendEvent({ event: "form_submit", data: { action: f.action, id: f.id || null, classes: f.className || null } });
         }, true);
 
-        //// scroll depth
-        //let maxScroll = 0;
-        //window.addEventListener("scroll", () => {
-        //    const cur = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-        //    if (cur > maxScroll) {
-        //        maxScroll = cur;
-        //        sendEvent({ event: "scroll_depth", data: { percent_scrolled: maxScroll } });
-        //    }
-        //}, { passive: true });
+        // detect begin_checkout by URL or presence of checkout forms
+        if (/checkout|cart|order/.test(location.pathname.toLowerCase())) {
+            const bcKey = `begin_checkout::${location.pathname}`;
+            if (!ONE_TIME_EVENTS.has(bcKey)) {
+                ONE_TIME_EVENTS.add(bcKey);
+                // try to collect cart items if present in DOM (best-effort)
+                const cartItems = Array.from(document.querySelectorAll(".cart-item, .cart-row, .cart-product, [data-cart-item]")).map(el => {
+                    return extractFromContainer(el) || { name: el.innerText?.slice(0, 80) || "cart_item" };
+                }).filter(Boolean);
+                sendEvent({ event: "begin_checkout", data: { items: cartItems } });
+            }
+        }
+
+        // purchase detection by thank-you page / URL patterns (one time)
+        if (/thank-you|order-confirmation|order-received|order\/\d+|checkout\/complete|success/.test(location.pathname.toLowerCase())) {
+            const puKey = `purchase_page::${location.pathname}`;
+            if (!ONE_TIME_EVENTS.has(puKey)) {
+                ONE_TIME_EVENTS.add(puKey);
+                // try to extract transaction details (site-specific)
+                // best-effort: look for order id / totals
+                const orderId = document.querySelector(".order-id, #order-id, [data-order-id]")?.innerText?.trim()
+                    || document.querySelector("[data-transaction-id]")?.getAttribute("data-transaction-id")
+                    || `txn_${nowMs()}`;
+                const totalText = document.querySelector(".order-total, .total, [data-order-total]")?.innerText || null;
+                const total = toNumber(totalText) || null;
+                // try cart items
+                const items = Array.from(document.querySelectorAll(".order-item, .purchased-item, [data-order-item]")).map(el => extractFromContainer(el)).filter(Boolean);
+                sendEvent({ event: "purchase", data: { transaction_id: orderId, value: total, currency: "USD", items } });
+            }
+        }
     }
 
     // -------------------------
     // Public API
     // -------------------------
     window.Trackly = window.Trackly || {};
-    window.Trackly.track = function (event, data) {
-        sendEvent({ event, data });
-    };
-    window.Trackly.trackProduct = function (action, product) {
-        if (!product) return;
-        sendEvent({ event: action, data: product });
-    };
+    window.Trackly.track = function (event, data) { sendEvent({ event, data }); };
+    window.Trackly.trackProduct = function (action, product) { if (!product) return; sendEvent({ event: action, data: product }); };
 
     // -------------------------
     // Init
     // -------------------------
     if (!sessionReady) {
         startSession().then(() => {
-            scanAndTrackProducts();
+            scanAndBindAll();
             enableAutoEvents();
         });
     } else {
-        scanAndTrackProducts();
+        scanAndBindAll();
         enableAutoEvents();
     }
 
-    // expose small debug helper
-    window.Trackly._debugFlushQueue = flushQueue;
+    // small debug helpers
+    window.Trackly._flushQueue = flushQueue;
+    window.Trackly._lastSeen = lastSeen;
+    window.Trackly._oneTime = ONE_TIME_EVENTS;
+
 })();
-
-
-
-
-//(function () {
-//    // Extract API Key from script tag URL
-//    const scriptTag = document.currentScript;
-//    const apiKey = new URLSearchParams(scriptTag.src.split('?')[1]).get("key");
-
-//    if (!apiKey) {
-//        console.error("Trackly: Missing x-api-key!");
-//        return;
-//    }
-
-//    // Helper: Save cookie
-//    function setCookie(name, value, days) {
-//        let expires = "";
-//        if (days) {
-//            const date = new Date();
-//            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-//            expires = "; expires=" + date.toUTCString();
-//        }
-//        document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure; SameSite=Lax";
-//    }
-
-//    function getCookie(name) {
-//        const nameEQ = name + "=";
-//        const ca = document.cookie.split(";");
-//        for (let i = 0; i < ca.length; i++) {
-//            let c = ca[i];
-//            while (c.charAt(0) === " ") c = c.substring(1, c.length);
-//            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-//        }
-//        return null;
-//    }
-
-//    // Start session if not exists
-//    let sessionId = getCookie("trackly_session");
-
-//    function startSession() {
-//        const payload = {
-//            Ip: "",
-//            ReferrerUrl: document.referrer,
-//            UserAgent: navigator.userAgent,
-//            Language: navigator.language || navigator.userLanguage,
-//            Screen: `${window.screen.width}x${window.screen.height}`
-//        };
-
-//        return fetch("https://apibizagent.techciph.com/Session/create", {
-//            method: "POST",
-//            headers: {
-//                "Content-Type": "application/json",
-//                "X-API-KEY": apiKey
-//            },
-//            body: JSON.stringify(payload)
-//        })
-//            .then(res => res.json())
-//            .then(result => {
-//                if (result.sessionId) {
-//                    sessionId = result.sessionId;
-//                    setCookie("trackly_session", sessionId, 1);
-//                    console.log("Trackly session started:", sessionId);
-//                    return sessionId;
-//                }
-//            })
-//            .catch(err => console.error("Trackly init failed:", err));
-//    }
-
-//    // Event tracking function
-//    window.Trackly = {
-//        track: function (eventName, data = {}) {
-//            if (!sessionId) return;
-
-//            fetch("https://apibizagent.techciph.com/Session/track", {
-//                method: "POST",
-//                headers: {
-//                    "Content-Type": "application/json",
-//                    "X-API-KEY": apiKey
-//                },
-//                body: JSON.stringify({
-//                    sessionId,
-//                    event: eventName,
-//                    data,
-//                    url: window.location.href,
-//                    ReferrerUrl: document.referrer,
-//                    ts: new Date().toISOString()
-//                })
-//            }).catch(err => console.error("Trackly event failed:", err));
-//        }
-//    };
-
-//    // AUTO EVENT TRACKING
-//    function enableAutoTracking() {
-
-//        // PAGE VIEW
-//        window.Trackly.track("page_view", {
-//            title: document.title
-//        });
-
-//        // LINK CLICK
-//        document.addEventListener("click", function (e) {
-//            let el = e.target.closest("a");
-//            if (!el) return;
-
-//            Trackly.track("link_click", {
-//                text: el.innerText,
-//                href: el.href
-//            });
-//        });
-
-//        // BUTTON CLICK
-//        document.addEventListener("click", function (e) {
-//            let el = e.target.closest("button");
-//            if (!el) return;
-
-//            Trackly.track("button_click", {
-//                text: el.innerText || el.value
-//            });
-//        });
-
-//        // FORM SUBMIT
-//        document.addEventListener("submit", function (e) {
-//            let form = e.target;
-//            Trackly.track("form_submit", {
-//                action: form.action,
-//                id: form.id,
-//                classes: form.className
-//            });
-//        });
-
-//        // SCROLL DEPTH
-//        let maxScroll = 0;
-//        window.addEventListener("scroll", function () {
-//            let current = Math.round(
-//                (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
-//            );
-
-//            if (current > maxScroll) {
-//                maxScroll = current;
-//                Trackly.track("scroll_depth", { depth: maxScroll });
-//            }
-//        });
-//    }
-
-//    // Initialize
-//    if (!sessionId) {
-//        startSession().then(() => enableAutoTracking());
-//    } else {
-//        enableAutoTracking();
-//    }
-
-//})();

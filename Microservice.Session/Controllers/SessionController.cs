@@ -321,7 +321,7 @@ namespace Microservice.Session.Controllers
         // Dtos/EventTrackRequest.cs
         public class EventTrackRequest
         {
-            public string SessionId { get; set; }
+            public string sessionId { get; set; }
             public string Event { get; set; }
             public object Data { get; set; }
             public string Url { get; set; }
@@ -333,7 +333,7 @@ namespace Microservice.Session.Controllers
         public async Task<IActionResult> Track([FromBody] EventTrackRequest req)
         {
             // quick validation
-            if (string.IsNullOrEmpty(req.SessionId) || string.IsNullOrEmpty(req.Event))
+            if (string.IsNullOrEmpty(req.sessionId) || string.IsNullOrEmpty(req.Event))
                 return BadRequest("sessionId and event required");
 
             if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))
@@ -350,6 +350,7 @@ namespace Microservice.Session.Controllers
 
             var log = new ActivityLog
             {
+                Session_Id = req.sessionId,
                 Tenant_Id = apiKeyInfo.Id,
                 EventName = req.Event,
                 Data = req.Data == null ? new BsonDocument() : BsonDocument.Parse(JsonSerializer.Serialize(req.Data)),
