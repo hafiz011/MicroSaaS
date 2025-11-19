@@ -4,6 +4,7 @@ using Microservice.Session.Infrastructure.Interfaces;
 using Microservice.Session.Infrastructure.MongoDb;
 using Microservice.Session.Infrastructure.Repositories;
 using Microservice.Session.Infrastructure.Services;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using RabbitMQ.Client;
 
@@ -14,6 +15,16 @@ namespace Microservice.Session
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
+
+
 
             builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
             builder.Services.AddSingleton<MongoDbContext>();
@@ -47,8 +58,6 @@ namespace Microservice.Session
                 return connection.CreateModel();
             });
 
-
-
             // Seed indexes
             builder.Services.AddTransient<IndexSeeder>();
 
@@ -60,19 +69,13 @@ namespace Microservice.Session
                 )
             );
 
-            //builder.Services.AddSingleton<IGeoLocationServiceGeoLite2>(sp =>
-            //    new GeoLocationServiceGeoLite2(
-            //        @"D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\GeoIP\GeoLite2-City.mmdb",
-            //        sp.GetRequiredService<ILogger<GeoLocationServiceGeoLite2>>()
-            //    )
-            //);
-
 
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
+            app.UseForwardedHeaders();
 
             // Seed indexes at startup
             using (var scope = app.Services.CreateScope())
@@ -80,7 +83,6 @@ namespace Microservice.Session
                 var seeder = scope.ServiceProvider.GetRequiredService<IndexSeeder>();
                 await seeder.SeedIndexesAsync();
             }
-
 
 
 

@@ -88,10 +88,24 @@ namespace Microservice.Session.Controllers
                 {
                     return Unauthorized("API Key information not found");
                 }
-                if(string.IsNullOrWhiteSpace(dto.Ip))
+
+                if (string.IsNullOrWhiteSpace(dto.Ip))
                 {
-                    dto.Ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+                    // Read X-Forwarded-For header
+                    var forwardedFor = HttpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+
+                    if (!string.IsNullOrWhiteSpace(forwardedFor))
+                    {
+                        // XFF can contain multiple IPs: client, proxy1, proxy2
+                        dto.Ip = forwardedFor.Split(',').First().Trim();
+                    }
+                    else
+                    {
+                        // fallback to RemoteIpAddress
+                        dto.Ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+                    }
                 }
+
                 //  call geolocation service to get location data
                 var location = await _geoServiceGeoLite2.GetGeoLocation(dto.Ip);
                 // if geolite2 fails, fallback to ipinfo.io service
