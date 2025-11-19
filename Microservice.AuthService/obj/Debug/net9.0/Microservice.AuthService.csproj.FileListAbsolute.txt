@@ -348,10 +348,10 @@ D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\staticweb
 D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\staticwebassets.build.json.cache
 D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\staticwebassets.development.json
 D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\Microser.3680E9BE.Up2Date
 D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.dll
 D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\refint\Microservice.AuthService.dll
 D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.pdb
 D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\Microservice.AuthService.genruntimeconfig.cache
 D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\ref\Microservice.AuthService.dll
-D:\GitHub\MicroSaaS\TrackLog\Microservice.AuthService\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

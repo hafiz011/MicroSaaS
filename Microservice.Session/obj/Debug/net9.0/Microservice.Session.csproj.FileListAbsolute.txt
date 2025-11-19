@@ -237,8 +237,6 @@ D:\Github\SaaSApp\SassApp\Microservice.Session\obj\Debug\net9.0\refint\Microserv
 D:\Github\SaaSApp\SassApp\Microservice.Session\obj\Debug\net9.0\Microservice.Session.pdb
 D:\Github\SaaSApp\SassApp\Microservice.Session\obj\Debug\net9.0\Microservice.Session.genruntimeconfig.cache
 D:\Github\SaaSApp\SassApp\Microservice.Session\obj\Debug\net9.0\ref\Microservice.Session.dll
-D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.csproj.AssemblyReference.cache
-D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.GeneratedMSBuildEditorConfig.editorconfig
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\appsettings.Development.json
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\appsettings.json
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\Microservice.Session.staticwebassets.endpoints.json
@@ -259,6 +257,8 @@ D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\Grpc.Net.Clie
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\Grpc.Net.ClientFactory.dll
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\Grpc.Net.Common.dll
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\MailKit.dll
+D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\MaxMind.Db.dll
+D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\MaxMind.GeoIP2.dll
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\Microsoft.OpenApi.dll
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\MimeKit.dll
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\MongoDB.Bson.dll
@@ -277,6 +277,8 @@ D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\ZstdSharp.dll
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\runtimes\linux\native\libmongocrypt.so
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\runtimes\osx\native\libmongocrypt.dylib
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\runtimes\win\native\mongocrypt.dll
+D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.csproj.AssemblyReference.cache
+D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.GeneratedMSBuildEditorConfig.editorconfig
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.AssemblyInfoInputs.cache
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.AssemblyInfo.cs
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.csproj.CoreCompileInputs.cache
@@ -295,5 +297,3 @@ D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\refint\Micros
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.pdb
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\Microservice.Session.genruntimeconfig.cache
 D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\obj\Debug\net9.0\ref\Microservice.Session.dll
-D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\MaxMind.Db.dll
-D:\GitHub\MicroSaaS\TrackLog\Microservice.Session\bin\Debug\net9.0\MaxMind.GeoIP2.dll

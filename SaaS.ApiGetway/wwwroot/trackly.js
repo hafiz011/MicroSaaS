@@ -341,15 +341,15 @@
             sendEvent({ event: "form_submit", data: { action: f.action, id: f.id || null, classes: f.className || null } });
         }, true);
 
-        // scroll depth
-        let maxScroll = 0;
-        window.addEventListener("scroll", () => {
-            const cur = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-            if (cur > maxScroll) {
-                maxScroll = cur;
-                sendEvent({ event: "scroll_depth", data: { percent_scrolled: maxScroll } });
-            }
-        }, { passive: true });
+        //// scroll depth
+        //let maxScroll = 0;
+        //window.addEventListener("scroll", () => {
+        //    const cur = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        //    if (cur > maxScroll) {
+        //        maxScroll = cur;
+        //        sendEvent({ event: "scroll_depth", data: { percent_scrolled: maxScroll } });
+        //    }
+        //}, { passive: true });
     }
 
     // -------------------------
