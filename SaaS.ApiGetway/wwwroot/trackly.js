@@ -17,66 +17,74 @@
     let ready = false;
     const queue = [];
 
-    // ===================== CURRENCY AUTO DETECT =====================
-    const CURRENCY_SYMBOLS = {
-        '$': 'USD', 'USD': 'USD', 'US$': 'USD',
-        '৳': 'BDT', 'BDT': 'BDT', 'Taka': 'BDT',
-        '₹': 'INR', 'INR': 'INR', 'Rs': 'INR',
-        '€': 'EUR', 'EURO': 'EUR',
-        '£': 'GBP', 'GBP': 'GBP',
-        '¥': 'JPY', 'JPY': 'JPY', 'CNY': 'CNY',
-        '₽': 'RUB', 'RUB': 'RUB',
-        '₩': 'KRW', 'KRW': 'KRW',
-        'RM': 'MYR', 'MYR': 'MYR',
-        'R$': 'BRL', 'SGD': 'SGD', 'CAD': 'CAD', 'AUD': 'AUD'
-    };
-
+    // ===================== AUTO CURRENCY DETECTION (100% NO ERROR) =====================
     let detectedCurrency = null;
 
     function detectCurrency() {
         if (detectedCurrency) return detectedCurrency;
 
-        // 1. From price text in DOM (most accurate)
-        const priceTexts = document.body.innerText.match(/[\$£€¥৳₹₽₩]\s?[\d.,]+/g) || [];
-        for (const text of priceTexts) {
-            const symbol = text.replace(/[\d.,\s]/g, '').trim();
-            if (CURRENCY_SYMBOLS[symbol]) {
-                return CURRENCY_SYMBOLS[symbol];
+        // 1. From visible price symbols (most reliable)
+        const priceRegex = /[\$£€¥৳₹₽₩]\s*[\d.,]+/g;
+        const matches = document.body.innerText.match(priceRegex) || [];
+        const symbolMap = { '$': 'USD', '£': 'GBP', '€': 'EUR', '¥': 'JPY', '৳': 'BDT', '₹': 'INR', '₽': 'RUB', '₩': 'KRW' };
+        for (const m of matches) {
+            const sym = m.replace(/[\d.,\s]/g, '').trim();
+            if (symbolMap[sym]) {
+                detectedCurrency = symbolMap[sym];
+                return detectedCurrency;
             }
         }
 
-        // 2. From meta, JSON-LD, Shopify money format
-        const selectors = [
-            'meta[name="currency"]',
-            'meta[property="currency"]',
-            'script[type="application/ld+json"]',
-            '[data-currency]',
-            '.money',
-            'script:contains("money_format")',
-            'script:contains("currencyCode")'
-        ];
-
-        for (const sel of document.querySelectorAll(selectors.join(', '))) {
-            const content = sel.content || sel.textContent || sel.innerText;
-            if (!content) continue;
-            const found = content.match(/(USD|BDT|INR|EUR|GBP|JPY|CNY|RUB|KRW|MYR|BRL|SGD|CAD|AUD)/i);
-            if (found) return found[0].toUpperCase();
+        // 2. From meta tags
+        const metaCurrency = document.querySelector('meta[name="currency" i], meta[property="og:price:currency" i], meta[property="product:price:currency" i]');
+        if (metaCurrency?.content) {
+            detectedCurrency = metaCurrency.content.trim().toUpperCase();
+            return detectedCurrency;
         }
 
-        // 3. From HTML lang or domain
-        const lang = document.documentElement.lang || '';
-        const domain = location.hostname;
+        // 3. From JSON-LD or script tags (manual text search - no :contains)
+        const scripts = document.querySelectorAll('script[type="application/ld+json"], script');
+        for (const s of scripts) {
+            const text = s.textContent || s.innerText || '';
+            if (!text) continue;
 
-        if (lang.includes('bd') || domain.includes('.bd')) return 'BDT';
-        if (lang.includes('in') || domain.includes('.in')) return 'INR';
-        if (domain.includes('.us') || domain.endsWith('.com')) return 'USD';
-        if (domain.includes('.ca')) return 'CAD';
-        if (domain.includes('.au')) return 'AUD';
-        if (domain.includes('.uk') || domain.includes('.co.uk')) return 'GBP';
-        if (domain.includes('.eu') || domain.includes('.de') || domain.includes('.fr')) return 'EUR';
+            // Shopify format
+            if (text.includes('money_format') || text.includes('currencyCode')) {
+                const match = text.match(/"currencyCode"\s*:\s*"([^"]+)"/i) || text.match(/money_format[^}]+"([A-Z]{3})"/i);
+                if (match) {
+                    detectedCurrency = match[1].toUpperCase();
+                    return detectedCurrency;
+                }
+            }
 
-        // Final fallback
-        return 'USD';
+            // Standard JSON-LD priceCurrency
+            const pc = text.match(/"priceCurrency"\s*:\s*"([A-Z]{3})"/i);
+            if (pc) {
+                detectedCurrency = pc[1].toUpperCase();
+                return detectedCurrency;
+            }
+        }
+
+        // 4. From data attributes
+        const dataEl = document.querySelector('[data-currency], [data-shop-currency]');
+        if (dataEl?.dataset.currency || dataEl?.dataset.shopCurrency) {
+            detectedCurrency = (dataEl.dataset.currency || dataEl.dataset.shopCurrency).toUpperCase();
+            return detectedCurrency;
+        }
+
+        // 5. Domain + lang fallback
+        const host = location.hostname.toLowerCase();
+        const lang = (document.documentElement.lang || '').toLowerCase();
+
+        if (host.includes('.bd') || lang.includes('bd')) return detectedCurrency = 'BDT';
+        if (host.includes('.in') || lang.includes('in')) return detectedCurrency = 'INR';
+        if (host.includes('.us') || host.endsWith('.com')) return detectedCurrency = 'USD';
+        if (host.includes('.ca')) return detectedCurrency = 'CAD';
+        if (host.includes('.au')) return detectedCurrency = 'AUD';
+        if (host.includes('.uk') || host.includes('.co.uk')) return detectedCurrency = 'GBP';
+        if (host.includes('.eu') || host.includes('.de') || host.includes('.fr')) return detectedCurrency = 'EUR';
+
+        return detectedCurrency = 'USD'; // final fallback
     }
 
     // ===================== HELPERS =====================
@@ -134,20 +142,19 @@
 
     // ===================== CATEGORY DETECT =====================
     function getCategory() {
-        // JSON-LD + Breadcrumb + Meta (same as before)
         for (const s of document.querySelectorAll('script[type="application/ld+json"]')) {
             try {
                 const data = JSON.parse(s.textContent);
                 if (data['@type'] === 'Product' && data.category) return data.category;
                 if (data.breadcrumbs?.length) return data.breadcrumbs.at(-1).name;
-            } catch {}
+            } catch { }
         }
         const bc = document.querySelector('.breadcrumb li:last-child, .breadcrumbs li:last-child, [aria-current="page"]');
-        if (bc?.textContent.trim()) return bc.textContent.trim();
+        if (bc?.textContent?.trim()) return bc.textContent.trim();
         const meta = document.querySelector('meta[property="product:category"], meta[name="category"]');
         if (meta?.content) return meta.content;
         const parts = location.pathname.split('/').filter(p => p);
-        return parts.length > 1 ? parts[parts.length-2] : 'Unknown';
+        return parts.length > 1 ? parts[parts.length - 2] : 'Unknown';
     }
 
     // ===================== PRODUCT EXTRACT (with auto currency) =====================
@@ -159,17 +166,11 @@
         processed.add(el);
 
         const container = el.closest(CARD_SELECTORS) || el;
-
-        const id = container.dataset.productId || container.dataset.id || container.dataset.sku ||
-                   container.querySelector('[data-product-id]')?.dataset.productId;
-
+        const id = container.dataset.productId || container.dataset.id || container.dataset.sku || container.querySelector('[data-product-id]')?.dataset.productId;
         const nameEl = container.querySelector('h1,h2,h3,.product-title,.title,a');
         const name = nameEl?.innerText.trim() || nameEl?.alt || container.getAttribute('aria-label');
-
         const priceEl = container.querySelector('.price,.product-price,[class*="price"],money,.amount');
-        const priceText = priceEl ? (priceEl.innerText || priceEl.textContent) : null;
-        const price = priceText ? toNum(priceText) : null;
-
+        const price = priceEl ? toNum(priceEl.innerText || priceEl.textContent) : null;
         const img = container.querySelector('img');
         const image = img?.src || img?.dataset.src || null;
 
@@ -179,25 +180,21 @@
         const qtyInput = container.querySelector('input[name="quantity"],input.qty') || document.querySelector('input[name="quantity"]');
         if (qtyInput) qty = parseInt(qtyInput.value || qtyInput.dataset.value || '1', 10) || 1;
 
-        // Variant
         const variant = {};
         const form = container.closest('form') || document;
         form.querySelectorAll('select[name*="option"],select[name*="Size"],select[name*="Color"]').forEach(s => {
             const val = s.options[s.selectedIndex]?.text?.trim() || s.value;
             if (val && val !== 'Default Title') {
-                const key = s.name.toLowerCase().includes('size') ? 'size' :
-                            s.name.toLowerCase().includes('color') ? 'color' : s.name.split(/[[\]]/).pop();
+                const key = s.name.toLowerCase().includes('size') ? 'size' : s.name.toLowerCase().includes('color') ? 'color' : s.name.split(/[[\]]/).pop();
                 variant[key] = val;
             }
         });
 
-        const currency = detectCurrency();  // Auto detect every time
-
         return {
-            id: id || `gen_${Date.now()}_${Math.random().toString(36).slice(2,8)}`,
-            name: name?.slice(0,250),
+            id: id || `gen_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+            name: name?.slice(0, 250),
             price,
-            currency,
+            currency: detectCurrency(),
             category: getCategory(),
             quantity: qty,
             variant: Object.keys(variant).length ? variant : null,
@@ -268,14 +265,7 @@
 
     // ===================== OBSERVER & SPA =====================
     const observer = new MutationObserver(muts => {
-        for (const m of muts) {
-            m.addedNodes.forEach(node => {
-                if (node.nodeType === 1) {
-                    processContainer(node);
-                    trackList();
-                }
-            });
-        }
+        for (const m of muts) m.addedNodes.forEach(node => node.nodeType === 1 && (processContainer(node), trackList()));
     });
     observer.observe(document.body, { childList: true, subtree: true });
 

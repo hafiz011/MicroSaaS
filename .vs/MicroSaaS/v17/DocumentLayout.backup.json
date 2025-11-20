@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "D:\\GitHub\\MicroSaaS\\TrackLog\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|d:\\github\\microsaas\\tracklog\\saas.apigetway\\wwwroot\\trackly.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|solutionrelative:saas.apigetway\\wwwroot\\trackly.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
@@ -18,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,28 +38,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "trackly.js",
               "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\SaaS.ApiGetway\\wwwroot\\trackly.js",
               "RelativeDocumentMoniker": "SaaS.ApiGetway\\wwwroot\\trackly.js",
               "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\SaaS.ApiGetway\\wwwroot\\trackly.js",
               "RelativeToolTip": "SaaS.ApiGetway\\wwwroot\\trackly.js",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAgwGQAAAALAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-11-19T07:27:50.086Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SessionController.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Controllers\\SessionController.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Controllers\\SessionController.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Controllers\\SessionController.cs",
-              "RelativeToolTip": "Microservice.Session\\Controllers\\SessionController.cs",
-              "ViewState": "AgIAAFIBAAAAAAAAAAAIwGYBAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T11:41:52.548Z",
               "EditorCaption": ""
             }
           ]
