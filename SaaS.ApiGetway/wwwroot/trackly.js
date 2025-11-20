@@ -42,29 +42,38 @@
 
     // ==================== SEND EVENT (415 FIX + Cookie Auto Send) ====================
     function send(payload) {
-        if (!ready || !sessionId) return queue.push(payload);
+        if (!ready) return queue.push(payload);
 
-        const key = `${payload.event}||${payload.data?.id || payload.data?.transaction_id || ''}`;
+        const currentSessionId = getCookie('trk_sess');
+        if (!currentSessionId) {
+            console.warn('Trackly: No sessionId, queuing event');
+            return queue.push(payload);
+        }
+
+        const key = `${payload.event}||${payload.data?.id || ''}`;
         if (dedupe.has(key) && Date.now() - dedupe.get(key) < DEDUPE_MS) return;
         dedupe.set(key, Date.now());
 
         fetch(ENDPOINT_TRACK, {
             method: 'POST',
-            credentials: 'include', // cookie
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'X-API-KEY': API_KEY
             },
             keepalive: true,
             body: JSON.stringify({
-                sessionId,
+                sessionId: currentSessionId,
                 Event: payload.event,
                 Data: payload.data || {},
                 Url: location.href,
                 ReferrerUrl: document.referrer || null,
                 Ts: new Date().toISOString()
             })
-        }).catch(() => queue.push(payload));
+        }).catch(err => {
+            console.error('Trackly: Track failed', err);
+            queue.push(payload); // retry
+        });
     }
 
     function track(event, data = {}) {
