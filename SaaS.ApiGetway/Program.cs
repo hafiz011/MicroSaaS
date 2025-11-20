@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.HttpOverrides;
+﻿using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +28,12 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 app.UseForwardedHeaders();
+
+app.UseCors(policy =>
+    policy.SetIsOriginAllowed(_ => true)
+          .AllowAnyHeader()
+          .AllowAnyMethod()
+          .AllowCredentials());
 
 // (Then any other middleware)
 app.Use(async (context, next) =>

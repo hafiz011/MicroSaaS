@@ -77,6 +77,15 @@ namespace Microservice.Session
 
             app.UseForwardedHeaders();
 
+            app.UseCors(cors =>
+                cors.SetIsOriginAllowed(_ => true)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+            );
+
+
+
             // Seed indexes at startup
             using (var scope = app.Services.CreateScope())
             {
