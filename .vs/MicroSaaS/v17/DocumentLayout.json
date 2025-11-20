@@ -7,8 +7,12 @@
       "RelativeMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|solutionrelative:saas.apigetway\\wwwroot\\trackly.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|d:\\github\\microsaas\\tracklog\\microservice.session\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9FD808D-F1C3-9D48-2DA0-61325A65728B}|Microservice.Session\\Microservice.Session.csproj|solutionrelative:microservice.session\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|d:\\github\\microsaas\\tracklog\\saas.apigetway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACBB1D35-7F0A-4C1B-9ADC-660506D807A4}|SaaS.ApiGetway\\SaaS.ApiGetway.csproj|solutionrelative:saas.apigetway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -43,14 +47,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SessionController.cs",
-              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Controllers\\SessionController.cs",
-              "RelativeDocumentMoniker": "Microservice.Session\\Controllers\\SessionController.cs",
-              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Controllers\\SessionController.cs",
-              "RelativeToolTip": "Microservice.Session\\Controllers\\SessionController.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAAwJ0AAAAAAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Program.cs",
+              "RelativeDocumentMoniker": "Microservice.Session\\Program.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\Microservice.Session\\Program.cs",
+              "RelativeToolTip": "Microservice.Session\\Program.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAgwD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T06:34:08.27Z",
+              "WhenOpened": "2025-11-20T09:45:05.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\MicroSaaS\\TrackLog\\SaaS.ApiGetway\\Program.cs",
+              "RelativeDocumentMoniker": "SaaS.ApiGetway\\Program.cs",
+              "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\SaaS.ApiGetway\\Program.cs",
+              "RelativeToolTip": "SaaS.ApiGetway\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T09:44:40.772Z",
               "EditorCaption": ""
             },
             {
@@ -61,7 +78,7 @@
               "RelativeDocumentMoniker": "SaaS.ApiGetway\\wwwroot\\trackly.js",
               "ToolTip": "D:\\GitHub\\MicroSaaS\\TrackLog\\SaaS.ApiGetway\\wwwroot\\trackly.js",
               "RelativeToolTip": "SaaS.ApiGetway\\wwwroot\\trackly.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-11-19T07:27:50.086Z",
               "EditorCaption": ""
