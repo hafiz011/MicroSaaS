@@ -4,6 +4,7 @@
     const script = document.currentScript;
     const params = new URLSearchParams(script.src.split('?')[1]);
     const API_KEY = params.get('key');
+
     if (!API_KEY) return console.error('Trackly: API key missing');
 
     const ENDPOINT_SESSION = 'https://apibizagent.techciph.com/Session/create';
@@ -16,39 +17,33 @@
     const oneTime = new Set();
     const DEDUPE_MS = 3000;
 
-    // ==================== COOKIE READ (server sets trk_sess) ====================
+    // ---------------- COOKIE ----------------
     function getCookie(n) {
         const v = document.cookie.match('(^|;) ?' + n + '=([^;]*)(;|$)');
         return v ? v[2] : null;
     }
 
-    // ==================== CURRENCY AUTO DETECT (Shopify/Woo) ====================
+    // ---------------- Currency Detect ----------------
     let currency = null;
     function detectCurrency() {
         if (currency) return currency;
 
-        const symbols = { '$': 'USD', '৳': 'BDT', '₹': 'INR', '€': 'EUR', '£': 'GBP', '¥': 'JPY', '₽': 'RUB', '₩': 'KRW' };
-        const text = document.body.innerText + (window.Shopify?.currency?.active || '') + (window.wc?.currency || '');
-        const match = text.match(/[\$৳₹€£¥₽₩]/);
-        if (match) {
-            currency = symbols[match[0]] || 'USD';
-        } else if (location.hostname.includes('.bd')) {
-            currency = 'BDT';
-        } else {
-            currency = 'USD';
-        }
+        const symbols = { '$': 'USD', '৳': 'BDT', '₹': 'INR', '€': 'EUR', '£': 'GBP', '¥': 'JPY' };
+        const text = document.body.innerText;
+
+        const match = text.match(/[\$৳₹€£¥]/);
+        if (match) currency = symbols[match[0]];
+        if (!currency) currency = location.hostname.endsWith('.bd') ? 'BDT' : 'USD';
+
         return currency;
     }
 
-    // ==================== SEND EVENT (415 FIX + Cookie Auto Send) ====================
+    // ---------------- SEND EVENT ----------------
     function send(payload) {
         if (!ready) return queue.push(payload);
 
-        const currentSessionId = getCookie('trk_sess');
-        if (!currentSessionId) {
-            console.warn('Trackly: No sessionId, queuing event');
-            return queue.push(payload);
-        }
+        const current = getCookie('trk_sess');
+        if (!current) return queue.push(payload);
 
         const key = `${payload.event}||${payload.data?.id || ''}`;
         if (dedupe.has(key) && Date.now() - dedupe.get(key) < DEDUPE_MS) return;
@@ -61,35 +56,32 @@
                 'Content-Type': 'application/json',
                 'X-API-KEY': API_KEY
             },
-            keepalive: true,
             body: JSON.stringify({
-                sessionId: currentSessionId,
+                sessionId: current,
                 Event: payload.event,
                 Data: payload.data || {},
                 Url: location.href,
                 ReferrerUrl: document.referrer || null,
                 Ts: new Date().toISOString()
             })
-        }).catch(err => {
-            console.error('Trackly: Track failed', err);
-            queue.push(payload); // retry
-        });
+        }).catch(() => queue.push(payload));
     }
 
     function track(event, data = {}) {
-        const key = `${event}::${location.pathname}`;
-        if (oneTime.has(key)) return;
-        if (['page_view', 'view_item_list', 'begin_checkout', 'purchase'].includes(event)) oneTime.add(key);
+        const k = `${event}::${location.pathname}`;
+        if (oneTime.has(k)) return;
+
+        if (['page_view', 'view_item_list', 'begin_checkout', 'purchase'].includes(event))
+            oneTime.add(k);
+
         send({ event, data });
     }
 
-    // ==================== SESSION INIT ====================
+    // ---------------- INIT SESSION ----------------
     async function initSession() {
         sessionId = getCookie('trk_sess');
-
         if (sessionId) {
             ready = true;
-            console.log('%cTrackly: Session restored → ' + sessionId.slice(0, 8) + '...', 'color: cyan');
             flushQueue();
             startTracking();
             return;
@@ -99,12 +91,15 @@
             const res = await fetch(ENDPOINT_SESSION, {
                 method: 'POST',
                 credentials: 'include',
-                headers: { 'Content-Type': 'application/json', 'X-API-KEY': API_KEY },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-KEY': API_KEY
+                },
                 body: JSON.stringify({
                     Ip: "",
                     ReferrerUrl: document.referrer || null,
                     UserAgent: navigator.userAgent,
-                    Language: navigator.language || null,
+                    Language: navigator.language,
                     Screen: `${screen.width}x${screen.height}`
                 })
             });
@@ -113,120 +108,119 @@
                 sessionId = getCookie('trk_sess');
                 if (sessionId) {
                     ready = true;
-                    console.log('%cTrackly: Session created → ' + sessionId.slice(0, 8) + '...', 'color: lime');
                     flushQueue();
                     startTracking();
                 }
             }
         } catch (e) {
-            setTimeout(initSession, 5000);
+            setTimeout(initSession, 3000);
         }
     }
 
-    function flushQueue() { while (queue.length) send(queue.shift()); }
+    function flushQueue() {
+        while (queue.length) send(queue.shift());
+    }
 
-    // ==================== UNIVERSAL PRODUCT DETECT (Shopify + Woo + Custom) ====================
+    // ---------------- PRODUCT EXTRACTOR ----------------
     const SELECTORS = [
-        '[data-product-id]', '.product', '.product-card', '.product-item', '.grid__item',
-        '.card', '.boost-pfs-product-item', '.woocommerce-product', '.product-single',
-        '.product-grid-item', '.js-product-card', 'article[type="product"]'
+        '[data-product-id]', '.product', '.product-item', '.product-card',
+        '.woocommerce-product', '.product-grid-item'
     ].join(',');
 
     function extractProduct(card) {
         if (!card) return null;
 
-        const name = card.querySelector('h1,h2,h3,h4,.product-title,.title,a,img')?.innerText?.trim() ||
-            card.querySelector('img')?.alt || 'Unknown Product';
+        const name = card.querySelector('h1,h2,h3,.title,.product-title')?.innerText?.trim()
+            || card.querySelector('img')?.alt || "Unknown";
 
-        const priceEl = card.querySelector('.price, .product-price, [class*="price"], .money, .amount, .woocommerce-Price-amount');
-        const priceText = priceEl ? (priceEl.innerText || priceEl.textContent || '') : '';
-        const price = parseFloat(priceText.replace(/[^0-9.]/g, '')) || null;
+        const priceEl = card.querySelector('.price, .amount, .woocommerce-Price-amount');
+        const priceText = priceEl?.innerText || "";
+        const price = parseFloat(priceText.replace(/[^0-9.]/g, "")) || null;
 
-        const id = card.dataset.productId || card.dataset.id || card.dataset.productSku ||
+        const id =
+            card.dataset.productId ||
             card.querySelector('[data-product-id]')?.dataset.productId ||
-            card.closest('form')?.querySelector('input[name="id"], input[name="product_id"]')?.value;
-
-        if (!name && !price && !id) return null;
+            card.querySelector('input[name="product_id"]')?.value ||
+            `gen_${Date.now()}`;
 
         return {
-            id: id || `gen_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
-            name: name.slice(0, 250),
+            id,
+            name,
             price,
             currency: detectCurrency(),
-            category: document.querySelector('.breadcrumb li:last-child, .breadcrumbs li:last-child, [aria-current="page"]')?.innerText?.trim() || 'Unknown',
+            category: document.querySelector('.breadcrumb li:last-child')?.innerText?.trim() || "Unknown",
             quantity: 1,
-            image: card.querySelector('img')?.src || card.querySelector('img')?.dataset.src || null
+            image: card.querySelector('img')?.src || null
         };
     }
 
-    // ==================== TRACKING ENGINE (All Platforms) ====================
+    // ---------------- TRACKING ENGINE ----------------
     function startTracking() {
         track('page_view', { title: document.title, currency: detectCurrency() });
 
-        // View Item List
         const products = document.querySelectorAll(SELECTORS);
+
+        // View list
         if (products.length > 3 && !oneTime.has('view_item_list')) {
-            oneTime.add('view_item_list');
-            track('view_item_list', { items: Array.from(products).slice(0, 30).map(extractProduct).filter(Boolean), list_name: 'collection' });
+            track('view_item_list', {
+                items: Array.from(products).slice(0, 40).map(extractProduct).filter(Boolean),
+                list_name: "collection"
+            });
         }
 
         products.forEach(card => {
             const p = extractProduct(card);
             if (!p) return;
 
-            // View Item (PDP)
-            if (location.pathname.includes('/products/') || location.pathname.includes('/product/') || card.closest('.template-product, #product')) {
+            // PDP
+            if (location.pathname.includes('/product')) {
                 track('view_item', p);
             }
 
-            // Add to Cart (All platforms)
-            card.querySelectorAll('button, a, input[type="submit"]').forEach(btn => {
-                const text = (btn.innerText || btn.value || '').toLowerCase();
-                if ((/add|cart|basket|bag/i.test(text) && !/checkout|buy now/i.test(text)) || btn.name === 'add' || btn.formAction?.includes('cart/add')) {
+            // Add to cart
+            card.querySelectorAll('button, input[type="submit"]').forEach(btn => {
+                const txt = (btn.innerText || btn.value || "").toLowerCase();
+                if (txt.includes("add") || txt.includes("cart")) {
                     btn.addEventListener('click', () => {
-                        p.quantity = parseInt(document.querySelector('input[name="quantity"], input.qty')?.value || 1) || 1;
-                        p.currency = detectCurrency();
+                        p.quantity = parseInt(document.querySelector('input.qty')?.value || 1) || 1;
                         track('add_to_cart', p);
                     });
                 }
             });
         });
 
-        // Begin Checkout
-        if (/cart|checkout|order|payment/i.test(location.pathname) && !oneTime.has('begin_checkout')) {
-            oneTime.add('begin_checkout');
-            const items = Array.from(document.querySelectorAll('.cart-item, .line-item, .woocommerce-cart-form__cart-item')).map(extractProduct).filter(Boolean);
-            if (items.length) track('begin_checkout', { items });
+        // Begin checkout
+        if (location.pathname.includes("checkout") && !oneTime.has('begin_checkout')) {
+            const items = Array.from(document.querySelectorAll('.cart-item')).map(extractProduct).filter(Boolean);
+            track('begin_checkout', { items });
         }
 
         // Purchase
-        if (/thank|success|confirmation|order|complete/i.test(location.pathname) && !oneTime.has('purchase')) {
-            oneTime.add('purchase');
-            const items = Array.from(document.querySelectorAll('.order-item, .line-item, .woocommerce-order-details__item')).map(extractProduct).filter(Boolean);
+        if (location.pathname.includes("thank") && !oneTime.has('purchase')) {
+            const items = Array.from(document.querySelectorAll('.order-item')).map(extractProduct).filter(Boolean);
             track('purchase', {
-                transaction_id: document.querySelector('.order-number, #order_id')?.innerText || `txn_${Date.now()}`,
-                value: null,
-                currency: detectCurrency(),
-                items
+                transaction_id: document.querySelector('.order-number')?.innerText || `txn_${Date.now()}`,
+                items,
+                currency: detectCurrency()
             });
         }
     }
 
-    // ==================== AJAX & SPA SUPPORT ====================
+    // ---------------- Observer (AJAX Reload Support) ----------------
     const observer = new MutationObserver(() => setTimeout(startTracking, 600));
     observer.observe(document.body, { childList: true, subtree: true });
 
-    // SPA (Shopify Turbo, WooCommerce AJAX)
-    const pushState = history.pushState;
-    history.pushState = function () {
-        pushState.apply(this, arguments);
-        setTimeout(startTracking, 600);
-    };
-    window.addEventListener('popstate', () => setTimeout(startTracking, 600));
+    history.pushState = new Proxy(history.pushState, {
+        apply(target, thisArg, argArray) {
+            const r = Reflect.apply(target, thisArg, argArray);
+            setTimeout(startTracking, 600);
+            return r;
+        }
+    });
+    window.addEventListener("popstate", () => setTimeout(startTracking, 500));
 
-    // ==================== START ====================
+    // ---------------- RUN ----------------
     initSession();
 
-    window.Trackly = { track, currency: detectCurrency };
-    console.log('%cTrackly SDK 2025 – Works on Shopify, WooCommerce, Custom Sites 100%', 'color: #ff00ff; font-size: 18px; font-weight: bold');
+    window.Trackly = { track };
 })();
