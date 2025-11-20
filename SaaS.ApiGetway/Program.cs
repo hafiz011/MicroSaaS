@@ -2,6 +2,7 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Forwarded headers
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders =
@@ -12,30 +13,31 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.KnownProxies.Clear();
 });
 
-
+// Reverse Proxy
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
+// FIXED CORS POLICY
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("TracklyPolicy", policy =>
     {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+        policy
+            .SetIsOriginAllowed(_ => true)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 
 var app = builder.Build();
+
 app.UseForwardedHeaders();
 
-app.UseCors(policy =>
-    policy.SetIsOriginAllowed(_ => true)
-          .AllowAnyHeader()
-          .AllowAnyMethod()
-          .AllowCredentials());
+// Use the single correct CORS here
+app.UseCors("TracklyPolicy");
 
-// (Then any other middleware)
+// Middleware to log IP
 app.Use(async (context, next) =>
 {
     var ip = context.Request.Headers["X-Forwarded-For"].FirstOrDefault()
@@ -43,14 +45,9 @@ app.Use(async (context, next) =>
     await next();
 });
 
-//app.Use(async (context, next) =>
-//{
-//    Console.WriteLine($"Proxying: {context.Request.Method} {context.Request.Path}");
-//    await next();
-//});
-
 app.UseStaticFiles();
-app.UseCors();
+
+// Reverse Proxy Mapping
 app.MapReverseProxy();
 
 app.MapGet("/", () => "SaaS API Gateway Running...");

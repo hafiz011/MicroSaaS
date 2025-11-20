@@ -45,6 +45,56 @@ namespace Microservice.Session.Controllers
         }
 
 
+
+
+        // Dtos/EventTrackRequest.cs
+        public class EventTrackRequest
+        {
+            public string sessionId { get; set; }
+            public string Event { get; set; }
+            public object Data { get; set; }
+            public string Url { get; set; }
+            public string? ReferrerUrl { get; set; }
+            public DateTime Ts { get; set; } = DateTime.UtcNow;
+        }
+
+        [HttpPost("track")]
+        public async Task<IActionResult> Track([FromBody] EventTrackRequest req)
+        {
+            // quick validation
+            if (string.IsNullOrEmpty(req.sessionId) || string.IsNullOrEmpty(req.Event))
+                return BadRequest("sessionId and event required");
+
+            if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))
+                return Unauthorized("API Key is missing.");
+
+            var apiKeyInfo = await _apiKeyRepository.GetApiByApiKeyIdAsync(rawKey);
+            if (apiKeyInfo == null)
+                return Unauthorized("Invalid API Key.");
+
+
+            var log = new ActivityLog
+            {
+                Session_Id = req.sessionId,
+                Tenant_Id = apiKeyInfo.Id,
+                EventName = req.Event,
+                Data = req.Data == null ? new BsonDocument() : BsonDocument.Parse(JsonSerializer.Serialize(req.Data)),
+                Url = req.Url,
+                ReferrerUrl = req.ReferrerUrl,
+                Time_Stamp = req.Ts
+            };
+
+            await _activityRepository.CreateLogActivityAsync(log);
+            return Ok(new { ok = true });
+        }
+
+
+
+
+
+
+
+
         /// <summary>
         /// Data Transfer Object for session requests
         /// </summary>
@@ -318,48 +368,7 @@ namespace Microservice.Session.Controllers
         }
 
 
-        // Dtos/EventTrackRequest.cs
-        public class EventTrackRequest
-        {
-            public string sessionId { get; set; }
-            public string Event { get; set; }
-            public object Data { get; set; }
-            public string Url { get; set; }
-            public string? ReferrerUrl { get; set; }
-            public DateTime Ts { get; set; } = DateTime.UtcNow;
-        }
-
-        [HttpPost("track")]
-        public async Task<IActionResult> Track([FromBody] EventTrackRequest req)
-        {
-            // quick validation
-            if (string.IsNullOrEmpty(req.sessionId) || string.IsNullOrEmpty(req.Event))
-                return BadRequest("sessionId and event required");
-
-            if (!Request.Headers.TryGetValue("X-API-KEY", out var rawKey))
-                return Unauthorized("API Key is missing.");
-
-            var apiKeyInfo = await _apiKeyRepository.GetApiByApiKeyIdAsync(rawKey);
-            if (apiKeyInfo == null)
-                return Unauthorized("Invalid API Key.");
-
-
-            var log = new ActivityLog
-            {
-                Session_Id = req.sessionId,
-                Tenant_Id = apiKeyInfo.Id,
-                EventName = req.Event,
-                Data = req.Data == null ? new BsonDocument() : BsonDocument.Parse(JsonSerializer.Serialize(req.Data)),
-                Url = req.Url,
-                ReferrerUrl = req.ReferrerUrl,
-                Time_Stamp = req.Ts
-            };
-
-            await _activityRepository.CreateLogActivityAsync(log);
-            return Ok(new { ok = true });
-        }
-
-
+     
 
 
 

@@ -2,7 +2,7 @@
     'use strict';
 
     const script = document.currentScript;
-    const params = new URLSearchParams(script.src.split('?')[1]);
+    const params = new URLSearchParams(script.src.split('?')[1] || '');
     const API_KEY = params.get('key');
 
     if (!API_KEY) return console.error('Trackly: API key missing');
@@ -20,42 +20,43 @@
     // ---------------- COOKIE ----------------
     function getCookie(n) {
         const v = document.cookie.match('(^|;) ?' + n + '=([^;]*)(;|$)');
-        return v ? v[2] : null;
+        return v ? decodeURIComponent(v[2]) : null;
     }
 
     // ---------------- Currency Detect ----------------
     let currency = null;
     function detectCurrency() {
         if (currency) return currency;
-
         const symbols = { '$': 'USD', '৳': 'BDT', '₹': 'INR', '€': 'EUR', '£': 'GBP', '¥': 'JPY' };
-        const text = document.body.innerText;
-
+        const text = document.body.innerText || '';
         const match = text.match(/[\$৳₹€£¥]/);
-        if (match) currency = symbols[match[0]];
+        if (match) currency = symbols[match[0]] || 'USD';
         if (!currency) currency = location.hostname.endsWith('.bd') ? 'BDT' : 'USD';
-
         return currency;
     }
 
     // ---------------- SEND EVENT ----------------
     function send(payload) {
-        if (!ready) return queue.push(payload);
-
+        // If session cookie is not present, queue and retry later
         const current = getCookie('trk_sess');
-        if (!current) return queue.push(payload);
+        if (!current) {
+            queue.push(payload);
+            return;
+        }
 
+        // dedupe
         const key = `${payload.event}||${payload.data?.id || ''}`;
         if (dedupe.has(key) && Date.now() - dedupe.get(key) < DEDUPE_MS) return;
         dedupe.set(key, Date.now());
 
         fetch(ENDPOINT_TRACK, {
             method: 'POST',
-            credentials: 'include',
+            credentials: 'include',      // important: send cookies (requires CORS allow credentials)
             headers: {
                 'Content-Type': 'application/json',
                 'X-API-KEY': API_KEY
             },
+            keepalive: true,
             body: JSON.stringify({
                 sessionId: current,
                 Event: payload.event,
@@ -64,16 +65,18 @@
                 ReferrerUrl: document.referrer || null,
                 Ts: new Date().toISOString()
             })
+        }).then(res => {
+            if (!res.ok) {
+                // retry later if server failed
+                queue.push(payload);
+            }
         }).catch(() => queue.push(payload));
     }
 
     function track(event, data = {}) {
         const k = `${event}::${location.pathname}`;
         if (oneTime.has(k)) return;
-
-        if (['page_view', 'view_item_list', 'begin_checkout', 'purchase'].includes(event))
-            oneTime.add(k);
-
+        if (['page_view', 'view_item_list', 'begin_checkout', 'purchase'].includes(event)) oneTime.add(k);
         send({ event, data });
     }
 
@@ -90,7 +93,7 @@
         try {
             const res = await fetch(ENDPOINT_SESSION, {
                 method: 'POST',
-                credentials: 'include',
+                credentials: 'include',  // important: so browser accepts Set-Cookie
                 headers: {
                     'Content-Type': 'application/json',
                     'X-API-KEY': API_KEY
@@ -99,26 +102,46 @@
                     Ip: "",
                     ReferrerUrl: document.referrer || null,
                     UserAgent: navigator.userAgent,
-                    Language: navigator.language,
+                    Language: navigator.language || null,
                     Screen: `${screen.width}x${screen.height}`
                 })
             });
 
-            if (res.ok) {
-                sessionId = getCookie('trk_sess');
-                if (sessionId) {
+            // ensure cookie set by server — read cookie
+            const sid = getCookie('trk_sess');
+            if (res.ok && sid) {
+                sessionId = sid;
+                ready = true;
+                flushQueue();
+                startTracking();
+                return;
+            } else {
+                // Try to read body (server returns session id too)
+                const data = await res.json().catch(() => null);
+                if (data && data.sessionId) {
+                    // If server returned sessionId in body, set local var (cookie may still arrive)
+                    sessionId = data.sessionId;
+                    // do not assume cookie, but allow queued events to send with sessionId
+                    // set a lightweight fallback cookie so send() can read it
+                    document.cookie = 'trk_sess=' + encodeURIComponent(sessionId) + '; path=/; SameSite=None; Secure';
                     ready = true;
                     flushQueue();
                     startTracking();
+                    return;
                 }
             }
         } catch (e) {
+            // retry with backoff
             setTimeout(initSession, 3000);
         }
     }
 
     function flushQueue() {
-        while (queue.length) send(queue.shift());
+        while (queue.length) {
+            const p = queue.shift();
+            // send each queued payload after a micro tick to avoid burst
+            setTimeout(() => send(p), 50);
+        }
     }
 
     // ---------------- PRODUCT EXTRACTOR ----------------
@@ -135,7 +158,7 @@
 
         const priceEl = card.querySelector('.price, .amount, .woocommerce-Price-amount');
         const priceText = priceEl?.innerText || "";
-        const price = parseFloat(priceText.replace(/[^0-9.]/g, "")) || null;
+        const price = parseFloat((priceText.match(/[\d.,]+/) || [''])[0]?.replace(/,/g, '')) || null;
 
         const id =
             card.dataset.productId ||
@@ -161,7 +184,7 @@
         const products = document.querySelectorAll(SELECTORS);
 
         // View list
-        if (products.length > 3 && !oneTime.has('view_item_list')) {
+        if (products.length > 2 && !oneTime.has('view_item_list')) {
             track('view_item_list', {
                 items: Array.from(products).slice(0, 40).map(extractProduct).filter(Boolean),
                 list_name: "collection"
@@ -172,32 +195,32 @@
             const p = extractProduct(card);
             if (!p) return;
 
-            // PDP
-            if (location.pathname.includes('/product')) {
+            // PDP heuristic
+            if (location.pathname.includes('/product') || card.closest('.product-single, .product-detail')) {
                 track('view_item', p);
             }
 
             // Add to cart
-            card.querySelectorAll('button, input[type="submit"]').forEach(btn => {
-                const txt = (btn.innerText || btn.value || "").toLowerCase();
-                if (txt.includes("add") || txt.includes("cart")) {
+            card.querySelectorAll('button, input[type="submit"], a').forEach(btn => {
+                const txt = (btn.innerText || btn.value || '').toLowerCase();
+                if (txt.includes("add") || txt.includes("cart") || btn.dataset.addToCart !== undefined) {
                     btn.addEventListener('click', () => {
                         p.quantity = parseInt(document.querySelector('input.qty')?.value || 1) || 1;
                         track('add_to_cart', p);
-                    });
+                    }, { passive: true });
                 }
             });
         });
 
         // Begin checkout
-        if (location.pathname.includes("checkout") && !oneTime.has('begin_checkout')) {
+        if (location.pathname.toLowerCase().includes("checkout") && !oneTime.has('begin_checkout')) {
             const items = Array.from(document.querySelectorAll('.cart-item')).map(extractProduct).filter(Boolean);
             track('begin_checkout', { items });
         }
 
-        // Purchase
-        if (location.pathname.includes("thank") && !oneTime.has('purchase')) {
-            const items = Array.from(document.querySelectorAll('.order-item')).map(extractProduct).filter(Boolean);
+        // Purchase detection
+        if (/(thank|success|confirmation|order)/i.test(location.pathname) && !oneTime.has('purchase')) {
+            const items = Array.from(document.querySelectorAll('.order-item, .purchased-item')).map(extractProduct).filter(Boolean);
             track('purchase', {
                 transaction_id: document.querySelector('.order-number')?.innerText || `txn_${Date.now()}`,
                 items,
