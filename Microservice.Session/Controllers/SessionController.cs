@@ -51,7 +51,7 @@ namespace Microservice.Session.Controllers
         public class SessionRequestDto
         {
             public string? Ip { get; set; }
-            public string ReferrerUrl { get; set; }
+            public string? ReferrerUrl { get; set; }
             public string UserAgent { get; set; }
             public string Language { get; set; }
             public string Screen { get; set; }
@@ -325,7 +325,7 @@ namespace Microservice.Session.Controllers
             public string Event { get; set; }
             public object Data { get; set; }
             public string Url { get; set; }
-            public string ReferrerUrl { get; set; }
+            public string? ReferrerUrl { get; set; }
             public DateTime Ts { get; set; } = DateTime.UtcNow;
         }
 
