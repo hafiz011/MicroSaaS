@@ -144,7 +144,7 @@ namespace Microservice.Session.Controllers
                 var sessionCreated = await _sessionRepository.CreateSessionAsync(session);
 
                 // Set cookie (client-side JS can also set; but setting here is safer)
-                Response.Cookies.Append("trackly_session", sessionCreated.Id, new CookieOptions
+                Response.Cookies.Append("trk_sess", sessionCreated.Id, new CookieOptions
                 {
                     HttpOnly = false, // JS reads it; set true if you want server-only and use other flow
                     Secure = true,
@@ -343,10 +343,6 @@ namespace Microservice.Session.Controllers
             if (apiKeyInfo == null)
                 return Unauthorized("Invalid API Key.");
 
-            //var session = await _sessionRepository.GetSessionByIdAsync(req.SessionId, apiKeyInfo.Id);
-            //if (session == null)
-            //    return BadRequest("Session ID does not match.");
-            //if (session == null) return BadRequest("invalid session");
 
             var log = new ActivityLog
             {
